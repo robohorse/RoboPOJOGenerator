@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator;
+package com.robohorse.robopojogenerator.view;
 
 import javax.swing.*;
 
