@@ -1,8 +1,11 @@
 package com.robohorse.robopojogenerator.support;
 
 import com.robohorse.robopojogenerator.action.GuiFormEventListener;
+import com.robohorse.robopojogenerator.errors.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +48,11 @@ public class GeneratorViewCreator {
     }
 
     private void validateJsonContent(String content) throws RoboPluginException {
-
+        try {
+            JSONObject jsonObject = new JSONObject(content);
+        } catch (JSONException exception) {
+            throw new JSONStructureException();
+        }
     }
 
     private class GenerateActionListener implements ActionListener {
