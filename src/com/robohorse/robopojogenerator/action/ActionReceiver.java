@@ -12,7 +12,7 @@ import com.robohorse.robopojogenerator.support.PathValidator;
 public class ActionReceiver {
     private PathValidator pathValidator = new PathValidator();
     private MessageService messageService = new MessageService();
-    private GeneratorViewCreator viewCreator = new GeneratorViewCreator(messageService);
+    private GeneratorViewCreator viewCreator = new GeneratorViewCreator();
 
     public void onActionHandled(AnActionEvent event) {
         try {
