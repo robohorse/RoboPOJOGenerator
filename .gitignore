@@ -1,2 +1,5 @@
 .idea
 *.iml
+out
+RoboPOJOGenerator.jar
+.DS_Store

@@ -30,6 +30,10 @@
 
   <actions>
     <!-- Add your actions here -->
+    <action id="NewPOJOGroupAction" class="com.robohorse.robopojogenerator.NewPOJOGroupAction"
+            text="Generate POJO from JSON">
+      <add-to-group group-id="NewGroup" anchor="first"/>
+    </action>
   </actions>
 
 </idea-plugin>
