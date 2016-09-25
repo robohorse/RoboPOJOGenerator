@@ -42,7 +42,7 @@ public class ClassProcessor {
                         classItem.addClassField(jsonObjectKey, "List<Object>");
 
                     } else {
-                        Stack<String> arrayStack = new Stack<>();
+                        Stack<String> arrayStack = new Stack<String>();
                         arrayStack.add("List");
                         proceedArray(jsonArray, arrayStack, jsonObjectKey, classItemSet);
 
@@ -60,11 +60,11 @@ public class ClassProcessor {
         classItemSet.add(classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray, Stack<String> arrayStack, String jsonObjectKey,
-                              Set<ClassItem> classItemSet) {
+    private void proceedArray(JSONArray jsonArray,final Stack<String> arrayStack,final String jsonObjectKey,
+                              final Set<ClassItem> classItemSet) {
         final String itemName = classGenerateHelper.getClassName(jsonObjectKey) + "Item";
         if (jsonArray.length() != 0) {
-            Object object = jsonArray.get(0);
+            final Object object = jsonArray.get(0);
             InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
                 @Override
                 public void onPrimitiveObjectIdentified(String classType) {

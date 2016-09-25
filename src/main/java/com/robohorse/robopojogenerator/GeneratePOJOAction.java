@@ -5,13 +5,13 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.robohorse.robopojogenerator.action.ActionController;
 
 /**
- * Created by vadim on 24.09.16.
+ * Created by vadim on 26.09.16.
  */
-public class NewPOJOGroupAction extends AnAction {
+public class GeneratePOJOAction extends AnAction {
     private ActionController actionController = new ActionController();
 
     @Override
-    public void actionPerformed(AnActionEvent event) {
-        actionController.onActionHandled(event);
+    public void actionPerformed(AnActionEvent e) {
+        actionController.onActionHandled(e);
     }
 }
