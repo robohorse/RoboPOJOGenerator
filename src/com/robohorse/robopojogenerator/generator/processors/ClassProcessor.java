@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
-import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.utils.InnerObjectResolver;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,16 +35,24 @@ public class ClassProcessor {
                 }
 
                 public void onJsonArrayIdentified(String classType) {
-//                    final JSONArray jsonArray = (JSONArray) object;
-//                    if (jsonArray.length() == 0) {
-                    classItem.addClassField(jsonObjectKey, "List<Object>");
+                    final JSONArray jsonArray = (JSONArray) object;
                     classItem.addClassImport("import java.util.List;");
-//
-//                    } else {
-//                        Stack<String> arrayStack = new Stack<String>();
-//                        arrayStack.add("List");
-//                        proceedArray(jsonArray, arrayStack);
-//                    }
+
+                    if (jsonArray.length() == 0) {
+                        classItem.addClassField(jsonObjectKey, "List<Object>");
+
+                    } else {
+                        Stack<String> arrayStack = new Stack<>();
+                        arrayStack.add("List");
+                        proceedArray(jsonArray, arrayStack, jsonObjectKey, classItemSet);
+
+                        String majorType = arrayStack.pop();
+                        final int size = arrayStack.size();
+                        for (int i = 0; i < size; i++) {
+                            majorType = "List<" + majorType + ">";
+                        }
+                        classItem.addClassField(jsonObjectKey, majorType);
+                    }
                 }
             };
             innerObjectResolver.resolveClassType(object, jsonObjectKey);
@@ -52,7 +60,38 @@ public class ClassProcessor {
         classItemSet.add(classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray, Stack<String> arrayStack) {
-        Object object = jsonArray.get(0);
+    private void proceedArray(JSONArray jsonArray, Stack<String> arrayStack, String jsonObjectKey,
+                              Set<ClassItem> classItemSet) {
+        final String itemName = classGenerateHelper.getClassName(jsonObjectKey) + "Item";
+        if (jsonArray.length() != 0) {
+            Object object = jsonArray.get(0);
+            InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
+                @Override
+                public void onPrimitiveObjectIdentified(String classType) {
+
+                }
+
+                @Override
+                public void onSimpleObjectIdentified(String classType) {
+                    arrayStack.add(classType);
+                }
+
+                @Override
+                public void onJsonObjectIdentified(String classType) {
+                    arrayStack.add(itemName);
+                    proceed((JSONObject) object, itemName, classItemSet);
+                }
+
+                @Override
+                public void onJsonArrayIdentified(String classType) {
+                    arrayStack.add("List");
+                    proceedArray((JSONArray) object, arrayStack, itemName, classItemSet);
+                }
+            };
+            innerObjectResolver.resolveClassType(object, itemName);
+
+        } else {
+            arrayStack.add("List<Object>");
+        }
     }
 }
