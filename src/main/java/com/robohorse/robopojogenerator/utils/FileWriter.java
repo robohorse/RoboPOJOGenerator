@@ -1,7 +1,5 @@
 package com.robohorse.robopojogenerator.utils;
 
-import com.intellij.psi.JavaDirectoryService;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.FileWriteException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
@@ -17,9 +15,6 @@ import java.io.IOException;
 public class FileWriter {
 
     public void writeFile(PsiDirectory directory, ClassItem classItem) throws RoboPluginException {
-        JavaDirectoryService
-                .getInstance()
-                .createClass(directory, classItem.getClassName());
         final String path = directory.getVirtualFile().getPath();
         final File file = new File(path + File.separator + classItem.getClassName() + ".java");
         try {

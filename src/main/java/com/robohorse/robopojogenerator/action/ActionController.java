@@ -1,8 +1,10 @@
 package com.robohorse.robopojogenerator.action;
 
-import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -16,6 +18,7 @@ import com.robohorse.robopojogenerator.utils.FileWriter;
 import com.robohorse.robopojogenerator.utils.GeneratorViewCreator;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.utils.PathValidator;
+import com.sun.istack.internal.NotNull;
 
 import javax.swing.*;
 import java.util.Set;
@@ -48,18 +51,25 @@ public class ActionController {
         if (null != directory) {
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 @Override
-                public void onJsonDataObtained(String content, String rootClassName,
-                                               AnnotationItem annotationItem, JFrame jFrame) {
+                public void onJsonDataObtained(final String content, final String rootClassName,
+                                               final AnnotationItem annotationItem, final JFrame jFrame) {
 
-                    try {
-                        generateFiles(content, rootClassName, packageName, directory, annotationItem);
-                        resetProject(project);
-                    } catch (RoboPluginException e) {
-                        messageService.onPluginExceptionHandled(e);
-                    }
-                    jFrame.setVisible(false);
-                    virtualFolder.refresh(false, true);
-                    messageService.showSuccessMessage();
+                    ProgressManager.getInstance().run(new Task.Backgroundable(project,
+                            "RoboPOJO Generation", false) {
+                        @Override
+                        public void run(@NotNull ProgressIndicator indicator) {
+                            try {
+                                generateFiles(content, rootClassName,
+                                        packageName, directory, annotationItem);
+                            } catch (RoboPluginException e) {
+                                messageService.onPluginExceptionHandled(e);
+                            }
+
+                            jFrame.setVisible(false);
+                            virtualFolder.refresh(false, true);
+                            messageService.showSuccessMessage();
+                        }
+                    });
                 }
             });
             viewCreator.showView();
@@ -77,12 +87,6 @@ public class ActionController {
 
             classPostProcessor.proceed(classItem, annotationItem);
             fileWriter.writeFile(directory, classItem);
-        }
-    }
-
-    private void resetProject(Project project) {
-        if (project != null) {
-            ProjectView.getInstance(project).refresh();
         }
     }
 }
