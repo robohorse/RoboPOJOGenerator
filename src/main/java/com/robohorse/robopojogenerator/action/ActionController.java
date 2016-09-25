@@ -45,7 +45,8 @@ public class ActionController {
     private void proceed(AnActionEvent event) throws RoboPluginException {
         final Project project = event.getProject();
         final VirtualFile virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE);
-        final String packageName = ProjectRootManager.getInstance(project).getFileIndex().getPackageNameByDirectory(virtualFolder);
+        final String packageName = ProjectRootManager.getInstance(project).getFileIndex()
+                       .getPackageNameByDirectory(virtualFolder);
         final PsiDirectory directory = pathValidator.checkPath(event);
 
         if (null != directory) {
