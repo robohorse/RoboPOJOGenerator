@@ -6,12 +6,10 @@
 
   <description><![CDATA[
       Generate POJO files from JSON: GSON, Logan Square<br>
-      <em>most HTML tags may be used</em>
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+     Beta version
     ]]>
   </change-notes>
 
