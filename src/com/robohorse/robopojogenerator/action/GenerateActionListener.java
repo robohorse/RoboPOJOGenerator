@@ -61,7 +61,7 @@ public class GenerateActionListener implements ActionListener {
     }
 
     private void validateClassName(String name) throws RoboPluginException {
-        if (null != name) {
+        if (null != name && name.length() > 1) {
             String pattern = "^[a-zA-Z0-9]*$";
             if (name.matches(pattern)) {
                 return;
