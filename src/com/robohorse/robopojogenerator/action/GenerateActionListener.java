@@ -2,6 +2,8 @@ package com.robohorse.robopojogenerator.action;
 
 import com.robohorse.robopojogenerator.errors.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
+import com.robohorse.robopojogenerator.errors.WrongClassNameException;
+import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 import org.json.JSONException;
@@ -25,11 +27,25 @@ public class GenerateActionListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        JTextArea textArea = generatorVew.getTextArea();
+        final JTextArea textArea = generatorVew.getTextArea();
+        final JTextField jTextField = generatorVew.getClassNameTextField();
+        final JRadioButton jRadioButtonGSON = generatorVew.getRadioGson();
+
+        AnnotationItem annotationItem;
+        if (jRadioButtonGSON.isSelected()) {
+            annotationItem = AnnotationItem.GSON;
+
+        } else {
+            annotationItem = AnnotationItem.LOGAN_SQUARE;
+        }
+
         try {
             final String text = textArea.getText();
+            final String className = jTextField.getText();
+            validateClassName(className);
+
             validateJsonContent(text);
-            eventListener.onJsonDataObtained(text);
+            eventListener.onJsonDataObtained(text, className, annotationItem);
 
         } catch (RoboPluginException exception) {
             messageService.onPluginExceptionHandled(exception);
@@ -42,5 +58,15 @@ public class GenerateActionListener implements ActionListener {
         } catch (JSONException exception) {
             throw new JSONStructureException();
         }
+    }
+
+    private void validateClassName(String name) throws RoboPluginException {
+        if (null != name) {
+            String pattern = "^[a-zA-Z0-9]*$";
+            if (name.matches(pattern)) {
+                return;
+            }
+        }
+        throw new WrongClassNameException();
     }
 }

@@ -11,9 +11,14 @@ public class GeneratorVew {
     private JRadioButton radioLogan;
     private JButton generateButton;
     private JTextArea textArea;
+    private JTextField classNameTextField;
 
     public JPanel getRootView() {
         return rootView;
+    }
+
+    public JTextField getClassNameTextField() {
+        return classNameTextField;
     }
 
     public JRadioButton getRadioGson() {

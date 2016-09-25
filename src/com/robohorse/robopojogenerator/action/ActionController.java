@@ -44,9 +44,10 @@ public class ActionController {
         if (null != directory) {
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 @Override
-                public void onJsonDataObtained(String content) {
+                public void onJsonDataObtained(String content, String rootClassName,
+                                               AnnotationItem annotationItem) {
                     try {
-                        generateFiles(content, directory, AnnotationItem.GSON);
+                        generateFiles(content, rootClassName, directory, annotationItem);
                         resetProject(project);
                     } catch (RoboPluginException e) {
                         messageService.onPluginExceptionHandled(e);
@@ -57,10 +58,11 @@ public class ActionController {
         }
     }
 
-    private void generateFiles(String content, PsiDirectory directory, AnnotationItem annotationItem)
+    private void generateFiles(String content, String rootClassName,
+                               PsiDirectory directory, AnnotationItem annotationItem)
             throws RoboPluginException {
 
-        Set<ClassItem> classItemSet = roboPOJOGenerator.generate(content);
+        Set<ClassItem> classItemSet = roboPOJOGenerator.generate(content, rootClassName);
         //TODO
         //JavaDirectoryService.getInstance().getPackage(directory).getQualifiedName();
         final String packageName = classGenerateHelper.resolvePackage(directory

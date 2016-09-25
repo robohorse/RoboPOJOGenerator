@@ -17,10 +17,10 @@ public class RoboPOJOGenerator {
         classProcessor = new ClassProcessor();
     }
 
-    public Set<ClassItem> generate(String string) {
+    public Set<ClassItem> generate(String string, String rootClassName) {
         Set<ClassItem> classItemSet = new HashSet<ClassItem>();
         JSONObject jsonObject = new JSONObject(string);
-        classProcessor.proceed(jsonObject, "root", classItemSet);
+        classProcessor.proceed(jsonObject, rootClassName, classItemSet);
         return classItemSet;
     }
 }
