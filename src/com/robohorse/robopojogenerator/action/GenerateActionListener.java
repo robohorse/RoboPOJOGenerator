@@ -2,7 +2,7 @@ package com.robohorse.robopojogenerator.action;
 
 import com.robohorse.robopojogenerator.errors.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.support.MessageService;
+import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,8 @@
-package com.robohorse.robopojogenerator.generator;
+package com.robohorse.robopojogenerator.generator.processors;
+
+import com.robohorse.robopojogenerator.generator.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 
 import java.util.Map;
 
@@ -8,8 +12,9 @@ import java.util.Map;
 public class ClassPostProcessor {
     private ClassGenerateHelper generateHelper = new ClassGenerateHelper();
 
-    public void proceed(ClassItem classItem) {
+    public void proceed(ClassItem classItem, AnnotationItem annotationItem) {
         generateSettersAndGetters(classItem);
+        generateAnnotation(annotationItem, classItem);
     }
 
     private void generateSettersAndGetters(ClassItem classItem) {
@@ -37,5 +42,18 @@ public class ClassPostProcessor {
                 + "(){\n"
                 + "\t\treturn " + fieldName + "; \n\t}";
         classItem.addClassMethod(getter);
+    }
+
+    private void generateAnnotation(AnnotationItem item, ClassItem classItem) {
+        switch (item) {
+            case GSON: {
+                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")");
+                classItem.setAnnotation("@SerializedName(\"%s\")\n@Expose");
+
+                classItem.addClassImport("import javax.annotation.Generated;");
+                classItem.addClassImport("import com.google.gson.annotations.Expose;");
+                classItem.addClassImport("import com.google.gson.annotations.SerializedName;");
+            }
+        }
     }
 }

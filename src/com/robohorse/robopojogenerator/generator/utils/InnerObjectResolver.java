@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.generator;
+package com.robohorse.robopojogenerator.generator.utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

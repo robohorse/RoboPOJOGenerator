@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.support;
+package com.robohorse.robopojogenerator.utils;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;

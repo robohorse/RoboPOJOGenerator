@@ -12,6 +12,7 @@ import java.util.Set;
  */
 public class ClassItem {
     private String annotation;
+    private String classAnnotation;
     private String className;
     private String packagePath;
     private Map<String, String> classFields = new HashMap<String, String>();
@@ -34,7 +35,6 @@ public class ClassItem {
         classFields.put(name, classType);
     }
 
-
     public String getClassName() {
         return className;
     }
@@ -51,16 +51,22 @@ public class ClassItem {
         return classFields;
     }
 
+    public void setClassAnnotation(String classAnnotation) {
+        this.classAnnotation = classAnnotation;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("package " + packagePath + ";\n");
         for (String string : classImports) {
             stringBuilder.append("\n" + string);
         }
-        stringBuilder.append("\n\npublic class " + className + "{\n");
+        stringBuilder.append("\n\n");
+        stringBuilder.append(classAnnotation);
+        stringBuilder.append("public class " + className + "{\n");
 
         for (String objectName : classFields.keySet()) {
-            stringBuilder.append("\t" + annotation + "\n");
+            stringBuilder.append("\t" + String.format(annotation, objectName) + "\n");
             stringBuilder.append("\tprivate " + classFields.get(objectName) + " " + objectName + ";\n");
         }
 

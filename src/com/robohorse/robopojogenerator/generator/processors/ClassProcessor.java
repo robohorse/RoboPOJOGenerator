@@ -1,5 +1,8 @@
-package com.robohorse.robopojogenerator.generator;
+package com.robohorse.robopojogenerator.generator.processors;
 
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
+import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.utils.InnerObjectResolver;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.support;
+package com.robohorse.robopojogenerator.utils;
 
 import com.robohorse.robopojogenerator.action.GenerateActionListener;
 import com.robohorse.robopojogenerator.action.GuiFormEventListener;

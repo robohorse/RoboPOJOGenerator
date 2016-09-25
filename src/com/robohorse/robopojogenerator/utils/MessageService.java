@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.support;
+package com.robohorse.robopojogenerator.utils;
 
 import com.intellij.openapi.ui.Messages;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;

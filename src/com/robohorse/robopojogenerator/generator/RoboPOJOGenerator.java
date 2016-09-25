@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.generator;
 
+import com.robohorse.robopojogenerator.generator.processors.ClassProcessor;
 import org.json.JSONObject;
 
 import java.util.HashSet;
