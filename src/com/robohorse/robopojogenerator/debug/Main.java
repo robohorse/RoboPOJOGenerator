@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String... args) {
         RoboPOJOGenerator roboPOJOGenerator = new RoboPOJOGenerator();
-        Set<ClassItem> classItemSet = roboPOJOGenerator.generate(JSON);
+        Set<ClassItem> classItemSet = roboPOJOGenerator.generate(JSON, "Root");
         for (ClassItem classItem : classItemSet) {
             classItem.setPackagePath("com.robohorse.pojogenerator");
             classItem.setAnnotation("@JSON");
