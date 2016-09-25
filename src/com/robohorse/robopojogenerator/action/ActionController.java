@@ -1,6 +1,10 @@
 package com.robohorse.robopojogenerator.action;
 
+import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.ClassItem;
@@ -35,13 +39,15 @@ public class ActionController {
     }
 
     private void proceed(AnActionEvent event) throws RoboPluginException {
-        final String path = pathValidator.checkPath(event);
-        if (null != path) {
+        final PsiDirectory directory = pathValidator.checkPath(event);
+        final Project project = event.getData(CommonDataKeys.PROJECT);
+        if (null != directory) {
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 @Override
                 public void onJsonDataObtained(String content) {
                     try {
-                        generateFiles(content, path, AnnotationItem.GSON);
+                        generateFiles(content, directory, AnnotationItem.GSON);
+                        resetProject(project);
                     } catch (RoboPluginException e) {
                         messageService.onPluginExceptionHandled(e);
                     }
@@ -51,23 +57,26 @@ public class ActionController {
         }
     }
 
-    private void generateFiles(String content, String path, AnnotationItem annotationItem)
+    private void generateFiles(String content, PsiDirectory directory, AnnotationItem annotationItem)
             throws RoboPluginException {
+
         Set<ClassItem> classItemSet = roboPOJOGenerator.generate(content);
-        final String packageName = classGenerateHelper.resolvePackage(path);
+        //TODO
+        //JavaDirectoryService.getInstance().getPackage(directory).getQualifiedName();
+        final String packageName = classGenerateHelper.resolvePackage(directory
+                .getVirtualFile().getPath());
 
         for (ClassItem classItem : classItemSet) {
             classItem.setPackagePath(packageName);
 
             classPostProcessor.proceed(classItem, annotationItem);
-            fileWriter.writeFile(path, classItem);
+            fileWriter.writeFile(directory, classItem);
         }
     }
 
-    private void resetProject() {
-//        Project project = event.getData(CommonDataKeys.PROJECT);
-//        if (project != null) {
-//            ProjectView.getInstance(project).refresh();
-//        }
+    private void resetProject(Project project) {
+        if (project != null) {
+            ProjectView.getInstance(project).refresh();
+        }
     }
 }

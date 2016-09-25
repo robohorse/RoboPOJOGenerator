@@ -47,12 +47,22 @@ public class ClassPostProcessor {
     private void generateAnnotation(AnnotationItem item, ClassItem classItem) {
         switch (item) {
             case GSON: {
-                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")");
-                classItem.setAnnotation("@SerializedName(\"%s\")\n@Expose");
+                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n");
+                classItem.setAnnotation("@SerializedName(\"%s\")\n\t@Expose");
 
                 classItem.addClassImport("import javax.annotation.Generated;");
                 classItem.addClassImport("import com.google.gson.annotations.Expose;");
                 classItem.addClassImport("import com.google.gson.annotations.SerializedName;");
+                break;
+            }
+            case LOGAN_SQUARE: {
+                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n@JsonObject");
+                classItem.setAnnotation("@SerializedName(\"%s\")\n\t@JsonField(name =\"%s\")");
+
+                classItem.addClassImport("import javax.annotation.Generated;");
+                classItem.addClassImport("import com.google.gson.annotations.SerializedName;");
+                classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonObject;");
+                classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonField;");
             }
         }
     }
