@@ -2,16 +2,16 @@ package com.robohorse.robopojogenerator;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.robohorse.robopojogenerator.action.ActionReceiver;
+import com.robohorse.robopojogenerator.action.ActionController;
 
 /**
  * Created by vadim on 24.09.16.
  */
 public class NewPOJOGroupAction extends AnAction {
-    private ActionReceiver actionReceiver = new ActionReceiver();
+    private ActionController actionController = new ActionController();
 
     @Override
     public void actionPerformed(AnActionEvent event) {
-        actionReceiver.onActionHandled(event);
+        actionController.onActionHandled(event);
     }
 }
