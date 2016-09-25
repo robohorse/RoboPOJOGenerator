@@ -1,8 +1,11 @@
 package com.robohorse.robopojogenerator.action;
 
 import com.intellij.ide.projectView.ProjectView;
+import com.intellij.notification.Notification;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
@@ -16,6 +19,7 @@ import com.robohorse.robopojogenerator.utils.GeneratorViewCreator;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.utils.PathValidator;
 
+import javax.swing.*;
 import java.util.Set;
 
 /**
@@ -45,13 +49,15 @@ public class ActionController {
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 @Override
                 public void onJsonDataObtained(String content, String rootClassName,
-                                               AnnotationItem annotationItem) {
+                                               AnnotationItem annotationItem, JFrame jFrame) {
                     try {
                         generateFiles(content, rootClassName, directory, annotationItem);
                         resetProject(project);
                     } catch (RoboPluginException e) {
                         messageService.onPluginExceptionHandled(e);
                     }
+                    jFrame.setVisible(false);
+                    messageService.showSuccessMessage();
                 }
             });
             viewCreator.showView();

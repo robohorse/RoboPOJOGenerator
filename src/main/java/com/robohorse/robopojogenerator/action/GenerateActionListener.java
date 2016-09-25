@@ -20,10 +20,13 @@ public class GenerateActionListener implements ActionListener {
     private GuiFormEventListener eventListener;
     private MessageService messageService = new MessageService();
     private GeneratorVew generatorVew;
+    private JFrame jFrame;
 
-    public GenerateActionListener(GeneratorVew generatorVew, GuiFormEventListener eventListener) {
+    public GenerateActionListener(GeneratorVew generatorVew, JFrame jFrame,
+                                  GuiFormEventListener eventListener) {
         this.generatorVew = generatorVew;
         this.eventListener = eventListener;
+        this.jFrame = jFrame;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -45,7 +48,7 @@ public class GenerateActionListener implements ActionListener {
             validateClassName(className);
 
             validateJsonContent(text);
-            eventListener.onJsonDataObtained(text, className, annotationItem);
+            eventListener.onJsonDataObtained(text, className, annotationItem, jFrame);
 
         } catch (RoboPluginException exception) {
             messageService.onPluginExceptionHandled(exception);

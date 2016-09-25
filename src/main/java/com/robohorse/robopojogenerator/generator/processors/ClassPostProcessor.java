@@ -56,7 +56,7 @@ public class ClassPostProcessor {
                 break;
             }
             case LOGAN_SQUARE: {
-                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n@JsonObject");
+                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n@JsonObject\n");
                 classItem.setAnnotation("@SerializedName(\"%s\")\n\t@JsonField(name =\"%s\")");
 
                 classItem.addClassImport("import javax.annotation.Generated;");

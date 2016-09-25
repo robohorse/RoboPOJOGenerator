@@ -66,7 +66,7 @@ public class ClassItem {
         stringBuilder.append("public class " + className + "{\n");
 
         for (String objectName : classFields.keySet()) {
-            stringBuilder.append("\t" + String.format(annotation, objectName) + "\n");
+            stringBuilder.append("\t" + String.format(annotation, objectName, objectName) + "\n");
             stringBuilder.append("\tprivate " + classFields.get(objectName) + " " + objectName + ";\n");
         }
 

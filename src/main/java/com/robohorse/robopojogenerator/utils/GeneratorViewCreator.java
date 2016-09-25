@@ -18,11 +18,11 @@ public class GeneratorViewCreator {
     }
 
     public void showView() {
+        JFrame frame = new JFrame("RoboPOJOGenerator");
         GeneratorVew generatorVew = new GeneratorVew();
         generatorVew.getGenerateButton()
-                .addActionListener(new GenerateActionListener(generatorVew, eventListener));
+                .addActionListener(new GenerateActionListener(generatorVew, frame, eventListener));
 
-        JFrame frame = new JFrame("RoboPOJOGenerator");
         frame.setContentPane(generatorVew.getRootView());
 
         frame.pack();
