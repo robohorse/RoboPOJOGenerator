@@ -53,10 +53,6 @@ public class ClassItem {
 
     @Override
     public String toString() {
-        if (className.length() > 1) {
-            className = Character.toUpperCase(className.charAt(0))
-                    + className.substring(1).toLowerCase();
-        }
         StringBuilder stringBuilder = new StringBuilder("package " + packagePath + ";\n");
         for (String string : classImports) {
             stringBuilder.append("\n" + string);

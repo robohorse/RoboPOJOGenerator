@@ -10,9 +10,10 @@ import java.util.Stack;
  * Created by vadim on 23.09.16.
  */
 public class ClassProcessor {
+    private ClassGenerateHelper classGenerateHelper = new ClassGenerateHelper();
 
     public void proceed(JSONObject jsonObject, String className, final Set<ClassItem> classItemSet) {
-        final ClassItem classItem = new ClassItem(className);
+        final ClassItem classItem = new ClassItem(classGenerateHelper.getClassName(className));
         for (final String jsonObjectKey : jsonObject.keySet()) {
             final Object object = jsonObject.get(jsonObjectKey);
 

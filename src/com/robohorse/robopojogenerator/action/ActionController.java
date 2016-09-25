@@ -3,7 +3,9 @@ package com.robohorse.robopojogenerator.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
+import com.robohorse.robopojogenerator.generator.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.ClassPostProcessor;
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator;
 import com.robohorse.robopojogenerator.support.GeneratorViewCreator;
 import com.robohorse.robopojogenerator.support.MessageService;
@@ -22,6 +24,8 @@ public class ActionController {
     private MessageService messageService = new MessageService();
     private GeneratorViewCreator viewCreator = new GeneratorViewCreator();
     private RoboPOJOGenerator roboPOJOGenerator = new RoboPOJOGenerator();
+    private ClassGenerateHelper classGenerateHelper = new ClassGenerateHelper();
+    private ClassPostProcessor classPostProcessor = new ClassPostProcessor();
 
     public void onActionHandled(AnActionEvent event) {
         try {
@@ -46,12 +50,14 @@ public class ActionController {
 
     private void generateFiles(String content, String path) {
         Set<ClassItem> classItemSet = roboPOJOGenerator.generate(content);
-        for (ClassItem classItem : classItemSet) {
-            classItem.setPackagePath("com.robohorse.pojogenerator");
-            classItem.setAnnotation("@JSON");
-            //classPostProcessor.proceed(classItem);
+        final String packageName = classGenerateHelper.resolvePackage(path);
 
-            File file = new File(path + File.pathSeparator + classItem.getClassName() + ".java");
+        for (ClassItem classItem : classItemSet) {
+            classItem.setPackagePath(packageName);
+            classItem.setAnnotation("@JSON");
+            classPostProcessor.proceed(classItem);
+
+            File file = new File(path + File.separator + classItem.getClassName() + ".java");
             try {
                 file.createNewFile();
                 FileUtils.writeStringToFile(file, classItem.toString());
