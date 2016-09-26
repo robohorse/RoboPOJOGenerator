@@ -1,7 +1,5 @@
 package com.robohorse.robopojogenerator.generator;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -19,11 +17,11 @@ public class ClassItem {
     private Set<String> classMethods = new HashSet<String>();
     private Set<String> classImports = new HashSet<String>();
 
-    public ClassItem(@NotNull String className) {
+    public ClassItem(String className) {
         this.className = className;
     }
 
-    public void setPackagePath(@NotNull String packagePath) {
+    public void setPackagePath(String packagePath) {
         this.packagePath = packagePath;
     }
 

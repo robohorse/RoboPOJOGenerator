@@ -18,7 +18,6 @@ import com.robohorse.robopojogenerator.utils.FileWriter;
 import com.robohorse.robopojogenerator.utils.GeneratorViewCreator;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.utils.PathValidator;
-import com.sun.istack.internal.NotNull;
 
 import javax.swing.*;
 import java.util.Set;
@@ -46,19 +45,16 @@ public class ActionController {
         final Project project = event.getProject();
         final VirtualFile virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE);
         final String packageName = ProjectRootManager.getInstance(project).getFileIndex()
-                       .getPackageNameByDirectory(virtualFolder);
+                .getPackageNameByDirectory(virtualFolder);
         final PsiDirectory directory = pathValidator.checkPath(event);
 
         if (null != directory) {
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
-                @Override
                 public void onJsonDataObtained(final String content, final String rootClassName,
                                                final AnnotationItem annotationItem, final JFrame jFrame) {
-
                     ProgressManager.getInstance().run(new Task.Backgroundable(project,
                             "RoboPOJO Generation", false) {
-                        @Override
-                        public void run(@NotNull ProgressIndicator indicator) {
+                        public void run(ProgressIndicator indicator) {
                             try {
                                 generateFiles(content, rootClassName,
                                         packageName, directory, annotationItem);
