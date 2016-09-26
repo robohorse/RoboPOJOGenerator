@@ -1,0 +1,36 @@
+<idea-plugin version="2">
+  <id>com.robohorse.robopojogenerator</id>
+  <name>RoboPOJOGenerator</name>
+  <version>1.0</version>
+  <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">Star it on Github</vendor>
+
+  <description><![CDATA[
+      Generate POJO files from JSON: GSON, Logan Square<br>
+    ]]></description>
+
+  <change-notes><![CDATA[
+     Beta version
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="141.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.GeneratePOJOAction"
+            text="Generate POJO from JSON" description="GeneratePOJOAction">
+      <add-to-group group-id="NewGroup" anchor="first"/>
+    </action>
+  </actions>
+</idea-plugin>
