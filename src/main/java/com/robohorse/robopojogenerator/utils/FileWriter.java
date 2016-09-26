@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.utils;
 
 import com.intellij.psi.PsiDirectory;
-import com.robohorse.robopojogenerator.errors.FileWriteException;
+import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import org.apache.commons.io.FileUtils;
@@ -18,8 +18,10 @@ public class FileWriter {
         final String path = directory.getVirtualFile().getPath();
         final File file = new File(path + File.separator + classItem.getClassName() + ".java");
         try {
-            file.createNewFile();
-            FileUtils.writeStringToFile(file, classItem.toString());
+            if (!file.exists()) {
+                file.createNewFile();
+                FileUtils.writeStringToFile(file, classItem.toString());
+            }
         } catch (IOException e) {
             throw new FileWriteException(e.getMessage());
         }

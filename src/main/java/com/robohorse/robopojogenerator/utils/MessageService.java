@@ -15,8 +15,8 @@ public class MessageService {
             new NotificationGroup("RoboPOJOGenerator",
                     NotificationDisplayType.BALLOON, true);
 
-    public void onPluginExceptionHandled(RoboPluginException exeption) {
-        showMessage(exeption.getMessage(), exeption.getHeader());
+    public void onPluginExceptionHandled(RoboPluginException exception) {
+        showMessage(exception.getMessage(), exception.getHeader());
     }
 
     private void showMessage(String message, String header) {
