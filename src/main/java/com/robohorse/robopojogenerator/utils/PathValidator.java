@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.utils;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.psi.PsiDirectory;
-import com.robohorse.robopojogenerator.errors.PathException;
+import com.robohorse.robopojogenerator.errors.custom.PathException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 
 /**

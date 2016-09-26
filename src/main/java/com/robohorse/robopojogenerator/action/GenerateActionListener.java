@@ -1,8 +1,8 @@
 package com.robohorse.robopojogenerator.action;
 
-import com.robohorse.robopojogenerator.errors.JSONStructureException;
+import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.errors.WrongClassNameException;
+import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.view.GeneratorVew;

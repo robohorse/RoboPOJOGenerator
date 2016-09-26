@@ -44,14 +44,17 @@ public class ActionController {
     private void proceed(AnActionEvent event) throws RoboPluginException {
         final Project project = event.getProject();
         final VirtualFile virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE);
-        final String packageName = ProjectRootManager.getInstance(project).getFileIndex()
+        final String packageName = ProjectRootManager
+                .getInstance(project)
+                .getFileIndex()
                 .getPackageNameByDirectory(virtualFolder);
         final PsiDirectory directory = pathValidator.checkPath(event);
 
         if (null != directory) {
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 public void onJsonDataObtained(final String content, final String rootClassName,
-                                               final AnnotationItem annotationItem, final JFrame jFrame) {
+                                               final AnnotationItem annotationItem,
+                                               final JFrame jFrame) {
                     ProgressManager.getInstance().run(new Task.Backgroundable(project,
                             "RoboPOJO Generation", false) {
                         public void run(ProgressIndicator indicator) {
@@ -73,8 +76,9 @@ public class ActionController {
         }
     }
 
-    private void generateFiles(String content, String rootClassName, String packageName,
-                               PsiDirectory directory, AnnotationItem annotationItem)
+    private void generateFiles(String content, String rootClassName,
+                               String packageName, PsiDirectory directory,
+                               AnnotationItem annotationItem)
             throws RoboPluginException {
 
         Set<ClassItem> classItemSet = roboPOJOGenerator.generate(content, rootClassName);
