@@ -24,8 +24,11 @@ public class GeneratorViewCreator {
         this.eventListener = eventListener;
     }
 
-    public JFrame createAndShowView() {
-        JFrame frame = new JFrame("RoboPOJOGenerator");
+    public JFrame createView() {
+        return new JFrame("RoboPOJOGenerator");
+    }
+
+    public void bindView(JFrame frame) {
         GeneratorVew generatorVew = new GeneratorVew();
         generatorVew.getGenerateButton()
                 .addActionListener(new GenerateActionListener(generatorVew, eventListener));
@@ -38,7 +41,6 @@ public class GeneratorViewCreator {
 
         centerView(frame);
         frame.setVisible(true);
-        return frame;
     }
 
     private void bindGroupViews(ButtonGroup buttonGroup) {

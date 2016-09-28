@@ -62,7 +62,7 @@ public class ActionController {
         final PsiDirectory directory = pathValidator.checkPath(event);
 
         if (null != directory) {
-            final JFrame frame = viewCreator.createAndShowView();
+            final JFrame frame = viewCreator.createView();
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 @Override
                 public void onJsonDataObtained(GenerationModel generationModel) {
@@ -83,6 +83,7 @@ public class ActionController {
                     });
                 }
             });
+            viewCreator.bindView(frame);
         }
     }
 

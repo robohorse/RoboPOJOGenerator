@@ -11,7 +11,6 @@ public class ClassGenerateHelper {
     }
 
     public String getClassName(String name) {
-        name = name.replaceAll("[^A-Za-z0-9]", "");
         if (name.length() > 1) {
             name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
         }

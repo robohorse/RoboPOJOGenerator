@@ -36,20 +36,19 @@ public class GenerateActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         final JTextArea textArea = generatorVew.getTextArea();
         final JTextField jTextField = generatorVew.getClassNameTextField();
+
         final AnnotationItem annotationItem = resolveAnnotationItem();
         final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox().isSelected();
-
+        final String content = textArea.getText();
+        final String className = jTextField.getText();
         try {
-            final String text = textArea.getText();
-            final String className = jTextField.getText();
             validateClassName(className);
-            validateJsonContent(text);
-
+            validateJsonContent(content);
             eventListener.onJsonDataObtained(new GenerationModel
                     .Builder()
                     .setAnnotationItem(annotationItem)
-                    .setContent(jTextField.getText())
-                    .setRootClassName(textArea.getText())
+                    .setContent(content)
+                    .setRootClassName(className)
                     .setRewriteClasses(rewriteClasses)
                     .build());
 
