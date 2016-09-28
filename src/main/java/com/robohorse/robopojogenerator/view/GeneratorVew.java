@@ -7,26 +7,26 @@ import javax.swing.*;
  */
 public class GeneratorVew {
     private JPanel rootView;
-    private JRadioButton radioGson;
-    private JRadioButton radioLogan;
     private JButton generateButton;
     private JTextArea textArea;
-    private JTextField classNameTextField;
+    private JRadioButton NONERadioButton;
+    private JRadioButton jackson2RadioButton;
+    private JRadioButton loganSquareRadioButton;
+    private JRadioButton GSONRadioButton;
+    private JCheckBox rewriteExistingClassesCheckBox;
+    private JTextField className;
+    private ButtonGroup typeButtonGroup;
 
     public JPanel getRootView() {
         return rootView;
     }
 
+    public ButtonGroup getTypeButtonGroup() {
+        return typeButtonGroup;
+    }
+
     public JTextField getClassNameTextField() {
-        return classNameTextField;
-    }
-
-    public JRadioButton getRadioGson() {
-        return radioGson;
-    }
-
-    public JRadioButton getRadioLogan() {
-        return radioLogan;
+        return className;
     }
 
     public JButton getGenerateButton() {
@@ -36,4 +36,25 @@ public class GeneratorVew {
     public JTextArea getTextArea() {
         return textArea;
     }
+
+    public JRadioButton getNONERadioButton() {
+        return NONERadioButton;
+    }
+
+    public JRadioButton getJackson2RadioButton() {
+        return jackson2RadioButton;
+    }
+
+    public JRadioButton getLoganSquareRadioButton() {
+        return loganSquareRadioButton;
+    }
+
+    public JRadioButton getGSONRadioButton() {
+        return GSONRadioButton;
+    }
+
+    public JCheckBox getRewriteExistingClassesCheckBox() {
+        return rewriteExistingClassesCheckBox;
+    }
+
 }

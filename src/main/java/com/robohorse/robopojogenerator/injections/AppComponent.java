@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.GeneratePOJOAction;
+import com.robohorse.robopojogenerator.action.GenerateActionListener;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -15,5 +16,7 @@ import javax.inject.Singleton;
 public interface AppComponent {
 
     void inject(GeneratePOJOAction item);
+
+    void inject(GenerateActionListener item);
 
 }

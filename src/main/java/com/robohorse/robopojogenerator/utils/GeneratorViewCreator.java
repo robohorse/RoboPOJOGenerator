@@ -2,11 +2,13 @@ package com.robohorse.robopojogenerator.utils;
 
 import com.robohorse.robopojogenerator.action.GenerateActionListener;
 import com.robohorse.robopojogenerator.action.GuiFormEventListener;
+import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 
 import javax.inject.Inject;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Enumeration;
 
 /**
  * Created by vadim on 24.09.16.
@@ -31,8 +33,23 @@ public class GeneratorViewCreator {
         frame.setContentPane(generatorVew.getRootView());
 
         frame.pack();
+        bindGroupViews(generatorVew.getTypeButtonGroup());
+
         centerView(frame);
         frame.setVisible(true);
+    }
+
+    private void bindGroupViews(ButtonGroup buttonGroup) {
+        Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+        for (AnnotationItem annotationItems : AnnotationItem.values()) {
+            if (buttons.hasMoreElements()) {
+                AbstractButton button = buttons.nextElement();
+                button.setText(annotationItems.getText());
+
+            } else {
+                break;
+            }
+        }
     }
 
     private void centerView(Frame frame) {
