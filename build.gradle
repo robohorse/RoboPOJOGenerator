@@ -3,15 +3,19 @@ buildscript {
         mavenCentral()
         maven { url "http://dl.bintray.com/jetbrains/intellij-plugin-service" }
         maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.2.0-SNAPSHOT"
     }
 }
 
-plugins {
-    id "org.jetbrains.intellij" version "0.1.10"
-}
+//plugins {
+//    id "org.jetbrains.intellij" version "0.1.10"
+//}
+
+apply plugin: 'org.jetbrains.intellij'
 
 sourceCompatibility = 1.8
 
@@ -28,7 +32,7 @@ group "com.robohorse.robopojogenerator"
 version "1.1"
 
 intellij {
-    version "IC-2016.1"
+    //version "IC-2016.1"
     pluginName "RoboPOJOGenerator"
 }
 
