@@ -1,7 +1,11 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+        maven { url "http://dl.bintray.com/jetbrains/intellij-plugin-service" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
     }
 }
 
@@ -9,27 +13,37 @@ plugins {
     id "org.jetbrains.intellij" version "0.1.10"
 }
 
-intellij {
-    version 'IC-2016.1'
-    pluginName 'RoboPOJOGenerator'
-}
-group 'com.robohorse.robopojogenerator'
-version '1.0-SNAPSHOT'
-
 sourceCompatibility = 1.8
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.jetbrains.intellij'
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "org.jetbrains.intellij"
+apply plugin: "net.ltgt.apt"
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+group "com.robohorse.robopojogenerator"
+version "1.0-SNAPSHOT"
 
-    compile 'com.intellij:annotations:+@jar'
-    compile group: 'org.json', name: 'json', version: '20160810'
-    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+intellij {
+    version "IC-2016.1"
+    pluginName "RoboPOJOGenerator"
+}
+
+ext.daggerVersion = '2.6'
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    testCompile 'org.mockito:mockito-core:2.0.100-beta'
+
+    compile "com.intellij:annotations:+@jar"
+    compile 'org.json:json:20160212'
+    compile "commons-io:commons-io:+"
+    compile 'com.google.guava:guava:19.0'
+
+    compile "com.google.dagger:dagger:$daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+    compile "javax.annotation:jsr250-api:1.0"
 }

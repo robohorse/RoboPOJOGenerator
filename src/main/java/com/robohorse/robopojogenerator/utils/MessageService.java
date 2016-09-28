@@ -7,10 +7,16 @@ import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.Messages;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 
+import javax.inject.Inject;
+
 /**
  * Created by vadim on 24.09.16.
  */
 public class MessageService {
+    @Inject
+    public MessageService() {
+    }
+
     private static final NotificationGroup GROUP_DISPLAY_ID_INFO =
             new NotificationGroup("RoboPOJOGenerator",
                     NotificationDisplayType.BALLOON, true);

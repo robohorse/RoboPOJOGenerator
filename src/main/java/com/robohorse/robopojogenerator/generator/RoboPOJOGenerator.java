@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.generator;
 import com.robohorse.robopojogenerator.generator.processors.ClassProcessor;
 import org.json.JSONObject;
 
+import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,10 +12,11 @@ import java.util.Set;
  * Created by vadim on 22.09.16.
  */
 public class RoboPOJOGenerator {
-    private ClassProcessor classProcessor;
+    @Inject
+    ClassProcessor classProcessor;
 
+    @Inject
     public RoboPOJOGenerator() {
-        classProcessor = new ClassProcessor();
     }
 
     public Set<ClassItem> generate(String string, String rootClassName) {

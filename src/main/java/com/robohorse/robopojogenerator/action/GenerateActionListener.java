@@ -9,6 +9,7 @@ import com.robohorse.robopojogenerator.view.GeneratorVew;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,13 @@ import java.awt.event.ActionListener;
  * Created by vadim on 24.09.16.
  */
 public class GenerateActionListener implements ActionListener {
+    @Inject
+    MessageService messageService;
     private GuiFormEventListener eventListener;
-    private MessageService messageService = new MessageService();
     private GeneratorVew generatorVew;
     private JFrame jFrame;
 
+    @Inject
     public GenerateActionListener(GeneratorVew generatorVew, JFrame jFrame,
                                   GuiFormEventListener eventListener) {
         this.generatorVew = generatorVew;

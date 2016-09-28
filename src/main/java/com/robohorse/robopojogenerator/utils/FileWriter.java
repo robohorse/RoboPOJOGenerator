@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import org.apache.commons.io.FileUtils;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,6 +14,9 @@ import java.io.IOException;
  * Created by vadim on 25.09.16.
  */
 public class FileWriter {
+    @Inject
+    public FileWriter() {
+    }
 
     public void writeFile(PsiDirectory directory, ClassItem classItem) throws RoboPluginException {
         final String path = directory.getVirtualFile().getPath();

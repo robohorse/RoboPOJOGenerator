@@ -19,6 +19,7 @@ import com.robohorse.robopojogenerator.utils.GeneratorViewCreator;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.utils.PathValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import java.util.Set;
 
@@ -26,12 +27,22 @@ import java.util.Set;
  * Created by vadim on 24.09.16.
  */
 public class ActionController {
-    private PathValidator pathValidator = new PathValidator();
-    private MessageService messageService = new MessageService();
-    private GeneratorViewCreator viewCreator = new GeneratorViewCreator();
-    private RoboPOJOGenerator roboPOJOGenerator = new RoboPOJOGenerator();
-    private ClassPostProcessor classPostProcessor = new ClassPostProcessor();
-    private FileWriter fileWriter = new FileWriter();
+    @Inject
+    PathValidator pathValidator;
+    @Inject
+    MessageService messageService;
+    @Inject
+    GeneratorViewCreator viewCreator;
+    @Inject
+    RoboPOJOGenerator roboPOJOGenerator;
+    @Inject
+    ClassPostProcessor classPostProcessor;
+    @Inject
+    FileWriter fileWriter;
+
+    @Inject
+    public ActionController() {
+    }
 
     public void onActionHandled(AnActionEvent event) {
         try {
