@@ -5,6 +5,7 @@ import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.injections.Injector;
+import com.robohorse.robopojogenerator.model.GenerationModel;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 import org.json.JSONException;
@@ -24,14 +25,11 @@ public class GenerateActionListener implements ActionListener {
     MessageService messageService;
     private GuiFormEventListener eventListener;
     private GeneratorVew generatorVew;
-    private JFrame jFrame;
 
-
-    public GenerateActionListener(GeneratorVew generatorVew, JFrame jFrame,
+    public GenerateActionListener(GeneratorVew generatorVew,
                                   GuiFormEventListener eventListener) {
         this.generatorVew = generatorVew;
         this.eventListener = eventListener;
-        this.jFrame = jFrame;
         Injector.getAppComponent().inject(this);
     }
 
@@ -39,14 +37,20 @@ public class GenerateActionListener implements ActionListener {
         final JTextArea textArea = generatorVew.getTextArea();
         final JTextField jTextField = generatorVew.getClassNameTextField();
 
-        AnnotationItem annotationItem = resolveAnnotationItem();
+        final AnnotationItem annotationItem = resolveAnnotationItem();
+        final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox().isSelected();
+        final String content = textArea.getText();
+        final String className = jTextField.getText();
         try {
-            final String text = textArea.getText();
-            final String className = jTextField.getText();
             validateClassName(className);
-
-            validateJsonContent(text);
-            eventListener.onJsonDataObtained(text, className, annotationItem, jFrame);
+            validateJsonContent(content);
+            eventListener.onJsonDataObtained(new GenerationModel
+                    .Builder()
+                    .setAnnotationItem(annotationItem)
+                    .setContent(content)
+                    .setRootClassName(className)
+                    .setRewriteClasses(rewriteClasses)
+                    .build());
 
         } catch (RoboPluginException exception) {
             messageService.onPluginExceptionHandled(exception);
@@ -83,6 +87,6 @@ public class GenerateActionListener implements ActionListener {
                 }
             }
         }
-        return null;
+        return AnnotationItem.NONE;
     }
 }

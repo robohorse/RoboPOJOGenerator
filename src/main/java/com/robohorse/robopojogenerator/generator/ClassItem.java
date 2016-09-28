@@ -60,11 +60,15 @@ public class ClassItem {
             stringBuilder.append("\n" + string);
         }
         stringBuilder.append("\n\n");
-        stringBuilder.append(classAnnotation);
+        if (null != classAnnotation) {
+            stringBuilder.append(classAnnotation);
+        }
         stringBuilder.append("public class " + className + "{\n");
 
         for (String objectName : classFields.keySet()) {
-            stringBuilder.append("\t" + String.format(annotation, objectName, objectName) + "\n");
+            if (null != annotation) {
+                stringBuilder.append("\t" + String.format(annotation, objectName, objectName) + "\n");
+            }
             stringBuilder.append("\tprivate " + classFields.get(objectName) + " " + objectName + ";\n");
         }
 

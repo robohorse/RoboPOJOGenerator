@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator;
 
 import com.robohorse.robopojogenerator.generator.processors.ClassProcessor;
+import com.robohorse.robopojogenerator.model.GenerationModel;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
@@ -19,10 +20,10 @@ public class RoboPOJOGenerator {
     public RoboPOJOGenerator() {
     }
 
-    public Set<ClassItem> generate(String string, String rootClassName) {
+    public Set<ClassItem> generate(GenerationModel model) {
         Set<ClassItem> classItemSet = new HashSet<ClassItem>();
-        JSONObject jsonObject = new JSONObject(string);
-        classProcessor.proceed(jsonObject, rootClassName, classItemSet);
+        JSONObject jsonObject = new JSONObject(model.getContent());
+        classProcessor.proceed(jsonObject, model.getRootClassName(), classItemSet);
         return classItemSet;
     }
 }
