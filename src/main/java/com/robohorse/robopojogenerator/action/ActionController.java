@@ -10,10 +10,10 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator;
 import com.robohorse.robopojogenerator.generator.processors.ClassPostProcessor;
+import com.robohorse.robopojogenerator.model.GenerationModel;
 import com.robohorse.robopojogenerator.utils.FileWriter;
 import com.robohorse.robopojogenerator.utils.GeneratorViewCreator;
 import com.robohorse.robopojogenerator.utils.MessageService;
@@ -62,43 +62,38 @@ public class ActionController {
         final PsiDirectory directory = pathValidator.checkPath(event);
 
         if (null != directory) {
+            final JFrame frame = viewCreator.createAndShowView();
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
-                public void onJsonDataObtained(final String content, final String rootClassName,
-                                               final AnnotationItem annotationItem,
-                                               final JFrame jFrame) {
+                @Override
+                public void onJsonDataObtained(GenerationModel generationModel) {
                     ProgressManager.getInstance().run(new Task.Backgroundable(project,
                             "RoboPOJO Generation", false) {
+
                         public void run(ProgressIndicator indicator) {
                             try {
-                                generateFiles(content, rootClassName,
-                                        packageName, directory, annotationItem);
+                                generateFiles(generationModel, packageName, directory);
                             } catch (RoboPluginException e) {
                                 messageService.onPluginExceptionHandled(e);
                             }
 
-                            jFrame.setVisible(false);
+                            frame.dispose();
                             virtualFolder.refresh(false, true);
                             messageService.showSuccessMessage();
                         }
                     });
                 }
             });
-            viewCreator.showView();
         }
     }
 
-    private void generateFiles(String content, String rootClassName,
-                               String packageName, PsiDirectory directory,
-                               AnnotationItem annotationItem)
+    private void generateFiles(GenerationModel model, String packageName, PsiDirectory directory)
             throws RoboPluginException {
-
-        Set<ClassItem> classItemSet = roboPOJOGenerator.generate(content, rootClassName);
-
+        final Set<ClassItem> classItemSet = roboPOJOGenerator.generate(model);
         for (ClassItem classItem : classItemSet) {
             classItem.setPackagePath(packageName);
+            classPostProcessor.proceed(classItem, model.getAnnotationItem());
 
-            classPostProcessor.proceed(classItem, annotationItem);
-            fileWriter.writeFile(directory, classItem);
+            fileWriter.writeFile(directory, classItem, model.isRewriteClasses());
         }
     }
 }

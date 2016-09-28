@@ -24,19 +24,21 @@ public class GeneratorViewCreator {
         this.eventListener = eventListener;
     }
 
-    public void showView() {
+    public JFrame createAndShowView() {
         JFrame frame = new JFrame("RoboPOJOGenerator");
         GeneratorVew generatorVew = new GeneratorVew();
         generatorVew.getGenerateButton()
-                .addActionListener(new GenerateActionListener(generatorVew, frame, eventListener));
+                .addActionListener(new GenerateActionListener(generatorVew, eventListener));
 
         frame.setContentPane(generatorVew.getRootView());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         frame.pack();
         bindGroupViews(generatorVew.getTypeButtonGroup());
 
         centerView(frame);
         frame.setVisible(true);
+        return frame;
     }
 
     private void bindGroupViews(ButtonGroup buttonGroup) {

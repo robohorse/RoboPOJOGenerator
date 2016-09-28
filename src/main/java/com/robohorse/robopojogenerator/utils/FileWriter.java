@@ -18,10 +18,14 @@ public class FileWriter {
     public FileWriter() {
     }
 
-    public void writeFile(PsiDirectory directory, ClassItem classItem) throws RoboPluginException {
+    public void writeFile(PsiDirectory directory, ClassItem classItem, boolean rewrite) throws RoboPluginException {
         final String path = directory.getVirtualFile().getPath();
         final File file = new File(path + File.separator + classItem.getClassName() + ".java");
         try {
+            if (file.exists() && rewrite) {
+                file.delete();
+            }
+
             if (!file.exists()) {
                 file.createNewFile();
                 FileUtils.writeStringToFile(file, classItem.toString());
