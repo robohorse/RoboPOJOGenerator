@@ -4,13 +4,19 @@ import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 /**
  * Created by vadim on 25.09.16.
  */
 public class ClassPostProcessor {
-    private ClassGenerateHelper generateHelper = new ClassGenerateHelper();
+    @Inject
+    ClassGenerateHelper generateHelper;
+
+    @Inject
+    public ClassPostProcessor() {
+    }
 
     public void proceed(ClassItem classItem, AnnotationItem annotationItem) {
         generateSettersAndGetters(classItem);

@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.generator.utils.InnerObjectResolver;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.inject.Inject;
 import java.util.Set;
 import java.util.Stack;
 
@@ -13,7 +14,12 @@ import java.util.Stack;
  * Created by vadim on 23.09.16.
  */
 public class ClassProcessor {
-    private ClassGenerateHelper classGenerateHelper = new ClassGenerateHelper();
+    @Inject
+    ClassGenerateHelper classGenerateHelper;
+
+    @Inject
+    public ClassProcessor() {
+    }
 
     public void proceed(JSONObject jsonObject, String className, final Set<ClassItem> classItemSet) {
         final ClassItem classItem = new ClassItem(classGenerateHelper.getClassName(className));
@@ -60,7 +66,7 @@ public class ClassProcessor {
         classItemSet.add(classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray,final Stack<String> arrayStack,final String jsonObjectKey,
+    private void proceedArray(JSONArray jsonArray, final Stack<String> arrayStack, final String jsonObjectKey,
                               final Set<ClassItem> classItemSet) {
         final String itemName = classGenerateHelper.getClassName(jsonObjectKey) + "Item";
         if (jsonArray.length() != 0) {

@@ -6,10 +6,15 @@ import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.custom.PathException;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 
+import javax.inject.Inject;
+
 /**
  * Created by vadim on 24.09.16.
  */
 public class PathValidator {
+    @Inject
+    public PathValidator() {
+    }
 
     public PsiDirectory checkPath(AnActionEvent event) throws RoboPluginException {
         Object pathItem = event.getData(CommonDataKeys.NAVIGATABLE);

@@ -4,6 +4,7 @@ import com.robohorse.robopojogenerator.action.GenerateActionListener;
 import com.robohorse.robopojogenerator.action.GuiFormEventListener;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,6 +12,10 @@ import java.awt.*;
  * Created by vadim on 24.09.16.
  */
 public class GeneratorViewCreator {
+    @Inject
+    public GeneratorViewCreator() {
+    }
+
     private GuiFormEventListener eventListener;
 
     public void setGuiFormEventListener(GuiFormEventListener eventListener) {
