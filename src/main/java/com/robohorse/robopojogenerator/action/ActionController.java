@@ -7,6 +7,7 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
@@ -62,7 +63,7 @@ public class ActionController {
         final PsiDirectory directory = pathValidator.checkPath(event);
 
         if (null != directory) {
-            final JFrame frame = viewCreator.createView();
+            final DialogBuilder dialogBuilder = viewCreator.createView();
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 @Override
                 public void onJsonDataObtained(GenerationModel generationModel) {
@@ -76,14 +77,14 @@ public class ActionController {
                                 messageService.onPluginExceptionHandled(e);
                             }
 
-                            frame.dispose();
+                            dialogBuilder.dispose();
                             virtualFolder.refresh(false, true);
                             messageService.showSuccessMessage();
                         }
                     });
                 }
             });
-            viewCreator.bindView(frame);
+            viewCreator.bindView(dialogBuilder);
         }
     }
 
