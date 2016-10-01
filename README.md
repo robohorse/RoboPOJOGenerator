@@ -4,8 +4,8 @@
 
 intellij idea, Android Studio plugin for JSON to POJO conversion.
 
-Generate POJO files from JSON: GSON, Logan Square, empty annotations template 
-supports: primitive types, multiple inner JSONArrays
+Generate POJO files from JSON: GSON, Logan Square, Jackson, empty annotations template.
+Supports: primitive types, multiple inner JSONArrays.
 
 <p><img src="images/tutorial.gif" width="900" height="600"></p>
 
