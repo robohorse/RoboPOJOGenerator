@@ -11,10 +11,6 @@ buildscript {
     }
 }
 
-//plugins {
-//    id "org.jetbrains.intellij" version "0.1.10"
-//}
-
 apply plugin: 'org.jetbrains.intellij'
 
 sourceCompatibility = 1.8
@@ -32,7 +28,6 @@ group "com.robohorse.robopojogenerator"
 version "1.1"
 
 intellij {
-    //version "IC-2016.1"
     pluginName "RoboPOJOGenerator"
 }
 
