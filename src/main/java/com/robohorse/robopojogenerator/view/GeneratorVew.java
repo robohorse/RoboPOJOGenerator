@@ -1,6 +1,11 @@
 package com.robohorse.robopojogenerator.view;
 
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.Theme;
+
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * Created by vadim on 24.09.16.
@@ -8,13 +13,14 @@ import javax.swing.*;
 public class GeneratorVew {
     private JPanel rootView;
     private JButton generateButton;
-    private JTextArea textArea;
+    private RSyntaxTextArea textArea;
     private JRadioButton NONERadioButton;
     private JRadioButton jackson2RadioButton;
     private JRadioButton loganSquareRadioButton;
     private JRadioButton GSONRadioButton;
     private JCheckBox rewriteExistingClassesCheckBox;
     private JTextField className;
+    private JScrollPane scrollView;
     private ButtonGroup typeButtonGroup;
 
     public JPanel getRootView() {
@@ -57,4 +63,18 @@ public class GeneratorVew {
         return rewriteExistingClassesCheckBox;
     }
 
+    private void createUIComponents() {
+        textArea = new RSyntaxTextArea();
+        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JSON);
+        textArea.setCodeFoldingEnabled(true);
+        scrollView = new JScrollPane(textArea);
+        try {
+            Theme theme = Theme.load(getClass().getResourceAsStream(
+                    "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
+            theme.apply(textArea);
+        } catch (IOException ioe) { // Never happens
+            ioe.printStackTrace();
+        }
+
+    }
 }

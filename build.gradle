@@ -50,4 +50,6 @@ dependencies {
     compile "com.google.dagger:dagger:$daggerVersion"
     apt "com.google.dagger:dagger-compiler:$daggerVersion"
     compile "javax.annotation:jsr250-api:1.0"
+
+    compile 'com.fifesoft:rsyntaxtextarea:2.6.0'
 }
