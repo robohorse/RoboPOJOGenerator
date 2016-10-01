@@ -69,6 +69,15 @@ public class ClassPostProcessor {
                 classItem.addClassImport("import com.google.gson.annotations.SerializedName;");
                 classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonObject;");
                 classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonField;");
+                break;
+            }
+            case JACKSON: {
+                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n");
+                classItem.setAnnotation("@JsonProperty(\"%s\")");
+
+                classItem.addClassImport("import javax.annotation.Generated;");
+                classItem.addClassImport("import com.fasterxml.jackson.annotation.JsonProperty;");
+                break;
             }
         }
     }

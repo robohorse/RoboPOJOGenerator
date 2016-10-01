@@ -72,9 +72,8 @@ public class GeneratorVew {
             Theme theme = Theme.load(getClass().getResourceAsStream(
                     "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
             theme.apply(textArea);
-        } catch (IOException ioe) { // Never happens
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
     }
 }
