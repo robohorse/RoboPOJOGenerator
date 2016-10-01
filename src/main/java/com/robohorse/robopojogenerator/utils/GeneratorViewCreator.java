@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.utils;
 
+import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.action.GenerateActionListener;
 import com.robohorse.robopojogenerator.action.GuiFormEventListener;
 import com.robohorse.robopojogenerator.generator.AnnotationItem;
@@ -7,7 +8,6 @@ import com.robohorse.robopojogenerator.view.GeneratorVew;
 
 import javax.inject.Inject;
 import javax.swing.*;
-import java.awt.*;
 import java.util.Enumeration;
 
 /**
@@ -24,23 +24,20 @@ public class GeneratorViewCreator {
         this.eventListener = eventListener;
     }
 
-    public JFrame createView() {
-        return new JFrame("RoboPOJOGenerator");
+    public DialogBuilder createView() {
+        return new DialogBuilder();
     }
 
-    public void bindView(JFrame frame) {
+    public void bindView(DialogBuilder builder) {
         GeneratorVew generatorVew = new GeneratorVew();
         generatorVew.getGenerateButton()
                 .addActionListener(new GenerateActionListener(generatorVew, eventListener));
-
-        frame.setContentPane(generatorVew.getRootView());
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        frame.pack();
         bindGroupViews(generatorVew.getTypeButtonGroup());
 
-        centerView(frame);
-        frame.setVisible(true);
+        builder.setCenterPanel(generatorVew.getRootView());
+        builder.setTitle("RoboPOJOGenerator");
+        builder.removeAllActions();
+        builder.show();
     }
 
     private void bindGroupViews(ButtonGroup buttonGroup) {
@@ -54,12 +51,5 @@ public class GeneratorViewCreator {
                 break;
             }
         }
-    }
-
-    private void centerView(Frame frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
     }
 }
