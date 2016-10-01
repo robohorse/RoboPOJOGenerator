@@ -22,6 +22,7 @@ import com.robohorse.robopojogenerator.utils.PathValidator;
 
 import javax.inject.Inject;
 import javax.swing.*;
+import java.awt.*;
 import java.util.Set;
 
 /**
@@ -64,6 +65,7 @@ public class ActionController {
 
         if (null != directory) {
             final DialogBuilder dialogBuilder = viewCreator.createView();
+            final Window window = dialogBuilder.getWindow();
             viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
                 @Override
                 public void onJsonDataObtained(GenerationModel generationModel) {
@@ -73,13 +75,12 @@ public class ActionController {
                         public void run(ProgressIndicator indicator) {
                             try {
                                 generateFiles(generationModel, packageName, directory);
+                                virtualFolder.refresh(false, true);
+                                messageService.showSuccessMessage();
+                                window.setVisible(false);
                             } catch (RoboPluginException e) {
                                 messageService.onPluginExceptionHandled(e);
                             }
-
-                            dialogBuilder.dispose();
-                            virtualFolder.refresh(false, true);
-                            messageService.showSuccessMessage();
                         }
                     });
                 }
