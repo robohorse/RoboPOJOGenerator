@@ -1,5 +1,7 @@
 # RoboPOJOGenerator
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RoboPOJOGenerator-green.svg?style=true)](https://android-arsenal.com/details/1/4429)
+
 intellij idea, Android Studio plugin for JSON to POJO conversion.
 
 Generate POJO files from JSON: GSON, Logan Square, empty annotations template 
