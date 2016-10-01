@@ -14,6 +14,6 @@ public class ClassGenerateHelper {
         if (name.length() > 1) {
             name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
         }
-        return name + "Dto";
+        return name;
     }
 }

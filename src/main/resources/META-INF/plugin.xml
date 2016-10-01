@@ -2,7 +2,7 @@
   <id>com.robohorse.robopojogenerator</id>
   <name>RoboPOJOGenerator</name>
   <version>1.2</version>
-  <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">Star it on Github</vendor>
+  <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
   <description><![CDATA[
       Generate POJO files from JSON: GSON, Logan Square, Jackson, empty annotations template.<br>

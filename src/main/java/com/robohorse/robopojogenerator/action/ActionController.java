@@ -75,12 +75,12 @@ public class ActionController {
                         public void run(ProgressIndicator indicator) {
                             try {
                                 generateFiles(generationModel, packageName, directory);
-                                virtualFolder.refresh(false, true);
-                                messageService.showSuccessMessage();
-                                window.setVisible(false);
                             } catch (RoboPluginException e) {
                                 messageService.onPluginExceptionHandled(e);
                             }
+                            messageService.showSuccessMessage();
+                            virtualFolder.refresh(true, true);
+                            window.setVisible(false);
                         }
                     });
                 }
@@ -88,7 +88,6 @@ public class ActionController {
             viewCreator.bindView(dialogBuilder);
         }
     }
-
     private void generateFiles(GenerationModel model, String packageName, PsiDirectory directory)
             throws RoboPluginException {
         final Set<ClassItem> classItemSet = roboPOJOGenerator.generate(model);
