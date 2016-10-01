@@ -70,6 +70,8 @@ public class ClassPostProcessor {
                 classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonObject;");
                 classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonField;");
             }
+            case JACKSON: {
+            }
         }
     }
 }
