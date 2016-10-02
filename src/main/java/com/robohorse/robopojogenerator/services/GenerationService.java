@@ -39,13 +39,8 @@ public class GenerationService {
                     messageService.onPluginExceptionHandled(e);
                 } finally {
                     indicator.stop();
+                    environmentService.refreshProject(projectModel);
                 }
-            }
-
-            @Override
-            public void onFinished() {
-                super.onFinished();
-                environmentService.refreshProject(projectModel);
             }
         });
     }
