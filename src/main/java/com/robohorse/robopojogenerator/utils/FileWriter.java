@@ -21,7 +21,8 @@ public class FileWriter {
     public FileWriter() {
     }
 
-    public void writeFile(PsiDirectory directory, ClassItem classItem, boolean rewrite) throws RoboPluginException {
+    public void writeFile(PsiDirectory directory, ClassItem classItem, boolean rewrite)
+            throws RoboPluginException {
         final String path = directory.getVirtualFile().getPath();
         final String fileName = classItem.getClassName() + ".java";
         final File file = new File(path + File.separator + fileName);

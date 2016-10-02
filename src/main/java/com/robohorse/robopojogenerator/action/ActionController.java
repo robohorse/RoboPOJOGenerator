@@ -17,12 +17,11 @@ import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator;
 import com.robohorse.robopojogenerator.generator.processors.ClassPostProcessor;
 import com.robohorse.robopojogenerator.model.GenerationModel;
 import com.robohorse.robopojogenerator.utils.FileWriter;
-import com.robohorse.robopojogenerator.utils.GeneratorViewCreator;
+import com.robohorse.robopojogenerator.view.GeneratorViewBinder;
 import com.robohorse.robopojogenerator.utils.MessageService;
 import com.robohorse.robopojogenerator.utils.PathValidator;
 
 import javax.inject.Inject;
-import javax.swing.*;
 import java.awt.*;
 import java.util.Set;
 
@@ -35,7 +34,7 @@ public class ActionController {
     @Inject
     MessageService messageService;
     @Inject
-    GeneratorViewCreator viewCreator;
+    GeneratorViewBinder generatorViewBinder;
     @Inject
     RoboPOJOGenerator roboPOJOGenerator;
     @Inject
@@ -65,9 +64,10 @@ public class ActionController {
         final PsiDirectory directory = pathValidator.checkPath(event);
 
         if (null != directory) {
-            final DialogBuilder dialogBuilder = viewCreator.createView();
+            final DialogBuilder dialogBuilder = new DialogBuilder();
             final Window window = dialogBuilder.getWindow();
-            viewCreator.setGuiFormEventListener(new GuiFormEventListener() {
+
+            generatorViewBinder.bindView(dialogBuilder, new GuiFormEventListener() {
                 @Override
                 public void onJsonDataObtained(GenerationModel generationModel) {
                     ProgressManager.getInstance().run(new Task.Backgroundable(project,
@@ -87,9 +87,9 @@ public class ActionController {
                     });
                 }
             });
-            viewCreator.bindView(dialogBuilder);
         }
     }
+
     private void generateFiles(GenerationModel model, String packageName, PsiDirectory directory)
             throws RoboPluginException {
         final Set<ClassItem> classItemSet = roboPOJOGenerator.generate(model);

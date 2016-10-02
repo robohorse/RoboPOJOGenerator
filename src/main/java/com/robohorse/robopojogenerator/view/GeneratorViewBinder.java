@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.utils;
+package com.robohorse.robopojogenerator.view;
 
 import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.action.GenerateActionListener;
@@ -13,22 +13,12 @@ import java.util.Enumeration;
 /**
  * Created by vadim on 24.09.16.
  */
-public class GeneratorViewCreator {
+public class GeneratorViewBinder {
     @Inject
-    public GeneratorViewCreator() {
+    public GeneratorViewBinder() {
     }
 
-    private GuiFormEventListener eventListener;
-
-    public void setGuiFormEventListener(GuiFormEventListener eventListener) {
-        this.eventListener = eventListener;
-    }
-
-    public DialogBuilder createView() {
-        return new DialogBuilder();
-    }
-
-    public void bindView(DialogBuilder builder) {
+    public void bindView(DialogBuilder builder, GuiFormEventListener eventListener) {
         GeneratorVew generatorVew = new GeneratorVew();
         generatorVew.getGenerateButton()
                 .addActionListener(new GenerateActionListener(generatorVew, eventListener));
@@ -41,12 +31,11 @@ public class GeneratorViewCreator {
     }
 
     private void bindGroupViews(ButtonGroup buttonGroup) {
-        Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+        final Enumeration<AbstractButton> buttons = buttonGroup.getElements();
         for (AnnotationItem annotationItems : AnnotationItem.values()) {
             if (buttons.hasMoreElements()) {
-                AbstractButton button = buttons.nextElement();
+                final AbstractButton button = buttons.nextElement();
                 button.setText(annotationItems.getText());
-
             } else {
                 break;
             }

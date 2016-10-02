@@ -23,6 +23,8 @@ import java.util.Enumeration;
 public class GenerateActionListener implements ActionListener {
     @Inject
     MessageService messageService;
+
+
     private GuiFormEventListener eventListener;
     private GeneratorVew generatorVew;
 
@@ -76,9 +78,9 @@ public class GenerateActionListener implements ActionListener {
     }
 
     private AnnotationItem resolveAnnotationItem() {
-        ButtonGroup buttonGroup = generatorVew.getTypeButtonGroup();
+        final ButtonGroup buttonGroup = generatorVew.getTypeButtonGroup();
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
-            AbstractButton button = buttons.nextElement();
+            final AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
                 for (AnnotationItem annotationItem : AnnotationItem.values()) {
                     if (annotationItem.getText().equals(button.getText())) {
