@@ -21,8 +21,8 @@ public class RoboPOJOGenerator {
     }
 
     public Set<ClassItem> generate(GenerationModel model) {
-        Set<ClassItem> classItemSet = new HashSet<ClassItem>();
-        JSONObject jsonObject = new JSONObject(model.getContent());
+        final Set<ClassItem> classItemSet = new HashSet<ClassItem>();
+        final JSONObject jsonObject = new JSONObject(model.getContent());
         classProcessor.proceed(jsonObject, model.getRootClassName(), classItemSet);
         return classItemSet;
     }

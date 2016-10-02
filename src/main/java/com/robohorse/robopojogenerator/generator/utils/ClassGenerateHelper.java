@@ -1,7 +1,12 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
+import com.robohorse.robopojogenerator.errors.RoboPluginException;
+import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
+import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.inject.Inject;
 
@@ -11,6 +16,24 @@ import javax.inject.Inject;
 public class ClassGenerateHelper {
     @Inject
     public ClassGenerateHelper() {
+    }
+
+    public void validateJsonContent(String content) throws RoboPluginException {
+        try {
+            new JSONObject(content);
+        } catch (JSONException exception) {
+            throw new JSONStructureException();
+        }
+    }
+
+    public void validateClassName(String name) throws RoboPluginException {
+        if (null != name && name.length() > 1) {
+            String pattern = "^[a-zA-Z0-9]*$";
+            if (name.matches(pattern)) {
+                return;
+            }
+        }
+        throw new WrongClassNameException();
     }
 
     public String getClassName(String name) {

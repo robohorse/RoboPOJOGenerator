@@ -4,6 +4,8 @@ import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.models.GenerationModel;
+import com.robohorse.robopojogenerator.models.ProjectModel;
 import org.apache.commons.io.FileUtils;
 
 import javax.inject.Inject;
@@ -21,14 +23,14 @@ public class FileWriterService {
     public FileWriterService() {
     }
 
-    public void writeFile(PsiDirectory directory, ClassItem classItem, boolean rewrite)
+    public void writeFile(ClassItem classItem, GenerationModel generationModel, ProjectModel projectModel)
             throws RoboPluginException {
-        final String path = directory.getVirtualFile().getPath();
+        final String path = projectModel.getDirectory().getVirtualFile().getPath();
         final String fileName = classItem.getClassName() + ".java";
         final File file = new File(path + File.separator + fileName);
         try {
             if (file.exists()) {
-                if (rewrite) {
+                if (generationModel.isRewriteClasses()) {
                     file.delete();
                     messageService.logEventMessage("updated", fileName);
                 } else {
