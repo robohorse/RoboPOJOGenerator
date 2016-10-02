@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.action;
 
+import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -79,6 +80,7 @@ public class ActionController {
                                 messageService.onPluginExceptionHandled(e);
                             }
                             messageService.showSuccessMessage();
+                            ProjectView.getInstance(project).refresh();
                             virtualFolder.refresh(true, true);
                             window.setVisible(false);
                         }
