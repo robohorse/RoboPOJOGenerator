@@ -39,7 +39,7 @@ dependencies {
 
     compile "com.intellij:annotations:+@jar"
     compile 'org.json:json:20160212'
-    compile "commons-io:commons-io:+"
+    compile 'commons-io:commons-io:2.4'
     compile 'com.google.guava:guava:19.0'
 
     compile "com.google.dagger:dagger:$daggerVersion"
