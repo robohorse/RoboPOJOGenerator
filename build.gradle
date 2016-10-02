@@ -35,7 +35,7 @@ ext.daggerVersion = '2.6'
 
 dependencies {
     testCompile "junit:junit:4.12"
-    testCompile 'org.mockito:mockito-core:2.0.100-beta'
+    testCompile 'org.mockito:mockito-core:2.0.86-beta'
 
     compile "com.intellij:annotations:+@jar"
     compile 'org.json:json:20160212'
