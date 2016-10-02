@@ -3,12 +3,12 @@ package com.robohorse.robopojogenerator.generator.processors;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.utils.InnerObjectResolver;
+import com.robohorse.robopojogenerator.model.InnerArrayModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Created by vadim on 23.09.16.
@@ -48,13 +48,12 @@ public class ClassProcessor {
                         classItem.addClassField(jsonObjectKey, "List<Object>");
 
                     } else {
-                        Stack<String> arrayStack = new Stack<String>();
-                        arrayStack.add("List");
-                        proceedArray(jsonArray, arrayStack, jsonObjectKey, classItemSet);
+                        InnerArrayModel innerArrayModel = new InnerArrayModel();
+                        innerArrayModel.increaseCount();
+                        proceedArray(jsonArray, innerArrayModel, jsonObjectKey, classItemSet);
 
-                        String majorType = arrayStack.pop();
-                        final int size = arrayStack.size();
-                        for (int i = 0; i < size; i++) {
+                        String majorType = innerArrayModel.getMajorType();
+                        for (int i = 0; i < innerArrayModel.getInnerCount(); i++) {
                             majorType = "List<" + majorType + ">";
                         }
                         classItem.addClassField(jsonObjectKey, majorType);
@@ -66,7 +65,7 @@ public class ClassProcessor {
         classItemSet.add(classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray, final Stack<String> arrayStack, final String jsonObjectKey,
+    private void proceedArray(JSONArray jsonArray, final InnerArrayModel innerArrayModel, final String jsonObjectKey,
                               final Set<ClassItem> classItemSet) {
         final String itemName = classGenerateHelper.getClassName(jsonObjectKey) + "Item";
         if (jsonArray.length() != 0) {
@@ -79,25 +78,26 @@ public class ClassProcessor {
 
                 @Override
                 public void onSimpleObjectIdentified(String classType) {
-                    arrayStack.add(classType);
+                    innerArrayModel.setMajorType(classType);
                 }
 
                 @Override
                 public void onJsonObjectIdentified(String classType) {
-                    arrayStack.add(itemName);
+                    innerArrayModel.setMajorType(itemName);
                     proceed((JSONObject) object, itemName, classItemSet);
                 }
 
                 @Override
                 public void onJsonArrayIdentified(String classType) {
-                    arrayStack.add("List");
-                    proceedArray((JSONArray) object, arrayStack, itemName, classItemSet);
+                    innerArrayModel.increaseCount();
+                    proceedArray((JSONArray) object, innerArrayModel, itemName, classItemSet);
                 }
             };
             innerObjectResolver.resolveClassType(object, itemName);
 
         } else {
-            arrayStack.add("List<Object>");
+            innerArrayModel.increaseCount();
+            innerArrayModel.setMajorType("Object");
         }
     }
 }
