@@ -1,6 +1,8 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.ClassType;
+import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.utils.InnerObjectResolver;
 import com.robohorse.robopojogenerator.model.InnerArrayModel;
@@ -27,6 +29,7 @@ public class ClassProcessor {
             final Object object = jsonObject.get(jsonObjectKey);
 
             InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
+
                 public void onSimpleObjectIdentified(String classType) {
                     classItem.addClassField(jsonObjectKey, classType);
                 }
@@ -42,7 +45,7 @@ public class ClassProcessor {
 
                 public void onJsonArrayIdentified(String classType) {
                     final JSONArray jsonArray = (JSONArray) object;
-                    classItem.addClassImport("import java.util.List;");
+                    classItem.addClassImport(Imports.LIST);
 
                     if (jsonArray.length() == 0) {
                         classItem.addClassField(jsonObjectKey, "List<Object>");
@@ -65,8 +68,8 @@ public class ClassProcessor {
         classItemSet.add(classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray, final InnerArrayModel innerArrayModel, final String jsonObjectKey,
-                              final Set<ClassItem> classItemSet) {
+    private void proceedArray(JSONArray jsonArray, final InnerArrayModel innerArrayModel,
+                              final String jsonObjectKey, final Set<ClassItem> classItemSet) {
         final String itemName = classGenerateHelper.getClassName(jsonObjectKey) + "Item";
         if (jsonArray.length() != 0) {
             final Object object = jsonArray.get(0);
@@ -97,7 +100,7 @@ public class ClassProcessor {
 
         } else {
             innerArrayModel.increaseCount();
-            innerArrayModel.setMajorType("Object");
+            innerArrayModel.setMajorType(ClassType.OBJECT.getBoxed());
         }
     }
 }

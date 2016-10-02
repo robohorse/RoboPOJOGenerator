@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.model;
 
-import com.robohorse.robopojogenerator.generator.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 
 /**
  * Created by vadim on 28.09.16.

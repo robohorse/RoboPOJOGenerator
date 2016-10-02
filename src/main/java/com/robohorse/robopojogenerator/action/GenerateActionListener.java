@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.action;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
-import com.robohorse.robopojogenerator.generator.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.injections.Injector;
 import com.robohorse.robopojogenerator.model.GenerationModel;
 import com.robohorse.robopojogenerator.utils.MessageService;

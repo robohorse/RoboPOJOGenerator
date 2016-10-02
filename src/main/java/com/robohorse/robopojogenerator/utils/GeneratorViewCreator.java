@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.utils;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.action.GenerateActionListener;
 import com.robohorse.robopojogenerator.action.GuiFormEventListener;
-import com.robohorse.robopojogenerator.generator.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 
 import javax.inject.Inject;
