@@ -1,6 +1,6 @@
-package com.robohorse.robopojogenerator.action;
+package com.robohorse.robopojogenerator.listeners;
 
-import com.robohorse.robopojogenerator.model.GenerationModel;
+import com.robohorse.robopojogenerator.models.GenerationModel;
 
 /**
  * Created by vadim on 24.09.16.

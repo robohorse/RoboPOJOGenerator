@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.action;
+package com.robohorse.robopojogenerator.controllers;
 
 import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -11,15 +11,16 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
+import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator;
 import com.robohorse.robopojogenerator.generator.processors.ClassPostProcessor;
-import com.robohorse.robopojogenerator.model.GenerationModel;
-import com.robohorse.robopojogenerator.utils.FileWriter;
+import com.robohorse.robopojogenerator.models.GenerationModel;
+import com.robohorse.robopojogenerator.services.FileWriterService;
 import com.robohorse.robopojogenerator.view.GeneratorViewBinder;
-import com.robohorse.robopojogenerator.utils.MessageService;
-import com.robohorse.robopojogenerator.utils.PathValidator;
+import com.robohorse.robopojogenerator.services.MessageService;
+import com.robohorse.robopojogenerator.services.EnvironmentService;
 
 import javax.inject.Inject;
 import java.awt.*;
@@ -28,9 +29,9 @@ import java.util.Set;
 /**
  * Created by vadim on 24.09.16.
  */
-public class ActionController {
+public class GeneratePOJOActionController {
     @Inject
-    PathValidator pathValidator;
+    EnvironmentService environmentService;
     @Inject
     MessageService messageService;
     @Inject
@@ -40,10 +41,10 @@ public class ActionController {
     @Inject
     ClassPostProcessor classPostProcessor;
     @Inject
-    FileWriter fileWriter;
+    FileWriterService fileWriterService;
 
     @Inject
-    public ActionController() {
+    public GeneratePOJOActionController() {
     }
 
     public void onActionHandled(AnActionEvent event) {
@@ -61,7 +62,7 @@ public class ActionController {
                 .getInstance(project)
                 .getFileIndex()
                 .getPackageNameByDirectory(virtualFolder);
-        final PsiDirectory directory = pathValidator.checkPath(event);
+        final PsiDirectory directory = environmentService.checkPath(event);
 
         if (null != directory) {
             final DialogBuilder dialogBuilder = new DialogBuilder();
@@ -97,7 +98,7 @@ public class ActionController {
             classItem.setPackagePath(packageName);
             classPostProcessor.proceed(classItem, model.getAnnotationItem());
 
-            fileWriter.writeFile(directory, classItem, model.isRewriteClasses());
+            fileWriterService.writeFile(directory, classItem, model.isRewriteClasses());
         }
     }
 }

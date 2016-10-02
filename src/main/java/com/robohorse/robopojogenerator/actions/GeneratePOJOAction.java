@@ -1,8 +1,8 @@
-package com.robohorse.robopojogenerator;
+package com.robohorse.robopojogenerator.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.robohorse.robopojogenerator.action.ActionController;
+import com.robohorse.robopojogenerator.controllers.GeneratePOJOActionController;
 import com.robohorse.robopojogenerator.injections.Injector;
 
 import javax.inject.Inject;
@@ -12,7 +12,7 @@ import javax.inject.Inject;
  */
 public class GeneratePOJOAction extends AnAction {
     @Inject
-    ActionController actionController;
+    GeneratePOJOActionController generatePOJOActionController;
 
     public GeneratePOJOAction() {
         Injector.initModules();
@@ -21,6 +21,6 @@ public class GeneratePOJOAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        actionController.onActionHandled(e);
+        generatePOJOActionController.onActionHandled(e);
     }
 }

@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.utils;
+package com.robohorse.robopojogenerator.services;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -11,9 +11,9 @@ import javax.inject.Inject;
 /**
  * Created by vadim on 24.09.16.
  */
-public class PathValidator {
+public class EnvironmentService {
     @Inject
-    public PathValidator() {
+    public EnvironmentService() {
     }
 
     public PsiDirectory checkPath(AnActionEvent event) throws RoboPluginException {

@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.utils;
+package com.robohorse.robopojogenerator.services;
 
 import com.intellij.notification.*;
 import com.intellij.openapi.application.ApplicationManager;

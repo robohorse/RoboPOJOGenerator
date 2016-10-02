@@ -1,12 +1,12 @@
-package com.robohorse.robopojogenerator.action;
+package com.robohorse.robopojogenerator.listeners;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.injections.Injector;
-import com.robohorse.robopojogenerator.model.GenerationModel;
-import com.robohorse.robopojogenerator.utils.MessageService;
+import com.robohorse.robopojogenerator.models.GenerationModel;
+import com.robohorse.robopojogenerator.services.MessageService;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +23,6 @@ import java.util.Enumeration;
 public class GenerateActionListener implements ActionListener {
     @Inject
     MessageService messageService;
-
 
     private GuiFormEventListener eventListener;
     private GeneratorVew generatorVew;

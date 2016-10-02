@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.model;
+package com.robohorse.robopojogenerator.models;
 
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 

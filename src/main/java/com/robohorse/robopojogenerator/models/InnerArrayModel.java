@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.model;
+package com.robohorse.robopojogenerator.models;
 
 /**
  * Created by vadim on 02.10.16.

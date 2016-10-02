@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.utils;
+package com.robohorse.robopojogenerator.services;
 
 import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
@@ -13,12 +13,12 @@ import java.io.IOException;
 /**
  * Created by vadim on 25.09.16.
  */
-public class FileWriter {
+public class FileWriterService {
     @Inject
     MessageService messageService;
 
     @Inject
-    public FileWriter() {
+    public FileWriterService() {
     }
 
     public void writeFile(PsiDirectory directory, ClassItem classItem, boolean rewrite)
