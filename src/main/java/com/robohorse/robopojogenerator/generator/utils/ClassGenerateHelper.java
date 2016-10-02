@@ -5,6 +5,7 @@ import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
+import com.robohorse.robopojogenerator.models.InnerArrayModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +29,7 @@ public class ClassGenerateHelper {
 
     public void validateClassName(String name) throws RoboPluginException {
         if (null != name && name.length() > 1) {
-            String pattern = "^[a-zA-Z0-9]*$";
+            final String pattern = "^[a-zA-Z0-9]*$";
             if (name.matches(pattern)) {
                 return;
             }
@@ -70,5 +71,13 @@ public class ClassGenerateHelper {
         for (String value : imports) {
             classItem.addClassImport(value);
         }
+    }
+
+    public String resolveMajorType(InnerArrayModel innerArrayModel) {
+        String majorType = innerArrayModel.getMajorType();
+        for (int i = 0; i < innerArrayModel.getInnerCount(); i++) {
+            majorType = "List<" + majorType + ">";
+        }
+        return majorType;
     }
 }

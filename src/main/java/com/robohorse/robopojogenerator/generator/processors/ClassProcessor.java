@@ -27,8 +27,7 @@ public class ClassProcessor {
         final ClassItem classItem = new ClassItem(classGenerateHelper.getClassName(className));
         for (final String jsonObjectKey : jsonObject.keySet()) {
             final Object object = jsonObject.get(jsonObjectKey);
-
-            InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
+            final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
 
                 public void onSimpleObjectIdentified(String classType) {
                     classItem.addClassField(jsonObjectKey, classType);
@@ -51,14 +50,12 @@ public class ClassProcessor {
                         classItem.addClassField(jsonObjectKey, "List<Object>");
 
                     } else {
-                        InnerArrayModel innerArrayModel = new InnerArrayModel();
+                        final InnerArrayModel innerArrayModel = new InnerArrayModel();
                         innerArrayModel.increaseCount();
+
                         proceedArray(jsonArray, innerArrayModel, jsonObjectKey, classItemSet);
 
-                        String majorType = innerArrayModel.getMajorType();
-                        for (int i = 0; i < innerArrayModel.getInnerCount(); i++) {
-                            majorType = "List<" + majorType + ">";
-                        }
+                        final String majorType = classGenerateHelper.resolveMajorType(innerArrayModel);
                         classItem.addClassField(jsonObjectKey, majorType);
                     }
                 }
@@ -73,7 +70,7 @@ public class ClassProcessor {
         final String itemName = classGenerateHelper.getClassName(jsonObjectKey) + "Item";
         if (jsonArray.length() != 0) {
             final Object object = jsonArray.get(0);
-            InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
+            final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
                 @Override
                 public void onPrimitiveObjectIdentified(String classType) {
 

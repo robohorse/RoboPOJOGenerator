@@ -22,8 +22,8 @@ public class FileWriterService {
     public FileWriterService() {
     }
 
-    public void writeFile(ClassItem classItem, GenerationModel generationModel, ProjectModel projectModel)
-            throws RoboPluginException {
+    public void writeFile(ClassItem classItem, GenerationModel generationModel,
+                          ProjectModel projectModel) throws RoboPluginException {
         final String path = projectModel.getDirectory().getVirtualFile().getPath();
         final String fileName = classItem.getClassName() + ".java";
         final File file = new File(path + File.separator + fileName);

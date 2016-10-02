@@ -8,7 +8,7 @@ import org.json.JSONObject;
  * Created by vadim on 23.09.16.
  */
 public abstract class InnerObjectResolver {
-    //TODO INJECTION
+
     private ClassGenerateHelper classGenerateHelper = new ClassGenerateHelper();
 
     public void resolveClassType(Object object, String key) {
