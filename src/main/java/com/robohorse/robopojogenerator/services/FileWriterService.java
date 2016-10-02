@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.services;
 
-import com.intellij.psi.PsiDirectory;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
@@ -32,13 +31,13 @@ public class FileWriterService {
             if (file.exists()) {
                 if (generationModel.isRewriteClasses()) {
                     file.delete();
-                    messageService.logEventMessage("updated", fileName);
+                    messageService.logEventMessage("updated " + fileName);
                 } else {
-                    messageService.logEventMessage("skipped", fileName);
+                    messageService.logEventMessage("skipped " + fileName);
                 }
 
             } else {
-                messageService.logEventMessage("created", fileName);
+                messageService.logEventMessage("created " + fileName);
             }
 
             if (!file.exists()) {

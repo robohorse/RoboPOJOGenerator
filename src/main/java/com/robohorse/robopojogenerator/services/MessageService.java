@@ -15,14 +15,18 @@ import javax.inject.Inject;
  */
 @Singleton
 public class MessageService {
-    private static final String GROUP_DISPLAY_ID = "RoboPOJOGenerator";
+    private static final String GROUP_DISPLAY = "RoboPOJOGenerator";
+    private static final String GROUP_DISPLAY_LOG = "RoboPOJOGenerator LOG";
 
     @Inject
     public MessageService() {
     }
 
     private static final NotificationGroup GROUP_DISPLAY_ID_INFO =
-            new NotificationGroup(GROUP_DISPLAY_ID, NotificationDisplayType.BALLOON, true);
+            new NotificationGroup(GROUP_DISPLAY, NotificationDisplayType.BALLOON, true);
+
+    private static final NotificationGroup GROUP_DISPLAY_ID_LOG =
+            new NotificationGroup(GROUP_DISPLAY_LOG, NotificationDisplayType.NONE, true);
 
     public void onPluginExceptionHandled(RoboPluginException exception) {
         showMessage(exception.getMessage(), exception.getHeader());
@@ -32,8 +36,16 @@ public class MessageService {
         Messages.showDialog(message, header, new String[]{"OK"}, -1, null);
     }
 
-    public void logEventMessage(String title, String message) {
-        Notifications.Bus.notify(new Notification(GROUP_DISPLAY_ID, title, message, NotificationType.INFORMATION));
+    public void logEventMessage(String message) {
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Notification notification = GROUP_DISPLAY_ID_LOG
+                        .createNotification(message, NotificationType.INFORMATION);
+                Project[] projects = ProjectManager.getInstance().getOpenProjects();
+                Notifications.Bus.notify(notification, projects[0]);
+            }
+        });
     }
 
     public void showSuccessMessage() {
