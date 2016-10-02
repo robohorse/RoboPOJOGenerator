@@ -29,7 +29,7 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.GeneratePOJOAction"
+    <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.actions.GeneratePOJOAction"
             text="Generate POJO from JSON" description="GeneratePOJOAction">
       <add-to-group group-id="NewGroup" anchor="first"/>
     </action>

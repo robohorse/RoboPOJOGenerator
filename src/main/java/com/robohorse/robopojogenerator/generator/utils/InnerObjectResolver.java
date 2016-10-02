@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
+import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,7 +8,7 @@ import org.json.JSONObject;
  * Created by vadim on 23.09.16.
  */
 public abstract class InnerObjectResolver {
-    //TODO INJECTION
+
     private ClassGenerateHelper classGenerateHelper = new ClassGenerateHelper();
 
     public void resolveClassType(Object object, String key) {
@@ -18,30 +19,30 @@ public abstract class InnerObjectResolver {
             onJsonArrayIdentified(key);
 
         } else if (object instanceof String) {
-            onSimpleObjectIdentified("String");
+            onSimpleObjectIdentified(ClassType.STRING.getBoxed());
 
         } else if (object instanceof Integer) {
-            onSimpleObjectIdentified("Integer");
-            onPrimitiveObjectIdentified("int");
+            onSimpleObjectIdentified(ClassType.INTEGER.getBoxed());
+            onPrimitiveObjectIdentified(ClassType.INTEGER.getPrimitive());
 
         } else if (object instanceof Double) {
-            onSimpleObjectIdentified("Double");
-            onPrimitiveObjectIdentified("double");
+            onSimpleObjectIdentified(ClassType.DOUBLE.getBoxed());
+            onPrimitiveObjectIdentified(ClassType.DOUBLE.getPrimitive());
 
         } else if (object instanceof Float) {
-            onSimpleObjectIdentified("Float");
-            onPrimitiveObjectIdentified("float");
+            onSimpleObjectIdentified(ClassType.FLOAT.getBoxed());
+            onPrimitiveObjectIdentified(ClassType.FLOAT.getPrimitive());
 
         } else if (object instanceof Long) {
-            onSimpleObjectIdentified("Long");
-            onPrimitiveObjectIdentified("long");
+            onSimpleObjectIdentified(ClassType.LONG.getBoxed());
+            onPrimitiveObjectIdentified(ClassType.LONG.getPrimitive());
 
         } else if (object instanceof Boolean) {
-            onSimpleObjectIdentified("Boolean");
-            onPrimitiveObjectIdentified("boolean");
+            onSimpleObjectIdentified(ClassType.BOOLEAN.getBoxed());
+            onPrimitiveObjectIdentified(ClassType.BOOLEAN.getPrimitive());
 
         } else {
-            onSimpleObjectIdentified("Object");
+            onSimpleObjectIdentified(ClassType.OBJECT.getBoxed());
         }
     }
 

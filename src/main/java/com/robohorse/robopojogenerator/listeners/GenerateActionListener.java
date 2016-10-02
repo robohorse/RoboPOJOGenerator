@@ -1,15 +1,12 @@
-package com.robohorse.robopojogenerator.action;
+package com.robohorse.robopojogenerator.listeners;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
-import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
-import com.robohorse.robopojogenerator.generator.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.injections.Injector;
-import com.robohorse.robopojogenerator.model.GenerationModel;
-import com.robohorse.robopojogenerator.utils.MessageService;
+import com.robohorse.robopojogenerator.models.GenerationModel;
+import com.robohorse.robopojogenerator.services.MessageService;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import javax.inject.Inject;
 import javax.swing.*;
@@ -23,6 +20,9 @@ import java.util.Enumeration;
 public class GenerateActionListener implements ActionListener {
     @Inject
     MessageService messageService;
+    @Inject
+    ClassGenerateHelper classGenerateHelper;
+
     private GuiFormEventListener eventListener;
     private GeneratorVew generatorVew;
 
@@ -35,15 +35,15 @@ public class GenerateActionListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         final JTextArea textArea = generatorVew.getTextArea();
-        final JTextField jTextField = generatorVew.getClassNameTextField();
+        final JTextField textField = generatorVew.getClassNameTextField();
 
         final AnnotationItem annotationItem = resolveAnnotationItem();
         final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox().isSelected();
         final String content = textArea.getText();
-        final String className = jTextField.getText();
+        final String className = textField.getText();
         try {
-            validateClassName(className);
-            validateJsonContent(content);
+            classGenerateHelper.validateClassName(className);
+            classGenerateHelper.validateJsonContent(content);
             eventListener.onJsonDataObtained(new GenerationModel
                     .Builder()
                     .setAnnotationItem(annotationItem)
@@ -57,28 +57,10 @@ public class GenerateActionListener implements ActionListener {
         }
     }
 
-    private void validateJsonContent(String content) throws RoboPluginException {
-        try {
-            JSONObject jsonObject = new JSONObject(content);
-        } catch (JSONException exception) {
-            throw new JSONStructureException();
-        }
-    }
-
-    private void validateClassName(String name) throws RoboPluginException {
-        if (null != name && name.length() > 1) {
-            String pattern = "^[a-zA-Z0-9]*$";
-            if (name.matches(pattern)) {
-                return;
-            }
-        }
-        throw new WrongClassNameException();
-    }
-
     private AnnotationItem resolveAnnotationItem() {
-        ButtonGroup buttonGroup = generatorVew.getTypeButtonGroup();
+        final ButtonGroup buttonGroup = generatorVew.getTypeButtonGroup();
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
-            AbstractButton button = buttons.nextElement();
+            final AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
                 for (AnnotationItem annotationItem : AnnotationItem.values()) {
                     if (annotationItem.getText().equals(button.getText())) {

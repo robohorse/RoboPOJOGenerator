@@ -1,7 +1,9 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
-import com.robohorse.robopojogenerator.generator.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.Imports;
+import com.robohorse.robopojogenerator.generator.consts.PojoAnnotations;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 
 import javax.inject.Inject;
@@ -20,63 +22,38 @@ public class ClassPostProcessor {
 
     public void proceed(ClassItem classItem, AnnotationItem annotationItem) {
         generateSettersAndGetters(classItem);
-        generateAnnotation(annotationItem, classItem);
+        generateAnnotations(annotationItem, classItem);
     }
 
     private void generateSettersAndGetters(ClassItem classItem) {
         Map<String, String> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
-            generateSetter(objectName, classFields.get(objectName), classItem);
-            generateGetter(objectName, classFields.get(objectName), classItem);
+            generateHelper.generateSetter(objectName, classFields.get(objectName), classItem);
+            generateHelper.generateGetter(objectName, classFields.get(objectName), classItem);
         }
     }
 
-    private void generateSetter(String fieldName, String fieldType, ClassItem classItem) {
-        final String setter = "\tpublic void set" + generateHelper.getClassName(fieldName)
-                + "(" + fieldType + " " + fieldName + "){\n"
-                + "\t\tthis." + fieldName + " = " + fieldName + "; \n\t}";
-        classItem.addClassMethod(setter);
-    }
-
-    private void generateGetter(String fieldName, String fieldType, ClassItem classItem) {
-        String prefix = "get";
-        if ("boolean".equalsIgnoreCase(fieldType)) {
-            prefix = "is";
-        }
-        final String getter = "\tpublic " + fieldType + " " + prefix
-                + generateHelper.getClassName(fieldName)
-                + "(){\n"
-                + "\t\treturn " + fieldName + "; \n\t}";
-        classItem.addClassMethod(getter);
-    }
-
-    private void generateAnnotation(AnnotationItem item, ClassItem classItem) {
+    private void generateAnnotations(AnnotationItem item, ClassItem classItem) {
         switch (item) {
             case GSON: {
-                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n");
-                classItem.setAnnotation("@SerializedName(\"%s\")\n\t@Expose");
-
-                classItem.addClassImport("import javax.annotation.Generated;");
-                classItem.addClassImport("import com.google.gson.annotations.Expose;");
-                classItem.addClassImport("import com.google.gson.annotations.SerializedName;");
+                generateHelper.setAnnotations(classItem,
+                        PojoAnnotations.GSON.CLASS_ANNOTATION,
+                        PojoAnnotations.GSON.ANNOTATION,
+                        Imports.GSON.IMPORTS);
                 break;
             }
             case LOGAN_SQUARE: {
-                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n@JsonObject\n");
-                classItem.setAnnotation("@SerializedName(\"%s\")\n\t@JsonField(name =\"%s\")");
-
-                classItem.addClassImport("import javax.annotation.Generated;");
-                classItem.addClassImport("import com.google.gson.annotations.SerializedName;");
-                classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonObject;");
-                classItem.addClassImport("import com.bluelinelabs.logansquare.annotation.JsonField;");
+                generateHelper.setAnnotations(classItem,
+                        PojoAnnotations.LOGAN_SQUARE.CLASS_ANNOTATION,
+                        PojoAnnotations.LOGAN_SQUARE.ANNOTATION,
+                        Imports.LOGAN_SQUARE.IMPORTS);
                 break;
             }
             case JACKSON: {
-                classItem.setClassAnnotation("@Generated(\"com.robohorse.robopojogenerator\")\n");
-                classItem.setAnnotation("@JsonProperty(\"%s\")");
-
-                classItem.addClassImport("import javax.annotation.Generated;");
-                classItem.addClassImport("import com.fasterxml.jackson.annotation.JsonProperty;");
+                generateHelper.setAnnotations(classItem,
+                        PojoAnnotations.JACKSON.CLASS_ANNOTATION,
+                        PojoAnnotations.JACKSON.ANNOTATION,
+                        Imports.JACKSON.IMPORTS);
                 break;
             }
         }
