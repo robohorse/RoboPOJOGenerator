@@ -28,20 +28,23 @@ public class ClassProcessor {
         for (final String jsonObjectKey : jsonObject.keySet()) {
             final Object object = jsonObject.get(jsonObjectKey);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
-
+                @Override
                 public void onSimpleObjectIdentified(String classType) {
                     classItem.addClassField(jsonObjectKey, classType);
                 }
 
+                @Override
                 public void onPrimitiveObjectIdentified(String classType) {
                     classItem.addClassField(jsonObjectKey, classType);
                 }
 
+                @Override
                 public void onJsonObjectIdentified(String classType) {
                     classItem.addClassField(jsonObjectKey, classType);
                     proceed((JSONObject) object, jsonObjectKey, classItemSet);
                 }
 
+                @Override
                 public void onJsonArrayIdentified(String classType) {
                     final JSONArray jsonArray = (JSONArray) object;
                     classItem.addClassImport(Imports.LIST);
