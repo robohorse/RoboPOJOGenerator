@@ -40,7 +40,7 @@ public class EnvironmentService {
 
     public void refreshProject(ProjectModel projectModel) {
         ProjectView.getInstance(projectModel.getProject()).refresh();
-        projectModel.getVirtualFolder().refresh(true, true);
+        projectModel.getVirtualFolder().refresh(false, true);
     }
 
     private PsiDirectory checkPath(AnActionEvent event) throws RoboPluginException {
