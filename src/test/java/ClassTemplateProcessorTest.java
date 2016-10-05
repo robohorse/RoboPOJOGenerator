@@ -1,6 +1,6 @@
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
-import com.robohorse.robopojogenerator.generator.utils.ClassTemplateGenerator;
+import com.robohorse.robopojogenerator.generator.processors.ClassTemplateProcessor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -13,9 +13,9 @@ import static org.mockito.Mockito.*;
 /**
  * Created by vadim on 05.10.16.
  */
-public class ClassTemplateGeneratorTest {
+public class ClassTemplateProcessorTest {
     @InjectMocks
-    ClassTemplateGenerator classTemplateGenerator;
+    ClassTemplateProcessor classTemplateProcessor;
 
     @Mock
     ClassGenerateHelper classGenerateHelper;
@@ -39,7 +39,7 @@ public class ClassTemplateGeneratorTest {
                 + ClassTemplate.NEW_LINE
                 + ClassTemplate.TAB + "}"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateGenerator.createSetter(field, type));
+        assertEquals(target, classTemplateProcessor.createSetter(field, type));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ClassTemplateGeneratorTest {
                 + ClassTemplate.NEW_LINE
                 + ClassTemplate.TAB + "}"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateGenerator.createGetter(field, type));
+        assertEquals(target, classTemplateProcessor.createGetter(field, type));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ClassTemplateGeneratorTest {
                 + ClassTemplate.NEW_LINE
                 + ClassTemplate.TAB + "}"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateGenerator.createGetter(field, type));
+        assertEquals(target, classTemplateProcessor.createGetter(field, type));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class ClassTemplateGeneratorTest {
         final String type = "boolean";
         final String target = ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateGenerator.createFiled(type, field, null));
+        assertEquals(target, classTemplateProcessor.createFiled(type, field, null));
     }
 
     @Test
@@ -93,6 +93,6 @@ public class ClassTemplateGeneratorTest {
         final String target = ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
                 ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateGenerator.createFiled(type, field, annotation));
+        assertEquals(target, classTemplateProcessor.createFiled(type, field, annotation));
     }
 }

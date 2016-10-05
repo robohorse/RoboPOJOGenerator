@@ -1,20 +1,21 @@
-package com.robohorse.robopojogenerator.generator.utils;
+package com.robohorse.robopojogenerator.generator.processors;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
+import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 
 import javax.inject.Inject;
 
 /**
  * Created by vadim on 05.10.16.
  */
-public class ClassTemplateGenerator {
+public class ClassTemplateProcessor {
     @Inject
     ClassGenerateHelper classGenerateHelper;
 
     @Inject
-    public ClassTemplateGenerator() {
+    public ClassTemplateProcessor() {
     }
 
     public String createSetter(String field, String type) {
