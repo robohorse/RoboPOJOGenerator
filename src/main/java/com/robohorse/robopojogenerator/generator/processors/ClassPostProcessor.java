@@ -6,7 +6,6 @@ import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.PojoAnnotations;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
-import com.robohorse.robopojogenerator.generator.utils.ClassTemplateGenerator;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -19,7 +18,7 @@ public class ClassPostProcessor {
     @Inject
     ClassGenerateHelper generateHelper;
     @Inject
-    ClassTemplateGenerator classTemplateGenerator;
+    ClassTemplateProcessor classTemplateProcessor;
 
     @Inject
     public ClassPostProcessor() {
@@ -32,14 +31,14 @@ public class ClassPostProcessor {
 
     private String proceedClass(ClassItem classItem) {
         final String classBody = proceedClassBody(classItem);
-        final String classTemplate = classTemplateGenerator.createClassBody(classItem, classBody);
+        final String classTemplate = classTemplateProcessor.createClassBody(classItem, classBody);
         final Set<String> imports = classItem.getClassImports();
         final StringBuilder importsBuilder = new StringBuilder();
         for (String importItem : imports) {
             importsBuilder.append(importItem);
             importsBuilder.append(ClassTemplate.NEW_LINE);
         }
-        return classTemplateGenerator.createClassItem(
+        return classTemplateProcessor.createClassItem(
                 classItem.getPackagePath(),
                 importsBuilder.toString(),
                 classTemplate);
@@ -50,17 +49,17 @@ public class ClassPostProcessor {
         final StringBuilder classMethodBuilder = new StringBuilder();
         final Map<String, String> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
-            classBodyBuilder.append(classTemplateGenerator
+            classBodyBuilder.append(classTemplateProcessor
                     .createFiled(classFields.get(objectName), objectName, classItem.getAnnotation()));
 
             classMethodBuilder.append(ClassTemplate.NEW_LINE);
 
-            classMethodBuilder.append(classTemplateGenerator
+            classMethodBuilder.append(classTemplateProcessor
                     .createSetter(objectName, classFields.get(objectName)));
 
             classMethodBuilder.append(ClassTemplate.NEW_LINE);
 
-            classMethodBuilder.append(classTemplateGenerator
+            classMethodBuilder.append(classTemplateProcessor
                     .createGetter(objectName, classFields.get(objectName)));
         }
         classBodyBuilder.append(classMethodBuilder);
