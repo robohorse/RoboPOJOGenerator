@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.services;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.processors.ClassPostProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
 import org.apache.commons.io.FileUtils;
@@ -17,6 +18,8 @@ import java.io.IOException;
 public class FileWriterService {
     @Inject
     MessageService messageService;
+    @Inject
+    ClassPostProcessor classPostProcessor;
 
     @Inject
     public FileWriterService() {
@@ -42,10 +45,22 @@ public class FileWriterService {
 
             if (!file.exists()) {
                 file.createNewFile();
-                FileUtils.writeStringToFile(file, classItem.toString());
+                writeToFile(classItem, generationModel, projectModel, file);
             }
         } catch (IOException e) {
             throw new FileWriteException(e.getMessage());
         }
+    }
+
+    private void writeToFile(ClassItem classItem, GenerationModel generationModel,
+                             ProjectModel projectModel, File file) throws IOException {
+        final String content = prepareClass(classItem, generationModel, projectModel);
+        FileUtils.writeStringToFile(file, content);
+    }
+
+    private String prepareClass(ClassItem classItem, GenerationModel generationModel,
+                                ProjectModel projectModel) {
+        classItem.setPackagePath(projectModel.getPackageName());
+        return classPostProcessor.proceed(classItem, generationModel.getAnnotationItem());
     }
 }
