@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,8 +13,7 @@ public class ClassItem {
     private String classAnnotation;
     private String className;
     private String packagePath;
-    private Map<String, String> classFields = new HashMap<String, String>();
-    private Set<String> classMethods = new HashSet<String>();
+    private Map<String, String> classFields = new LinkedHashMap<>();
     private Set<String> classImports = new HashSet<String>();
 
     public ClassItem(String className) {
@@ -41,10 +40,6 @@ public class ClassItem {
         classImports.add(value);
     }
 
-    public void addClassMethod(String value) {
-        classMethods.add(value);
-    }
-
     public Map<String, String> getClassFields() {
         return classFields;
     }
@@ -53,29 +48,19 @@ public class ClassItem {
         this.classAnnotation = classAnnotation;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("package " + packagePath + ";\n");
-        for (String string : classImports) {
-            stringBuilder.append("\n" + string);
-        }
-        stringBuilder.append("\n\n");
-        if (null != classAnnotation) {
-            stringBuilder.append(classAnnotation);
-        }
-        stringBuilder.append("public class " + className + "{\n");
+    public Set<String> getClassImports() {
+        return classImports;
+    }
 
-        for (String objectName : classFields.keySet()) {
-            if (null != annotation) {
-                stringBuilder.append("\t" + String.format(annotation, objectName, objectName) + "\n");
-            }
-            stringBuilder.append("\tprivate " + classFields.get(objectName) + " " + objectName + ";\n");
-        }
+    public String getAnnotation() {
+        return annotation;
+    }
 
-        for (String string : classMethods) {
-            stringBuilder.append("\n" + string + "\n");
-        }
-        stringBuilder.append("\n}");
-        return stringBuilder.toString();
+    public String getClassAnnotation() {
+        return classAnnotation;
+    }
+
+    public String getPackagePath() {
+        return packagePath;
     }
 }

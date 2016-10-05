@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.generator;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.generator.processors.ClassPostProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
 import com.robohorse.robopojogenerator.services.FileWriterService;
@@ -17,8 +16,6 @@ public class ClassCreator {
     @Inject
     RoboPOJOGenerator roboPOJOGenerator;
     @Inject
-    ClassPostProcessor classPostProcessor;
-    @Inject
     FileWriterService fileWriterService;
 
     @Inject
@@ -30,9 +27,6 @@ public class ClassCreator {
         final Set<ClassItem> classItemSet = roboPOJOGenerator.generate(generationModel);
 
         for (ClassItem classItem : classItemSet) {
-            classItem.setPackagePath(projectModel.getPackageName());
-            classPostProcessor.proceed(classItem, generationModel.getAnnotationItem());
-
             fileWriterService.writeFile(classItem, generationModel, projectModel);
         }
     }

@@ -2,12 +2,15 @@ package com.robohorse.robopojogenerator.generator.processors;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.PojoAnnotations;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
+import com.robohorse.robopojogenerator.generator.utils.ClassTemplateGenerator;
 
 import javax.inject.Inject;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by vadim on 25.09.16.
@@ -15,25 +18,56 @@ import java.util.Map;
 public class ClassPostProcessor {
     @Inject
     ClassGenerateHelper generateHelper;
+    @Inject
+    ClassTemplateGenerator classTemplateGenerator;
 
     @Inject
     public ClassPostProcessor() {
     }
 
-    public void proceed(ClassItem classItem, AnnotationItem annotationItem) {
-        generateSettersAndGetters(classItem);
-        generateAnnotations(annotationItem, classItem);
+    public String proceed(ClassItem classItem, AnnotationItem annotationItem) {
+        applyAnnotations(annotationItem, classItem);
+        return proceedClass(classItem);
     }
 
-    private void generateSettersAndGetters(ClassItem classItem) {
-        Map<String, String> classFields = classItem.getClassFields();
-        for (String objectName : classFields.keySet()) {
-            generateHelper.generateSetter(objectName, classFields.get(objectName), classItem);
-            generateHelper.generateGetter(objectName, classFields.get(objectName), classItem);
+    private String proceedClass(ClassItem classItem) {
+        final String classBody = proceedClassBody(classItem);
+        final String classTemplate = classTemplateGenerator.createClassBody(classItem, classBody);
+        final Set<String> imports = classItem.getClassImports();
+        final StringBuilder importsBuilder = new StringBuilder();
+        for (String importItem : imports) {
+            importsBuilder.append(importItem);
+            importsBuilder.append(ClassTemplate.NEW_LINE);
         }
+        return classTemplateGenerator.createClassItem(
+                classItem.getPackagePath(),
+                importsBuilder.toString(),
+                classTemplate);
     }
 
-    private void generateAnnotations(AnnotationItem item, ClassItem classItem) {
+    private String proceedClassBody(ClassItem classItem) {
+        final StringBuilder classBodyBuilder = new StringBuilder();
+        final StringBuilder classMethodBuilder = new StringBuilder();
+        final Map<String, String> classFields = classItem.getClassFields();
+        for (String objectName : classFields.keySet()) {
+            classBodyBuilder.append(classTemplateGenerator
+                    .createFiled(classFields.get(objectName), objectName, classItem.getAnnotation()));
+
+            classMethodBuilder.append(ClassTemplate.NEW_LINE);
+
+            classMethodBuilder.append(classTemplateGenerator
+                    .createSetter(objectName, classFields.get(objectName)));
+
+            classMethodBuilder.append(ClassTemplate.NEW_LINE);
+
+            classMethodBuilder.append(classTemplateGenerator
+                    .createGetter(objectName, classFields.get(objectName)));
+        }
+        classBodyBuilder.append(classMethodBuilder);
+        return classBodyBuilder.toString();
+    }
+
+    private void applyAnnotations(AnnotationItem item, ClassItem classItem) {
         switch (item) {
             case GSON: {
                 generateHelper.setAnnotations(classItem,

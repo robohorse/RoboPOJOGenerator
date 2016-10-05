@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import utils.JsonReader;
 
@@ -16,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by vadim on 02.10.16.
@@ -40,7 +40,7 @@ public class ClassProcessorTest {
         final String name = "Response";
         final Set<ClassItem> classItemSet = new HashSet<>();
 
-        Mockito.when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.getClassName(name))
                 .thenReturn(name);
 
         classProcessor.proceed(jsonObject, name, classItemSet);
