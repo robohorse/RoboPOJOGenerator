@@ -19,36 +19,40 @@ public abstract class InnerObjectResolver {
             onJsonArrayIdentified(key);
 
         } else if (object instanceof String) {
-            onSimpleObjectIdentified(ClassType.STRING.getBoxed());
+            onBoxedObjectIdentified(ClassType.STRING.getBoxed());
+            onPrimitiveObjectIdentified(ClassType.STRING.getPrimitive());
 
         } else if (object instanceof Integer) {
-            onSimpleObjectIdentified(ClassType.INTEGER.getBoxed());
+            onBoxedObjectIdentified(ClassType.INTEGER.getBoxed());
             onPrimitiveObjectIdentified(ClassType.INTEGER.getPrimitive());
 
         } else if (object instanceof Double) {
-            onSimpleObjectIdentified(ClassType.DOUBLE.getBoxed());
+            onBoxedObjectIdentified(ClassType.DOUBLE.getBoxed());
             onPrimitiveObjectIdentified(ClassType.DOUBLE.getPrimitive());
 
         } else if (object instanceof Float) {
-            onSimpleObjectIdentified(ClassType.FLOAT.getBoxed());
+            onBoxedObjectIdentified(ClassType.FLOAT.getBoxed());
             onPrimitiveObjectIdentified(ClassType.FLOAT.getPrimitive());
 
         } else if (object instanceof Long) {
-            onSimpleObjectIdentified(ClassType.LONG.getBoxed());
+            onBoxedObjectIdentified(ClassType.LONG.getBoxed());
             onPrimitiveObjectIdentified(ClassType.LONG.getPrimitive());
 
         } else if (object instanceof Boolean) {
-            onSimpleObjectIdentified(ClassType.BOOLEAN.getBoxed());
+            onBoxedObjectIdentified(ClassType.BOOLEAN.getBoxed());
             onPrimitiveObjectIdentified(ClassType.BOOLEAN.getPrimitive());
 
         } else {
-            onSimpleObjectIdentified(ClassType.OBJECT.getBoxed());
+            onBoxedObjectIdentified(ClassType.OBJECT.getBoxed());
+            onPrimitiveObjectIdentified(ClassType.OBJECT.getPrimitive());
         }
     }
 
-    public abstract void onPrimitiveObjectIdentified(String classType);
+    public void onPrimitiveObjectIdentified(String classType) {
+    }
 
-    public abstract void onSimpleObjectIdentified(String classType);
+    public void onBoxedObjectIdentified(String classType) {
+    }
 
     public abstract void onJsonObjectIdentified(String classType);
 

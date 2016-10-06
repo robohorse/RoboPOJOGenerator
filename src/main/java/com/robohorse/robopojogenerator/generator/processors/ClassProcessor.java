@@ -28,10 +28,6 @@ public class ClassProcessor {
         for (final String jsonObjectKey : jsonObject.keySet()) {
             final Object object = jsonObject.get(jsonObjectKey);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
-                @Override
-                public void onSimpleObjectIdentified(String classType) {
-                    classItem.addClassField(jsonObjectKey, classType);
-                }
 
                 @Override
                 public void onPrimitiveObjectIdentified(String classType) {
@@ -74,13 +70,9 @@ public class ClassProcessor {
         if (jsonArray.length() != 0) {
             final Object object = jsonArray.get(0);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
-                @Override
-                public void onPrimitiveObjectIdentified(String classType) {
-
-                }
 
                 @Override
-                public void onSimpleObjectIdentified(String classType) {
+                public void onBoxedObjectIdentified(String classType) {
                     innerArrayModel.setMajorType(classType);
                 }
 
