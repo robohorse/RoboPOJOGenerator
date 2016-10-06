@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
@@ -28,10 +29,6 @@ public class ClassProcessor {
         for (final String jsonObjectKey : jsonObject.keySet()) {
             final Object object = jsonObject.get(jsonObjectKey);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
-                @Override
-                public void onSimpleObjectIdentified(String classType) {
-                    classItem.addClassField(jsonObjectKey, classType);
-                }
 
                 @Override
                 public void onPrimitiveObjectIdentified(String classType) {
@@ -50,7 +47,7 @@ public class ClassProcessor {
                     classItem.addClassImport(Imports.LIST);
 
                     if (jsonArray.length() == 0) {
-                        classItem.addClassField(jsonObjectKey, "List<Object>");
+                        classItem.addClassField(jsonObjectKey, ArrayItemsTemplate.UNDEFINED_LIST);
 
                     } else {
                         final InnerArrayModel innerArrayModel = new InnerArrayModel();
@@ -70,17 +67,13 @@ public class ClassProcessor {
 
     private void proceedArray(JSONArray jsonArray, final InnerArrayModel innerArrayModel,
                               final String jsonObjectKey, final Set<ClassItem> classItemSet) {
-        final String itemName = classGenerateHelper.getClassName(jsonObjectKey) + "Item";
+        final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonObjectKey);
         if (jsonArray.length() != 0) {
             final Object object = jsonArray.get(0);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
-                @Override
-                public void onPrimitiveObjectIdentified(String classType) {
-
-                }
 
                 @Override
-                public void onSimpleObjectIdentified(String classType) {
+                public void onBoxedObjectIdentified(String classType) {
                     innerArrayModel.setMajorType(classType);
                 }
 

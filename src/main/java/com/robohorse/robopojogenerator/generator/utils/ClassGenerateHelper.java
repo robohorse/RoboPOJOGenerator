@@ -4,6 +4,7 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.models.InnerArrayModel;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +41,10 @@ public class ClassGenerateHelper {
         return upperCaseFirst(name);
     }
 
+    public String getClassNameWithItemPostfix(String name) {
+        return String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(name));
+    }
+
     public String upperCaseFirst(String name) {
         if (name.length() > 1) {
             name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
@@ -60,7 +65,7 @@ public class ClassGenerateHelper {
     public String resolveMajorType(InnerArrayModel innerArrayModel) {
         String majorType = innerArrayModel.getMajorType();
         for (int i = 0; i < innerArrayModel.getInnerCount(); i++) {
-            majorType = "List<" + majorType + ">";
+            majorType = String.format(ArrayItemsTemplate.LIST_OF_ITEM, majorType);
         }
         return majorType;
     }
