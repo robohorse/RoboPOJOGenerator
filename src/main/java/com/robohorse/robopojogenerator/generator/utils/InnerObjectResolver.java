@@ -20,7 +20,7 @@ public abstract class InnerObjectResolver {
 
         } else if (object instanceof String) {
             onBoxedObjectIdentified(ClassType.STRING.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.STRING.getPrimitive());
+            onPrimitiveObjectIdentified(ClassType.STRING.getBoxed());
 
         } else if (object instanceof Integer) {
             onBoxedObjectIdentified(ClassType.INTEGER.getBoxed());
@@ -44,7 +44,7 @@ public abstract class InnerObjectResolver {
 
         } else {
             onBoxedObjectIdentified(ClassType.OBJECT.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.OBJECT.getPrimitive());
+            onPrimitiveObjectIdentified(ClassType.OBJECT.getBoxed());
         }
     }
 
