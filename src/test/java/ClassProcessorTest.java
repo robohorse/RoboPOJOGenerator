@@ -57,4 +57,33 @@ public class ClassProcessorTest {
             assertTrue(fields.containsKey(key));
         }
     }
+
+    @Test
+    public void testInnerObjectGeneration_isCorrect() throws Exception {
+        final JSONObject jsonObject = jsonReader.read("inner_json_object.json");
+        final JSONObject innerJsonObject = jsonObject.optJSONObject("data");
+        final String name = "Response";
+        final Set<ClassItem> classItemSet = new HashSet<>();
+
+        when(classGenerateHelper.getClassName(name))
+                .thenReturn(name);
+
+        classProcessor.proceed(jsonObject, name, classItemSet);
+        assertTrue(classItemSet.size() == 2);
+
+        for (ClassItem classItem : classItemSet) {
+            final Map<String, String> fields = classItem.getClassFields();
+            assertNotNull(fields);
+
+            if (name.equalsIgnoreCase(classItem.getClassName())) {
+                for (String key : jsonObject.keySet()) {
+                    assertTrue(fields.containsKey(key));
+                }
+            } else {
+                for (String key : innerJsonObject.keySet()) {
+                    assertTrue(fields.containsKey(key));
+                }
+            }
+        }
+    }
 }
