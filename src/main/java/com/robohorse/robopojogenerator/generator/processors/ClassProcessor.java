@@ -31,8 +31,8 @@ public class ClassProcessor {
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
 
                 @Override
-                public void onPrimitiveObjectIdentified(String classType) {
-                    classItem.addClassField(jsonObjectKey, classType);
+                public void onInnerObjectIdentified(ClassType classType) {
+                    classItem.addClassField(jsonObjectKey, classType.getPrimitive());
                 }
 
                 @Override
@@ -73,8 +73,8 @@ public class ClassProcessor {
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
 
                 @Override
-                public void onBoxedObjectIdentified(String classType) {
-                    innerArrayModel.setMajorType(classType);
+                public void onInnerObjectIdentified(ClassType classType) {
+                    innerArrayModel.setMajorType(classType.getBoxed());
                 }
 
                 @Override

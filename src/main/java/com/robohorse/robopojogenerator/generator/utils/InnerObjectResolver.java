@@ -19,40 +19,29 @@ public abstract class InnerObjectResolver {
             onJsonArrayIdentified(key);
 
         } else if (object instanceof String) {
-            onBoxedObjectIdentified(ClassType.STRING.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.STRING.getBoxed());
+            onInnerObjectIdentified(ClassType.STRING);
 
         } else if (object instanceof Integer) {
-            onBoxedObjectIdentified(ClassType.INTEGER.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.INTEGER.getPrimitive());
+            onInnerObjectIdentified(ClassType.INTEGER);
 
         } else if (object instanceof Double) {
-            onBoxedObjectIdentified(ClassType.DOUBLE.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.DOUBLE.getPrimitive());
+            onInnerObjectIdentified(ClassType.DOUBLE);
 
         } else if (object instanceof Float) {
-            onBoxedObjectIdentified(ClassType.FLOAT.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.FLOAT.getPrimitive());
+            onInnerObjectIdentified(ClassType.FLOAT);
 
         } else if (object instanceof Long) {
-            onBoxedObjectIdentified(ClassType.LONG.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.LONG.getPrimitive());
+            onInnerObjectIdentified(ClassType.LONG);
 
         } else if (object instanceof Boolean) {
-            onBoxedObjectIdentified(ClassType.BOOLEAN.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.BOOLEAN.getPrimitive());
+            onInnerObjectIdentified(ClassType.BOOLEAN);
 
         } else {
-            onBoxedObjectIdentified(ClassType.OBJECT.getBoxed());
-            onPrimitiveObjectIdentified(ClassType.OBJECT.getBoxed());
+            onInnerObjectIdentified(ClassType.OBJECT);
         }
     }
 
-    public void onPrimitiveObjectIdentified(String classType) {
-    }
-
-    public void onBoxedObjectIdentified(String classType) {
-    }
+    public abstract void onInnerObjectIdentified(ClassType classType);
 
     public abstract void onJsonObjectIdentified(String classType);
 
