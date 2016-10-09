@@ -1,0 +1,10 @@
+{
+  "value": 1,
+  "type": "toy",
+  "available": true,
+  "cost": 2.5,
+  "data": {
+    "value": 1,
+    "name": "Super Awesome toy"
+  }
+}
