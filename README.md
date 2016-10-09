@@ -11,9 +11,7 @@ Supports: primitive types, multiple inner JSONArrays.
 
 
 # Download
-get it and install from plugin repository https://plugins.jetbrains.com/plugin/8634
-
-or simply find it in "Preferences" -> "Plugins" -> "Browse Repositories" -> "RoboPOJOGenerator"
+get it and install from <a href="https://plugins.jetbrains.com/plugin/8634">plugin repository</a> or simply find it in "Preferences" -> "Plugins" -> "Browse Repositories" -> "RoboPOJOGenerator"
 
 <p><img src="images/install.png" width="100%" height="70%"></p>
 
