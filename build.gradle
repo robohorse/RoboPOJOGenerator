@@ -12,7 +12,7 @@ buildscript {
 }
 apply plugin: "java"
 apply plugin: "idea"
-apply plugin: 'org.jetbrains.intellij'
+apply plugin: "org.jetbrains.intellij"
 apply plugin: "net.ltgt.apt"
 
 sourceCompatibility = 1.8
