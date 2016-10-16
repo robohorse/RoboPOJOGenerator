@@ -15,7 +15,10 @@ apply plugin: "idea"
 apply plugin: "org.jetbrains.intellij"
 apply plugin: "net.ltgt.apt"
 
-sourceCompatibility = 1.8
+compileJava {
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+}
 
 repositories {
     mavenCentral()

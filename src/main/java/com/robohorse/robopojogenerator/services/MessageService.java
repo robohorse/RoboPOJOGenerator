@@ -42,7 +42,7 @@ public class MessageService {
         sendNotification(notification);
     }
 
-    private void sendNotification(Notification notification) {
+    private void sendNotification(final Notification notification) {
         ApplicationManager.getApplication().invokeLater(new Runnable() {
             @Override
             public void run() {
