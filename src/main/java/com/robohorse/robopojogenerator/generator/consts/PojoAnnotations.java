@@ -12,7 +12,7 @@ public interface PojoAnnotations {
     }
 
     interface LOGAN_SQUARE {
-        String CLASS_ANNOTATION = INFO_ANNOTATION + "@JsonObject\n";
+        String CLASS_ANNOTATION = INFO_ANNOTATION + "\n@JsonObject";
         String ANNOTATION = "@SerializedName(\"%1$s\")\n\t@JsonField(name =\"%1$s\")";
     }
 
