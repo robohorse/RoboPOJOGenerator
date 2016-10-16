@@ -9,14 +9,12 @@ import org.json.JSONObject;
  */
 public abstract class InnerObjectResolver {
 
-    private ClassGenerateHelper classGenerateHelper = new ClassGenerateHelper();
-
-    public void resolveClassType(Object object, String key) {
+    public void resolveClassType(Object object) {
         if (object instanceof JSONObject) {
-            onJsonObjectIdentified(classGenerateHelper.getClassName(key));
+            onJsonObjectIdentified();
 
         } else if (object instanceof JSONArray) {
-            onJsonArrayIdentified(key);
+            onJsonArrayIdentified();
 
         } else if (object instanceof String) {
             onInnerObjectIdentified(ClassType.STRING);
@@ -43,7 +41,7 @@ public abstract class InnerObjectResolver {
 
     public abstract void onInnerObjectIdentified(ClassType classType);
 
-    public abstract void onJsonObjectIdentified(String classType);
+    public abstract void onJsonObjectIdentified();
 
-    public abstract void onJsonArrayIdentified(String classType);
+    public abstract void onJsonArrayIdentified();
 }
