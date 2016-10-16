@@ -25,10 +25,11 @@ repositories {
 }
 
 group "com.robohorse.robopojogenerator"
-version "1.3"
+version "1.4"
 
 intellij {
     pluginName "RoboPOJOGenerator"
+    intellij.updateSinceUntilBuild false
 }
 
 ext.daggerVersion = '2.6'
