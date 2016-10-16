@@ -26,7 +26,8 @@ public class GenerationService {
     public GenerationService() {
     }
 
-    public void runGenerationTask(GenerationModel generationModel, ProjectModel projectModel) {
+    public void runGenerationTask(final GenerationModel generationModel,
+                                  final ProjectModel projectModel) {
         ProgressManager.getInstance().run(new Task.Backgroundable(projectModel.getProject(),
                 "RoboPOJO Generation", false) {
 

@@ -13,7 +13,7 @@ public class ClassItem {
     private String classAnnotation;
     private String className;
     private String packagePath;
-    private Map<String, String> classFields = new LinkedHashMap<>();
+    private Map<String, String> classFields = new LinkedHashMap<String, String>();
     private Set<String> classImports = new HashSet<String>();
 
     public ClassItem(String className) {

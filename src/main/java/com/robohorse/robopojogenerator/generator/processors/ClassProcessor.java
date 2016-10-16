@@ -36,13 +36,13 @@ public class ClassProcessor {
                 }
 
                 @Override
-                public void onJsonObjectIdentified(String classType) {
-                    classItem.addClassField(jsonObjectKey, classType);
+                public void onJsonObjectIdentified() {
+                    classItem.addClassField(jsonObjectKey, classGenerateHelper.getClassName(jsonObjectKey));
                     proceed((JSONObject) object, jsonObjectKey, classItemSet);
                 }
 
                 @Override
-                public void onJsonArrayIdentified(String classType) {
+                public void onJsonArrayIdentified() {
                     final JSONArray jsonArray = (JSONArray) object;
                     classItem.addClassImport(Imports.LIST);
 
@@ -60,7 +60,7 @@ public class ClassProcessor {
                     }
                 }
             };
-            innerObjectResolver.resolveClassType(object, jsonObjectKey);
+            innerObjectResolver.resolveClassType(object);
         }
         classItemSet.add(classItem);
     }
@@ -78,18 +78,18 @@ public class ClassProcessor {
                 }
 
                 @Override
-                public void onJsonObjectIdentified(String classType) {
+                public void onJsonObjectIdentified() {
                     innerArrayModel.setMajorType(itemName);
                     proceed((JSONObject) object, itemName, classItemSet);
                 }
 
                 @Override
-                public void onJsonArrayIdentified(String classType) {
+                public void onJsonArrayIdentified() {
                     innerArrayModel.increaseCount();
                     proceedArray((JSONArray) object, innerArrayModel, itemName, classItemSet);
                 }
             };
-            innerObjectResolver.resolveClassType(object, itemName);
+            innerObjectResolver.resolveClassType(object);
 
         } else {
             innerArrayModel.increaseCount();
