@@ -61,6 +61,6 @@ public class FileWriterService {
     private String prepareClass(ClassItem classItem, GenerationModel generationModel,
                                 ProjectModel projectModel) {
         classItem.setPackagePath(projectModel.getPackageName());
-        return classPostProcessor.proceed(classItem, generationModel.getAnnotationItem());
+        return classPostProcessor.proceed(classItem, generationModel);
     }
 }

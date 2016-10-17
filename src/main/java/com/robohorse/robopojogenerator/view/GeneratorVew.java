@@ -21,7 +21,17 @@ public class GeneratorVew {
     private JCheckBox rewriteExistingClassesCheckBox;
     private JTextField className;
     private JScrollPane scrollView;
+    private JCheckBox useSettersCheckBox;
+    private JCheckBox useGettersCheckBox;
     private ButtonGroup typeButtonGroup;
+
+    public JCheckBox getUseSettersCheckBox() {
+        return useSettersCheckBox;
+    }
+
+    public JCheckBox getUseGettersCheckBox() {
+        return useGettersCheckBox;
+    }
 
     public JPanel getRootView() {
         return rootView;

@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.PojoAnnotations;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
+import com.robohorse.robopojogenerator.models.GenerationModel;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -24,13 +25,13 @@ public class ClassPostProcessor {
     public ClassPostProcessor() {
     }
 
-    public String proceed(ClassItem classItem, AnnotationItem annotationItem) {
-        applyAnnotations(annotationItem, classItem);
-        return proceedClass(classItem);
+    public String proceed(ClassItem classItem, GenerationModel generationModel) {
+        applyAnnotations(generationModel.getAnnotationItem(), classItem);
+        return proceedClass(classItem, generationModel);
     }
 
-    private String proceedClass(ClassItem classItem) {
-        final String classBody = proceedClassBody(classItem);
+    private String proceedClass(ClassItem classItem, GenerationModel generationModel) {
+        final String classBody = proceedClassBody(classItem, generationModel);
         final String classTemplate = classTemplateProcessor.createClassBody(classItem, classBody);
         final Set<String> imports = classItem.getClassImports();
         final StringBuilder importsBuilder = new StringBuilder();
@@ -44,7 +45,7 @@ public class ClassPostProcessor {
                 classTemplate);
     }
 
-    private String proceedClassBody(ClassItem classItem) {
+    private String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
         final StringBuilder classMethodBuilder = new StringBuilder();
         final Map<String, String> classFields = classItem.getClassFields();
@@ -52,15 +53,17 @@ public class ClassPostProcessor {
             classBodyBuilder.append(classTemplateProcessor
                     .createFiled(classFields.get(objectName), objectName, classItem.getAnnotation()));
 
-            classMethodBuilder.append(ClassTemplate.NEW_LINE);
+            if (generationModel.isUseSetters()) {
+                classMethodBuilder.append(ClassTemplate.NEW_LINE);
+                classMethodBuilder.append(classTemplateProcessor
+                        .createSetter(objectName, classFields.get(objectName)));
 
-            classMethodBuilder.append(classTemplateProcessor
-                    .createSetter(objectName, classFields.get(objectName)));
-
-            classMethodBuilder.append(ClassTemplate.NEW_LINE);
-
-            classMethodBuilder.append(classTemplateProcessor
-                    .createGetter(objectName, classFields.get(objectName)));
+            }
+            if (generationModel.isUseGetters()) {
+                classMethodBuilder.append(ClassTemplate.NEW_LINE);
+                classMethodBuilder.append(classTemplateProcessor
+                        .createGetter(objectName, classFields.get(objectName)));
+            }
         }
         classBodyBuilder.append(classMethodBuilder);
         return classBodyBuilder.toString();

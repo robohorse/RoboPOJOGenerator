@@ -10,6 +10,8 @@ public class GenerationModel {
     private AnnotationItem annotationItem;
     private String rootClassName;
     private String content;
+    private boolean useSetters;
+    private boolean useGetters;
 
     public boolean isRewriteClasses() {
         return rewriteClasses;
@@ -25,6 +27,14 @@ public class GenerationModel {
 
     public String getContent() {
         return content;
+    }
+
+    public boolean isUseSetters() {
+        return useSetters;
+    }
+
+    public boolean isUseGetters() {
+        return useGetters;
     }
 
     public static class Builder {
@@ -46,6 +56,16 @@ public class GenerationModel {
 
         public Builder setRootClassName(String rootClassName) {
             instance.rootClassName = rootClassName;
+            return this;
+        }
+
+        public Builder setSettersAvailable(boolean available) {
+            instance.useSetters = available;
+            return this;
+        }
+
+        public Builder setGettersAvailable(boolean available) {
+            instance.useGetters = available;
             return this;
         }
 
