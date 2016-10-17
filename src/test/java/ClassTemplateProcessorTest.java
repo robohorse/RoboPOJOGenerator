@@ -32,6 +32,8 @@ public class ClassTemplateProcessorTest {
         final String fieldUpper = "Item";
         when(classGenerateHelper.upperCaseFirst(field))
                 .thenReturn(fieldUpper);
+        when(classGenerateHelper.lowerCaseFirst(field))
+                .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public void set" + fieldUpper + "(" + type + " " + field + "){"
                 + ClassTemplate.NEW_LINE +
@@ -49,6 +51,8 @@ public class ClassTemplateProcessorTest {
         final String fieldUpper = "Item";
         when(classGenerateHelper.upperCaseFirst(field))
                 .thenReturn(fieldUpper);
+        when(classGenerateHelper.lowerCaseFirst(field))
+                .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public " + type + " get" + fieldUpper + "(){"
                 + ClassTemplate.NEW_LINE +
@@ -66,6 +70,8 @@ public class ClassTemplateProcessorTest {
         final String fieldUpper = "Item";
         when(classGenerateHelper.upperCaseFirst(field))
                 .thenReturn(fieldUpper);
+        when(classGenerateHelper.lowerCaseFirst(field))
+                .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public boolean is" + fieldUpper + "(){"
                 + ClassTemplate.NEW_LINE +
@@ -82,6 +88,8 @@ public class ClassTemplateProcessorTest {
         final String type = "boolean";
         final String target = ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE;
+        when(classGenerateHelper.getClassField(field))
+                .thenReturn(field);
         assertEquals(target, classTemplateProcessor.createFiled(type, field, null));
     }
 
@@ -93,6 +101,8 @@ public class ClassTemplateProcessorTest {
         final String target = ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
                 ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE;
+        when(classGenerateHelper.getClassField(field))
+                .thenReturn(field);
         assertEquals(target, classTemplateProcessor.createFiled(type, field, annotation));
     }
 }

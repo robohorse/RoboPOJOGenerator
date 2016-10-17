@@ -22,26 +22,21 @@ public class ClassTemplateProcessor {
         return String.format(ClassTemplate.SETTER,
                 classGenerateHelper.upperCaseFirst(field),
                 type,
-                field);
+                classGenerateHelper.lowerCaseFirst(field));
     }
 
     public String createGetter(String field, String type) {
-        if (ClassType.BOOLEAN.getPrimitive().equalsIgnoreCase(type)) {
-            return String.format(ClassTemplate.GETTER_BOOLEAN,
-                    classGenerateHelper.upperCaseFirst(field),
-                    field);
-        } else {
-            return String.format(ClassTemplate.GETTER,
-                    classGenerateHelper.upperCaseFirst(field),
-                    field,
-                    type);
-        }
+        final boolean isBoolean = ClassType.BOOLEAN.getPrimitive().equalsIgnoreCase(type);
+        return String.format(isBoolean ? ClassTemplate.GETTER_BOOLEAN : ClassTemplate.GETTER,
+                classGenerateHelper.upperCaseFirst(field),
+                classGenerateHelper.lowerCaseFirst(field),
+                type);
     }
 
     public String createFiled(String type, String name, String annotation) {
         final String field = String.format(ClassTemplate.FIELD,
                 type,
-                name);
+                classGenerateHelper.getClassField(name));
         if (null != annotation && !annotation.isEmpty()) {
             return String.format(ClassTemplate.FIELD_ANNOTATED,
                     String.format(annotation, name),
