@@ -52,6 +52,17 @@ public class ClassGenerateHelper {
         return name;
     }
 
+    public String getClassField(String name) {
+        return lowerCaseFirst(name);
+    }
+
+    public String lowerCaseFirst(String name) {
+        if (name.length() > 1) {
+            name = Character.toLowerCase(name.charAt(0)) + name.substring(1);
+        }
+        return name;
+    }
+
     public void setAnnotations(ClassItem classItem, String classAnnotation,
                                String annotation, String[] imports) {
         classItem.setClassAnnotation(classAnnotation);
