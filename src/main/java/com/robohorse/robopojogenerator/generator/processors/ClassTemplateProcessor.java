@@ -29,7 +29,8 @@ public class ClassTemplateProcessor {
         final boolean isBoolean = ClassType.BOOLEAN.getPrimitive().equalsIgnoreCase(type);
         return String.format(isBoolean ? ClassTemplate.GETTER_BOOLEAN : ClassTemplate.GETTER,
                 classGenerateHelper.upperCaseFirst(field),
-                classGenerateHelper.lowerCaseFirst(field));
+                classGenerateHelper.lowerCaseFirst(field),
+                type);
     }
 
     public String createFiled(String type, String name, String annotation) {
