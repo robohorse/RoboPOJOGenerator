@@ -39,6 +39,8 @@ public class GenerateActionListener implements ActionListener {
 
         final AnnotationItem annotationItem = resolveAnnotationItem();
         final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox().isSelected();
+        final boolean useSetters = generatorVew.getUseSettersCheckBox().isSelected();
+        final boolean useGetters = generatorVew.getUseGettersCheckBox().isSelected();
         final String content = textArea.getText();
         final String className = textField.getText();
         try {
@@ -48,6 +50,8 @@ public class GenerateActionListener implements ActionListener {
                     .Builder()
                     .setAnnotationItem(annotationItem)
                     .setContent(content)
+                    .setSettersAvailable(useSetters)
+                    .setGettersAvailable(useGetters)
                     .setRootClassName(className)
                     .setRewriteClasses(rewriteClasses)
                     .build());
