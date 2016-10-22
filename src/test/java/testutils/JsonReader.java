@@ -1,4 +1,4 @@
-package utils;
+package testutils;
 
 import com.google.common.io.CharStreams;
 import org.json.JSONException;
