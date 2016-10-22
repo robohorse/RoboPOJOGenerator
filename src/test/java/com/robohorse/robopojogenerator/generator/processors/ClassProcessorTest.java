@@ -1,5 +1,6 @@
+package com.robohorse.robopojogenerator.generator.processors;
+
 import com.robohorse.robopojogenerator.generator.ClassItem;
-import com.robohorse.robopojogenerator.generator.processors.ClassProcessor;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import utils.JsonReader;
+import testutils.JsonReader;
 
 import java.util.HashSet;
 import java.util.Iterator;

@@ -1,3 +1,5 @@
+package com.robohorse.robopojogenerator.generator.utils;
+
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.models.InnerArrayModel;
