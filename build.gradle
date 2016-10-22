@@ -25,7 +25,7 @@ repositories {
 }
 
 group "com.robohorse.robopojogenerator"
-version "1.4"
+version "1.5"
 
 intellij {
     pluginName "RoboPOJOGenerator"
