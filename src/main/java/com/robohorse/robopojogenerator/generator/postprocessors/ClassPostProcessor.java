@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by vadim on 25.09.16.
  */
-public class ClassPostProcessor extends AbsPostProcessor{
+public class ClassPostProcessor extends AbsPostProcessor {
 
     @Inject
     public ClassPostProcessor() {
@@ -39,5 +39,10 @@ public class ClassPostProcessor extends AbsPostProcessor{
         }
         classBodyBuilder.append(classMethodBuilder);
         return classBodyBuilder.toString();
+    }
+
+    @Override
+    public String createClassTemplate(ClassItem classItem, String classBody) {
+        return classTemplateProcessor.createClassBody(classItem, classBody);
     }
 }

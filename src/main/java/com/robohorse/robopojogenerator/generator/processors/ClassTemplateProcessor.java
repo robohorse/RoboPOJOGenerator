@@ -37,27 +37,28 @@ public class ClassTemplateProcessor {
         final String field = String.format(ClassTemplate.FIELD,
                 type,
                 classGenerateHelper.getClassField(name));
-        if (null != annotation && !annotation.isEmpty()) {
-            return String.format(ClassTemplate.FIELD_ANNOTATED,
-                    String.format(annotation, name),
-                    field);
-        } else {
-            return field;
-        }
+        return createAnnotatedField(name, annotation, field);
+    }
+
+    public String createAutoValueFiled(String type, String name, String annotation) {
+        final String field = String.format(ClassTemplate.FIELD_AUTO_VALUE,
+                type,
+                classGenerateHelper.getClassField(name));
+        return createAnnotatedField(name, annotation, field);
     }
 
     public String createClassBody(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY,
                 classItem.getClassName(),
                 classBody);
-        final String classAnnotation = classItem.getClassAnnotation();
-        if (null != classAnnotation && !classAnnotation.isEmpty()) {
-            return String.format(ClassTemplate.CLASS_BODY_ANNOTATED,
-                    classAnnotation,
-                    classItemBody);
-        } else {
-            return classItemBody;
-        }
+        return createClassBodyAnnotated(classItem, classItemBody);
+    }
+
+    public String createClassBodyAbstract(ClassItem classItem, String classBody) {
+        final String classItemBody = String.format(ClassTemplate.CLASS_BODY_ABSTRACT,
+                classItem.getClassName(),
+                classBody);
+        return createClassBodyAnnotated(classItem, classItemBody);
     }
 
     public String createClassItem(String packagePath, String imports, String body) {
@@ -70,6 +71,27 @@ public class ClassTemplateProcessor {
             return String.format(ClassTemplate.CLASS_ROOT,
                     packagePath,
                     body);
+        }
+    }
+
+    private String createClassBodyAnnotated(ClassItem classItem, String classItemBody) {
+        final String classAnnotation = classItem.getClassAnnotation();
+        if (null != classAnnotation && !classAnnotation.isEmpty()) {
+            return String.format(ClassTemplate.CLASS_BODY_ANNOTATED,
+                    classAnnotation,
+                    classItemBody);
+        } else {
+            return classItemBody;
+        }
+    }
+
+    private String createAnnotatedField(String name, String annotation, String field) {
+        if (null != annotation && !annotation.isEmpty()) {
+            return String.format(ClassTemplate.FIELD_ANNOTATED,
+                    String.format(annotation, name),
+                    field);
+        } else {
+            return field;
         }
     }
 }

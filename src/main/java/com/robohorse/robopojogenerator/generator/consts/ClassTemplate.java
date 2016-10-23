@@ -12,6 +12,11 @@ public interface ClassTemplate {
             "%2$s" + NEW_LINE +
             "}";
 
+    String CLASS_BODY_ABSTRACT = "public abstract class %1$s" +
+            "{" + NEW_LINE +
+            "%2$s" + NEW_LINE +
+            "}";
+
     String CLASS_BODY_ANNOTATED = "%1$s" + NEW_LINE +
             "%2$s";
 
@@ -23,6 +28,8 @@ public interface ClassTemplate {
             "%2$s" + NEW_LINE;
 
     String FIELD = TAB + "private %1$s %2$s;" + NEW_LINE;
+
+    String FIELD_AUTO_VALUE = TAB + "public abstract %1$s %2$s();" + NEW_LINE;
 
     String FIELD_ANNOTATED = TAB + "%1$s" + NEW_LINE + "%2$s";
 

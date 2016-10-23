@@ -18,14 +18,19 @@ public class AutoValueClassPostProcessor extends AbsPostProcessor {
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
-        final StringBuilder classMethodBuilder = new StringBuilder();
         final Map<String, String> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
             classBodyBuilder.append(classTemplateProcessor
-                    .createFiled(classFields.get(objectName), objectName, classItem.getAnnotation()));
+                    .createAutoValueFiled(classFields.get(objectName),
+                            objectName,
+                            classItem.getAnnotation()));
 
         }
-        classBodyBuilder.append(classMethodBuilder);
         return classBodyBuilder.toString();
+    }
+
+    @Override
+    public String createClassTemplate(ClassItem classItem, String classBody) {
+        return classTemplateProcessor.createClassBodyAbstract(classItem, classBody);
     }
 }
