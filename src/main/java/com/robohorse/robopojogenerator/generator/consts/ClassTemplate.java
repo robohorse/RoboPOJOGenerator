@@ -31,6 +31,8 @@ public interface ClassTemplate {
 
     String FIELD_AUTO_VALUE = TAB + "public abstract %1$s %2$s();" + NEW_LINE;
 
+    String FIELD_KOTLIN_DTO = TAB + "val %1$s: %2$s?" + "," + NEW_LINE;
+
     String FIELD_ANNOTATED = TAB + "%1$s" + NEW_LINE + "%2$s";
 
     String TYPE_ADAPTER = TAB + "public static TypeAdapter<%1$s> typeAdapter(Gson gson) {" + NEW_LINE +

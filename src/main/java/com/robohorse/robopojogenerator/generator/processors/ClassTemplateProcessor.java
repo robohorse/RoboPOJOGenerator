@@ -47,6 +47,13 @@ public class ClassTemplateProcessor {
         return createAnnotatedField(name, annotation, field);
     }
 
+    public String createKotlinDataClassField(String type, String name, String annotation) {
+        final String field = String.format(ClassTemplate.FIELD_KOTLIN_DTO,
+                                           classGenerateHelper.getClassField(name),
+                                           type);
+        return createAnnotatedField(name, annotation, field);
+    }
+
     public String createClassBody(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY,
                 classItem.getClassName(),
