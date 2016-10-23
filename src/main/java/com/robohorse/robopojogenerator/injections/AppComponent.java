@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.actions.GeneratePOJOAction;
+import com.robohorse.robopojogenerator.generator.postprocessors.ClassPostProcessor;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import dagger.Component;
 
@@ -18,5 +19,7 @@ public interface AppComponent {
     void inject(GeneratePOJOAction item);
 
     void inject(GenerateActionListener item);
+
+    ClassPostProcessor newClassPostProcessor();
 
 }

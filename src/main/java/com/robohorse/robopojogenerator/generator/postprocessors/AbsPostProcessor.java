@@ -1,34 +1,32 @@
-package com.robohorse.robopojogenerator.generator.processors;
+package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.PojoAnnotations;
+import com.robohorse.robopojogenerator.generator.processors.ClassTemplateProcessor;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
 import javax.inject.Inject;
-import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by vadim on 25.09.16.
+ * Created by vadim on 23.10.16.
  */
-public class ClassPostProcessor {
+public abstract class AbsPostProcessor {
     @Inject
     ClassGenerateHelper generateHelper;
     @Inject
     ClassTemplateProcessor classTemplateProcessor;
 
-    @Inject
-    public ClassPostProcessor() {
-    }
-
     public String proceed(ClassItem classItem, GenerationModel generationModel) {
         applyAnnotations(generationModel.getAnnotationItem(), classItem);
         return proceedClass(classItem, generationModel);
     }
+
+    public abstract String proceedClassBody(ClassItem classItem, GenerationModel generationModel);
 
     private String proceedClass(ClassItem classItem, GenerationModel generationModel) {
         final String classBody = proceedClassBody(classItem, generationModel);
@@ -43,30 +41,6 @@ public class ClassPostProcessor {
                 classItem.getPackagePath(),
                 importsBuilder.toString(),
                 classTemplate);
-    }
-
-    private String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
-        final StringBuilder classBodyBuilder = new StringBuilder();
-        final StringBuilder classMethodBuilder = new StringBuilder();
-        final Map<String, String> classFields = classItem.getClassFields();
-        for (String objectName : classFields.keySet()) {
-            classBodyBuilder.append(classTemplateProcessor
-                    .createFiled(classFields.get(objectName), objectName, classItem.getAnnotation()));
-
-            if (generationModel.isUseSetters()) {
-                classMethodBuilder.append(ClassTemplate.NEW_LINE);
-                classMethodBuilder.append(classTemplateProcessor
-                        .createSetter(objectName, classFields.get(objectName)));
-
-            }
-            if (generationModel.isUseGetters()) {
-                classMethodBuilder.append(ClassTemplate.NEW_LINE);
-                classMethodBuilder.append(classTemplateProcessor
-                        .createGetter(objectName, classFields.get(objectName)));
-            }
-        }
-        classBodyBuilder.append(classMethodBuilder);
-        return classBodyBuilder.toString();
     }
 
     private void applyAnnotations(AnnotationItem item, ClassItem classItem) {

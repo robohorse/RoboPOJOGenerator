@@ -3,7 +3,8 @@ package com.robohorse.robopojogenerator.services;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
-import com.robohorse.robopojogenerator.generator.processors.ClassPostProcessor;
+import com.robohorse.robopojogenerator.generator.PostProcessorFactory;
+import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
 import org.apache.commons.io.FileUtils;
@@ -19,7 +20,7 @@ public class FileWriterService {
     @Inject
     MessageService messageService;
     @Inject
-    ClassPostProcessor classPostProcessor;
+    PostProcessorFactory factory;
 
     @Inject
     public FileWriterService() {
@@ -61,6 +62,7 @@ public class FileWriterService {
     private String prepareClass(ClassItem classItem, GenerationModel generationModel,
                                 ProjectModel projectModel) {
         classItem.setPackagePath(projectModel.getPackageName());
-        return classPostProcessor.proceed(classItem, generationModel);
+        final AbsPostProcessor postProcessor = factory.createPostProcessor(generationModel);
+        return postProcessor.proceed(classItem, generationModel);
     }
 }
