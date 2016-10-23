@@ -1,12 +1,14 @@
 package com.robohorse.robopojogenerator.models;
 
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.LanguageItem;
 
 /**
  * Created by vadim on 28.09.16.
  */
 public class GenerationModel {
     private boolean rewriteClasses;
+    private LanguageItem languageItem;
     private AnnotationItem annotationItem;
     private String rootClassName;
     private String content;
@@ -37,6 +39,12 @@ public class GenerationModel {
         return useGetters;
     }
 
+
+    public LanguageItem getLanguageItem() {
+        return languageItem;
+    }
+
+
     public static class Builder {
         private GenerationModel instance;
 
@@ -46,6 +54,11 @@ public class GenerationModel {
 
         public Builder setRewriteClasses(boolean rewriteClasses) {
             instance.rewriteClasses = rewriteClasses;
+            return this;
+        }
+
+        public Builder setLanguageItem(LanguageItem languageItem) {
+            instance.languageItem = languageItem;
             return this;
         }
 
