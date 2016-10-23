@@ -23,6 +23,7 @@ public class GeneratorVew {
     private JScrollPane scrollView;
     private JCheckBox useSettersCheckBox;
     private JCheckBox useGettersCheckBox;
+    private JRadioButton radioButton1;
     private ButtonGroup typeButtonGroup;
 
     public JCheckBox getUseSettersCheckBox() {
