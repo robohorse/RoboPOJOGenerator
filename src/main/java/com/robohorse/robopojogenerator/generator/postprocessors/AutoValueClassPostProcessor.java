@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
 import javax.inject.Inject;
@@ -26,6 +27,8 @@ public class AutoValueClassPostProcessor extends AbsPostProcessor {
                             classItem.getAnnotation()));
 
         }
+        classBodyBuilder.append(ClassTemplate.NEW_LINE);
+        classBodyBuilder.append(classTemplateProcessor.createTypeAdapter(classItem));
         return classBodyBuilder.toString();
     }
 

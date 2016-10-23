@@ -54,6 +54,10 @@ public class ClassTemplateProcessor {
         return createClassBodyAnnotated(classItem, classItemBody);
     }
 
+    public String createTypeAdapter(ClassItem classItem) {
+        return String.format(ClassTemplate.TYPE_ADAPTER, classItem.getClassName());
+    }
+
     public String createClassBodyAbstract(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY_ABSTRACT,
                 classItem.getClassName(),
