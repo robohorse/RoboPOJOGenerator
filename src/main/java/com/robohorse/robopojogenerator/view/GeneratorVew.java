@@ -23,7 +23,7 @@ public class GeneratorVew {
     private JScrollPane  scrollView;
     private JCheckBox    useSettersCheckBox;
     private JCheckBox    useGettersCheckBox;
-    private JRadioButton radioButton1;
+    private JRadioButton autoValueGsonButton;
     private JRadioButton javaPojoButton;
     private JRadioButton kotlinDtoButton;
     private ButtonGroup languageGroup;
