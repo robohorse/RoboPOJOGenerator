@@ -18,6 +18,7 @@ public interface Imports {
 
     String AUTO_VALUE = "import com.google.auto.value.AutoValue;";
     String TYPED_ADAPTER = "import com.google.gson.TypeAdapter;";
+    String GSON = "import com.google.gson.Gson;";
 
     interface GSON {
         String[] IMPORTS = {GENERATED, EXPOSE, SERIALIZED_NAME};
@@ -32,6 +33,6 @@ public interface Imports {
     }
 
     interface AUTO_VALUE_GSON {
-        String[] IMPORTS = {GENERATED, SERIALIZED_NAME, AUTO_VALUE, TYPED_ADAPTER};
+        String[] IMPORTS = {GENERATED, SERIALIZED_NAME, AUTO_VALUE, TYPED_ADAPTER, GSON};
     }
 }
