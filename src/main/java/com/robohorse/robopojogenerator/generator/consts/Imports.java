@@ -16,6 +16,9 @@ public interface Imports {
 
     String JSON_PROPERTY = "import com.fasterxml.jackson.annotation.JsonProperty;";
 
+    String AUTO_VALUE = "import com.google.auto.value.AutoValue;";
+    String TYPED_ADAPTER = "import com.google.gson.TypeAdapter;";
+
     interface GSON {
         String[] IMPORTS = {GENERATED, EXPOSE, SERIALIZED_NAME};
     }
@@ -26,5 +29,9 @@ public interface Imports {
 
     interface JACKSON {
         String[] IMPORTS = {GENERATED, JSON_PROPERTY};
+    }
+
+    interface AUTO_VALUE_GSON {
+        String[] IMPORTS = {GENERATED, SERIALIZED_NAME, AUTO_VALUE, TYPED_ADAPTER};
     }
 }

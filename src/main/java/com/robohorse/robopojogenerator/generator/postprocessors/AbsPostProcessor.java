@@ -66,6 +66,13 @@ public abstract class AbsPostProcessor {
                         Imports.JACKSON.IMPORTS);
                 break;
             }
+            case AUTO_VALUE_GSON: {
+                generateHelper.setAnnotations(classItem,
+                        PojoAnnotations.AUTO_VALUE_GSON.CLASS_ANNOTATION,
+                        PojoAnnotations.AUTO_VALUE_GSON.ANNOTATION,
+                        Imports.AUTO_VALUE_GSON.IMPORTS);
+                break;
+            }
         }
     }
 }

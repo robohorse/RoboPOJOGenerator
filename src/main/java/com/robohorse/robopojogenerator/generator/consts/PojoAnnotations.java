@@ -20,4 +20,9 @@ public interface PojoAnnotations {
         String CLASS_ANNOTATION = INFO_ANNOTATION;
         String ANNOTATION = "@JsonProperty(\"%1$s\")";
     }
+
+    interface AUTO_VALUE_GSON {
+        String CLASS_ANNOTATION = INFO_ANNOTATION + "\n@AutoValue";
+        String ANNOTATION = "@SerializedName(\"%1$s\")";
+    }
 }

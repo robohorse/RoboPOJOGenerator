@@ -7,7 +7,8 @@ public enum AnnotationItem {
     NONE("none"),
     GSON("GSON"),
     JACKSON("Jackson"),
-    LOGAN_SQUARE("Logan Square");
+    LOGAN_SQUARE("Logan Square"),
+    AUTO_VALUE_GSON("AutoValue (GSON)");
     
     private String text;
 

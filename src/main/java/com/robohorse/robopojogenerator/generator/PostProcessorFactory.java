@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator;
 
-import com.robohorse.robopojogenerator.generator.postprocessors.ClassPostProcessor;
+import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.injections.Injector;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -15,8 +15,11 @@ public class PostProcessorFactory {
     public PostProcessorFactory() {
     }
 
-    public ClassPostProcessor createPostProcessor(GenerationModel generationModel) {
+    public AbsPostProcessor createPostProcessor(GenerationModel generationModel) {
         switch (generationModel.getAnnotationItem()) {
+            case AUTO_VALUE_GSON: {
+                return Injector.getAppComponent().newAutoValueClassPostProcessor();
+            }
             default: {
                 return Injector.getAppComponent().newClassPostProcessor();
             }
