@@ -72,6 +72,14 @@ public class ClassTemplateProcessor {
         return createClassBodyAnnotated(classItem, classItemBody);
     }
 
+    public String createClassBodyKotlinDataClass(ClassItem classItem, String classBody) {
+        final String classItemBody = String.format(ClassTemplate.CLASS_BODY_KOTLIN_DTO,
+                                                   classItem.getClassName(),
+                                                   classBody);
+
+        return createClassBodyAnnotated(classItem, classItemBody);
+    }
+
     public String createClassItem(String packagePath, String imports, String body) {
         if (null != imports && !imports.isEmpty()) {
             return String.format(ClassTemplate.CLASS_ROOT_IMPORTS,

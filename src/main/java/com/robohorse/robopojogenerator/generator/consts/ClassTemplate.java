@@ -17,6 +17,11 @@ public interface ClassTemplate {
             "%2$s" + NEW_LINE +
             "}";
 
+    String CLASS_BODY_KOTLIN_DTO = "data class %1$s" +
+                                   "(" + NEW_LINE +
+                                   "%2$s" + NEW_LINE +
+                                   ")";
+
     String CLASS_BODY_ANNOTATED = "%1$s" + NEW_LINE +
             "%2$s";
 

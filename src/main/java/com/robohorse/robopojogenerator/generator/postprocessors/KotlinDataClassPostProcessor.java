@@ -68,7 +68,6 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
 
     @Override
     public String createClassTemplate(ClassItem classItem, String classBody) {
-
-        return null;
+        return classTemplateProcessor.createClassBodyKotlinDataClass(classItem, classBody);
     }
 }
