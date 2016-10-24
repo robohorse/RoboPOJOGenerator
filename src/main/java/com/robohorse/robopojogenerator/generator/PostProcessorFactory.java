@@ -16,8 +16,17 @@ public class PostProcessorFactory {
     }
 
     public AbsPostProcessor createPostProcessor(GenerationModel generationModel) {
+
+        switch (generationModel.getLanguageItem()) {
+            case KOTLIN_DTO: {
+                return Injector.getAppComponent().newKotlinDataClassPostProcessor();
+            }
+        }
+
         switch (generationModel.getAnnotationItem()) {
             case AUTO_VALUE_GSON: {
+                // I disable AutoValue when select Kotlin
+                // So if the above is Kotlin, it won't get here
                 return Injector.getAppComponent().newAutoValueClassPostProcessor();
             }
             default: {
