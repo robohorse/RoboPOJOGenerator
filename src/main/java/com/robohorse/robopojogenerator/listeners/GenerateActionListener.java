@@ -2,7 +2,6 @@ package com.robohorse.robopojogenerator.listeners;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
-import com.robohorse.robopojogenerator.generator.consts.LanguageItem;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.injections.Injector;
 import com.robohorse.robopojogenerator.models.GenerationModel;
@@ -38,12 +37,10 @@ public class GenerateActionListener implements ActionListener {
         final JTextArea textArea = generatorVew.getTextArea();
         final JTextField textField = generatorVew.getClassNameTextField();
 
-        final LanguageItem languageItem = resolveLanguageItem();
-
         final AnnotationItem annotationItem = resolveAnnotationItem();
 
-        final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox()
-                .isSelected();
+        final boolean useKotlin = generatorVew.getKotlinCheckBox().isSelected();
+        final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox().isSelected();
         final boolean useSetters = generatorVew.getUseSettersCheckBox().isSelected();
         final boolean useGetters = generatorVew.getUseGettersCheckBox().isSelected();
 
@@ -54,7 +51,7 @@ public class GenerateActionListener implements ActionListener {
             classGenerateHelper.validateJsonContent(content);
             eventListener.onJsonDataObtained(new GenerationModel
                     .Builder()
-                    .setLanguageItem(languageItem)
+                    .useKotlin(useKotlin)
                     .setAnnotationItem(annotationItem)
                     .setContent(content)
                     .setSettersAvailable(useSetters)
@@ -66,24 +63,6 @@ public class GenerateActionListener implements ActionListener {
         } catch (RoboPluginException exception) {
             messageService.onPluginExceptionHandled(exception);
         }
-    }
-
-    private LanguageItem resolveLanguageItem() {
-        final ButtonGroup buttonGroup = generatorVew.getLanguageGroup();
-
-        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons
-                .hasMoreElements(); ) {
-            final AbstractButton button = buttons.nextElement();
-            if (button.isSelected()) {
-                for (LanguageItem languageItem : LanguageItem.values()) {
-                    if (languageItem.getText().equals(button.getText())) {
-                        return languageItem;
-                    }
-                }
-            }
-        }
-
-        return LanguageItem.POJO;
     }
 
     private AnnotationItem resolveAnnotationItem() {

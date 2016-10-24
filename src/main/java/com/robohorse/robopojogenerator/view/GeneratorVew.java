@@ -12,22 +12,25 @@ import java.io.IOException;
  */
 public class GeneratorVew {
     private JPanel rootView;
-    private JButton         generateButton;
+    private JButton generateButton;
     private RSyntaxTextArea textArea;
     private JRadioButton NONERadioButton;
     private JRadioButton jackson2RadioButton;
     private JRadioButton loganSquareRadioButton;
     private JRadioButton GSONRadioButton;
-    private JCheckBox    rewriteExistingClassesCheckBox;
-    private JTextField   className;
-    private JScrollPane  scrollView;
-    private JCheckBox    useSettersCheckBox;
-    private JCheckBox    useGettersCheckBox;
+    private JCheckBox rewriteExistingClassesCheckBox;
+    private JTextField className;
+    private JScrollPane scrollView;
+    private JCheckBox useSettersCheckBox;
+    private JCheckBox useGettersCheckBox;
     private JRadioButton autoValueGsonButton;
-    private JRadioButton javaPojoButton;
-    private JRadioButton kotlinDtoButton;
+    private JCheckBox kotlinCheckBox;
     private ButtonGroup languageGroup;
-    private ButtonGroup  typeButtonGroup;
+    private ButtonGroup typeButtonGroup;
+
+    public JCheckBox getKotlinCheckBox() {
+        return kotlinCheckBox;
+    }
 
     public JCheckBox getUseSettersCheckBox() {
         return useSettersCheckBox;
