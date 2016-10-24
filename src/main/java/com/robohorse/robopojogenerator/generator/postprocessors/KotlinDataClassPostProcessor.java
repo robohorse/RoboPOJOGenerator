@@ -1,11 +1,12 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.google.common.base.CaseFormat;
-import com.google.gson.annotations.SerializedName;
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
+import com.robohorse.robopojogenerator.generator.consts.annotations.KotlinAnnotations;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
 import java.util.HashSet;
@@ -42,7 +43,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
         for (String objectName : classFields.keySet()) {
 
             String type       = proceedType(classFields.get(objectName));
-            String annotation = proceedAnnotation(classItem.getAnnotation());
+            String annotation = classItem.getAnnotation();
             String fieldName  = proceedField(objectName);
 
             classBodyBuilder.append(
@@ -96,19 +97,32 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     }
 
 
-    private String proceedAnnotation(String annotation) {
+    @Override
+    protected void applyAnnotations(AnnotationItem item, ClassItem classItem) {
 
-        if (annotation != null) {
-            String regex = "\"@(.+?)\"";
-            annotation = annotation.replaceAll(regex, "\"ç$1\"");
-            annotation = annotation.replaceAll("@", "@field:");
-
-            regex = "\"ç(.+?)\"";
-            annotation = annotation.replaceAll(regex, "\"@$1\"");
-
-            return annotation;
+        switch (item) {
+            case GSON: {
+                generateHelper.setAnnotations(classItem,
+                                              KotlinAnnotations.GSON.CLASS_ANNOTATION,
+                                              KotlinAnnotations.GSON.ANNOTATION,
+                                              Imports.GSON.IMPORTS);
+                break;
+            }
+            case LOGAN_SQUARE: {
+                generateHelper.setAnnotations(classItem,
+                                              KotlinAnnotations.LOGAN_SQUARE.CLASS_ANNOTATION,
+                                              KotlinAnnotations.LOGAN_SQUARE.ANNOTATION,
+                                              Imports.LOGAN_SQUARE.IMPORTS);
+                break;
+            }
+            case JACKSON: {
+                generateHelper.setAnnotations(classItem,
+                                              KotlinAnnotations.JACKSON.CLASS_ANNOTATION,
+                                              KotlinAnnotations.JACKSON.ANNOTATION,
+                                              Imports.JACKSON.IMPORTS);
+                break;
+            }
         }
-        return null;
     }
 
 

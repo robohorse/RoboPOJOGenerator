@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.generator.consts;
+package com.robohorse.robopojogenerator.generator.consts.annotations;
 
 /**
  * Created by vadim on 02.10.16.

@@ -4,7 +4,7 @@ import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
-import com.robohorse.robopojogenerator.generator.consts.PojoAnnotations;
+import com.robohorse.robopojogenerator.generator.consts.annotations.PojoAnnotations;
 import com.robohorse.robopojogenerator.generator.processors.ClassTemplateProcessor;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.models.GenerationModel;
@@ -62,7 +62,7 @@ public abstract class AbsPostProcessor {
     }
 
 
-    private void applyAnnotations(AnnotationItem item, ClassItem classItem) {
+    protected void applyAnnotations(AnnotationItem item, ClassItem classItem) {
 
         switch (item) {
             case GSON: {
