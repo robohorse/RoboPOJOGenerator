@@ -48,7 +48,6 @@ public class GenerateActionListener implements ActionListener {
         final JTextField textField = generatorVew.getClassNameTextField();
 
         final LanguageItem languageItem = resolveLanguageItem();
-        changeAnnotation(languageItem);
 
         final AnnotationItem annotationItem = resolveAnnotationItem();
 
@@ -77,42 +76,6 @@ public class GenerateActionListener implements ActionListener {
             messageService.onPluginExceptionHandled(exception);
         }
     }
-
-
-    /**
-     * Disable autovalue when select Kotlin
-     *
-     * @param languageItem The selected language item
-     */
-    private void changeAnnotation(LanguageItem languageItem) {
-
-        ButtonGroup                 buttonGroup = generatorVew.getTypeButtonGroup();
-        Enumeration<AbstractButton> buttons     = buttonGroup.getElements();
-
-        if (languageItem.equals(LanguageItem.KOTLIN_DTO)) {
-            while (buttons.hasMoreElements()) {
-                final AbstractButton button = buttons.nextElement();
-
-                if (button.getText().contains("AutoValue")) {
-                    button.setSelected(false);
-                    button.setEnabled(false);
-                }
-                else if (button.getText().equals(AnnotationItem.NONE.getText())) {
-                    button.setSelected(true);
-                }
-            }
-        }
-        else {
-            while (buttons.hasMoreElements()) {
-                final AbstractButton button = buttons.nextElement();
-
-                if (!button.isEnabled()) {
-                    button.setEnabled(true);
-                }
-            }
-        }
-    }
-
 
     private LanguageItem resolveLanguageItem() {
 
