@@ -46,7 +46,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
 
             classBodyBuilder.append(
                     classTemplateProcessor
-                            .createKotlinDataClassField(type, fieldName, annotation));
+                            .createKotlinDataClassField(type, fieldName, objectName, annotation));
         }
 
         if (classBodyBuilder.length() == 0) {
