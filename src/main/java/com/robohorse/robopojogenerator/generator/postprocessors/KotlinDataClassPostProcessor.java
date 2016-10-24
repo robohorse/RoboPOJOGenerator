@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
-import com.google.common.base.CaseFormat;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
@@ -39,53 +38,19 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
-        Map<String, String> classFields = classItem.getClassFields();
+        final Map<String, String> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
-            String type = generateHelper.updateKotlinType(classFields.get(objectName));
-            String annotation = classItem.getAnnotation();
-            String fieldName = proceedField(objectName);
+            final String type = generateHelper.updateKotlinType(classFields.get(objectName));
+            final String annotation = classItem.getAnnotation();
+            final String fieldName = generateHelper.proceedField(objectName);
             classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
                     type,
                     fieldName,
                     objectName,
                     annotation));
         }
-        updateClassModel(classBodyBuilder);
+        generateHelper.updateClassModel(classBodyBuilder);
         return classBodyBuilder.toString();
-    }
-
-    //TODO think about this method
-    private void updateClassModel(StringBuilder classBodyBuilder) {
-        if (classBodyBuilder.length() == 0) {
-            // Kotlin don't allow empty constructor
-            classBodyBuilder.append(ClassTemplate.FIELD_KOTLIN_DOT_DEFAULT);
-        } else {
-            // Remove the last comma
-            classBodyBuilder.deleteCharAt(classBodyBuilder.lastIndexOf(","));
-        }
-    }
-
-    //TODO think about this method
-    private String proceedField(String objectName) {
-        String fieldName = objectName;
-
-        if (fieldName.contains("-")) {
-            // Turn to lower case with underscore if it is hyphen
-            fieldName = fieldName.replaceAll("-+", "_");
-        }
-
-        if (fieldName.contains("_")) {
-            fieldName = fieldName.replaceAll("_{2,}", "_");
-            fieldName = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, fieldName);
-        }
-
-        char fieldNameFirstChar = fieldName.charAt(0);
-        if (Character.isDigit(fieldNameFirstChar)) {
-            // The first char is number
-            fieldName = "_" + fieldName;
-        }
-
-        return fieldName;
     }
 
     @Override
