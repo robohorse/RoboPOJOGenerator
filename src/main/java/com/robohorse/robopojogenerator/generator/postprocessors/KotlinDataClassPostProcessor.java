@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -35,6 +36,15 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
             classBodyBuilder.append(
                     classTemplateProcessor
                             .createKotlinDataClassField(type, objectName, annotation));
+        }
+
+        if (classBodyBuilder.length() == 0) {
+            // Kotlin don't allow empty constructor
+            classBodyBuilder.append(ClassTemplate.FIELD_KOTLIN_DOT_DEFAULT);
+        }
+        else {
+            // Remove the last comma
+            classBodyBuilder.deleteCharAt(classBodyBuilder.lastIndexOf(","));
         }
 
         return classBodyBuilder.toString();
