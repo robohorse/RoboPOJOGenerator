@@ -93,6 +93,19 @@ public class ClassTemplateProcessor {
         }
     }
 
+    public String createClassItemWithoutSemicolon(String packagePath, String imports, String body) {
+        if (null != imports && !imports.isEmpty()) {
+            return String.format(ClassTemplate.CLASS_ROOT_IMPORTS_WITHOUT_SEMICOLON,
+                    packagePath,
+                    imports,
+                    body);
+        } else {
+            return String.format(ClassTemplate.CLASS_ROOT_WITHOUT_SEMICOLON,
+                    packagePath,
+                    body);
+        }
+    }
+
     private String createClassBodyAnnotated(ClassItem classItem, String classItemBody) {
         final String classAnnotation = classItem.getClassAnnotation();
         if (null != classAnnotation && !classAnnotation.isEmpty()) {

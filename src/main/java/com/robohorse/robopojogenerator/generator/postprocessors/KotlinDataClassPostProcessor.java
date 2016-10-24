@@ -51,6 +51,15 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     }
 
 
+    @Override
+    protected String createClassItemText(String packagePath, String imports, String classTemplate) {
+
+        return classTemplateProcessor.createClassItemWithoutSemicolon(packagePath,
+                                                                      imports,
+                                                                      classTemplate);
+    }
+
+
     private String proceedAnnotation(String annotation) {
 
         return annotation.replaceAll("@", "@field:");
@@ -59,7 +68,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
 
     private String proceedType(String type) {
 
-        final String regex = "<([^<>]*)>";
+        final String  regex   = "<([^<>]*)>";
         final Pattern pattern = Pattern.compile(regex);
         final Matcher matcher = pattern.matcher(type);
 
