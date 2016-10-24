@@ -16,14 +16,13 @@ import java.util.Set;
 /**
  * Created by vadim on 23.09.16.
  */
-public class ClassProcessor {
-    @Inject
-    ClassGenerateHelper classGenerateHelper;
+public class ClassProcessor extends AbsClassProcessor{
 
     @Inject
     public ClassProcessor() {
     }
 
+    @Override
     public void proceed(JSONObject jsonObject, String className, final Set<ClassItem> classItemSet) {
         final ClassItem classItem = new ClassItem(classGenerateHelper.getClassName(className));
         for (final String jsonObjectKey : jsonObject.keySet()) {
