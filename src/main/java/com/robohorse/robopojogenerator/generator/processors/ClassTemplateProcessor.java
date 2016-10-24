@@ -47,6 +47,13 @@ public class ClassTemplateProcessor {
         return createAnnotatedField(name, annotation, field);
     }
 
+    public String createKotlinDataClassField(String type, String fieldName, String objectName, String annotation) {
+        final String field = String.format(ClassTemplate.FIELD_KOTLIN_DTO,
+                                           classGenerateHelper.getClassField(fieldName),
+                                           type);
+        return createAnnotatedField(objectName, annotation, field);
+    }
+
     public String createClassBody(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY,
                 classItem.getClassName(),
@@ -65,6 +72,14 @@ public class ClassTemplateProcessor {
         return createClassBodyAnnotated(classItem, classItemBody);
     }
 
+    public String createClassBodyKotlinDataClass(ClassItem classItem, String classBody) {
+        final String classItemBody = String.format(ClassTemplate.CLASS_BODY_KOTLIN_DTO,
+                                                   classItem.getClassName(),
+                                                   classBody);
+
+        return createClassBodyAnnotated(classItem, classItemBody);
+    }
+
     public String createClassItem(String packagePath, String imports, String body) {
         if (null != imports && !imports.isEmpty()) {
             return String.format(ClassTemplate.CLASS_ROOT_IMPORTS,
@@ -73,6 +88,19 @@ public class ClassTemplateProcessor {
                     body);
         } else {
             return String.format(ClassTemplate.CLASS_ROOT,
+                    packagePath,
+                    body);
+        }
+    }
+
+    public String createClassItemWithoutSemicolon(String packagePath, String imports, String body) {
+        if (null != imports && !imports.isEmpty()) {
+            return String.format(ClassTemplate.CLASS_ROOT_IMPORTS_WITHOUT_SEMICOLON,
+                    packagePath,
+                    imports,
+                    body);
+        } else {
+            return String.format(ClassTemplate.CLASS_ROOT_WITHOUT_SEMICOLON,
                     packagePath,
                     body);
         }

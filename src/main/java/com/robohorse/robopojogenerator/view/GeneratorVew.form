@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.robohorse.robopojogenerator.view.GeneratorVew">
-  <grid id="27dc6" binding="rootView" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="rootView" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="527" height="478"/>
+      <xy x="20" y="20" width="527" height="506"/>
     </constraints>
     <properties/>
     <border type="empty"/>
@@ -21,7 +21,7 @@
       <grid id="95dae" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="empty"/>
@@ -36,43 +36,44 @@
             <children>
               <component id="8b642" class="javax.swing.JRadioButton" binding="NONERadioButton" default-binding="true">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="NONE"/>
-                </properties>
-              </component>
-              <component id="1db40" class="javax.swing.JRadioButton" binding="loganSquareRadioButton" default-binding="true">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Logan Square"/>
-                </properties>
-              </component>
-              <component id="aa398" class="javax.swing.JRadioButton" binding="GSONRadioButton" default-binding="true">
-                <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <selected value="true"/>
+                  <text value="NONE"/>
+                </properties>
+              </component>
+              <component id="aa398" class="javax.swing.JRadioButton" binding="GSONRadioButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <selected value="false"/>
                   <text value="GSON"/>
                 </properties>
               </component>
               <component id="c4ca6" class="javax.swing.JRadioButton" binding="jackson2RadioButton">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Jackson"/>
                 </properties>
               </component>
-              <component id="20088" class="javax.swing.JRadioButton" binding="radioButton1" default-binding="true">
+              <component id="1db40" class="javax.swing.JRadioButton" binding="loganSquareRadioButton" default-binding="true">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="RadioButton"/>
+                  <text value="Logan Square"/>
+                </properties>
+              </component>
+              <component id="20088" class="javax.swing.JRadioButton" binding="autoValueGsonButton">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="AutoValue(GSON)"/>
                 </properties>
               </component>
             </children>
@@ -177,6 +178,33 @@
           </grid>
         </children>
       </grid>
+      <grid id="d9b41" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="e3dc" class="javax.swing.JRadioButton" binding="javaPojoButton">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value="Java POJO"/>
+            </properties>
+          </component>
+          <component id="6b2c" class="javax.swing.JRadioButton" binding="kotlinDtoButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Kotlin DTO"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
   <buttonGroups>
@@ -184,12 +212,15 @@
       <member id="e74b1"/>
       <member id="38ee8"/>
     </group>
+    <group name="languageGroup" bound="true">
+      <member id="e3dc"/>
+      <member id="6b2c"/>
+    </group>
     <group name="typeButtonGroup" bound="true">
-      <member id="aa398"/>
-      <member id="1db40"/>
-      <member id="aab11"/>
       <member id="8b642"/>
+      <member id="aa398"/>
       <member id="c4ca6"/>
+      <member id="1db40"/>
       <member id="20088"/>
     </group>
   </buttonGroups>

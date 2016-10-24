@@ -4,6 +4,8 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.PostProcessorFactory;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.LanguageItem;
 import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
@@ -29,7 +31,16 @@ public class FileWriterService {
     public void writeFile(ClassItem classItem, GenerationModel generationModel,
                           ProjectModel projectModel) throws RoboPluginException {
         final String path = projectModel.getDirectory().getVirtualFile().getPath();
-        final String fileName = classItem.getClassName() + ".java";
+
+        final String fileName;
+        if (generationModel.getLanguageItem().equals(LanguageItem.KOTLIN_DTO)
+                && !generationModel.getAnnotationItem().equals(AnnotationItem.AUTO_VALUE_GSON)) {
+            fileName = classItem.getClassName() + ".kt";
+        }
+        else {
+            fileName = classItem.getClassName() + ".java";
+        }
+
         final File file = new File(path + File.separator + fileName);
         try {
             if (file.exists()) {
