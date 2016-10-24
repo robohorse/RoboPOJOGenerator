@@ -5,8 +5,8 @@ import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.injections.Injector;
 import com.robohorse.robopojogenerator.models.GenerationModel;
-import com.robohorse.robopojogenerator.services.MessageService;
-import com.robohorse.robopojogenerator.view.GeneratorVew;
+import com.robohorse.robopojogenerator.delegates.MessageDelegate;
+import com.robohorse.robopojogenerator.view.ui.GeneratorVew;
 
 import javax.inject.Inject;
 import javax.swing.*;
@@ -22,7 +22,7 @@ public class GenerateActionListener implements ActionListener {
     private GeneratorVew generatorVew;
 
     @Inject
-    MessageService messageService;
+    MessageDelegate messageDelegate;
     @Inject
     ClassGenerateHelper classGenerateHelper;
 
@@ -61,7 +61,7 @@ public class GenerateActionListener implements ActionListener {
                     .build());
 
         } catch (RoboPluginException exception) {
-            messageService.onPluginExceptionHandled(exception);
+            messageDelegate.onPluginExceptionHandled(exception);
         }
     }
 

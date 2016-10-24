@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.generator;
 
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.processors.ClassProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import org.json.JSONObject;

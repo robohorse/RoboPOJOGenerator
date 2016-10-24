@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.services;
+package com.robohorse.robopojogenerator.delegates;
 
 import com.intellij.notification.*;
 import com.intellij.openapi.application.ApplicationManager;
@@ -14,7 +14,7 @@ import javax.inject.Inject;
  * Created by vadim on 24.09.16.
  */
 @Singleton
-public class MessageService {
+public class MessageDelegate {
     private static final String GROUP_DISPLAY = "RoboPOJOGenerator";
     private static final String GROUP_DISPLAY_LOG = "RoboPOJOGenerator LOG";
     private static final NotificationGroup GROUP_DISPLAY_ID_INFO =
@@ -23,7 +23,7 @@ public class MessageService {
             new NotificationGroup(GROUP_DISPLAY_LOG, NotificationDisplayType.NONE, true);
 
     @Inject
-    public MessageService() {
+    public MessageDelegate() {
     }
 
     public void onPluginExceptionHandled(RoboPluginException exception) {

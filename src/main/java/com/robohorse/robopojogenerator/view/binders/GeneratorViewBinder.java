@@ -1,9 +1,10 @@
-package com.robohorse.robopojogenerator.view;
+package com.robohorse.robopojogenerator.view.binders;
 
 import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
+import com.robohorse.robopojogenerator.view.ui.GeneratorVew;
 
 import javax.inject.Inject;
 import javax.swing.*;

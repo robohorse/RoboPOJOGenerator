@@ -1,9 +1,9 @@
-package com.robohorse.robopojogenerator.services;
+package com.robohorse.robopojogenerator.delegates;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
-import com.robohorse.robopojogenerator.generator.ClassItem;
-import com.robohorse.robopojogenerator.generator.PostProcessorFactory;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.PostProcessorFactory;
 import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
@@ -16,14 +16,14 @@ import java.io.IOException;
 /**
  * Created by vadim on 25.09.16.
  */
-public class FileWriterService {
+public class FileWriterDelegate {
     @Inject
-    MessageService messageService;
+    MessageDelegate messageDelegate;
     @Inject
     PostProcessorFactory factory;
 
     @Inject
-    public FileWriterService() {
+    public FileWriterDelegate() {
     }
 
     public void writeFile(ClassItem classItem, GenerationModel generationModel,
@@ -36,13 +36,13 @@ public class FileWriterService {
             if (file.exists()) {
                 if (generationModel.isRewriteClasses()) {
                     file.delete();
-                    messageService.logEventMessage("updated " + fileName);
+                    messageDelegate.logEventMessage("updated " + fileName);
                 } else {
-                    messageService.logEventMessage("skipped " + fileName);
+                    messageDelegate.logEventMessage("skipped " + fileName);
                 }
 
             } else {
-                messageService.logEventMessage("created " + fileName);
+                messageDelegate.logEventMessage("created " + fileName);
             }
 
             if (!file.exists()) {

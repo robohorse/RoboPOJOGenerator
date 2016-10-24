@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
-import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.annotations.PojoAnnotations;

@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.generator;
+package com.robohorse.robopojogenerator.generator.common;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;

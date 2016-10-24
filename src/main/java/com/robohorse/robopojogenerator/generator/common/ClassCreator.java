@@ -1,9 +1,10 @@
-package com.robohorse.robopojogenerator.generator;
+package com.robohorse.robopojogenerator.generator.common;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
+import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
-import com.robohorse.robopojogenerator.services.FileWriterService;
+import com.robohorse.robopojogenerator.delegates.FileWriterDelegate;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ public class ClassCreator {
     @Inject
     RoboPOJOGenerator roboPOJOGenerator;
     @Inject
-    FileWriterService fileWriterService;
+    FileWriterDelegate fileWriterDelegate;
 
     @Inject
     public ClassCreator() {
@@ -26,7 +27,7 @@ public class ClassCreator {
                               @NotNull ProjectModel projectModel) throws RoboPluginException {
         final Set<ClassItem> classItemSet = roboPOJOGenerator.generate(generationModel);
         for (ClassItem classItem : classItemSet) {
-            fileWriterService.writeFile(classItem, generationModel, projectModel);
+            fileWriterDelegate.writeFile(classItem, generationModel, projectModel);
         }
     }
 }

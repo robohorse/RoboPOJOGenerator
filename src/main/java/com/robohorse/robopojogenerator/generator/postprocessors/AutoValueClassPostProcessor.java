@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
-import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -11,7 +11,6 @@ import java.util.Map;
  * Created by vadim on 23.10.16.
  */
 public class AutoValueClassPostProcessor extends JavaPostProcessor {
-
     @Inject
     public AutoValueClassPostProcessor() {
     }

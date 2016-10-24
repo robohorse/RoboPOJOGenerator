@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.view;
+package com.robohorse.robopojogenerator.view.ui;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;

@@ -1,11 +1,10 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
-import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
-import com.robohorse.robopojogenerator.generator.utils.InnerObjectResolver;
 import com.robohorse.robopojogenerator.models.InnerArrayModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
