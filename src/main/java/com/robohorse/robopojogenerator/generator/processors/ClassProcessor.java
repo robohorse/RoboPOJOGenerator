@@ -1,11 +1,10 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
-import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
-import com.robohorse.robopojogenerator.generator.utils.InnerObjectResolver;
 import com.robohorse.robopojogenerator.models.InnerArrayModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,13 +15,14 @@ import java.util.Set;
 /**
  * Created by vadim on 23.09.16.
  */
-public class ClassProcessor extends AbsClassProcessor{
+public class ClassProcessor {
+    @Inject
+    ClassGenerateHelper classGenerateHelper;
 
     @Inject
     public ClassProcessor() {
     }
 
-    @Override
     public void proceed(JSONObject jsonObject, String className, final Set<ClassItem> classItemSet) {
         final ClassItem classItem = new ClassItem(classGenerateHelper.getClassName(className));
         for (final String jsonObjectKey : jsonObject.keySet()) {

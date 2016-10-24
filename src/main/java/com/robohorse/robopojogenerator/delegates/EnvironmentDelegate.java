@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.services;
+package com.robohorse.robopojogenerator.delegates;
 
 import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -17,9 +17,9 @@ import javax.inject.Inject;
 /**
  * Created by vadim on 24.09.16.
  */
-public class EnvironmentService {
+public class EnvironmentDelegate {
     @Inject
-    public EnvironmentService() {
+    public EnvironmentDelegate() {
     }
 
     public ProjectModel obtainProjectModel(AnActionEvent event) throws RoboPluginException {

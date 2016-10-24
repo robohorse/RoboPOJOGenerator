@@ -1,8 +1,10 @@
 package com.robohorse.robopojogenerator.generator;
 
+import com.robohorse.robopojogenerator.generator.common.ClassCreator;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
-import com.robohorse.robopojogenerator.services.FileWriterService;
+import com.robohorse.robopojogenerator.delegates.FileWriterDelegate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -24,7 +26,7 @@ public class ClassCreatorTest {
     @Mock
     RoboPOJOGenerator roboPOJOGenerator;
     @Mock
-    FileWriterService fileWriterService;
+    FileWriterDelegate fileWriterDelegate;
 
     @Before
     public void setUp() {
@@ -45,7 +47,7 @@ public class ClassCreatorTest {
         when(roboPOJOGenerator.generate(generationModel))
                 .thenReturn(classItemSet);
         classCreator.generateFiles(generationModel, projectModel);
-        verify(fileWriterService)
+        verify(fileWriterDelegate)
                 .writeFile(classItem, generationModel, projectModel);
     }
 }

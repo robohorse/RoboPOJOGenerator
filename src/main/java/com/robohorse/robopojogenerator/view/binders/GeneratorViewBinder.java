@@ -1,10 +1,10 @@
-package com.robohorse.robopojogenerator.view;
+package com.robohorse.robopojogenerator.view.binders;
 
 import com.intellij.openapi.ui.DialogBuilder;
-import com.robohorse.robopojogenerator.generator.consts.LanguageItem;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
-import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.view.ui.GeneratorVew;
 
 import javax.inject.Inject;
 import javax.swing.*;
@@ -28,20 +28,6 @@ public class GeneratorViewBinder {
         builder.setTitle("RoboPOJOGenerator");
         builder.removeAllActions();
         builder.show();
-    }
-
-    private void bindLanguageViews(ButtonGroup buttonGroup) {
-        final Enumeration<AbstractButton> buttons  = buttonGroup.getElements();
-
-        for (LanguageItem languageItem : LanguageItem.values()) {
-            if (buttons.hasMoreElements()) {
-                final AbstractButton button = buttons.nextElement();
-                button.setText(languageItem.getText());
-            }
-            else {
-                break;
-            }
-        }
     }
 
     private void bindGroupViews(ButtonGroup buttonGroup) {

@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
-import com.robohorse.robopojogenerator.generator.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -10,10 +10,9 @@ import java.util.Map;
 /**
  * Created by vadim on 25.09.16.
  */
-public class ClassPostProcessor extends AbsPostProcessor {
-
+public class CommonJavaPostProcessor extends JavaPostProcessor {
     @Inject
-    public ClassPostProcessor() {
+    public CommonJavaPostProcessor() {
     }
 
     @Override
@@ -22,19 +21,23 @@ public class ClassPostProcessor extends AbsPostProcessor {
         final StringBuilder classMethodBuilder = new StringBuilder();
         final Map<String, String> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
-            classBodyBuilder.append(classTemplateProcessor
-                    .createFiled(classFields.get(objectName), objectName, classItem.getAnnotation()));
+            classBodyBuilder.append(classTemplateHelper.createFiled(
+                    classFields.get(objectName),
+                    objectName,
+                    classItem.getAnnotation()));
 
             if (generationModel.isUseSetters()) {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
-                classMethodBuilder.append(classTemplateProcessor
-                        .createSetter(objectName, classFields.get(objectName)));
+                classMethodBuilder.append(classTemplateHelper.createSetter(
+                        objectName,
+                        classFields.get(objectName)));
 
             }
             if (generationModel.isUseGetters()) {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
-                classMethodBuilder.append(classTemplateProcessor
-                        .createGetter(objectName, classFields.get(objectName)));
+                classMethodBuilder.append(classTemplateHelper.createGetter(
+                        objectName,
+                        classFields.get(objectName)));
             }
         }
         classBodyBuilder.append(classMethodBuilder);
@@ -43,6 +46,6 @@ public class ClassPostProcessor extends AbsPostProcessor {
 
     @Override
     public String createClassTemplate(ClassItem classItem, String classBody) {
-        return classTemplateProcessor.createClassBody(classItem, classBody);
+        return classTemplateHelper.createClassBody(classItem, classBody);
     }
 }

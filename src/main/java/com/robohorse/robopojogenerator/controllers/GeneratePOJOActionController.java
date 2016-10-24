@@ -6,10 +6,10 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
-import com.robohorse.robopojogenerator.services.EnvironmentService;
-import com.robohorse.robopojogenerator.services.GenerationService;
-import com.robohorse.robopojogenerator.services.MessageService;
-import com.robohorse.robopojogenerator.view.GeneratorViewBinder;
+import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate;
+import com.robohorse.robopojogenerator.delegates.GenerationDelegate;
+import com.robohorse.robopojogenerator.delegates.MessageDelegate;
+import com.robohorse.robopojogenerator.view.binders.GeneratorViewBinder;
 
 import javax.inject.Inject;
 import java.awt.*;
@@ -19,13 +19,13 @@ import java.awt.*;
  */
 public class GeneratePOJOActionController {
     @Inject
-    EnvironmentService environmentService;
+    EnvironmentDelegate environmentDelegate;
     @Inject
-    MessageService messageService;
+    MessageDelegate messageDelegate;
     @Inject
     GeneratorViewBinder generatorViewBinder;
     @Inject
-    GenerationService generationService;
+    GenerationDelegate generationDelegate;
 
     @Inject
     public GeneratePOJOActionController() {
@@ -35,12 +35,12 @@ public class GeneratePOJOActionController {
         try {
             proceed(event);
         } catch (RoboPluginException exception) {
-            messageService.onPluginExceptionHandled(exception);
+            messageDelegate.onPluginExceptionHandled(exception);
         }
     }
 
     private void proceed(AnActionEvent event) throws RoboPluginException {
-        final ProjectModel projectModel = environmentService.obtainProjectModel(event);
+        final ProjectModel projectModel = environmentDelegate.obtainProjectModel(event);
         final DialogBuilder dialogBuilder = new DialogBuilder();
         final Window window = dialogBuilder.getWindow();
 
@@ -48,7 +48,7 @@ public class GeneratePOJOActionController {
             @Override
             public void onJsonDataObtained(GenerationModel generationModel) {
                 window.dispose();
-                generationService.runGenerationTask(generationModel, projectModel);
+                generationDelegate.runGenerationTask(generationModel, projectModel);
             }
         });
     }

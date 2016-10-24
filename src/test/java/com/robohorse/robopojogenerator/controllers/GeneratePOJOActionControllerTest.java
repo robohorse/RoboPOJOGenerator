@@ -3,10 +3,10 @@ package com.robohorse.robopojogenerator.controllers;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.models.ProjectModel;
-import com.robohorse.robopojogenerator.services.EnvironmentService;
-import com.robohorse.robopojogenerator.services.GenerationService;
-import com.robohorse.robopojogenerator.services.MessageService;
-import com.robohorse.robopojogenerator.view.GeneratorViewBinder;
+import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate;
+import com.robohorse.robopojogenerator.delegates.GenerationDelegate;
+import com.robohorse.robopojogenerator.delegates.MessageDelegate;
+import com.robohorse.robopojogenerator.view.binders.GeneratorViewBinder;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -26,13 +26,13 @@ public class GeneratePOJOActionControllerTest {
     GeneratePOJOActionController generatePOJOActionController;
 
     @Mock
-    EnvironmentService environmentService;
+    EnvironmentDelegate environmentDelegate;
     @Mock
-    MessageService messageService;
+    MessageDelegate messageDelegate;
     @Mock
     GeneratorViewBinder generatorViewBinder;
     @Mock
-    GenerationService generationService;
+    GenerationDelegate generationDelegate;
 
     @Before
     public void setUp() {
@@ -46,7 +46,7 @@ public class GeneratePOJOActionControllerTest {
                 .build();
         AnActionEvent event = Mockito.mock(AnActionEvent.class);
 
-        when(environmentService.obtainProjectModel(event))
+        when(environmentDelegate.obtainProjectModel(event))
                 .thenReturn(projectModel);
         generatePOJOActionController.onActionHandled(event);
         verify(generatorViewBinder).bindView(any(), any());
@@ -57,9 +57,9 @@ public class GeneratePOJOActionControllerTest {
         final RoboPluginException exception = new RoboPluginException("", "");
         AnActionEvent event = Mockito.mock(AnActionEvent.class);
 
-        when(environmentService.obtainProjectModel(event))
+        when(environmentDelegate.obtainProjectModel(event))
                 .thenThrow(exception);
         generatePOJOActionController.onActionHandled(event);
-        verify(messageService).onPluginExceptionHandled(exception);
+        verify(messageDelegate).onPluginExceptionHandled(exception);
     }
 }
