@@ -29,6 +29,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
 
     }
 
+
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
 
@@ -107,7 +108,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
         final Matcher matcher = pattern.matcher(type);
 
         String innerType;
-        if (matcher.groupCount() != 0) {
+        if (matcher.find()) {
             // Type is List
 
             innerType = generateHelper.upperCaseFirst(matcher.group(0));
