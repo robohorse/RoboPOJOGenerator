@@ -97,7 +97,10 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
 
     private String proceedAnnotation(String annotation) {
 
-        return annotation.replaceAll("@", "@field:");
+        if (annotation != null) {
+            return annotation.replaceAll("@", "@field:");
+        }
+        return null;
     }
 
 
@@ -120,7 +123,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
                 innerType = "Int";
             }
 
-            type = type.replaceAll(regex, "<" + innerType + ">");
+            type = type.replaceAll(regex, innerType);
             type = type.replaceAll(">", "?>");
         }
         else {
