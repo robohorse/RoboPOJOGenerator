@@ -4,6 +4,7 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.PostProcessorFactory;
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.LanguageItem;
 import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
@@ -32,7 +33,8 @@ public class FileWriterService {
         final String path = projectModel.getDirectory().getVirtualFile().getPath();
 
         final String fileName;
-        if (generationModel.getLanguageItem().equals(LanguageItem.KOTLIN_DTO)) {
+        if (generationModel.getLanguageItem().equals(LanguageItem.KOTLIN_DTO)
+                && !generationModel.getAnnotationItem().equals(AnnotationItem.AUTO_VALUE_GSON)) {
             fileName = classItem.getClassName() + ".kt";
         }
         else {
