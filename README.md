@@ -35,5 +35,8 @@ see log of changes
 <img src="images/plugin_log.png" height="200">
 </p>
 
+# People, who help
+[wafer-li](https://github.com/wafer-li) - Kotlin support (release 1.7)
+
 # About
 Copyright 2016 Vadim Shchenev, and licensed under the MIT license. No attribution is necessary but it's very much appreciated. Star this project if you like it.
