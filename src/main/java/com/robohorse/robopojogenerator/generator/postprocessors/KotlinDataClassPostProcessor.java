@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import jdk.nashorn.internal.runtime.regexp.joni.encoding.CharacterType;
+import javax.inject.Inject;
 
 /**
  * This is the KotlinDataClassPostProcessor class
@@ -23,6 +23,11 @@ import jdk.nashorn.internal.runtime.regexp.joni.encoding.CharacterType;
  * @since 16/10/24 00:30
  */
 public class KotlinDataClassPostProcessor extends AbsPostProcessor {
+
+    @Inject
+    public KotlinDataClassPostProcessor() {
+
+    }
 
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
