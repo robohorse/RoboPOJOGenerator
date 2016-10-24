@@ -1,22 +1,23 @@
 package com.robohorse.robopojogenerator.listeners;
 
-import com.intellij.codeInspection.javaDoc.JavadocHtmlLintAnnotator;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.LanguageItem;
-import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.injections.Injector;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.services.MessageService;
 import com.robohorse.robopojogenerator.view.GeneratorVew;
 
-import javax.inject.Inject;
-import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
+
+import javax.inject.Inject;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  * Created by vadim on 24.09.16.
@@ -63,14 +64,14 @@ public class GenerateActionListener implements ActionListener {
             classGenerateHelper.validateJsonContent(content);
             eventListener.onJsonDataObtained(new GenerationModel
                     .Builder()
-                                                     .setLanguageItem(languageItem)
-                                                     .setAnnotationItem(annotationItem)
-                                                     .setContent(content)
-                                                     .setSettersAvailable(useSetters)
-                                                     .setGettersAvailable(useGetters)
-                                                     .setRootClassName(className)
-                                                     .setRewriteClasses(rewriteClasses)
-                                                     .build());
+                    .setLanguageItem(languageItem)
+                    .setAnnotationItem(annotationItem)
+                    .setContent(content)
+                    .setSettersAvailable(useSetters)
+                    .setGettersAvailable(useGetters)
+                    .setRootClassName(className)
+                    .setRewriteClasses(rewriteClasses)
+                    .build());
 
         } catch (RoboPluginException exception) {
             messageService.onPluginExceptionHandled(exception);
