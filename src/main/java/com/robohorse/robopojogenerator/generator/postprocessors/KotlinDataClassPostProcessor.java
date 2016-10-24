@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.google.common.base.CaseFormat;
+import com.google.gson.annotations.SerializedName;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
@@ -98,7 +99,14 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     private String proceedAnnotation(String annotation) {
 
         if (annotation != null) {
-            return annotation.replaceAll("@", "@field:");
+            String regex = "\"@(.+?)\"";
+            annotation = annotation.replaceAll(regex, "\"ç$1\"");
+            annotation = annotation.replaceAll("@", "@field:");
+
+            regex = "\"ç(.+?)\"";
+            annotation = annotation.replaceAll(regex, "\"@$1\"");
+
+            return annotation;
         }
         return null;
     }
