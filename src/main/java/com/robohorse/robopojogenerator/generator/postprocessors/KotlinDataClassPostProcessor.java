@@ -114,7 +114,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
         if (matcher.find()) {
             // Type is List
 
-            innerType = generateHelper.upperCaseFirst(matcher.group(0));
+            innerType = generateHelper.upperCaseFirst(matcher.group(1));
 
             if (innerType.equals(ClassType.OBJECT.getBoxed())) {
                 innerType = "Any";
@@ -123,7 +123,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
                 innerType = "Int";
             }
 
-            type = type.replaceAll(regex, innerType);
+            type = type.replaceAll(regex, "<" + innerType + ">");
             type = type.replaceAll(">", "?>");
         }
         else {
