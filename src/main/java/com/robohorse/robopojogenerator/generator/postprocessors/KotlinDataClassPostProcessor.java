@@ -3,6 +3,7 @@ package com.robohorse.robopojogenerator.generator.postprocessors;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
+import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
 
-        removeClassImportSemicolon(classItem);
+        proceedImports(classItem);
 
         StringBuilder       classBodyBuilder = new StringBuilder();
         Map<String, String> classFields      = classItem.getClassFields();
@@ -102,13 +103,23 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     }
 
 
-    private void removeClassImportSemicolon(ClassItem classItem) {
+    /**
+     * Remove List import and semicolon
+     * @param classItem The class item which is use to getting import
+     */
+    private void proceedImports(ClassItem classItem) {
 
         Set<String> classImports = classItem.getClassImports();
 
         Set<String> classImportWithoutSemicolon = new HashSet<String>();
 
         for (String classImport : classImports) {
+
+            if (classImport.equals(Imports.LIST)) {
+                // Kotlin don't use List import
+                continue;
+            }
+
             classImport = classImport.substring(0, classImport.indexOf(";"));
             classImportWithoutSemicolon.add(classImport);
         }
