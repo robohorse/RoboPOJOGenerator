@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by vadim on 23.10.16.
  */
-public class AutoValueClassPostProcessor extends AbsPostProcessor {
+public class AutoValueClassPostProcessor extends JavaPostProcessor {
 
     @Inject
     public AutoValueClassPostProcessor() {
