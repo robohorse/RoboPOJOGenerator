@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.generator.processors;
+package com.robohorse.robopojogenerator.generator.utils;
 
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
@@ -10,12 +10,12 @@ import javax.inject.Inject;
 /**
  * Created by vadim on 05.10.16.
  */
-public class ClassTemplateProcessor {
+public class ClassTemplateHelper {
     @Inject
     ClassGenerateHelper classGenerateHelper;
 
     @Inject
-    public ClassTemplateProcessor() {
+    public ClassTemplateHelper() {
     }
 
     public String createSetter(String field, String type) {
@@ -49,8 +49,8 @@ public class ClassTemplateProcessor {
 
     public String createKotlinDataClassField(String type, String fieldName, String objectName, String annotation) {
         final String field = String.format(ClassTemplate.FIELD_KOTLIN_DTO,
-                                           classGenerateHelper.getClassField(fieldName),
-                                           type);
+                classGenerateHelper.getClassField(fieldName),
+                type);
         return createAnnotatedField(objectName, annotation, field);
     }
 
@@ -74,8 +74,8 @@ public class ClassTemplateProcessor {
 
     public String createClassBodyKotlinDataClass(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY_KOTLIN_DTO,
-                                                   classItem.getClassName(),
-                                                   classBody);
+                classItem.getClassName(),
+                classBody);
 
         return createClassBodyAnnotated(classItem, classItemBody);
     }

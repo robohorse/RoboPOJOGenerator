@@ -5,6 +5,7 @@ import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
+import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.models.InnerArrayModel;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,6 +72,17 @@ public class ClassGenerateHelper {
         for (String value : imports) {
             classItem.addClassImport(value);
         }
+    }
+
+    public String updateKotlinType(String type) {
+        if (type.contains("<")) {
+            return type.replace(ClassType.OBJECT.getBoxed(), "Any")
+                    .replace(">", "?>");
+
+        } else if (type.equals("Object")) {
+            return "Any";
+        }
+        return type;
     }
 
     public String resolveMajorType(InnerArrayModel innerArrayModel) {

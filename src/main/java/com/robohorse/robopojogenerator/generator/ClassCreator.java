@@ -25,7 +25,6 @@ public class ClassCreator {
     public void generateFiles(@NotNull GenerationModel generationModel,
                               @NotNull ProjectModel projectModel) throws RoboPluginException {
         final Set<ClassItem> classItemSet = roboPOJOGenerator.generate(generationModel);
-
         for (ClassItem classItem : classItemSet) {
             fileWriterService.writeFile(classItem, generationModel, projectModel);
         }

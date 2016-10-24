@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.generator;
 
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
-import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.LanguageItem;
 import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.injections.Injector;
@@ -19,10 +18,10 @@ public class PostProcessorFactory {
     }
 
     public AbsPostProcessor createPostProcessor(GenerationModel generationModel) {
-
+//TODO rework this
         // Not support AutoValue yet
         if (generationModel.getLanguageItem().equals(LanguageItem.KOTLIN_DTO)
-                && !generationModel.getAnnotationItem().equals(AnnotationItem.AUTO_VALUE_GSON)){
+                && !generationModel.getAnnotationItem().equals(AnnotationItem.AUTO_VALUE_GSON)) {
             return Injector.getAppComponent().newKotlinDataClassPostProcessor();
         }
 

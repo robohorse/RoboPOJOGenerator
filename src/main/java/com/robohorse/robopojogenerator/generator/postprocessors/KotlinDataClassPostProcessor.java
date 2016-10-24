@@ -4,18 +4,13 @@ import com.google.common.base.CaseFormat;
 import com.robohorse.robopojogenerator.generator.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
-import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.annotations.KotlinAnnotations;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
-import java.util.HashSet;
+import javax.inject.Inject;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.inject.Inject;
 
 /**
  * This is the KotlinDataClassPostProcessor class
@@ -25,47 +20,53 @@ import javax.inject.Inject;
  * @since 16/10/24 00:30
  */
 public class KotlinDataClassPostProcessor extends AbsPostProcessor {
-
     @Inject
     public KotlinDataClassPostProcessor() {
-
     }
 
+    @Override
+    protected StringBuilder proceedClassImports(ClassItem classItem) {
+        final Set<String> imports = classItem.getClassImports();
+        imports.remove(Imports.LIST);
+        final StringBuilder importsBuilder = new StringBuilder();
+        for (String importItem : imports) {
+            importsBuilder.append(importItem.replace(";", ""));
+            importsBuilder.append(ClassTemplate.NEW_LINE);
+        }
+        return importsBuilder;
+    }
 
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
-
-        proceedImports(classItem);
-
-        StringBuilder       classBodyBuilder = new StringBuilder();
-        Map<String, String> classFields      = classItem.getClassFields();
-
+        final StringBuilder classBodyBuilder = new StringBuilder();
+        Map<String, String> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
-
-            String type       = proceedType(classFields.get(objectName));
+            String type = generateHelper.updateKotlinType(classFields.get(objectName));
             String annotation = classItem.getAnnotation();
-            String fieldName  = proceedField(objectName);
-
-            classBodyBuilder.append(
-                    classTemplateProcessor
-                            .createKotlinDataClassField(type, fieldName, objectName, annotation));
+            String fieldName = proceedField(objectName);
+            classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
+                    type,
+                    fieldName,
+                    objectName,
+                    annotation));
         }
-
-        if (classBodyBuilder.length() == 0) {
-            // Kotlin don't allow empty constructor
-            classBodyBuilder.append(ClassTemplate.FIELD_KOTLIN_DOT_DEFAULT);
-        }
-        else {
-            // Remove the last comma
-            classBodyBuilder.deleteCharAt(classBodyBuilder.lastIndexOf(","));
-        }
-
+        updateClassModel(classBodyBuilder);
         return classBodyBuilder.toString();
     }
 
+    //TODO think about this method
+    private void updateClassModel(StringBuilder classBodyBuilder) {
+        if (classBodyBuilder.length() == 0) {
+            // Kotlin don't allow empty constructor
+            classBodyBuilder.append(ClassTemplate.FIELD_KOTLIN_DOT_DEFAULT);
+        } else {
+            // Remove the last comma
+            classBodyBuilder.deleteCharAt(classBodyBuilder.lastIndexOf(","));
+        }
+    }
 
+    //TODO think about this method
     private String proceedField(String objectName) {
-
         String fieldName = objectName;
 
         if (fieldName.contains("-")) {
@@ -87,111 +88,44 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
         return fieldName;
     }
 
-
     @Override
     protected String createClassItemText(String packagePath, String imports, String classTemplate) {
-
-        return classTemplateProcessor.createClassItemWithoutSemicolon(packagePath,
-                                                                      imports,
-                                                                      classTemplate);
+        return classTemplateHelper
+                .createClassItemWithoutSemicolon(
+                        packagePath,
+                        imports,
+                        classTemplate);
     }
-
 
     @Override
     protected void applyAnnotations(AnnotationItem item, ClassItem classItem) {
-
         switch (item) {
             case GSON: {
                 generateHelper.setAnnotations(classItem,
-                                              KotlinAnnotations.GSON.CLASS_ANNOTATION,
-                                              KotlinAnnotations.GSON.ANNOTATION,
-                                              Imports.GSON.IMPORTS);
+                        KotlinAnnotations.GSON.CLASS_ANNOTATION,
+                        KotlinAnnotations.GSON.ANNOTATION,
+                        Imports.GSON.IMPORTS);
                 break;
             }
             case LOGAN_SQUARE: {
                 generateHelper.setAnnotations(classItem,
-                                              KotlinAnnotations.LOGAN_SQUARE.CLASS_ANNOTATION,
-                                              KotlinAnnotations.LOGAN_SQUARE.ANNOTATION,
-                                              Imports.LOGAN_SQUARE.IMPORTS);
+                        KotlinAnnotations.LOGAN_SQUARE.CLASS_ANNOTATION,
+                        KotlinAnnotations.LOGAN_SQUARE.ANNOTATION,
+                        Imports.LOGAN_SQUARE.IMPORTS);
                 break;
             }
             case JACKSON: {
                 generateHelper.setAnnotations(classItem,
-                                              KotlinAnnotations.JACKSON.CLASS_ANNOTATION,
-                                              KotlinAnnotations.JACKSON.ANNOTATION,
-                                              Imports.JACKSON.IMPORTS);
+                        KotlinAnnotations.JACKSON.CLASS_ANNOTATION,
+                        KotlinAnnotations.JACKSON.ANNOTATION,
+                        Imports.JACKSON.IMPORTS);
                 break;
             }
         }
     }
 
-
-    private String proceedType(String type) {
-
-        final String  regex   = "<([^<>]*)>";
-        final Pattern pattern = Pattern.compile(regex);
-        final Matcher matcher = pattern.matcher(type);
-
-        String innerType;
-        if (matcher.find()) {
-            // Type is List
-
-            innerType = generateHelper.upperCaseFirst(matcher.group(1));
-
-            if (innerType.equals(ClassType.OBJECT.getBoxed())) {
-                innerType = "Any";
-            }
-            else if (innerType.equals(ClassType.INTEGER.getBoxed())) {
-                innerType = "Int";
-            }
-
-            type = type.replaceAll(regex, "<" + innerType + ">");
-            type = type.replaceAll(">", "?>");
-        }
-        else {
-            // Type is object or primitive
-
-            type = generateHelper.upperCaseFirst(type);
-
-            if (type.equals("Object")) {
-                type = "Any";
-            }
-        }
-
-        return type;
-    }
-
-
-    /**
-     * Remove List import and semicolon
-     *
-     * @param classItem The class item which is use to getting import
-     */
-    private void proceedImports(ClassItem classItem) {
-
-        Set<String> classImports = classItem.getClassImports();
-
-        Set<String> classImportWithoutSemicolon = new HashSet<String>();
-
-        for (String classImport : classImports) {
-
-            if (classImport.equals(Imports.LIST)) {
-                // Kotlin don't use List import
-                continue;
-            }
-
-            classImport = classImport.substring(0, classImport.indexOf(";"));
-            classImportWithoutSemicolon.add(classImport);
-        }
-
-        classImports.clear();
-        classImports.addAll(classImportWithoutSemicolon);
-    }
-
-
     @Override
     public String createClassTemplate(ClassItem classItem, String classBody) {
-
-        return classTemplateProcessor.createClassBodyKotlinDataClass(classItem, classBody);
+        return classTemplateHelper.createClassBodyKotlinDataClass(classItem, classBody);
     }
 }

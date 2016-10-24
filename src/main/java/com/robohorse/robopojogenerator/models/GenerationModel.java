@@ -39,11 +39,9 @@ public class GenerationModel {
         return useGetters;
     }
 
-
     public LanguageItem getLanguageItem() {
         return languageItem;
     }
-
 
     public static class Builder {
         private GenerationModel instance;

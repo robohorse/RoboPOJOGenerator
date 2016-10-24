@@ -2,7 +2,7 @@ package com.robohorse.robopojogenerator.generator.processors;
 
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
-import com.robohorse.robopojogenerator.generator.processors.ClassTemplateProcessor;
+import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -15,9 +15,9 @@ import static org.mockito.Mockito.*;
 /**
  * Created by vadim on 05.10.16.
  */
-public class ClassTemplateProcessorTest {
+public class ClassTemplateHelperTest {
     @InjectMocks
-    ClassTemplateProcessor classTemplateProcessor;
+    ClassTemplateHelper classTemplateHelper;
 
     @Mock
     ClassGenerateHelper classGenerateHelper;
@@ -43,7 +43,7 @@ public class ClassTemplateProcessorTest {
                 + ClassTemplate.NEW_LINE
                 + ClassTemplate.TAB + "}"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateProcessor.createSetter(field, type));
+        assertEquals(target, classTemplateHelper.createSetter(field, type));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ClassTemplateProcessorTest {
                 + ClassTemplate.NEW_LINE
                 + ClassTemplate.TAB + "}"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateProcessor.createGetter(field, type));
+        assertEquals(target, classTemplateHelper.createGetter(field, type));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class ClassTemplateProcessorTest {
                 + ClassTemplate.NEW_LINE
                 + ClassTemplate.TAB + "}"
                 + ClassTemplate.NEW_LINE;
-        assertEquals(target, classTemplateProcessor.createGetter(field, type));
+        assertEquals(target, classTemplateHelper.createGetter(field, type));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ClassTemplateProcessorTest {
                 + ClassTemplate.NEW_LINE;
         when(classGenerateHelper.getClassField(field))
                 .thenReturn(field);
-        assertEquals(target, classTemplateProcessor.createFiled(type, field, null));
+        assertEquals(target, classTemplateHelper.createFiled(type, field, null));
     }
 
     @Test
@@ -105,6 +105,6 @@ public class ClassTemplateProcessorTest {
                 + ClassTemplate.NEW_LINE;
         when(classGenerateHelper.getClassField(field))
                 .thenReturn(field);
-        assertEquals(target, classTemplateProcessor.createFiled(type, field, annotation));
+        assertEquals(target, classTemplateHelper.createFiled(type, field, annotation));
     }
 }

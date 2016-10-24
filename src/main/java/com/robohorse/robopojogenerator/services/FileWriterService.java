@@ -36,8 +36,7 @@ public class FileWriterService {
         if (generationModel.getLanguageItem().equals(LanguageItem.KOTLIN_DTO)
                 && !generationModel.getAnnotationItem().equals(AnnotationItem.AUTO_VALUE_GSON)) {
             fileName = classItem.getClassName() + ".kt";
-        }
-        else {
+        } else {
             fileName = classItem.getClassName() + ".java";
         }
 
