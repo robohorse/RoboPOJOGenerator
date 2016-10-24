@@ -37,7 +37,7 @@ public interface ClassTemplate {
     String CLASS_ROOT = "package %1$s;" + NEW_LINE + NEW_LINE +
                         "%2$s" + NEW_LINE;
 
-    String CLASS_ROOT_WITHOUT_SEMICOLON = "package %1$s;" + NEW_LINE + NEW_LINE +
+    String CLASS_ROOT_WITHOUT_SEMICOLON = "package %1$s" + NEW_LINE + NEW_LINE +
                                           "%2$s" + NEW_LINE;
 
     String FIELD = TAB + "private %1$s %2$s;" + NEW_LINE;
