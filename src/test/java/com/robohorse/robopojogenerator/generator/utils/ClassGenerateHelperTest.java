@@ -102,6 +102,12 @@ public class ClassGenerateHelperTest {
         final String nestedListObjectType = "List<List<Object>>";
         final String nestedListObjectTarget = "List<List<Any?>?>";
 
+        final String nestedListObjectItemType = "List<List<ObjectItem>>";
+        final String nestedListObjectItemTarget = "List<List<ObjectItem?>?>";
+
+        final String nestedListIntegerItemType = "List<List<IntegerItem>>";
+        final String nestedListIntegerItemTarget = "List<List<IntegerItem?>?>";
+
         final String primitiveType = "int";
         final String primitiveTarget = "Int";
 
@@ -110,6 +116,8 @@ public class ClassGenerateHelperTest {
 
         assertEquals(nestedListTarget, classGenerateHelper.updateKotlinType(nestedListType));
         assertEquals(nestedListObjectTarget, classGenerateHelper.updateKotlinType(nestedListObjectType));
+        assertEquals(nestedListObjectItemTarget, classGenerateHelper.updateKotlinType(nestedListObjectItemType));
+        assertEquals(nestedListIntegerItemTarget, classGenerateHelper.updateKotlinType(nestedListIntegerItemType));
         assertEquals(primitiveTarget, classGenerateHelper.updateKotlinType(primitiveType));
         assertEquals(objectTarget, classGenerateHelper.updateKotlinType(objectType));
     }
