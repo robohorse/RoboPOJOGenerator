@@ -112,8 +112,8 @@ public class ClassGenerateHelper {
 
     public String updateKotlinType(String type) {
         if (type.contains("<")) {
-            type = type.replace(ClassType.OBJECT.getBoxed(), "Any");
-            type = type.replace(ClassType.INTEGER.getBoxed(), "Int");
+            type = type.replace("<" + ClassType.OBJECT.getBoxed() + ">", "<Any>");
+            type = type.replace("<" + ClassType.INTEGER.getBoxed() + ">", "<Int>");
             type = type.replace(">", "?>");
         } else if (type.equals("Object")) {
             return "Any";
