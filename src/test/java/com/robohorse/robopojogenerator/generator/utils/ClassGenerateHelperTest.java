@@ -1,11 +1,13 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.models.InnerArrayModel;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by vadim on 28.09.16.
@@ -90,5 +92,25 @@ public class ClassGenerateHelperTest {
 
         innerArrayModel.setMajorType(type);
         assertEquals(type, classGenerateHelper.resolveMajorType(innerArrayModel));
+    }
+
+    @Test
+    public void testUpdateKotlinType() throws Exception {
+        final String nestedListType = "List<List<List<Integer>>>";
+        final String nestedListTarget = "List<List<List<Int?>?>?>";
+
+        final String nestedListObjectType = "List<List<Object>>";
+        final String nestedListObjectTarget = "List<List<Any?>?>";
+
+        final String primitiveType = "int";
+        final String primitiveTarget = "Int";
+
+        final String objectType = "Object";
+        final String objectTarget = "Any";
+
+        assertEquals(nestedListTarget, classGenerateHelper.updateKotlinType(nestedListType));
+        assertEquals(nestedListObjectTarget, classGenerateHelper.updateKotlinType(nestedListObjectType));
+        assertEquals(primitiveTarget, classGenerateHelper.updateKotlinType(primitiveType));
+        assertEquals(objectTarget, classGenerateHelper.updateKotlinType(objectType));
     }
 }
