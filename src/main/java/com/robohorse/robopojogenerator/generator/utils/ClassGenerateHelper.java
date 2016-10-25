@@ -112,11 +112,14 @@ public class ClassGenerateHelper {
 
     public String updateKotlinType(String type) {
         if (type.contains("<")) {
-            return type.replace(ClassType.OBJECT.getBoxed(), "Any")
-                    .replace(">", "?>");
-
+            type = type.replace(ClassType.OBJECT.getBoxed(), "Any");
+            type = type.replace(ClassType.INTEGER.getBoxed(), "Int");
+            type = type.replace(">", "?>");
         } else if (type.equals("Object")) {
             return "Any";
+        }
+        else {
+            type = upperCaseFirst(type);
         }
         return type;
     }
