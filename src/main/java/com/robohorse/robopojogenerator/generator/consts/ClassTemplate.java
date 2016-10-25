@@ -47,7 +47,7 @@ public interface ClassTemplate {
 
     String FIELD_KOTLIN_DOT_DEFAULT = TAB + "val any: Any? = null";
 
-    String FIELD_ANNOTATED = TAB + "%1$s" + NEW_LINE + "%2$s";
+    String FIELD_ANNOTATED = TAB + "%1$s" + NEW_LINE + "%2$s" + NEW_LINE;
 
     String TYPE_ADAPTER = TAB + "public static TypeAdapter<%1$s> typeAdapter(Gson gson) {" +
             NEW_LINE +
