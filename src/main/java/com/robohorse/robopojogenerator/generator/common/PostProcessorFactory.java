@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.generator.common;
 
+import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.injections.Injector;
 import com.robohorse.robopojogenerator.models.GenerationModel;
@@ -17,15 +18,12 @@ public class PostProcessorFactory {
     public AbsPostProcessor createPostProcessor(GenerationModel generationModel) {
         if (generationModel.isUseKotlin()) {
             return Injector.getAppComponent().newKotlinDataClassPostProcessor();
+
+        } else if (generationModel.getAnnotationItem() == AnnotationItem.AUTO_VALUE_GSON) {
+            return Injector.getAppComponent().newAutoValueClassPostProcessor();
+
         } else {
-            switch (generationModel.getAnnotationItem()) {
-                case AUTO_VALUE_GSON: {
-                    return Injector.getAppComponent().newAutoValueClassPostProcessor();
-                }
-                default: {
-                    return Injector.getAppComponent().newClassPostProcessor();
-                }
-            }
+            return Injector.getAppComponent().newCommonJavaPostProcessor();
         }
     }
 }

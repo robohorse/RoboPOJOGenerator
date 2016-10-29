@@ -22,7 +22,7 @@ public interface AppComponent {
 
     void inject(GenerateActionListener item);
 
-    CommonJavaPostProcessor newClassPostProcessor();
+    CommonJavaPostProcessor newCommonJavaPostProcessor();
 
     AutoValueClassPostProcessor newAutoValueClassPostProcessor();
 

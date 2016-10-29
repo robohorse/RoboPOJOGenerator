@@ -1,13 +1,10 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.models.InnerArrayModel;
-
+import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by vadim on 28.09.16.
@@ -67,58 +64,24 @@ public class ClassGenerateHelperTest {
     @Test
     public void testResolveMajorTypeWithSingleCount_isCorrect() throws Exception {
         final String type = "Double";
-        InnerArrayModel innerArrayModel = new InnerArrayModel();
-        innerArrayModel.increaseCount();
-
-        innerArrayModel.setMajorType(type);
-        assertEquals("List<" + type + ">", classGenerateHelper.resolveMajorType(innerArrayModel));
+        ClassDecorator classDecorator = new ClassDecorator();
+        classDecorator.setClassDecorator(new ClassDecorator(type));
+        assertEquals("List<" + type + ">", classDecorator.getJavaItem());
     }
 
     @Test
     public void testResolveMajorTypeWithDoubleCount_isCorrect() throws Exception {
         final String type = "Double";
-        InnerArrayModel innerArrayModel = new InnerArrayModel();
-        innerArrayModel.increaseCount();
-        innerArrayModel.increaseCount();
-
-        innerArrayModel.setMajorType(type);
-        assertEquals("List<List<" + type + ">>", classGenerateHelper.resolveMajorType(innerArrayModel));
+        ClassDecorator classDecorator = new ClassDecorator();
+        classDecorator.setClassDecorator(new ClassDecorator());
+        classDecorator.setClassDecorator(new ClassDecorator(type));
+        assertEquals("List<List<" + type + ">>", classDecorator.getJavaItem());
     }
 
     @Test
     public void testResolveMajorTypeWithZeroCount_isCorrect() throws Exception {
         final String type = "Double";
-        InnerArrayModel innerArrayModel = new InnerArrayModel();
-
-        innerArrayModel.setMajorType(type);
-        assertEquals(type, classGenerateHelper.resolveMajorType(innerArrayModel));
-    }
-
-    @Test
-    public void testUpdateKotlinType() throws Exception {
-        final String nestedListType = "List<List<List<Integer>>>";
-        final String nestedListTarget = "List<List<List<Int?>?>?>";
-
-        final String nestedListObjectType = "List<List<Object>>";
-        final String nestedListObjectTarget = "List<List<Any?>?>";
-
-        final String nestedListObjectItemType = "List<List<ObjectItem>>";
-        final String nestedListObjectItemTarget = "List<List<ObjectItem?>?>";
-
-        final String nestedListIntegerItemType = "List<List<IntegerItem>>";
-        final String nestedListIntegerItemTarget = "List<List<IntegerItem?>?>";
-
-        final String primitiveType = "int";
-        final String primitiveTarget = "Int";
-
-        final String objectType = "Object";
-        final String objectTarget = "Any";
-
-        assertEquals(nestedListTarget, classGenerateHelper.updateKotlinType(nestedListType));
-        assertEquals(nestedListObjectTarget, classGenerateHelper.updateKotlinType(nestedListObjectType));
-        assertEquals(nestedListObjectItemTarget, classGenerateHelper.updateKotlinType(nestedListObjectItemType));
-        assertEquals(nestedListIntegerItemTarget, classGenerateHelper.updateKotlinType(nestedListIntegerItemType));
-        assertEquals(primitiveTarget, classGenerateHelper.updateKotlinType(primitiveType));
-        assertEquals(objectTarget, classGenerateHelper.updateKotlinType(objectType));
+        ClassDecorator classDecorator = new ClassDecorator(type);
+        assertEquals(type, classDecorator.getJavaItem());
     }
 }

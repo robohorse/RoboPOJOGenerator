@@ -13,7 +13,7 @@ public class ClassItem {
     private String classAnnotation;
     private String className;
     private String packagePath;
-    private Map<String, String> classFields = new LinkedHashMap<String, String>();
+    private Map<String, ClassDecorator> classFields = new LinkedHashMap<String, ClassDecorator>();
     private Set<String> classImports = new HashSet<String>();
 
     public ClassItem(String className) {
@@ -28,7 +28,7 @@ public class ClassItem {
         this.annotation = annotation;
     }
 
-    public void addClassField(String name, String classType) {
+    public void addClassField(String name, ClassDecorator classType) {
         classFields.put(name, classType);
     }
 
@@ -40,7 +40,7 @@ public class ClassItem {
         classImports.add(value);
     }
 
-    public Map<String, String> getClassFields() {
+    public Map<String, ClassDecorator> getClassFields() {
         return classFields;
     }
 

@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
+import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import org.json.JSONArray;
@@ -53,7 +54,7 @@ public class ClassProcessorTest {
         ClassItem classItem = (ClassItem) iterator.next();
         assertEquals(classItem.getClassName(), name);
 
-        final Map<String, String> fields = classItem.getClassFields();
+        final Map<String, ClassDecorator> fields = classItem.getClassFields();
         assertNotNull(fields);
 
         for (String key : jsonObject.keySet()) {
@@ -75,7 +76,7 @@ public class ClassProcessorTest {
         assertTrue(classItemSet.size() == 2);
 
         for (ClassItem classItem : classItemSet) {
-            final Map<String, String> fields = classItem.getClassFields();
+            final Map<String, ClassDecorator> fields = classItem.getClassFields();
             assertNotNull(fields);
 
             if (name.equalsIgnoreCase(classItem.getClassName())) {
@@ -106,16 +107,16 @@ public class ClassProcessorTest {
         ClassItem classItem = (ClassItem) iterator.next();
         assertEquals(classItem.getClassName(), name);
 
-        final Map<String, String> fields = classItem.getClassFields();
+        final Map<String, ClassDecorator> fields = classItem.getClassFields();
         assertNotNull(fields);
 
         for (String key : jsonObject.keySet()) {
             assertTrue(fields.containsKey(key));
         }
 
-        final String targetObjectType = classItem.getClassFields().get("data");
+        final ClassDecorator targetObjectType = classItem.getClassFields().get("data");
 
-        assertEquals("List<Object>", targetObjectType);
+        assertEquals("List<Object>", targetObjectType.getJavaItem());
     }
 
     @Test
@@ -129,9 +130,6 @@ public class ClassProcessorTest {
         when(classGenerateHelper.getClassName(name))
                 .thenReturn(name);
 
-        when(classGenerateHelper.resolveMajorType(Mockito.anyObject()))
-                .thenReturn(targetType);
-
         classProcessor.proceed(jsonObject, name, classItemSet);
         assertTrue(classItemSet.size() == 1);
 
@@ -139,16 +137,16 @@ public class ClassProcessorTest {
         ClassItem classItem = (ClassItem) iterator.next();
         assertEquals(classItem.getClassName(), name);
 
-        final Map<String, String> fields = classItem.getClassFields();
+        final Map<String, ClassDecorator> fields = classItem.getClassFields();
         assertNotNull(fields);
 
         for (String key : jsonObject.keySet()) {
             assertTrue(fields.containsKey(key));
         }
 
-        final String actualType = classItem.getClassFields().get("data");
+        final ClassDecorator actualType = classItem.getClassFields().get("data");
 
-        assertEquals(targetType, actualType);
+        assertEquals(targetType, actualType.getJavaItem());
     }
 
     @Test
@@ -163,23 +161,22 @@ public class ClassProcessorTest {
 
         when(classGenerateHelper.getClassName(name))
                 .thenReturn(name);
-        when(classGenerateHelper.resolveMajorType(Mockito.anyObject()))
-                .thenReturn(targetType);
         when(classGenerateHelper.getClassNameWithItemPostfix(Mockito.anyString()))
-                .thenReturn(targetType);
+                .thenReturn("DataItem");
 
         classProcessor.proceed(jsonObject, name, classItemSet);
         assertTrue(classItemSet.size() == 2);
 
         for (ClassItem classItem : classItemSet) {
-            final Map<String, String> fields = classItem.getClassFields();
+            final Map<String, ClassDecorator> fields = classItem.getClassFields();
             assertNotNull(fields);
 
             if (name.equalsIgnoreCase(classItem.getClassName())) {
                 for (String key : jsonObject.keySet()) {
                     assertTrue(fields.containsKey(key));
-                    final String actualType = classItem.getClassFields().get("data");
-                    assertEquals(targetType, actualType);
+                    final ClassDecorator actualType = classItem.getClassFields().get("data");
+                    final String javaItem = actualType.getJavaItem();
+                    assertEquals(targetType, javaItem);
                 }
             } else {
                 for (String key : innerJsonObject.keySet()) {
