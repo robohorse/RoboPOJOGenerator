@@ -18,6 +18,7 @@ public class ClassTemplateHelper {
     }
 
     public String createSetter(String field, String type) {
+        field = classGenerateHelper.getClassField(field);
         return String.format(ClassTemplate.SETTER,
                 classGenerateHelper.upperCaseFirst(field),
                 type,
@@ -25,6 +26,7 @@ public class ClassTemplateHelper {
     }
 
     public String createGetter(String field, String type) {
+        field = classGenerateHelper.getClassField(field);
         final boolean isBoolean = ClassType.BOOLEAN.getPrimitive().equalsIgnoreCase(type);
         return String.format(isBoolean ? ClassTemplate.GETTER_BOOLEAN : ClassTemplate.GETTER,
                 classGenerateHelper.upperCaseFirst(field),
@@ -39,18 +41,18 @@ public class ClassTemplateHelper {
         return createAnnotatedField(name, annotation, field);
     }
 
-    public String createAutoValueFiled(String type, String name, String annotation) {
+    public String createAutoValueField(String type, String name, String annotation) {
         final String field = String.format(ClassTemplate.FIELD_AUTO_VALUE,
                 type,
                 classGenerateHelper.getClassField(name));
         return createAnnotatedField(name, annotation, field);
     }
 
-    public String createKotlinDataClassField(String type, String fieldName, String objectName, String annotation) {
+    public String createKotlinDataClassField(String type, String fieldName, String annotation) {
         final String field = String.format(ClassTemplate.FIELD_KOTLIN_DTO,
                 classGenerateHelper.getClassField(fieldName),
                 type);
-        return createAnnotatedField(objectName, annotation, field);
+        return createAnnotatedField(fieldName, annotation, field);
     }
 
     public String createClassBody(ClassItem classItem, String classBody) {
