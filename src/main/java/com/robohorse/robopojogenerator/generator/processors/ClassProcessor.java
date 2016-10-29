@@ -1,11 +1,10 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
+import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
-import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
-import com.robohorse.robopojogenerator.models.InnerArrayModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,12 +30,15 @@ public class ClassProcessor {
 
                 @Override
                 public void onInnerObjectIdentified(ClassType classType) {
-                    classItem.addClassField(jsonObjectKey, classType.getPrimitive());
+                    classItem.addClassField(jsonObjectKey, new ClassDecorator(classType));
                 }
 
                 @Override
                 public void onJsonObjectIdentified() {
-                    classItem.addClassField(jsonObjectKey, classGenerateHelper.getClassName(jsonObjectKey));
+                    final String className = classGenerateHelper.getClassName(jsonObjectKey);
+                    final ClassDecorator decorator = new ClassDecorator(className);
+
+                    classItem.addClassField(jsonObjectKey, decorator);
                     proceed((JSONObject) object, jsonObjectKey, classItemSet);
                 }
 
@@ -45,17 +47,14 @@ public class ClassProcessor {
                     final JSONArray jsonArray = (JSONArray) object;
                     classItem.addClassImport(Imports.LIST);
 
+                    final ClassDecorator decorator = new ClassDecorator();
                     if (jsonArray.length() == 0) {
-                        classItem.addClassField(jsonObjectKey, ArrayItemsTemplate.UNDEFINED_LIST);
+                        decorator.setClassDecorator(new ClassDecorator(ClassType.OBJECT));
+                        classItem.addClassField(jsonObjectKey, decorator);
 
                     } else {
-                        final InnerArrayModel innerArrayModel = new InnerArrayModel();
-                        innerArrayModel.increaseCount();
-
-                        proceedArray(jsonArray, innerArrayModel, jsonObjectKey, classItemSet);
-
-                        final String majorType = classGenerateHelper.resolveMajorType(innerArrayModel);
-                        classItem.addClassField(jsonObjectKey, majorType);
+                        proceedArray(jsonArray, decorator, jsonObjectKey, classItemSet);
+                        classItem.addClassField(jsonObjectKey, decorator);
                     }
                 }
             };
@@ -64,7 +63,7 @@ public class ClassProcessor {
         classItemSet.add(classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray, final InnerArrayModel innerArrayModel,
+    private void proceedArray(JSONArray jsonArray, final ClassDecorator decorator,
                               final String jsonObjectKey, final Set<ClassItem> classItemSet) {
         final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonObjectKey);
         if (jsonArray.length() != 0) {
@@ -73,26 +72,25 @@ public class ClassProcessor {
 
                 @Override
                 public void onInnerObjectIdentified(ClassType classType) {
-                    innerArrayModel.setMajorType(classType.getBoxed());
+                    decorator.setClassDecorator(new ClassDecorator(classType));
                 }
 
                 @Override
                 public void onJsonObjectIdentified() {
-                    innerArrayModel.setMajorType(itemName);
+                    decorator.setClassDecorator(new ClassDecorator(itemName));
                     proceed((JSONObject) object, itemName, classItemSet);
                 }
 
                 @Override
                 public void onJsonArrayIdentified() {
-                    innerArrayModel.increaseCount();
-                    proceedArray((JSONArray) object, innerArrayModel, itemName, classItemSet);
+                    decorator.setClassDecorator(new ClassDecorator());
+                    proceedArray((JSONArray) object, decorator, itemName, classItemSet);
                 }
             };
             innerObjectResolver.resolveClassType(object);
 
         } else {
-            innerArrayModel.increaseCount();
-            innerArrayModel.setMajorType(ClassType.OBJECT.getBoxed());
+            decorator.setClassDecorator(new ClassDecorator(ClassType.OBJECT));
         }
     }
 }

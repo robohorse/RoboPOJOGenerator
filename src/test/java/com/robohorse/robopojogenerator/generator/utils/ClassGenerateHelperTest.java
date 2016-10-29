@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.models.InnerArrayModel;
 
 import org.junit.Test;
 

@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -18,10 +19,10 @@ public class AutoValueClassPostProcessor extends JavaPostProcessor {
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
-        final Map<String, String> classFields = classItem.getClassFields();
+        final Map<String, ClassDecorator> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
             classBodyBuilder.append(classTemplateHelper.createAutoValueFiled(
-                    classFields.get(objectName),
+                    classFields.get(objectName).getJavaItem(),
                     objectName,
                     classItem.getAnnotation()));
 

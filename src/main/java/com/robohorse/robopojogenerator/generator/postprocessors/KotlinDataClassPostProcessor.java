@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
@@ -38,9 +39,9 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     @Override
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
-        final Map<String, String> classFields = classItem.getClassFields();
+        final Map<String, ClassDecorator> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
-            final String type = generateHelper.updateKotlinType(classFields.get(objectName));
+            final String type = classFields.get(objectName).getKotlinItem();
             final String annotation = classItem.getAnnotation();
             final String fieldName = generateHelper.proceedField(objectName);
             classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
