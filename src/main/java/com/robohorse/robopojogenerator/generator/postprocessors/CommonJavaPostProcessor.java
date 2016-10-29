@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -21,9 +21,12 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
         final StringBuilder classBodyBuilder = new StringBuilder();
         final StringBuilder classMethodBuilder = new StringBuilder();
         final Map<String, ClassDecorator> classFields = classItem.getClassFields();
+
         for (String objectName : classFields.keySet()) {
+            final String classItemValue = classFields.get(objectName).getJavaItem();
+
             classBodyBuilder.append(classTemplateHelper.createFiled(
-                    classFields.get(objectName).getJavaItem(),
+                    classItemValue,
                     objectName,
                     classItem.getAnnotation()));
 
@@ -31,14 +34,14 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
                 classMethodBuilder.append(classTemplateHelper.createSetter(
                         objectName,
-                        classFields.get(objectName).getJavaItem()));
+                        classItemValue));
 
             }
             if (generationModel.isUseGetters()) {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
                 classMethodBuilder.append(classTemplateHelper.createGetter(
                         objectName,
-                        classFields.get(objectName).getJavaItem()));
+                        classItemValue));
             }
         }
         classBodyBuilder.append(classMethodBuilder);
