@@ -38,6 +38,16 @@ public class ClassGenerateHelper {
         throw new WrongClassNameException();
     }
 
+    public String updateClassBody(String classBody) {
+        if (null != classBody && classBody.length() > 0) {
+            final int lastIndex = classBody.length() - 1;
+            if (classBody.charAt(lastIndex) == '\n') {
+                return classBody.substring(0, lastIndex);
+            }
+        }
+        return classBody;
+    }
+
     public String getClassName(String name) {
         return upperCaseFirst(name);
     }
@@ -74,7 +84,6 @@ public class ClassGenerateHelper {
         }
     }
 
-    //TODO think about this method
     public void updateClassModel(StringBuilder classBodyBuilder) {
         if (classBodyBuilder.length() == 0) {
             // Kotlin don't allow empty constructor
