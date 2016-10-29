@@ -102,7 +102,7 @@ public class ClassTemplateHelperTest {
         final String annotation = "@JsonField";
         final String target = ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
                 ClassTemplate.TAB + "private " + type + " " + field + ";"
-                + ClassTemplate.NEW_LINE;
+                + ClassTemplate.NEW_LINE + ClassTemplate.NEW_LINE;
         when(classGenerateHelper.getClassField(field))
                 .thenReturn(field);
         assertEquals(target, classTemplateHelper.createFiled(type, field, annotation));
