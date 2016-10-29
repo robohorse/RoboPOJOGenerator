@@ -36,6 +36,8 @@ public class ClassTemplateHelperTest {
                 .thenReturn(fieldUpper);
         when(classGenerateHelper.lowerCaseFirst(field))
                 .thenReturn(field);
+        when(classGenerateHelper.getClassField(field))
+                .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public void set" + fieldUpper + "(" + type + " " + field + "){"
                 + ClassTemplate.NEW_LINE +
@@ -55,6 +57,8 @@ public class ClassTemplateHelperTest {
                 .thenReturn(fieldUpper);
         when(classGenerateHelper.lowerCaseFirst(field))
                 .thenReturn(field);
+        when(classGenerateHelper.getClassField(field))
+                .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public " + type + " get" + fieldUpper + "(){"
                 + ClassTemplate.NEW_LINE +
@@ -73,6 +77,8 @@ public class ClassTemplateHelperTest {
         when(classGenerateHelper.upperCaseFirst(field))
                 .thenReturn(fieldUpper);
         when(classGenerateHelper.lowerCaseFirst(field))
+                .thenReturn(field);
+        when(classGenerateHelper.getClassField(field))
                 .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public boolean is" + fieldUpper + "(){"
@@ -100,9 +106,9 @@ public class ClassTemplateHelperTest {
         final String field = "item";
         final String type = "boolean";
         final String annotation = "@JsonField";
-        final String target = ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
+        final String target = ClassTemplate.NEW_LINE + ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
                 ClassTemplate.TAB + "private " + type + " " + field + ";"
-                + ClassTemplate.NEW_LINE + ClassTemplate.NEW_LINE;
+                + ClassTemplate.NEW_LINE;
         when(classGenerateHelper.getClassField(field))
                 .thenReturn(field);
         assertEquals(target, classTemplateHelper.createFiled(type, field, annotation));
