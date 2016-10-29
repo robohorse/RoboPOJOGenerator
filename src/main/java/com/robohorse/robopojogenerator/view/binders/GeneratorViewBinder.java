@@ -4,6 +4,7 @@ import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
+import com.robohorse.robopojogenerator.listeners.KotlinCheckBoxStateListener;
 import com.robohorse.robopojogenerator.view.ui.GeneratorVew;
 
 import javax.inject.Inject;
@@ -19,9 +20,11 @@ public class GeneratorViewBinder {
     }
 
     public void bindView(DialogBuilder builder, GuiFormEventListener eventListener) {
-        GeneratorVew generatorVew = new GeneratorVew();
-        generatorVew.getGenerateButton()
-                .addActionListener(new GenerateActionListener(generatorVew, eventListener));
+        final GeneratorVew generatorVew = new GeneratorVew();
+        final GenerateActionListener actionListener = new GenerateActionListener(generatorVew, eventListener);
+        generatorVew.getGenerateButton().addActionListener(actionListener);
+        generatorVew.getKotlinCheckBox().addItemListener(new KotlinCheckBoxStateListener(generatorVew));
+
         bindGroupViews(generatorVew.getTypeButtonGroup());
 
         builder.setCenterPanel(generatorVew.getRootView());
