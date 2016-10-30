@@ -1,8 +1,9 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassType;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
+import com.robohorse.robopojogenerator.models.FieldModel;
 
 import javax.inject.Inject;
 
@@ -32,52 +33,52 @@ public class ClassTemplateHelper {
                 type);
     }
 
-    public String createFiled(String type, String name, String annotation) {
+    public String createFiled(String type, String name, String formatted, String annotation) {
         final String field = String.format(ClassTemplate.FIELD,
                 type,
-                name);
+                formatted);
         return createAnnotatedField(name, annotation, field);
     }
 
-    public String createAutoValueField(String type, String name, String annotation) {
+    public String createAutoValueField(FieldModel model) {
         final String field = String.format(ClassTemplate.FIELD_AUTO_VALUE,
-                type,
-                name);
-        return createAnnotatedField(name, annotation, field);
+                model.getClassType(),
+                model.getFieldNameFormatted());
+        return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
-    public String createKotlinDataClassField(String type, String fieldName, String annotation) {
+    public String createKotlinDataClassField(FieldModel model) {
         final String field = String.format(ClassTemplate.FIELD_KOTLIN_DTO,
-                fieldName,
-                type)
+                model.getFieldNameFormatted(),
+                model.getClassType())
                 .replace(">", "?>");
-        return createAnnotatedField(fieldName, annotation, field);
+        return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
-    public String createClassBody(ClassItem classItem, String classBody) {
+    public String createClassBody(ClassItemModel classItemModel, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY,
-                classItem.getClassName(),
+                classItemModel.getClassName(),
                 classBody);
-        return createClassBodyAnnotated(classItem, classItemBody);
+        return createClassBodyAnnotated(classItemModel, classItemBody);
     }
 
-    public String createTypeAdapter(ClassItem classItem) {
-        return String.format(ClassTemplate.TYPE_ADAPTER, classItem.getClassName());
+    public String createTypeAdapter(ClassItemModel classItemModel) {
+        return String.format(ClassTemplate.TYPE_ADAPTER, classItemModel.getClassName());
     }
 
-    public String createClassBodyAbstract(ClassItem classItem, String classBody) {
+    public String createClassBodyAbstract(ClassItemModel classItemModel, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY_ABSTRACT,
-                classItem.getClassName(),
+                classItemModel.getClassName(),
                 classBody);
-        return createClassBodyAnnotated(classItem, classItemBody);
+        return createClassBodyAnnotated(classItemModel, classItemBody);
     }
 
-    public String createClassBodyKotlinDataClass(ClassItem classItem, String classBody) {
+    public String createClassBodyKotlinDataClass(ClassItemModel classItemModel, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY_KOTLIN_DTO,
-                classItem.getClassName(),
+                classItemModel.getClassName(),
                 classBody);
 
-        return createClassBodyAnnotated(classItem, classItemBody);
+        return createClassBodyAnnotated(classItemModel, classItemBody);
     }
 
     public String createClassItem(String packagePath, String imports, String body) {
@@ -106,8 +107,8 @@ public class ClassTemplateHelper {
         }
     }
 
-    private String createClassBodyAnnotated(ClassItem classItem, String classItemBody) {
-        final String classAnnotation = classItem.getClassAnnotation();
+    private String createClassBodyAnnotated(ClassItemModel classItemModel, String classItemBody) {
+        final String classAnnotation = classItemModel.getClassAnnotation();
         if (null != classAnnotation && !classAnnotation.isEmpty()) {
             return String.format(ClassTemplate.CLASS_BODY_ANNOTATED,
                     classAnnotation,

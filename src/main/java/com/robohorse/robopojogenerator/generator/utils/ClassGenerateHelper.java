@@ -4,7 +4,7 @@ import com.google.common.base.CaseFormat;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
 import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.ReservedWords;
@@ -54,7 +54,7 @@ public class ClassGenerateHelper {
     }
 
     public String getClassNameWithItemPostfix(String name) {
-        return String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(name));
+        return String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(name)));
     }
 
     public String upperCaseFirst(String name) {
@@ -75,13 +75,13 @@ public class ClassGenerateHelper {
         return name;
     }
 
-    public void setAnnotations(ClassItem classItem, String classAnnotation,
+    public void setAnnotations(ClassItemModel classItemModel, String classAnnotation,
                                String annotation, String[] imports) {
-        classItem.setClassAnnotation(classAnnotation);
-        classItem.setAnnotation(annotation);
+        classItemModel.setClassAnnotation(classAnnotation);
+        classItemModel.setAnnotation(annotation);
 
         for (String value : imports) {
-            classItem.addClassImport(value);
+            classItemModel.addClassImport(value);
         }
     }
 

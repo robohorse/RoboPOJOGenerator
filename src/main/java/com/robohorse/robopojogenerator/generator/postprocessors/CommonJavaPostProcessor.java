@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -17,18 +17,19 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
     }
 
     @Override
-    public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
+    public String proceedClassBody(ClassItemModel classItemModel, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
         final StringBuilder classMethodBuilder = new StringBuilder();
-        final Map<String, ClassDecorator> classFields = classItem.getClassFields();
+        final Map<String, ClassDecorator> classFields = classItemModel.getClassFields();
 
         for (String objectName : classFields.keySet()) {
             final String classItemValue = classFields.get(objectName).getJavaItem();
             final String itemNameFormatted = generateHelper.formatClassField(objectName);
             classBodyBuilder.append(classTemplateHelper.createFiled(
                     classItemValue,
+                    objectName,
                     itemNameFormatted,
-                    classItem.getAnnotation()));
+                    classItemModel.getAnnotation()));
 
             if (generationModel.isUseSetters()) {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
@@ -49,7 +50,7 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
     }
 
     @Override
-    public String createClassTemplate(ClassItem classItem, String classBody) {
-        return classTemplateHelper.createClassBody(classItem, classBody);
+    public String createClassTemplate(ClassItemModel classItemModel, String classBody) {
+        return classTemplateHelper.createClassBody(classItemModel, classBody);
     }
 }

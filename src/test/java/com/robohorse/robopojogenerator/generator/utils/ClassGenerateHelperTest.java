@@ -93,5 +93,6 @@ public class ClassGenerateHelperTest {
         assertEquals("JsonMemberPrivate", classGenerateHelper.proceedField("private"));
         assertEquals("JsonMember3351231Yte",
                 classGenerateHelper.proceedField("!!@##$%^$3351$%^&23^1_--=---___-_-yte"));
+        assertEquals("ArrayOfJsonObjectsItem", classGenerateHelper.proceedField("Array_of_json_objectsItem"));
     }
 }

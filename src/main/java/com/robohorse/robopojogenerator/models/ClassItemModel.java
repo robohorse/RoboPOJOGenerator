@@ -1,4 +1,6 @@
-package com.robohorse.robopojogenerator.generator.common;
+package com.robohorse.robopojogenerator.models;
+
+import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -8,7 +10,7 @@ import java.util.Set;
 /**
  * Created by vadim on 25.09.16.
  */
-public class ClassItem {
+public class ClassItemModel {
     private String annotation;
     private String classAnnotation;
     private String className;
@@ -16,7 +18,7 @@ public class ClassItem {
     private Map<String, ClassDecorator> classFields = new LinkedHashMap<String, ClassDecorator>();
     private Set<String> classImports = new HashSet<String>();
 
-    public ClassItem(String className) {
+    public ClassItemModel(String className) {
         this.className = className;
     }
 
