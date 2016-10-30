@@ -1,9 +1,9 @@
-package com.robohorse.robopojogenerator.generator.consts;
+package com.robohorse.robopojogenerator.generator.consts.templates;
 
 /**
  * Created by vadim on 02.10.16.
  */
-public interface Imports {
+public interface ImportsTemplate {
     String LIST = "import java.util.List;";
 
     String GENERATED = "import javax.annotation.Generated;";

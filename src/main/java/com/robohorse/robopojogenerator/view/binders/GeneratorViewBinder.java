@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.view.binders;
 
 import com.intellij.openapi.ui.DialogBuilder;
-import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
 import com.robohorse.robopojogenerator.listeners.KotlinCheckBoxStateListener;
@@ -35,7 +35,7 @@ public class GeneratorViewBinder {
 
     private void bindGroupViews(ButtonGroup buttonGroup) {
         final Enumeration<AbstractButton> buttons = buttonGroup.getElements();
-        for (AnnotationItem annotationItems : AnnotationItem.values()) {
+        for (AnnotationEnum annotationItems : AnnotationEnum.values()) {
             if (buttons.hasMoreElements()) {
                 final AbstractButton button = buttons.nextElement();
                 button.setText(annotationItems.getText());

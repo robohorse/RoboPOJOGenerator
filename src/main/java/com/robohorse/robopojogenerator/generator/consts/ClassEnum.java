@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.generator.consts;
 /**
  * Created by vadim on 02.10.16.
  */
-public enum ClassType {
+public enum ClassEnum {
     STRING("String", "String", "String"),
     INTEGER("Integer", "int", "Int"),
     BOOLEAN("Boolean", "boolean", "Boolean"),
@@ -16,7 +16,7 @@ public enum ClassType {
     private String boxed;
     private String kotlin;
 
-    ClassType(String boxed, String primitive, String kotlin) {
+    ClassEnum(String boxed, String primitive, String kotlin) {
         this.primitive = primitive;
         this.boxed = boxed;
         this.kotlin = kotlin;

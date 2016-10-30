@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.listeners;
 
-import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
 import com.robohorse.robopojogenerator.view.ui.GeneratorVew;
 
 import javax.swing.*;
@@ -29,10 +29,10 @@ public class KotlinCheckBoxStateListener implements ItemListener {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons
                 .hasMoreElements(); ) {
             final AbstractButton button = buttons.nextElement();
-            if (AnnotationItem.AUTO_VALUE_GSON.getText().equals(button.getText())) {
+            if (AnnotationEnum.AUTO_VALUE_GSON.getText().equals(button.getText())) {
                 button.setEnabled(enable);
 
-            } else if (AnnotationItem.NONE.getText().equals(button.getText())) {
+            } else if (AnnotationEnum.NONE.getText().equals(button.getText())) {
                 button.setSelected(true);
             }
         }

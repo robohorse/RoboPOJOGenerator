@@ -1,9 +1,9 @@
-package com.robohorse.robopojogenerator.generator.consts;
+package com.robohorse.robopojogenerator.generator.consts.annotations;
 
 /**
  * Created by vadim on 25.09.16.
  */
-public enum AnnotationItem {
+public enum AnnotationEnum {
     NONE("none"),
     GSON("GSON"),
     JACKSON("Jackson"),
@@ -12,7 +12,7 @@ public enum AnnotationItem {
     
     private String text;
 
-    AnnotationItem(String text) {
+    AnnotationEnum(String text) {
         this.text = text;
     }
 

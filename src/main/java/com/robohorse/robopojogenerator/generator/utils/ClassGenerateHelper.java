@@ -4,10 +4,10 @@ import com.google.common.base.CaseFormat;
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
-import com.robohorse.robopojogenerator.models.ClassItemModel;
-import com.robohorse.robopojogenerator.generator.consts.ArrayItemsTemplate;
-import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
-import com.robohorse.robopojogenerator.generator.consts.ReservedWords;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate;
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
+import com.robohorse.robopojogenerator.generator.consts.reserved.ReservedWords;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,13 +75,13 @@ public class ClassGenerateHelper {
         return name;
     }
 
-    public void setAnnotations(ClassItemModel classItemModel, String classAnnotation,
+    public void setAnnotations(ClassItem classItem, String classAnnotation,
                                String annotation, String[] imports) {
-        classItemModel.setClassAnnotation(classAnnotation);
-        classItemModel.setAnnotation(annotation);
+        classItem.setClassAnnotation(classAnnotation);
+        classItem.setAnnotation(annotation);
 
         for (String value : imports) {
-            classItemModel.addClassImport(value);
+            classItem.addClassImport(value);
         }
     }
 

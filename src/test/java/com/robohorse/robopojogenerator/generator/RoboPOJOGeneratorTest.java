@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator;
 
-import com.robohorse.robopojogenerator.models.ClassItemModel;
-import com.robohorse.robopojogenerator.generator.processors.ClassProcessor;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.processing.ClassProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -34,7 +34,7 @@ public class RoboPOJOGeneratorTest {
                 .Builder()
                 .setContent(new JSONObject().toString())
                 .build();
-        Set<ClassItemModel> classItemModelSet = roboPOJOGenerator.generate(generationModel);
-        assertNotNull(classItemModelSet);
+        Set<ClassItem> classItemSet = roboPOJOGenerator.generate(generationModel);
+        assertNotNull(classItemSet);
     }
 }
