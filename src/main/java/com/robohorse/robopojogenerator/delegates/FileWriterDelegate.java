@@ -2,7 +2,7 @@ package com.robohorse.robopojogenerator.delegates;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.FileWriteException;
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
 import com.robohorse.robopojogenerator.generator.common.PostProcessorFactory;
 import com.robohorse.robopojogenerator.generator.postprocessors.AbsPostProcessor;
 import com.robohorse.robopojogenerator.models.GenerationModel;
@@ -26,10 +26,10 @@ public class FileWriterDelegate {
     public FileWriterDelegate() {
     }
 
-    public void writeFile(ClassItem classItem, GenerationModel generationModel,
+    public void writeFile(ClassItemModel classItemModel, GenerationModel generationModel,
                           ProjectModel projectModel) throws RoboPluginException {
         final String path = projectModel.getDirectory().getVirtualFile().getPath();
-        final String fileName = classItem.getClassName()
+        final String fileName = classItemModel.getClassName()
                 + (generationModel.isUseKotlin() ? ".kt" : ".java");
         final File file = new File(path + File.separator + fileName);
         try {
@@ -47,23 +47,23 @@ public class FileWriterDelegate {
 
             if (!file.exists()) {
                 file.createNewFile();
-                writeToFile(classItem, generationModel, projectModel, file);
+                writeToFile(classItemModel, generationModel, projectModel, file);
             }
         } catch (IOException e) {
             throw new FileWriteException(e.getMessage());
         }
     }
 
-    private void writeToFile(ClassItem classItem, GenerationModel generationModel,
+    private void writeToFile(ClassItemModel classItemModel, GenerationModel generationModel,
                              ProjectModel projectModel, File file) throws IOException {
-        final String content = prepareClass(classItem, generationModel, projectModel);
+        final String content = prepareClass(classItemModel, generationModel, projectModel);
         FileUtils.writeStringToFile(file, content);
     }
 
-    private String prepareClass(ClassItem classItem, GenerationModel generationModel,
+    private String prepareClass(ClassItemModel classItemModel, GenerationModel generationModel,
                                 ProjectModel projectModel) {
-        classItem.setPackagePath(projectModel.getPackageName());
+        classItemModel.setPackagePath(projectModel.getPackageName());
         final AbsPostProcessor postProcessor = factory.createPostProcessor(generationModel);
-        return postProcessor.proceed(classItem, generationModel);
+        return postProcessor.proceed(classItemModel, generationModel);
     }
 }

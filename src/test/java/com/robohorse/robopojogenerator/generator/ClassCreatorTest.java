@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator;
 
 import com.robohorse.robopojogenerator.generator.common.ClassCreator;
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 import com.robohorse.robopojogenerator.models.ProjectModel;
 import com.robohorse.robopojogenerator.delegates.FileWriterDelegate;
@@ -35,9 +35,9 @@ public class ClassCreatorTest {
 
     @Test
     public void generateFiles() throws Exception {
-        final ClassItem classItem = new ClassItem("");
-        final Set<ClassItem> classItemSet = new HashSet<ClassItem>();
-        classItemSet.add(classItem);
+        final ClassItemModel classItemModel = new ClassItemModel("");
+        final Set<ClassItemModel> classItemModelSet = new HashSet<ClassItemModel>();
+        classItemModelSet.add(classItemModel);
         final GenerationModel generationModel = new GenerationModel
                 .Builder()
                 .build();
@@ -45,9 +45,9 @@ public class ClassCreatorTest {
                 .Builder()
                 .build();
         when(roboPOJOGenerator.generate(generationModel))
-                .thenReturn(classItemSet);
+                .thenReturn(classItemModelSet);
         classCreator.generateFiles(generationModel, projectModel);
         verify(fileWriterDelegate)
-                .writeFile(classItem, generationModel, projectModel);
+                .writeFile(classItemModel, generationModel, projectModel);
     }
 }

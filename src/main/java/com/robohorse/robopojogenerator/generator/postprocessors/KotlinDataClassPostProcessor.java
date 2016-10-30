@@ -1,11 +1,12 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.Imports;
 import com.robohorse.robopojogenerator.generator.consts.annotations.KotlinAnnotations;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
+import com.robohorse.robopojogenerator.models.FieldModel;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
 import javax.inject.Inject;
@@ -25,8 +26,8 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     }
 
     @Override
-    protected StringBuilder proceedClassImports(ClassItem classItem) {
-        final Set<String> imports = classItem.getClassImports();
+    protected StringBuilder proceedClassImports(ClassItemModel classItemModel) {
+        final Set<String> imports = classItemModel.getClassImports();
         imports.remove(Imports.LIST);
         final StringBuilder importsBuilder = new StringBuilder();
         for (String importItem : imports) {
@@ -37,16 +38,18 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     }
 
     @Override
-    public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
+    public String proceedClassBody(ClassItemModel classItemModel, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
-        final Map<String, ClassDecorator> classFields = classItem.getClassFields();
+        final Map<String, ClassDecorator> classFields = classItemModel.getClassFields();
         for (String objectName : classFields.keySet()) {
-            final String type = classFields.get(objectName).getKotlinItem();
-            final String annotation = classItem.getAnnotation();
             classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
-                    type,
-                    objectName,
-                    annotation));
+                    new FieldModel.Builder()
+                            .setFieldName(objectName)
+                            .setClassType(classFields.get(objectName).getKotlinItem())
+                            .setAnnotation(classItemModel.getAnnotation())
+                            .setFieldNameFormatted(generateHelper.formatClassField(objectName))
+                            .build()
+            ));
         }
         generateHelper.updateClassModel(classBodyBuilder);
         return classBodyBuilder.toString();
@@ -62,24 +65,24 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     }
 
     @Override
-    protected void applyAnnotations(AnnotationItem item, ClassItem classItem) {
+    protected void applyAnnotations(AnnotationItem item, ClassItemModel classItemModel) {
         switch (item) {
             case GSON: {
-                generateHelper.setAnnotations(classItem,
+                generateHelper.setAnnotations(classItemModel,
                         KotlinAnnotations.GSON.CLASS_ANNOTATION,
                         KotlinAnnotations.GSON.ANNOTATION,
                         Imports.GSON.IMPORTS);
                 break;
             }
             case LOGAN_SQUARE: {
-                generateHelper.setAnnotations(classItem,
+                generateHelper.setAnnotations(classItemModel,
                         KotlinAnnotations.LOGAN_SQUARE.CLASS_ANNOTATION,
                         KotlinAnnotations.LOGAN_SQUARE.ANNOTATION,
                         Imports.LOGAN_SQUARE.IMPORTS);
                 break;
             }
             case JACKSON: {
-                generateHelper.setAnnotations(classItem,
+                generateHelper.setAnnotations(classItemModel,
                         KotlinAnnotations.JACKSON.CLASS_ANNOTATION,
                         KotlinAnnotations.JACKSON.ANNOTATION,
                         Imports.JACKSON.IMPORTS);
@@ -89,7 +92,7 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
     }
 
     @Override
-    public String createClassTemplate(ClassItem classItem, String classBody) {
-        return classTemplateHelper.createClassBodyKotlinDataClass(classItem, classBody);
+    public String createClassTemplate(ClassItemModel classItemModel, String classBody) {
+        return classTemplateHelper.createClassBodyKotlinDataClass(classItemModel, classBody);
     }
 }

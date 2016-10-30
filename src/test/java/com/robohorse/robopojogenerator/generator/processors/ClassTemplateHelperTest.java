@@ -3,14 +3,15 @@ package com.robohorse.robopojogenerator.generator.processors;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper;
+import com.robohorse.robopojogenerator.models.FieldModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by vadim on 05.10.16.
@@ -36,7 +37,7 @@ public class ClassTemplateHelperTest {
                 .thenReturn(fieldUpper);
         when(classGenerateHelper.lowerCaseFirst(field))
                 .thenReturn(field);
-        when(classGenerateHelper.getClassField(field))
+        when(classGenerateHelper.formatClassField(field))
                 .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public void set" + fieldUpper + "(" + type + " " + field + "){"
@@ -57,7 +58,7 @@ public class ClassTemplateHelperTest {
                 .thenReturn(fieldUpper);
         when(classGenerateHelper.lowerCaseFirst(field))
                 .thenReturn(field);
-        when(classGenerateHelper.getClassField(field))
+        when(classGenerateHelper.formatClassField(field))
                 .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public " + type + " get" + fieldUpper + "(){"
@@ -78,7 +79,7 @@ public class ClassTemplateHelperTest {
                 .thenReturn(fieldUpper);
         when(classGenerateHelper.lowerCaseFirst(field))
                 .thenReturn(field);
-        when(classGenerateHelper.getClassField(field))
+        when(classGenerateHelper.formatClassField(field))
                 .thenReturn(field);
 
         final String target = ClassTemplate.TAB + "public boolean is" + fieldUpper + "(){"
@@ -96,9 +97,15 @@ public class ClassTemplateHelperTest {
         final String type = "boolean";
         final String target = ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE;
-        when(classGenerateHelper.getClassField(field))
+        when(classGenerateHelper.formatClassField(field))
                 .thenReturn(field);
-        assertEquals(target, classTemplateHelper.createFiled(type, field, null));
+        assertEquals(target, classTemplateHelper.createFiled(
+                new FieldModel.Builder()
+                        .setClassType(type)
+                        .setFieldNameFormatted(field)
+                        .setFieldName(field)
+                        .build()
+        ));
     }
 
     @Test
@@ -109,8 +116,15 @@ public class ClassTemplateHelperTest {
         final String target = ClassTemplate.NEW_LINE + ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
                 ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE;
-        when(classGenerateHelper.getClassField(field))
+        when(classGenerateHelper.formatClassField(field))
                 .thenReturn(field);
-        assertEquals(target, classTemplateHelper.createFiled(type, field, annotation));
+        assertEquals(target, classTemplateHelper.createFiled(
+                new FieldModel.Builder()
+                        .setClassType(type)
+                        .setAnnotation(annotation)
+                        .setFieldNameFormatted(field)
+                        .setFieldName(field)
+                        .build()
+        ));
     }
 }

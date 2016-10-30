@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.processors;
 
 import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,19 +42,19 @@ public class ClassProcessorTest {
     public void testSingleObjectGeneration_isCorrect() throws Exception {
         final JSONObject jsonObject = jsonReader.read("single_object.json");
         final String name = "Response";
-        final Set<ClassItem> classItemSet = new HashSet<>();
+        final Set<ClassItemModel> classItemModelSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
-        classProcessor.proceed(jsonObject, name, classItemSet);
-        assertTrue(classItemSet.size() == 1);
+        classProcessor.proceed(jsonObject, name, classItemModelSet);
+        assertTrue(classItemModelSet.size() == 1);
 
-        Iterator iterator = classItemSet.iterator();
-        ClassItem classItem = (ClassItem) iterator.next();
-        assertEquals(classItem.getClassName(), name);
+        Iterator iterator = classItemModelSet.iterator();
+        ClassItemModel classItemModel = (ClassItemModel) iterator.next();
+        assertEquals(classItemModel.getClassName(), name);
 
-        final Map<String, ClassDecorator> fields = classItem.getClassFields();
+        final Map<String, ClassDecorator> fields = classItemModel.getClassFields();
         assertNotNull(fields);
 
         for (String key : jsonObject.keySet()) {
@@ -67,19 +67,19 @@ public class ClassProcessorTest {
         final JSONObject jsonObject = jsonReader.read("inner_json_object.json");
         final JSONObject innerJsonObject = jsonObject.optJSONObject("data");
         final String name = "Response";
-        final Set<ClassItem> classItemSet = new HashSet<>();
+        final Set<ClassItemModel> classItemModelSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
-        classProcessor.proceed(jsonObject, name, classItemSet);
-        assertTrue(classItemSet.size() == 2);
+        classProcessor.proceed(jsonObject, name, classItemModelSet);
+        assertTrue(classItemModelSet.size() == 2);
 
-        for (ClassItem classItem : classItemSet) {
-            final Map<String, ClassDecorator> fields = classItem.getClassFields();
+        for (ClassItemModel classItemModel : classItemModelSet) {
+            final Map<String, ClassDecorator> fields = classItemModel.getClassFields();
             assertNotNull(fields);
 
-            if (name.equalsIgnoreCase(classItem.getClassName())) {
+            if (name.equalsIgnoreCase(classItemModel.getClassName())) {
                 for (String key : jsonObject.keySet()) {
                     assertTrue(fields.containsKey(key));
                 }
@@ -95,26 +95,26 @@ public class ClassProcessorTest {
     public void testEmptyArrayGeneration_isCorrect() throws Exception {
         final JSONObject jsonObject = jsonReader.read("empty_array.json");
         final String name = "Response";
-        final Set<ClassItem> classItemSet = new HashSet<>();
+        final Set<ClassItemModel> classItemModelSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
-        classProcessor.proceed(jsonObject, name, classItemSet);
-        assertTrue(classItemSet.size() == 1);
+        classProcessor.proceed(jsonObject, name, classItemModelSet);
+        assertTrue(classItemModelSet.size() == 1);
 
-        Iterator iterator = classItemSet.iterator();
-        ClassItem classItem = (ClassItem) iterator.next();
-        assertEquals(classItem.getClassName(), name);
+        Iterator iterator = classItemModelSet.iterator();
+        ClassItemModel classItemModel = (ClassItemModel) iterator.next();
+        assertEquals(classItemModel.getClassName(), name);
 
-        final Map<String, ClassDecorator> fields = classItem.getClassFields();
+        final Map<String, ClassDecorator> fields = classItemModel.getClassFields();
         assertNotNull(fields);
 
         for (String key : jsonObject.keySet()) {
             assertTrue(fields.containsKey(key));
         }
 
-        final ClassDecorator targetObjectType = classItem.getClassFields().get("data");
+        final ClassDecorator targetObjectType = classItemModel.getClassFields().get("data");
 
         assertEquals("List<Object>", targetObjectType.getJavaItem());
     }
@@ -125,26 +125,26 @@ public class ClassProcessorTest {
         final String name = "Response";
         final String targetType = "List<Integer>";
 
-        final Set<ClassItem> classItemSet = new HashSet<>();
+        final Set<ClassItemModel> classItemModelSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
-        classProcessor.proceed(jsonObject, name, classItemSet);
-        assertTrue(classItemSet.size() == 1);
+        classProcessor.proceed(jsonObject, name, classItemModelSet);
+        assertTrue(classItemModelSet.size() == 1);
 
-        Iterator iterator = classItemSet.iterator();
-        ClassItem classItem = (ClassItem) iterator.next();
-        assertEquals(classItem.getClassName(), name);
+        Iterator iterator = classItemModelSet.iterator();
+        ClassItemModel classItemModel = (ClassItemModel) iterator.next();
+        assertEquals(classItemModel.getClassName(), name);
 
-        final Map<String, ClassDecorator> fields = classItem.getClassFields();
+        final Map<String, ClassDecorator> fields = classItemModel.getClassFields();
         assertNotNull(fields);
 
         for (String key : jsonObject.keySet()) {
             assertTrue(fields.containsKey(key));
         }
 
-        final ClassDecorator actualType = classItem.getClassFields().get("data");
+        final ClassDecorator actualType = classItemModel.getClassFields().get("data");
 
         assertEquals(targetType, actualType.getJavaItem());
     }
@@ -157,24 +157,24 @@ public class ClassProcessorTest {
         final String name = "Response";
         final String targetType = "List<DataItem>";
 
-        final Set<ClassItem> classItemSet = new HashSet<>();
+        final Set<ClassItemModel> classItemModelSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
         when(classGenerateHelper.getClassNameWithItemPostfix(Mockito.anyString()))
                 .thenReturn("DataItem");
 
-        classProcessor.proceed(jsonObject, name, classItemSet);
-        assertTrue(classItemSet.size() == 2);
+        classProcessor.proceed(jsonObject, name, classItemModelSet);
+        assertTrue(classItemModelSet.size() == 2);
 
-        for (ClassItem classItem : classItemSet) {
-            final Map<String, ClassDecorator> fields = classItem.getClassFields();
+        for (ClassItemModel classItemModel : classItemModelSet) {
+            final Map<String, ClassDecorator> fields = classItemModel.getClassFields();
             assertNotNull(fields);
 
-            if (name.equalsIgnoreCase(classItem.getClassName())) {
+            if (name.equalsIgnoreCase(classItemModel.getClassName())) {
                 for (String key : jsonObject.keySet()) {
                     assertTrue(fields.containsKey(key));
-                    final ClassDecorator actualType = classItem.getClassFields().get("data");
+                    final ClassDecorator actualType = classItemModel.getClassFields().get("data");
                     final String javaItem = actualType.getJavaItem();
                     assertEquals(targetType, javaItem);
                 }

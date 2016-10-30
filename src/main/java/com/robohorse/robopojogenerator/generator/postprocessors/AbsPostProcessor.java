@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
 import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
@@ -19,30 +19,30 @@ public abstract class AbsPostProcessor {
     @Inject
     ClassTemplateHelper classTemplateHelper;
 
-    public String proceed(ClassItem classItem, GenerationModel generationModel) {
-        applyAnnotations(generationModel.getAnnotationItem(), classItem);
-        return proceedClass(classItem, generationModel);
+    public String proceed(ClassItemModel classItemModel, GenerationModel generationModel) {
+        applyAnnotations(generationModel.getAnnotationItem(), classItemModel);
+        return proceedClass(classItemModel, generationModel);
     }
 
-    protected abstract void applyAnnotations(AnnotationItem item, ClassItem classItem);
+    protected abstract void applyAnnotations(AnnotationItem item, ClassItemModel classItemModel);
 
-    public abstract String proceedClassBody(ClassItem classItem, GenerationModel generationModel);
+    public abstract String proceedClassBody(ClassItemModel classItemModel, GenerationModel generationModel);
 
-    public abstract String createClassTemplate(ClassItem classItem, String classBody);
+    public abstract String createClassTemplate(ClassItemModel classItemModel, String classBody);
 
-    private String proceedClass(ClassItem classItem, GenerationModel generationModel) {
+    private String proceedClass(ClassItemModel classItemModel, GenerationModel generationModel) {
         final String classBody = generateHelper.updateClassBody(
-                proceedClassBody(classItem, generationModel));
-        final String classTemplate = createClassTemplate(classItem, classBody);
-        final StringBuilder importsBuilder = proceedClassImports(classItem);
+                proceedClassBody(classItemModel, generationModel));
+        final String classTemplate = createClassTemplate(classItemModel, classBody);
+        final StringBuilder importsBuilder = proceedClassImports(classItemModel);
 
-        return createClassItemText(classItem.getPackagePath(),
+        return createClassItemText(classItemModel.getPackagePath(),
                 importsBuilder.toString(),
                 classTemplate);
     }
 
-    protected StringBuilder proceedClassImports(ClassItem classItem) {
-        final Set<String> imports = classItem.getClassImports();
+    protected StringBuilder proceedClassImports(ClassItemModel classItemModel) {
+        final Set<String> imports = classItemModel.getClassImports();
         final StringBuilder importsBuilder = new StringBuilder();
         for (String importItem : imports) {
             importsBuilder.append(importItem);
