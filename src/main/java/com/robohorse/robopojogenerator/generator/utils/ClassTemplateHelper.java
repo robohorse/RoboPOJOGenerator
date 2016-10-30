@@ -33,11 +33,11 @@ public class ClassTemplateHelper {
                 type);
     }
 
-    public String createFiled(String type, String name, String formatted, String annotation) {
+    public String createFiled(FieldModel model) {
         final String field = String.format(ClassTemplate.FIELD,
-                type,
-                formatted);
-        return createAnnotatedField(name, annotation, field);
+                model.getClassType(),
+                model.getFieldNameFormatted());
+        return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
     public String createAutoValueField(FieldModel model) {

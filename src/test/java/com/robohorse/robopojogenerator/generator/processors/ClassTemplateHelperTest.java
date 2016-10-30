@@ -3,14 +3,15 @@ package com.robohorse.robopojogenerator.generator.processors;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper;
+import com.robohorse.robopojogenerator.models.FieldModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by vadim on 05.10.16.
@@ -98,7 +99,13 @@ public class ClassTemplateHelperTest {
                 + ClassTemplate.NEW_LINE;
         when(classGenerateHelper.formatClassField(field))
                 .thenReturn(field);
-        assertEquals(target, classTemplateHelper.createFiled(type, field, null));
+        assertEquals(target, classTemplateHelper.createFiled(
+                new FieldModel.Builder()
+                        .setClassType(type)
+                        .setFieldNameFormatted(field)
+                        .setFieldName(field)
+                        .build()
+        ));
     }
 
     @Test
@@ -111,6 +118,13 @@ public class ClassTemplateHelperTest {
                 + ClassTemplate.NEW_LINE;
         when(classGenerateHelper.formatClassField(field))
                 .thenReturn(field);
-        assertEquals(target, classTemplateHelper.createFiled(type, field, annotation));
+        assertEquals(target, classTemplateHelper.createFiled(
+                new FieldModel.Builder()
+                        .setClassType(type)
+                        .setAnnotation(annotation)
+                        .setFieldNameFormatted(field)
+                        .setFieldName(field)
+                        .build()
+        ));
     }
 }

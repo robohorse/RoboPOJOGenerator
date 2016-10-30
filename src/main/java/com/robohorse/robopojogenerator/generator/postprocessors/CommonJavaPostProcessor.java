@@ -1,8 +1,9 @@
 package com.robohorse.robopojogenerator.generator.postprocessors;
 
 import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
-import com.robohorse.robopojogenerator.models.ClassItemModel;
 import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
+import com.robohorse.robopojogenerator.models.ClassItemModel;
+import com.robohorse.robopojogenerator.models.FieldModel;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
 import javax.inject.Inject;
@@ -26,11 +27,13 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
             final String classItemValue = classFields.get(objectName).getJavaItem();
             final String itemNameFormatted = generateHelper.formatClassField(objectName);
             classBodyBuilder.append(classTemplateHelper.createFiled(
-                    classItemValue,
-                    objectName,
-                    itemNameFormatted,
-                    classItemModel.getAnnotation()));
-
+                    new FieldModel.Builder()
+                            .setClassType(classItemValue)
+                            .setFieldNameFormatted(itemNameFormatted)
+                            .setFieldName(objectName)
+                            .setAnnotation(classItemModel.getAnnotation())
+                            .build()
+            ));
             if (generationModel.isUseSetters()) {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
                 classMethodBuilder.append(classTemplateHelper.createSetter(
