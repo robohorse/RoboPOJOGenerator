@@ -26,13 +26,13 @@ Select target package -> new -> Generate POJO from JSON
 put JSON into window and select target POJO type
 
 <p>
-<img src="images/plugin_window.png" height="300">
+<img src="images/plugin_window_v2.png" height="300">
 </p>
 
 see log of changes
 
 <p>
-<img src="images/plugin_log.png" height="200">
+<img src="images/plugin_log_v2.png" height="200">
 </p>
 
 # People, who help
