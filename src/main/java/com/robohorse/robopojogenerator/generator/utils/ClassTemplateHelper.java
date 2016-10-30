@@ -51,7 +51,8 @@ public class ClassTemplateHelper {
     public String createKotlinDataClassField(String type, String fieldName, String annotation) {
         final String field = String.format(ClassTemplate.FIELD_KOTLIN_DTO,
                 classGenerateHelper.getClassField(fieldName),
-                type);
+                type)
+                .replace(">", "?>");
         return createAnnotatedField(fieldName, annotation, field);
     }
 
