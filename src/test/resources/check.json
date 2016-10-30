@@ -1,0 +1,32 @@
+{
+  "valueInt": 1,
+  "valueDouble": 2.3,
+  "valueString": "someString",
+  "valueBoolean": true,
+  "some_array_of_numbers": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "empty_array": [],
+  "empty_array_in_array": [
+    []
+  ],
+  "array_of_int_in_array": [
+    [
+      2,
+      3
+    ]
+  ],
+  "someJsonObject": {
+    "value": 2,
+    "text": "some text"
+  },
+  "array_of_json_objects": [
+    {
+      "value": 2,
+      "text": "some text"
+    }
+  ]
+}
