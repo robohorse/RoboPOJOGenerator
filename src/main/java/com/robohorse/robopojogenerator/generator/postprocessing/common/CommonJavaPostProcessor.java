@@ -1,8 +1,8 @@
-package com.robohorse.robopojogenerator.generator.postprocessors;
+package com.robohorse.robopojogenerator.generator.postprocessing.common;
 
 import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
-import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
-import com.robohorse.robopojogenerator.models.ClassItemModel;
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.models.FieldModel;
 import com.robohorse.robopojogenerator.models.GenerationModel;
 
@@ -18,10 +18,10 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
     }
 
     @Override
-    public String proceedClassBody(ClassItemModel classItemModel, GenerationModel generationModel) {
+    public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
         final StringBuilder classMethodBuilder = new StringBuilder();
-        final Map<String, ClassDecorator> classFields = classItemModel.getClassFields();
+        final Map<String, ClassDecorator> classFields = classItem.getClassFields();
 
         for (String objectName : classFields.keySet()) {
             final String classItemValue = classFields.get(objectName).getJavaItem();
@@ -31,7 +31,7 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
                             .setClassType(classItemValue)
                             .setFieldNameFormatted(itemNameFormatted)
                             .setFieldName(objectName)
-                            .setAnnotation(classItemModel.getAnnotation())
+                            .setAnnotation(classItem.getAnnotation())
                             .build()
             ));
             if (generationModel.isUseSetters()) {
@@ -53,7 +53,7 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
     }
 
     @Override
-    public String createClassTemplate(ClassItemModel classItemModel, String classBody) {
-        return classTemplateHelper.createClassBody(classItemModel, classBody);
+    public String createClassTemplate(ClassItem classItem, String classBody) {
+        return classTemplateHelper.createClassBody(classItem, classBody);
     }
 }

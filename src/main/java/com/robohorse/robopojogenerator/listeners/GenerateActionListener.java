@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.listeners;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.injections.Injector;
 import com.robohorse.robopojogenerator.models.GenerationModel;
@@ -37,7 +37,7 @@ public class GenerateActionListener implements ActionListener {
         final JTextArea textArea = generatorVew.getTextArea();
         final JTextField textField = generatorVew.getClassNameTextField();
 
-        final AnnotationItem annotationItem = resolveAnnotationItem();
+        final AnnotationEnum annotationEnum = resolveAnnotationItem();
 
         final boolean useKotlin = generatorVew.getKotlinCheckBox().isSelected();
         final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox().isSelected();
@@ -52,7 +52,7 @@ public class GenerateActionListener implements ActionListener {
             eventListener.onJsonDataObtained(new GenerationModel
                     .Builder()
                     .useKotlin(useKotlin)
-                    .setAnnotationItem(annotationItem)
+                    .setAnnotationItem(annotationEnum)
                     .setContent(content)
                     .setSettersAvailable(useSetters)
                     .setGettersAvailable(useGetters)
@@ -65,19 +65,19 @@ public class GenerateActionListener implements ActionListener {
         }
     }
 
-    private AnnotationItem resolveAnnotationItem() {
+    private AnnotationEnum resolveAnnotationItem() {
         final ButtonGroup buttonGroup = generatorVew.getTypeButtonGroup();
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons
                 .hasMoreElements(); ) {
             final AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
-                for (AnnotationItem annotationItem : AnnotationItem.values()) {
-                    if (annotationItem.getText().equals(button.getText())) {
-                        return annotationItem;
+                for (AnnotationEnum annotationEnum : AnnotationEnum.values()) {
+                    if (annotationEnum.getText().equals(button.getText())) {
+                        return annotationEnum;
                     }
                 }
             }
         }
-        return AnnotationItem.NONE;
+        return AnnotationEnum.NONE;
     }
 }

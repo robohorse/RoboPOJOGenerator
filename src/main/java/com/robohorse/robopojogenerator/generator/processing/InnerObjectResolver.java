@@ -1,6 +1,6 @@
-package com.robohorse.robopojogenerator.generator.processors;
+package com.robohorse.robopojogenerator.generator.processing;
 
-import com.robohorse.robopojogenerator.generator.consts.ClassType;
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -17,29 +17,29 @@ public abstract class InnerObjectResolver {
             onJsonArrayIdentified();
 
         } else if (object instanceof String) {
-            onInnerObjectIdentified(ClassType.STRING);
+            onInnerObjectIdentified(ClassEnum.STRING);
 
         } else if (object instanceof Integer) {
-            onInnerObjectIdentified(ClassType.INTEGER);
+            onInnerObjectIdentified(ClassEnum.INTEGER);
 
         } else if (object instanceof Double) {
-            onInnerObjectIdentified(ClassType.DOUBLE);
+            onInnerObjectIdentified(ClassEnum.DOUBLE);
 
         } else if (object instanceof Float) {
-            onInnerObjectIdentified(ClassType.FLOAT);
+            onInnerObjectIdentified(ClassEnum.FLOAT);
 
         } else if (object instanceof Long) {
-            onInnerObjectIdentified(ClassType.LONG);
+            onInnerObjectIdentified(ClassEnum.LONG);
 
         } else if (object instanceof Boolean) {
-            onInnerObjectIdentified(ClassType.BOOLEAN);
+            onInnerObjectIdentified(ClassEnum.BOOLEAN);
 
         } else {
-            onInnerObjectIdentified(ClassType.OBJECT);
+            onInnerObjectIdentified(ClassEnum.OBJECT);
         }
     }
 
-    public abstract void onInnerObjectIdentified(ClassType classType);
+    public abstract void onInnerObjectIdentified(ClassEnum classEnum);
 
     public abstract void onJsonObjectIdentified();
 

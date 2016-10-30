@@ -1,6 +1,6 @@
-package com.robohorse.robopojogenerator.generator.processors;
+package com.robohorse.robopojogenerator.generator.processing;
 
-import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper;
 import com.robohorse.robopojogenerator.models.FieldModel;

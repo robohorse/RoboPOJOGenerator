@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.generator.consts;
+package com.robohorse.robopojogenerator.generator.consts.reserved;
 
 import java.util.Arrays;
 import java.util.HashSet;

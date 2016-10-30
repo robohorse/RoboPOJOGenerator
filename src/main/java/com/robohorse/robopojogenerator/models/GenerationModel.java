@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.models;
 
-import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
+import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
 
 /**
  * Created by vadim on 28.09.16.
@@ -8,7 +8,7 @@ import com.robohorse.robopojogenerator.generator.consts.AnnotationItem;
 public class GenerationModel {
     private boolean rewriteClasses;
     private boolean useKotlin;
-    private AnnotationItem annotationItem;
+    private AnnotationEnum annotationEnum;
     private String rootClassName;
     private String content;
     private boolean useSetters;
@@ -18,8 +18,8 @@ public class GenerationModel {
         return rewriteClasses;
     }
 
-    public AnnotationItem getAnnotationItem() {
-        return annotationItem;
+    public AnnotationEnum getAnnotationEnum() {
+        return annotationEnum;
     }
 
     public String getRootClassName() {
@@ -59,8 +59,8 @@ public class GenerationModel {
             return this;
         }
 
-        public Builder setAnnotationItem(AnnotationItem annotationItem) {
-            instance.annotationItem = annotationItem;
+        public Builder setAnnotationItem(AnnotationEnum annotationEnum) {
+            instance.annotationEnum = annotationEnum;
             return this;
         }
 

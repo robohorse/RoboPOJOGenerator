@@ -1,9 +1,9 @@
 package com.robohorse.robopojogenerator.injections;
 
 import com.robohorse.robopojogenerator.actions.GeneratePOJOAction;
-import com.robohorse.robopojogenerator.generator.postprocessors.AutoValueClassPostProcessor;
-import com.robohorse.robopojogenerator.generator.postprocessors.CommonJavaPostProcessor;
-import com.robohorse.robopojogenerator.generator.postprocessors.KotlinDataClassPostProcessor;
+import com.robohorse.robopojogenerator.generator.postprocessing.common.AutoValueClassPostProcessor;
+import com.robohorse.robopojogenerator.generator.postprocessing.common.CommonJavaPostProcessor;
+import com.robohorse.robopojogenerator.generator.postprocessing.common.KotlinDataClassPostProcessor;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import dagger.Component;
 

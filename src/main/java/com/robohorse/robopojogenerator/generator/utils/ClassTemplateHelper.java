@@ -1,8 +1,8 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
-import com.robohorse.robopojogenerator.generator.consts.ClassTemplate;
-import com.robohorse.robopojogenerator.generator.consts.ClassType;
-import com.robohorse.robopojogenerator.models.ClassItemModel;
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
+import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.models.FieldModel;
 
 import javax.inject.Inject;
@@ -26,7 +26,7 @@ public class ClassTemplateHelper {
     }
 
     public String createGetter(String field, String type) {
-        final boolean isBoolean = ClassType.BOOLEAN.getPrimitive().equalsIgnoreCase(type);
+        final boolean isBoolean = ClassEnum.BOOLEAN.getPrimitive().equalsIgnoreCase(type);
         return String.format(isBoolean ? ClassTemplate.GETTER_BOOLEAN : ClassTemplate.GETTER,
                 classGenerateHelper.upperCaseFirst(field),
                 classGenerateHelper.lowerCaseFirst(field),
@@ -55,30 +55,30 @@ public class ClassTemplateHelper {
         return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
-    public String createClassBody(ClassItemModel classItemModel, String classBody) {
+    public String createClassBody(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY,
-                classItemModel.getClassName(),
+                classItem.getClassName(),
                 classBody);
-        return createClassBodyAnnotated(classItemModel, classItemBody);
+        return createClassBodyAnnotated(classItem, classItemBody);
     }
 
-    public String createTypeAdapter(ClassItemModel classItemModel) {
-        return String.format(ClassTemplate.TYPE_ADAPTER, classItemModel.getClassName());
+    public String createTypeAdapter(ClassItem classItem) {
+        return String.format(ClassTemplate.TYPE_ADAPTER, classItem.getClassName());
     }
 
-    public String createClassBodyAbstract(ClassItemModel classItemModel, String classBody) {
+    public String createClassBodyAbstract(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY_ABSTRACT,
-                classItemModel.getClassName(),
+                classItem.getClassName(),
                 classBody);
-        return createClassBodyAnnotated(classItemModel, classItemBody);
+        return createClassBodyAnnotated(classItem, classItemBody);
     }
 
-    public String createClassBodyKotlinDataClass(ClassItemModel classItemModel, String classBody) {
+    public String createClassBodyKotlinDataClass(ClassItem classItem, String classBody) {
         final String classItemBody = String.format(ClassTemplate.CLASS_BODY_KOTLIN_DTO,
-                classItemModel.getClassName(),
+                classItem.getClassName(),
                 classBody);
 
-        return createClassBodyAnnotated(classItemModel, classItemBody);
+        return createClassBodyAnnotated(classItem, classItemBody);
     }
 
     public String createClassItem(String packagePath, String imports, String body) {
@@ -107,8 +107,8 @@ public class ClassTemplateHelper {
         }
     }
 
-    private String createClassBodyAnnotated(ClassItemModel classItemModel, String classItemBody) {
-        final String classAnnotation = classItemModel.getClassAnnotation();
+    private String createClassBodyAnnotated(ClassItem classItem, String classItemBody) {
+        final String classAnnotation = classItem.getClassAnnotation();
         if (null != classAnnotation && !classAnnotation.isEmpty()) {
             return String.format(ClassTemplate.CLASS_BODY_ANNOTATED,
                     classAnnotation,
