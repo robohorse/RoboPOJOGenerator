@@ -17,7 +17,7 @@ public interface KotlinAnnotations {
 
     interface LOGAN_SQUARE {
         String CLASS_ANNOTATION = INFO_ANNOTATION + "\n@JsonObject";
-        String ANNOTATION = "@field:SerializedName(\"%1$s\")\n\t@field:JsonField(name =\"%1$s\")";
+        String ANNOTATION = "@field:SerializedName(\"%1$s\")\n\t@field:JsonField(name = arrayOf(\"%1$s\"))";
     }
 
     interface JACKSON {
