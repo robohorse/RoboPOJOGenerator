@@ -49,7 +49,7 @@ public class ClassGenerateHelper {
         return classBody;
     }
 
-    public String getClassName(String name) {
+    public String formatClassName(String name) {
         return upperCaseFirst(proceedField(name));
     }
 
@@ -64,7 +64,7 @@ public class ClassGenerateHelper {
         return name;
     }
 
-    public String getClassField(String name) {
+    public String formatClassField(String name) {
         return lowerCaseFirst(proceedField(name));
     }
 
@@ -97,11 +97,15 @@ public class ClassGenerateHelper {
         objectName = objectName
                 .replaceAll("[^A-Za-z0-9]", "_")
                 .replaceAll("_{2,}", "_");
-        objectName = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, objectName);
-        if (objectName.length() == 0 || Character.isDigit(objectName.charAt(0))
-                || ReservedWords.WORDS_SET.contains(objectName)) {
+
+        final boolean isDigitFirst = (objectName.length() > 0 && Character.isDigit(objectName.charAt(0)))
+                || (objectName.length() > 1 && (objectName.charAt(0) == '_' &&
+                Character.isDigit(objectName.charAt(1))));
+
+        if (objectName.length() == 0 || isDigitFirst || ReservedWords.WORDS_SET.contains(objectName)) {
             objectName = "json_member_" + objectName;
         }
-        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, objectName);
+        objectName = objectName.replaceAll("([A-Z])", "_$1");
+        return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, objectName);
     }
 }

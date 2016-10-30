@@ -21,9 +21,10 @@ public class AutoValueClassPostProcessor extends JavaPostProcessor {
         final StringBuilder classBodyBuilder = new StringBuilder();
         final Map<String, ClassDecorator> classFields = classItem.getClassFields();
         for (String objectName : classFields.keySet()) {
+            final String itemNameFormatted = generateHelper.formatClassField(objectName);
             classBodyBuilder.append(classTemplateHelper.createAutoValueField(
                     classFields.get(objectName).getJavaItem(),
-                    objectName,
+                    itemNameFormatted,
                     classItem.getAnnotation()));
 
         }

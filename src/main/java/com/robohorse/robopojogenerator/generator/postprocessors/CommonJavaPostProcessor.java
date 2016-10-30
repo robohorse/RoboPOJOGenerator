@@ -24,23 +24,23 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
 
         for (String objectName : classFields.keySet()) {
             final String classItemValue = classFields.get(objectName).getJavaItem();
-
+            final String itemNameFormatted = generateHelper.formatClassField(objectName);
             classBodyBuilder.append(classTemplateHelper.createFiled(
                     classItemValue,
-                    objectName,
+                    itemNameFormatted,
                     classItem.getAnnotation()));
 
             if (generationModel.isUseSetters()) {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
                 classMethodBuilder.append(classTemplateHelper.createSetter(
-                        objectName,
+                        itemNameFormatted,
                         classItemValue));
 
             }
             if (generationModel.isUseGetters()) {
                 classMethodBuilder.append(ClassTemplate.NEW_LINE);
                 classMethodBuilder.append(classTemplateHelper.createGetter(
-                        objectName,
+                        itemNameFormatted,
                         classItemValue));
             }
         }

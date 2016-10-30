@@ -44,7 +44,7 @@ public class ClassProcessorTest {
         final String name = "Response";
         final Set<ClassItem> classItemSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
         classProcessor.proceed(jsonObject, name, classItemSet);
@@ -69,7 +69,7 @@ public class ClassProcessorTest {
         final String name = "Response";
         final Set<ClassItem> classItemSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
         classProcessor.proceed(jsonObject, name, classItemSet);
@@ -97,7 +97,7 @@ public class ClassProcessorTest {
         final String name = "Response";
         final Set<ClassItem> classItemSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
         classProcessor.proceed(jsonObject, name, classItemSet);
@@ -127,7 +127,7 @@ public class ClassProcessorTest {
 
         final Set<ClassItem> classItemSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
 
         classProcessor.proceed(jsonObject, name, classItemSet);
@@ -159,7 +159,7 @@ public class ClassProcessorTest {
 
         final Set<ClassItem> classItemSet = new HashSet<>();
 
-        when(classGenerateHelper.getClassName(name))
+        when(classGenerateHelper.formatClassName(name))
                 .thenReturn(name);
         when(classGenerateHelper.getClassNameWithItemPostfix(Mockito.anyString()))
                 .thenReturn("DataItem");

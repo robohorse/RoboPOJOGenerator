@@ -43,9 +43,10 @@ public class KotlinDataClassPostProcessor extends AbsPostProcessor {
         for (String objectName : classFields.keySet()) {
             final String type = classFields.get(objectName).getKotlinItem();
             final String annotation = classItem.getAnnotation();
+            final String itemNameFormatted = generateHelper.formatClassField(objectName);
             classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
                     type,
-                    objectName,
+                    itemNameFormatted,
                     annotation));
         }
         generateHelper.updateClassModel(classBodyBuilder);

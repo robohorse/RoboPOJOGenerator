@@ -14,7 +14,7 @@ public class ClassGenerateHelperTest {
 
     @Test
     public void getClassNameModification_isCorrect() throws Exception {
-        assertEquals("Item", classGenerateHelper.getClassName("item"));
+        assertEquals("Item", classGenerateHelper.formatClassName("item"));
     }
 
     @Test
@@ -83,5 +83,15 @@ public class ClassGenerateHelperTest {
         final String type = "Double";
         ClassDecorator classDecorator = new ClassDecorator(type);
         assertEquals(type, classDecorator.getJavaItem());
+    }
+
+    @Test
+    public void testProceedField_isCorrect() throws Exception {
+        assertEquals("CamelCaseField", classGenerateHelper.proceedField("camelCaseField"));
+        assertEquals("CamelCaseField", classGenerateHelper.proceedField("_camelCaseField"));
+        assertEquals("Field", classGenerateHelper.proceedField("field"));
+        assertEquals("JsonMemberPrivate", classGenerateHelper.proceedField("private"));
+        assertEquals("JsonMember3351231Yte",
+                classGenerateHelper.proceedField("!!@##$%^$3351$%^&23^1_--=---___-_-yte"));
     }
 }

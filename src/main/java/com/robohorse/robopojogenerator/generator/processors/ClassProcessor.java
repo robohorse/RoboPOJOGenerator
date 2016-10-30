@@ -23,7 +23,7 @@ public class ClassProcessor {
     }
 
     public void proceed(JSONObject jsonObject, String className, final Set<ClassItem> classItemSet) {
-        final ClassItem classItem = new ClassItem(classGenerateHelper.getClassName(className));
+        final ClassItem classItem = new ClassItem(classGenerateHelper.formatClassName(className));
         for (final String jsonObjectKey : jsonObject.keySet()) {
             final Object object = jsonObject.get(jsonObjectKey);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
@@ -35,7 +35,7 @@ public class ClassProcessor {
 
                 @Override
                 public void onJsonObjectIdentified() {
-                    final String className = classGenerateHelper.getClassName(jsonObjectKey);
+                    final String className = classGenerateHelper.formatClassName(jsonObjectKey);
                     final ClassDecorator decorator = new ClassDecorator(className);
 
                     classItem.addClassField(jsonObjectKey, decorator);
