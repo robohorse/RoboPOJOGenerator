@@ -94,7 +94,7 @@ public class ClassProcessor {
                 @Override
                 public void onJsonObjectIdentified() {
                     classField.setClassField(new ClassField(itemName));
-                    final JsonItem jsonItem = new JsonItem((JSONObject) object, jsonItemArray.getKey());
+                    final JsonItem jsonItem = new JsonItem((JSONObject) object, itemName);
                     proceed(jsonItem, itemMap);
                 }
 
