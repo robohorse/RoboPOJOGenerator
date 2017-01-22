@@ -1,16 +1,18 @@
 <idea-plugin version="2">
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>1.7</version>
+    <version>1.8</version>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
     <description><![CDATA[
       Generate Java and Kotlin POJO files from JSON: GSON, AutoValue (GSON), Logan Square, Jackson, empty annotations template.<br>
       Supports: primitive types, multiple inner JSONArrays.
+
+      key words: JsonToPojo, Json2Pojo, Kotlin, GSON, AutoValue, Jackson, LoganSquare
     ]]></description>
 
     <change-notes><![CDATA[
-    Kotlin feature added
+    Recursive objects support added
     ]]>
     </change-notes>
 

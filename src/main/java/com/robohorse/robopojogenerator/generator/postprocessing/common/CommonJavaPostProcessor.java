@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator.postprocessing.common;
 
-import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
+import com.robohorse.robopojogenerator.generator.common.ClassField;
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.models.FieldModel;
@@ -21,7 +21,7 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
     public String proceedClassBody(ClassItem classItem, GenerationModel generationModel) {
         final StringBuilder classBodyBuilder = new StringBuilder();
         final StringBuilder classMethodBuilder = new StringBuilder();
-        final Map<String, ClassDecorator> classFields = classItem.getClassFields();
+        final Map<String, ClassField> classFields = classItem.getClassFields();
 
         for (String objectName : classFields.keySet()) {
             final String classItemValue = classFields.get(objectName).getJavaItem();

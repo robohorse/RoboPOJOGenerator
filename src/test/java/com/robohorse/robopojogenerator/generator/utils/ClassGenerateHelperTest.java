@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
 import com.robohorse.robopojogenerator.errors.RoboPluginException;
-import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
+import com.robohorse.robopojogenerator.generator.common.ClassField;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -64,25 +64,25 @@ public class ClassGenerateHelperTest {
     @Test
     public void testResolveMajorTypeWithSingleCount_isCorrect() throws Exception {
         final String type = "Double";
-        ClassDecorator classDecorator = new ClassDecorator();
-        classDecorator.setClassDecorator(new ClassDecorator(type));
-        assertEquals("List<" + type + ">", classDecorator.getJavaItem());
+        ClassField classField = new ClassField();
+        classField.setClassField(new ClassField(type));
+        assertEquals("List<" + type + ">", classField.getJavaItem());
     }
 
     @Test
     public void testResolveMajorTypeWithDoubleCount_isCorrect() throws Exception {
         final String type = "Double";
-        ClassDecorator classDecorator = new ClassDecorator();
-        classDecorator.setClassDecorator(new ClassDecorator());
-        classDecorator.setClassDecorator(new ClassDecorator(type));
-        assertEquals("List<List<" + type + ">>", classDecorator.getJavaItem());
+        ClassField classField = new ClassField();
+        classField.setClassField(new ClassField());
+        classField.setClassField(new ClassField(type));
+        assertEquals("List<List<" + type + ">>", classField.getJavaItem());
     }
 
     @Test
     public void testResolveMajorTypeWithZeroCount_isCorrect() throws Exception {
         final String type = "Double";
-        ClassDecorator classDecorator = new ClassDecorator(type);
-        assertEquals(type, classDecorator.getJavaItem());
+        ClassField classField = new ClassField(type);
+        assertEquals(type, classField.getJavaItem());
     }
 
     @Test

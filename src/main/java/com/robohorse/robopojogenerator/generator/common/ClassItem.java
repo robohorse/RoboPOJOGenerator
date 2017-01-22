@@ -1,7 +1,5 @@
 package com.robohorse.robopojogenerator.generator.common;
 
-import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
-
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -15,7 +13,7 @@ public class ClassItem {
     private String classAnnotation;
     private String className;
     private String packagePath;
-    private Map<String, ClassDecorator> classFields = new LinkedHashMap<String, ClassDecorator>();
+    private Map<String, ClassField> classFields = new LinkedHashMap<String, ClassField>();
     private Set<String> classImports = new HashSet<String>();
 
     public ClassItem(String className) {
@@ -30,7 +28,7 @@ public class ClassItem {
         this.annotation = annotation;
     }
 
-    public void addClassField(String name, ClassDecorator classType) {
+    public void addClassField(String name, ClassField classType) {
         classFields.put(name, classType);
     }
 
@@ -42,7 +40,7 @@ public class ClassItem {
         classImports.add(value);
     }
 
-    public Map<String, ClassDecorator> getClassFields() {
+    public Map<String, ClassField> getClassFields() {
         return classFields;
     }
 

@@ -1,7 +1,9 @@
 package com.robohorse.robopojogenerator.generator.processing;
 
-import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
+import com.robohorse.robopojogenerator.generator.common.ClassField;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.common.JsonItem;
+import com.robohorse.robopojogenerator.generator.common.JsonItemArray;
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
@@ -9,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Created by vadim on 23.09.16.
@@ -22,24 +24,25 @@ public class ClassProcessor {
     public ClassProcessor() {
     }
 
-    public void proceed(JSONObject jsonObject, String className, final Set<ClassItem> classItemSet) {
-        final ClassItem classItem = new ClassItem(classGenerateHelper.formatClassName(className));
-        for (final String jsonObjectKey : jsonObject.keySet()) {
-            final Object object = jsonObject.get(jsonObjectKey);
+    public void proceed(JsonItem jsonItem, final Map<String, ClassItem> itemMap) {
+        final ClassItem classItem = new ClassItem(classGenerateHelper.formatClassName(jsonItem.getKey()));
+        for (final String jsonObjectKey : jsonItem.getJsonObject().keySet()) {
+            final Object object = jsonItem.getJsonObject().get(jsonObjectKey);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
 
                 @Override
                 public void onInnerObjectIdentified(ClassEnum classType) {
-                    classItem.addClassField(jsonObjectKey, new ClassDecorator(classType));
+                    classItem.addClassField(jsonObjectKey, new ClassField(classType));
                 }
 
                 @Override
                 public void onJsonObjectIdentified() {
                     final String className = classGenerateHelper.formatClassName(jsonObjectKey);
-                    final ClassDecorator decorator = new ClassDecorator(className);
+                    final ClassField classField = new ClassField(className);
+                    final JsonItem jsonItem = new JsonItem((JSONObject) object, jsonObjectKey);
 
-                    classItem.addClassField(jsonObjectKey, decorator);
-                    proceed((JSONObject) object, jsonObjectKey, classItemSet);
+                    classItem.addClassField(jsonObjectKey, classField);
+                    proceed(jsonItem, itemMap);
                 }
 
                 @Override
@@ -47,50 +50,65 @@ public class ClassProcessor {
                     final JSONArray jsonArray = (JSONArray) object;
                     classItem.addClassImport(ImportsTemplate.LIST);
 
-                    final ClassDecorator decorator = new ClassDecorator();
+                    final ClassField classField = new ClassField();
                     if (jsonArray.length() == 0) {
-                        decorator.setClassDecorator(new ClassDecorator(ClassEnum.OBJECT));
-                        classItem.addClassField(jsonObjectKey, decorator);
+                        classField.setClassField(new ClassField(ClassEnum.OBJECT));
+                        classItem.addClassField(jsonObjectKey, classField);
 
                     } else {
-                        proceedArray(jsonArray, decorator, jsonObjectKey, classItemSet);
-                        classItem.addClassField(jsonObjectKey, decorator);
+                        final JsonItemArray jsonItemArray = new JsonItemArray((JSONArray) object, jsonObjectKey);
+                        proceedArray(jsonItemArray, classField, itemMap);
+                        classItem.addClassField(jsonObjectKey, classField);
                     }
                 }
             };
             innerObjectResolver.resolveClassType(object);
         }
-        classItemSet.add(classItem);
+        appendItemsMap(itemMap, classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray, final ClassDecorator decorator,
-                              final String jsonObjectKey, final Set<ClassItem> classItemSet) {
-        final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonObjectKey);
-        if (jsonArray.length() != 0) {
-            final Object object = jsonArray.get(0);
+    private void appendItemsMap(Map<String, ClassItem> itemMap, ClassItem classItem) {
+        final String className = classItem.getClassName();
+        if (itemMap.containsKey(className)) {
+            final ClassItem storedClassItem = itemMap.get(className);
+            if (storedClassItem.getClassFields().size() > classItem.getClassFields().size()) {
+                return;
+            }
+        }
+        itemMap.put(className, classItem);
+    }
+
+    private void proceedArray(final JsonItemArray jsonItemArray,
+                              final ClassField classField,
+                              final Map<String, ClassItem> itemMap) {
+        final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonItemArray.getKey());
+        if (jsonItemArray.getJsonArray().length() != 0) {
+            final Object object = jsonItemArray.getJsonArray().get(0);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
 
                 @Override
                 public void onInnerObjectIdentified(ClassEnum classType) {
-                    decorator.setClassDecorator(new ClassDecorator(classType));
+                    classField.setClassField(new ClassField(classType));
                 }
 
                 @Override
                 public void onJsonObjectIdentified() {
-                    decorator.setClassDecorator(new ClassDecorator(itemName));
-                    proceed((JSONObject) object, itemName, classItemSet);
+                    classField.setClassField(new ClassField(itemName));
+                    final JsonItem jsonItem = new JsonItem((JSONObject) object, itemName);
+                    proceed(jsonItem, itemMap);
                 }
 
                 @Override
                 public void onJsonArrayIdentified() {
-                    decorator.setClassDecorator(new ClassDecorator());
-                    proceedArray((JSONArray) object, decorator, itemName, classItemSet);
+                    classField.setClassField(new ClassField());
+                    final JsonItemArray jsonItemArray = new JsonItemArray((JSONArray) object, itemName);
+                    proceedArray(jsonItemArray, classField, itemMap);
                 }
             };
             innerObjectResolver.resolveClassType(object);
 
         } else {
-            decorator.setClassDecorator(new ClassDecorator(ClassEnum.OBJECT));
+            classField.setClassField(new ClassField(ClassEnum.OBJECT));
         }
     }
 }

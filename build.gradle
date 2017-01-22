@@ -25,11 +25,12 @@ repositories {
 }
 
 group "com.robohorse.robopojogenerator"
-version "1.7"
+version "1.8"
 
 intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
+    //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
 
 ext.daggerVersion = '2.6'
