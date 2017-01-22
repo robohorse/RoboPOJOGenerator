@@ -8,7 +8,7 @@
       Generate Java and Kotlin POJO files from JSON: GSON, AutoValue (GSON), Logan Square, Jackson, empty annotations template.<br>
       Supports: primitive types, multiple inner JSONArrays.
 
-      #JsonToPojo #Json2Pojo #Kotlin #GSON #AutoValue #Jackson #LoganSquare
+      key words: JsonToPojo, Json2Pojo, Kotlin, GSON, AutoValue, Jackson, LoganSquare
     ]]></description>
 
     <change-notes><![CDATA[
