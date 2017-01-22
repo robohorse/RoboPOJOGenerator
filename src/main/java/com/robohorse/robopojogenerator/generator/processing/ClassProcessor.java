@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator.processing;
 
-import com.robohorse.robopojogenerator.generator.common.ClassDecorator;
+import com.robohorse.robopojogenerator.generator.common.ClassField;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate;
@@ -30,15 +30,15 @@ public class ClassProcessor {
 
                 @Override
                 public void onInnerObjectIdentified(ClassEnum classType) {
-                    classItem.addClassField(jsonObjectKey, new ClassDecorator(classType));
+                    classItem.addClassField(jsonObjectKey, new ClassField(classType));
                 }
 
                 @Override
                 public void onJsonObjectIdentified() {
                     final String className = classGenerateHelper.formatClassName(jsonObjectKey);
-                    final ClassDecorator decorator = new ClassDecorator(className);
+                    final ClassField classField = new ClassField(className);
 
-                    classItem.addClassField(jsonObjectKey, decorator);
+                    classItem.addClassField(jsonObjectKey, classField);
                     proceed((JSONObject) object, jsonObjectKey, itemMap);
                 }
 
@@ -47,14 +47,14 @@ public class ClassProcessor {
                     final JSONArray jsonArray = (JSONArray) object;
                     classItem.addClassImport(ImportsTemplate.LIST);
 
-                    final ClassDecorator decorator = new ClassDecorator();
+                    final ClassField classField = new ClassField();
                     if (jsonArray.length() == 0) {
-                        decorator.setClassDecorator(new ClassDecorator(ClassEnum.OBJECT));
-                        classItem.addClassField(jsonObjectKey, decorator);
+                        classField.setClassField(new ClassField(ClassEnum.OBJECT));
+                        classItem.addClassField(jsonObjectKey, classField);
 
                     } else {
-                        proceedArray(jsonArray, decorator, jsonObjectKey, itemMap);
-                        classItem.addClassField(jsonObjectKey, decorator);
+                        proceedArray(jsonArray, classField, jsonObjectKey, itemMap);
+                        classItem.addClassField(jsonObjectKey, classField);
                     }
                 }
             };
@@ -74,7 +74,7 @@ public class ClassProcessor {
         itemMap.put(className, classItem);
     }
 
-    private void proceedArray(JSONArray jsonArray, final ClassDecorator decorator,
+    private void proceedArray(JSONArray jsonArray, final ClassField classField,
                               final String jsonObjectKey, final Map<String, ClassItem> itemMap) {
         final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonObjectKey);
         if (jsonArray.length() != 0) {
@@ -83,25 +83,25 @@ public class ClassProcessor {
 
                 @Override
                 public void onInnerObjectIdentified(ClassEnum classType) {
-                    decorator.setClassDecorator(new ClassDecorator(classType));
+                    classField.setClassField(new ClassField(classType));
                 }
 
                 @Override
                 public void onJsonObjectIdentified() {
-                    decorator.setClassDecorator(new ClassDecorator(itemName));
+                    classField.setClassField(new ClassField(itemName));
                     proceed((JSONObject) object, itemName, itemMap);
                 }
 
                 @Override
                 public void onJsonArrayIdentified() {
-                    decorator.setClassDecorator(new ClassDecorator());
-                    proceedArray((JSONArray) object, decorator, itemName, itemMap);
+                    classField.setClassField(new ClassField());
+                    proceedArray((JSONArray) object, classField, itemName, itemMap);
                 }
             };
             innerObjectResolver.resolveClassType(object);
 
         } else {
-            decorator.setClassDecorator(new ClassDecorator(ClassEnum.OBJECT));
+            classField.setClassField(new ClassField(ClassEnum.OBJECT));
         }
     }
 }
