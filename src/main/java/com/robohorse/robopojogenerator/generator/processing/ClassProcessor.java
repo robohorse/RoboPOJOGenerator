@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Created by vadim on 23.09.16.
@@ -22,7 +22,7 @@ public class ClassProcessor {
     public ClassProcessor() {
     }
 
-    public void proceed(JSONObject jsonObject, String className, final Set<ClassItem> classItemSet) {
+    public void proceed(JSONObject jsonObject, String className, final Map<String, ClassItem> itemMap) {
         final ClassItem classItem = new ClassItem(classGenerateHelper.formatClassName(className));
         for (final String jsonObjectKey : jsonObject.keySet()) {
             final Object object = jsonObject.get(jsonObjectKey);
@@ -39,7 +39,7 @@ public class ClassProcessor {
                     final ClassDecorator decorator = new ClassDecorator(className);
 
                     classItem.addClassField(jsonObjectKey, decorator);
-                    proceed((JSONObject) object, jsonObjectKey, classItemSet);
+                    proceed((JSONObject) object, jsonObjectKey, itemMap);
                 }
 
                 @Override
@@ -53,18 +53,29 @@ public class ClassProcessor {
                         classItem.addClassField(jsonObjectKey, decorator);
 
                     } else {
-                        proceedArray(jsonArray, decorator, jsonObjectKey, classItemSet);
+                        proceedArray(jsonArray, decorator, jsonObjectKey, itemMap);
                         classItem.addClassField(jsonObjectKey, decorator);
                     }
                 }
             };
             innerObjectResolver.resolveClassType(object);
         }
-        classItemSet.add(classItem);
+        appendItemsMap(itemMap, classItem);
+    }
+
+    private void appendItemsMap(Map<String, ClassItem> itemMap, ClassItem classItem) {
+        final String className = classItem.getClassName();
+        if (itemMap.containsKey(className)) {
+            final ClassItem storedClassItem = itemMap.get(className);
+            if (storedClassItem.getClassFields().size() > classItem.getClassFields().size()) {
+                return;
+            }
+        }
+        itemMap.put(className, classItem);
     }
 
     private void proceedArray(JSONArray jsonArray, final ClassDecorator decorator,
-                              final String jsonObjectKey, final Set<ClassItem> classItemSet) {
+                              final String jsonObjectKey, final Map<String, ClassItem> itemMap) {
         final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonObjectKey);
         if (jsonArray.length() != 0) {
             final Object object = jsonArray.get(0);
@@ -78,13 +89,13 @@ public class ClassProcessor {
                 @Override
                 public void onJsonObjectIdentified() {
                     decorator.setClassDecorator(new ClassDecorator(itemName));
-                    proceed((JSONObject) object, itemName, classItemSet);
+                    proceed((JSONObject) object, itemName, itemMap);
                 }
 
                 @Override
                 public void onJsonArrayIdentified() {
                     decorator.setClassDecorator(new ClassDecorator());
-                    proceedArray((JSONArray) object, decorator, itemName, classItemSet);
+                    proceedArray((JSONArray) object, decorator, itemName, itemMap);
                 }
             };
             innerObjectResolver.resolveClassType(object);
