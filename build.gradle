@@ -30,6 +30,7 @@ version "1.7"
 intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
+    intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
 
 ext.daggerVersion = '2.6'
