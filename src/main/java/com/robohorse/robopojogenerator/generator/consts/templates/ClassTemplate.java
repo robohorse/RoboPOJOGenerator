@@ -65,4 +65,15 @@ public interface ClassTemplate {
     String GETTER_BOOLEAN = TAB + "public boolean is%1$s(){" + NEW_LINE +
             TAB + TAB + "return %2$s;" + NEW_LINE
             + TAB + "}" + NEW_LINE;
+
+    String TO_STRING = TAB + "@Override"+NEW_LINE+" "+TAB +
+            "public String toString(){"+NEW_LINE+
+            TAB + TAB + "return "+NEW_LINE
+            +TAB+ TAB + TAB +"\"%1$s{\" + " + NEW_LINE
+            + "%2$s"
+            +TAB + TAB + TAB + "\"}\";" + NEW_LINE
+            +TAB + TAB + "}";
+
+    String TO_STRING_LINE = TAB + TAB + TAB + "\"%2$s%1$s=\'\" + "+"%1$s + \'\\\'\' + " + NEW_LINE;
+
 }

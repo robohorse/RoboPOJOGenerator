@@ -25,6 +25,7 @@ public class GeneratorVew {
     private JCheckBox useGettersCheckBox;
     private JRadioButton autoValueGsonButton;
     private JCheckBox kotlinCheckBox;
+    private JCheckBox useStringCheckBox;
     private ButtonGroup languageGroup;
     private ButtonGroup typeButtonGroup;
 
@@ -78,6 +79,10 @@ public class GeneratorVew {
 
     public JCheckBox getRewriteExistingClassesCheckBox() {
         return rewriteExistingClassesCheckBox;
+    }
+
+    public JCheckBox getUseStringCheckBox() {
+        return useStringCheckBox;
     }
 
     private void createUIComponents() {

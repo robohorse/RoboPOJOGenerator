@@ -48,6 +48,12 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
                         classItemValue));
             }
         }
+        if (generationModel.isUseStrings()) {
+            classMethodBuilder.append(ClassTemplate.NEW_LINE);
+            classMethodBuilder.append(classTemplateHelper.createToString(
+                    classItem
+            ));
+        }
         classBodyBuilder.append(classMethodBuilder);
         return classBodyBuilder.toString();
     }

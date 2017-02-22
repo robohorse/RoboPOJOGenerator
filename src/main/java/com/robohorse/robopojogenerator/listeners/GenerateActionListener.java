@@ -43,6 +43,7 @@ public class GenerateActionListener implements ActionListener {
         final boolean rewriteClasses = generatorVew.getRewriteExistingClassesCheckBox().isSelected();
         final boolean useSetters = generatorVew.getUseSettersCheckBox().isSelected();
         final boolean useGetters = generatorVew.getUseGettersCheckBox().isSelected();
+        final boolean useStrings = generatorVew.getUseStringCheckBox().isSelected();
 
         final String content = textArea.getText();
         final String className = textField.getText();
@@ -56,6 +57,7 @@ public class GenerateActionListener implements ActionListener {
                     .setContent(content)
                     .setSettersAvailable(useSetters)
                     .setGettersAvailable(useGetters)
+                    .setToStringAvailable(useStrings)
                     .setRootClassName(className)
                     .setRewriteClasses(rewriteClasses)
                     .build());
