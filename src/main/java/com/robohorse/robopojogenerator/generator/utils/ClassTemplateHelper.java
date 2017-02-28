@@ -20,70 +20,86 @@ public class ClassTemplateHelper {
     }
 
     public String createSetter(String field, String type) {
-        return String.format(ClassTemplate.SETTER,
+        return String.format(
+                ClassTemplate.SETTER,
                 classGenerateHelper.upperCaseFirst(field),
                 type,
-                classGenerateHelper.lowerCaseFirst(field));
+                classGenerateHelper.lowerCaseFirst(field)
+        );
     }
 
     public String createGetter(String field, String type) {
         final boolean isBoolean = ClassEnum.BOOLEAN.getPrimitive().equalsIgnoreCase(type);
-        return String.format(isBoolean ? ClassTemplate.GETTER_BOOLEAN : ClassTemplate.GETTER,
+        return String.format(
+                isBoolean ? ClassTemplate.GETTER_BOOLEAN : ClassTemplate.GETTER,
                 classGenerateHelper.upperCaseFirst(field),
                 classGenerateHelper.lowerCaseFirst(field),
-                type);
+                type
+        );
     }
 
     public String createToString(ClassItem classItem) {
-        String toString = generateToStingItem(classItem);
-        return String.format(ClassTemplate.TO_STRING,
+        final String toString = generateToStingItem(classItem);
+        return String.format(
+                ClassTemplate.TO_STRING,
                 classItem.getClassName(),
-                toString);
+                toString
+        );
     }
 
     private String generateToStingItem(ClassItem classItem) {
         boolean isFirstField = true;
-        StringBuffer fieldToStringStatement = new StringBuffer();
-        Set<String> fieds = classItem.getClassFields().keySet();
-        for (String field : fieds) {
-
+        final StringBuilder fieldToStringStatement = new StringBuilder();
+        final Set<String> fields = classItem.getClassFields().keySet();
+        for (String field : fields) {
+            fieldToStringStatement.append(
+                    String.format(
+                            ClassTemplate.TO_STRING_LINE,
+                            classGenerateHelper.lowerCaseFirst(field),
+                            classGenerateHelper.formatClassField(field),
+                            isFirstField ? "" : ","
+                    )
+            );
             if (isFirstField) {
                 isFirstField = false;
-                fieldToStringStatement.append(String.format(ClassTemplate.TO_STRING_LINE,
-                        classGenerateHelper.lowerCaseFirst(field),""));
-            }else {
-                fieldToStringStatement.append(String.format(ClassTemplate.TO_STRING_LINE,
-                        classGenerateHelper.lowerCaseFirst(field),","));
             }
         }
         return fieldToStringStatement.toString();
     }
+
     public String createFiled(FieldModel model) {
-        final String field = String.format(ClassTemplate.FIELD,
+        final String field = String.format(
+                ClassTemplate.FIELD,
                 model.getClassType(),
-                model.getFieldNameFormatted());
+                model.getFieldNameFormatted()
+        );
         return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
     public String createAutoValueField(FieldModel model) {
-        final String field = String.format(ClassTemplate.FIELD_AUTO_VALUE,
+        final String field = String.format(
+                ClassTemplate.FIELD_AUTO_VALUE,
                 model.getClassType(),
-                model.getFieldNameFormatted());
+                model.getFieldNameFormatted()
+        );
         return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
     public String createKotlinDataClassField(FieldModel model) {
-        final String field = String.format(ClassTemplate.FIELD_KOTLIN_DTO,
+        final String field = String.format(
+                ClassTemplate.FIELD_KOTLIN_DTO,
                 model.getFieldNameFormatted(),
-                model.getClassType())
-                .replace(">", "?>");
+                model.getClassType()
+        ).replace(">", "?>");
         return createAnnotatedField(model.getFieldName(), model.getAnnotation(), field);
     }
 
     public String createClassBody(ClassItem classItem, String classBody) {
-        final String classItemBody = String.format(ClassTemplate.CLASS_BODY,
+        final String classItemBody = String.format(
+                ClassTemplate.CLASS_BODY,
                 classItem.getClassName(),
-                classBody);
+                classBody
+        );
         return createClassBodyAnnotated(classItem, classItemBody);
     }
 
@@ -92,17 +108,20 @@ public class ClassTemplateHelper {
     }
 
     public String createClassBodyAbstract(ClassItem classItem, String classBody) {
-        final String classItemBody = String.format(ClassTemplate.CLASS_BODY_ABSTRACT,
+        final String classItemBody = String.format(
+                ClassTemplate.CLASS_BODY_ABSTRACT,
                 classItem.getClassName(),
-                classBody);
+                classBody
+        );
         return createClassBodyAnnotated(classItem, classItemBody);
     }
 
     public String createClassBodyKotlinDataClass(ClassItem classItem, String classBody) {
-        final String classItemBody = String.format(ClassTemplate.CLASS_BODY_KOTLIN_DTO,
+        final String classItemBody = String.format(
+                ClassTemplate.CLASS_BODY_KOTLIN_DTO,
                 classItem.getClassName(),
-                classBody);
-
+                classBody
+        );
         return createClassBodyAnnotated(classItem, classItemBody);
     }
 
@@ -135,9 +154,11 @@ public class ClassTemplateHelper {
     private String createClassBodyAnnotated(ClassItem classItem, String classItemBody) {
         final String classAnnotation = classItem.getClassAnnotation();
         if (null != classAnnotation && !classAnnotation.isEmpty()) {
-            return String.format(ClassTemplate.CLASS_BODY_ANNOTATED,
+            return String.format(
+                    ClassTemplate.CLASS_BODY_ANNOTATED,
                     classAnnotation,
-                    classItemBody);
+                    classItemBody
+            );
         } else {
             return classItemBody;
         }
@@ -145,9 +166,11 @@ public class ClassTemplateHelper {
 
     private String createAnnotatedField(String name, String annotation, String field) {
         if (null != annotation && !annotation.isEmpty()) {
-            return String.format(ClassTemplate.FIELD_ANNOTATED,
+            return String.format(
+                    ClassTemplate.FIELD_ANNOTATED,
                     String.format(annotation, name),
-                    field);
+                    field
+            );
         } else {
             return field;
         }

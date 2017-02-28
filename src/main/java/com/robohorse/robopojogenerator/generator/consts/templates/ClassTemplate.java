@@ -74,6 +74,6 @@ public interface ClassTemplate {
             +TAB + TAB + TAB + "\"}\";" + NEW_LINE
             +TAB + TAB + "}";
 
-    String TO_STRING_LINE = TAB + TAB + TAB + "\"%2$s%1$s=\'\" + "+"%1$s + \'\\\'\' + " + NEW_LINE;
+    String TO_STRING_LINE = TAB + TAB + TAB + "\"%3$s%1$s = \'\" + "+"%2$s + \'\\\'\' + " + NEW_LINE;
 
 }
