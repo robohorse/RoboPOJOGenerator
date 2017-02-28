@@ -36,8 +36,14 @@ see log of changes
 </p>
 
 # People, who help
+<ul>
+<li>
 [wafer-li](https://github.com/wafer-li) - Kotlin support (release 1.7)
+</li>
+<li>
 [ccqy66](https://github.com/ccqy66) - toString support (release 1.8.1)
+</li>
+</ul>
 
 # About
 Copyright 2016 Vadim Shchenev, and licensed under the MIT license. No attribution is necessary but it's very much appreciated. Star this project if you like it.
