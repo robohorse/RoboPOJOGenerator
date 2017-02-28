@@ -1,11 +1,12 @@
 package com.robohorse.robopojogenerator.generator.utils;
 
-import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
-import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
+import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
 import com.robohorse.robopojogenerator.models.FieldModel;
 
 import javax.inject.Inject;
+import java.util.Set;
 
 /**
  * Created by vadim on 05.10.16.
@@ -33,6 +34,30 @@ public class ClassTemplateHelper {
                 type);
     }
 
+    public String createToString(ClassItem classItem) {
+        String toString = generateToStingItem(classItem);
+        return String.format(ClassTemplate.TO_STRING,
+                classItem.getClassName(),
+                toString);
+    }
+
+    private String generateToStingItem(ClassItem classItem) {
+        boolean isFirstField = true;
+        StringBuffer fieldToStringStatement = new StringBuffer();
+        Set<String> fieds = classItem.getClassFields().keySet();
+        for (String field : fieds) {
+
+            if (isFirstField) {
+                isFirstField = false;
+                fieldToStringStatement.append(String.format(ClassTemplate.TO_STRING_LINE,
+                        classGenerateHelper.lowerCaseFirst(field),""));
+            }else {
+                fieldToStringStatement.append(String.format(ClassTemplate.TO_STRING_LINE,
+                        classGenerateHelper.lowerCaseFirst(field),","));
+            }
+        }
+        return fieldToStringStatement.toString();
+    }
     public String createFiled(FieldModel model) {
         final String field = String.format(ClassTemplate.FIELD,
                 model.getClassType(),

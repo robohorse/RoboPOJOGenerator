@@ -13,6 +13,7 @@ public class GenerationModel {
     private String content;
     private boolean useSetters;
     private boolean useGetters;
+    private boolean useStrings;
 
     public boolean isRewriteClasses() {
         return rewriteClasses;
@@ -40,6 +41,10 @@ public class GenerationModel {
 
     public boolean isUseKotlin() {
         return useKotlin;
+    }
+
+    public boolean isUseStrings() {
+        return useStrings;
     }
 
     public static class Builder {
@@ -78,7 +83,10 @@ public class GenerationModel {
             instance.useGetters = available;
             return this;
         }
-
+        public Builder setToStringAvailable(boolean available) {
+            instance.useStrings = available;
+            return this;
+        }
         public Builder setContent(String content) {
             instance.content = content;
             return this;
