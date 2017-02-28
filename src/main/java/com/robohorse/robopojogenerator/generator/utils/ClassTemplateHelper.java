@@ -35,7 +35,7 @@ public class ClassTemplateHelper {
     }
 
     public String createToString(ClassItem classItem) {
-        String toString = generateToStingItem(classItem);
+        final String toString = generateToStingItem(classItem);
         return String.format(ClassTemplate.TO_STRING,
                 classItem.getClassName(),
                 toString);
@@ -43,21 +43,22 @@ public class ClassTemplateHelper {
 
     private String generateToStingItem(ClassItem classItem) {
         boolean isFirstField = true;
-        StringBuffer fieldToStringStatement = new StringBuffer();
-        Set<String> fieds = classItem.getClassFields().keySet();
-        for (String field : fieds) {
-
+        final StringBuilder fieldToStringStatement = new StringBuilder();
+        Set<String> fields = classItem.getClassFields().keySet();
+        for (String field : fields) {
+            fieldToStringStatement.append(String.format(
+                    ClassTemplate.TO_STRING_LINE,
+                    classGenerateHelper.lowerCaseFirst(field),
+                    classGenerateHelper.formatClassField(field),
+                    isFirstField ? "" : ","
+            ));
             if (isFirstField) {
                 isFirstField = false;
-                fieldToStringStatement.append(String.format(ClassTemplate.TO_STRING_LINE,
-                        classGenerateHelper.lowerCaseFirst(field),""));
-            }else {
-                fieldToStringStatement.append(String.format(ClassTemplate.TO_STRING_LINE,
-                        classGenerateHelper.lowerCaseFirst(field),","));
             }
         }
         return fieldToStringStatement.toString();
     }
+
     public String createFiled(FieldModel model) {
         final String field = String.format(ClassTemplate.FIELD,
                 model.getClassType(),
