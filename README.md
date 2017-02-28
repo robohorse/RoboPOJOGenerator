@@ -38,10 +38,10 @@ see log of changes
 # People, who help
 <ul>
 <li>
-[wafer-li](https://github.com/wafer-li) - Kotlin support (release 1.7)
+<a href="https://github.com/wafer-li">wafer-li</a> - Kotlin support (release 1.7)
 </li>
 <li>
-[ccqy66](https://github.com/ccqy66) - toString support (release 1.8.1)
+<a href="https://github.com/ccqy66">ccqy66</a> - toString support (release 1.8.1)
 </li>
 </ul>
 
