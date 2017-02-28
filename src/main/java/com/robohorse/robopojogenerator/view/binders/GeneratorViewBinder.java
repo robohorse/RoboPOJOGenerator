@@ -2,6 +2,7 @@ package com.robohorse.robopojogenerator.view.binders;
 
 import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
+import com.robohorse.robopojogenerator.listeners.AutoValueSelectionListener;
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
 import com.robohorse.robopojogenerator.listeners.KotlinCheckBoxStateListener;
@@ -25,7 +26,7 @@ public class GeneratorViewBinder {
         generatorVew.getGenerateButton().addActionListener(actionListener);
         generatorVew.getKotlinCheckBox().addItemListener(new KotlinCheckBoxStateListener(generatorVew));
 
-        bindGroupViews(generatorVew.getTypeButtonGroup());
+        bindGroupViews(generatorVew.getTypeButtonGroup(), generatorVew);
 
         builder.setCenterPanel(generatorVew.getRootView());
         builder.setTitle("RoboPOJOGenerator");
@@ -33,12 +34,15 @@ public class GeneratorViewBinder {
         builder.show();
     }
 
-    private void bindGroupViews(ButtonGroup buttonGroup) {
+    private void bindGroupViews(ButtonGroup buttonGroup, GeneratorVew generatorVew) {
         final Enumeration<AbstractButton> buttons = buttonGroup.getElements();
         for (AnnotationEnum annotationItems : AnnotationEnum.values()) {
             if (buttons.hasMoreElements()) {
                 final AbstractButton button = buttons.nextElement();
                 button.setText(annotationItems.getText());
+                if (annotationItems == AnnotationEnum.AUTO_VALUE_GSON) {
+                    button.addItemListener(new AutoValueSelectionListener(generatorVew));
+                }
             } else {
                 break;
             }

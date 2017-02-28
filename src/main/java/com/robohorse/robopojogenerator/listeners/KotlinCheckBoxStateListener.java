@@ -19,8 +19,8 @@ public class KotlinCheckBoxStateListener implements ItemListener {
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e) {
-        final boolean kotlinEnabled = e.getStateChange() == ItemEvent.SELECTED;
+    public void itemStateChanged(ItemEvent itemEvent) {
+        final boolean kotlinEnabled = itemEvent.getStateChange() == ItemEvent.SELECTED;
         enableAutoValueButton(generatorVew, !kotlinEnabled);
         enableCheckBoxes(generatorVew, kotlinEnabled);
     }
