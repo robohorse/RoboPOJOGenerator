@@ -16,6 +16,8 @@ public interface ImportsTemplate {
 
     String JSON_PROPERTY = "import com.fasterxml.jackson.annotation.JsonProperty;";
 
+    String FAST_JSON_PROPERTY = "import com.alibaba.fastjson.annotation.JSONField";
+
     String AUTO_VALUE = "import com.google.auto.value.AutoValue;";
     String TYPED_ADAPTER = "import com.google.gson.TypeAdapter;";
     String GSON_IMPORT = "import com.google.gson.Gson;";
@@ -34,5 +36,9 @@ public interface ImportsTemplate {
 
     interface AUTO_VALUE_GSON {
         String[] IMPORTS = {GENERATED, SERIALIZED_NAME, AUTO_VALUE, TYPED_ADAPTER, GSON_IMPORT};
+    }
+
+    interface FAST_JSON {
+        String[] IMPORTS = {GENERATED, FAST_JSON_PROPERTY};
     }
 }
