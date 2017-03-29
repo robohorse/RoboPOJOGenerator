@@ -89,6 +89,13 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
                         ImportsTemplate.JACKSON.IMPORTS);
                 break;
             }
+            case FAST_JSON: {
+                generateHelper.setAnnotations(classItem,
+                        KotlinAnnotations.FAST_JSON.CLASS_ANNOTATION,
+                        KotlinAnnotations.FAST_JSON.ANNOTATION,
+                        ImportsTemplate.FAST_JSON.IMPORTS);
+                break;
+            }
         }
     }
 
