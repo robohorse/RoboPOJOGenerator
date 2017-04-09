@@ -34,6 +34,13 @@ public abstract class JavaPostProcessor extends BasePostProcessor {
                         ImportsTemplate.JACKSON.IMPORTS);
                 break;
             }
+            case FAST_JSON: {
+                generateHelper.setAnnotations(classItem,
+                        PojoAnnotations.FAST_JSON.CLASS_ANNOTATION,
+                        PojoAnnotations.FAST_JSON.ANNOTATION,
+                        ImportsTemplate.FAST_JSON.IMPORTS);
+                break;
+            }
             case AUTO_VALUE_GSON: {
                 generateHelper.setAnnotations(classItem,
                         PojoAnnotations.AUTO_VALUE_GSON.CLASS_ANNOTATION,

@@ -24,4 +24,9 @@ public interface KotlinAnnotations {
         String CLASS_ANNOTATION = INFO_ANNOTATION;
         String ANNOTATION = "@field:JsonProperty(\"%1$s\")";
     }
+
+    interface FAST_JSON {
+        String CLASS_ANNOTATION = INFO_ANNOTATION;
+        String ANNOTATION = "@field:JSONField(name=\"%1$s\")";
+    }
 }

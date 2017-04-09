@@ -8,8 +8,9 @@ public enum AnnotationEnum {
     GSON("GSON"),
     JACKSON("Jackson"),
     LOGAN_SQUARE("Logan Square"),
+    FAST_JSON("FastJSON"),
     AUTO_VALUE_GSON("AutoValue (GSON)");
-    
+
     private String text;
 
     AnnotationEnum(String text) {

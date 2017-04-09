@@ -21,7 +21,7 @@ public class KotlinCheckBoxStateListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent itemEvent) {
         final boolean kotlinEnabled = itemEvent.getStateChange() == ItemEvent.SELECTED;
-        enableAutoValueButton(generatorVew, !kotlinEnabled);
+        enableRadioButton(generatorVew, !kotlinEnabled);
         enableCheckBoxes(generatorVew, kotlinEnabled);
     }
 
@@ -31,7 +31,7 @@ public class KotlinCheckBoxStateListener implements ItemListener {
         generatorVew.getUseStringCheckBox().setEnabled(!kotlinEnabled);
     }
 
-    private void enableAutoValueButton(GeneratorVew generatorVew, boolean enable) {
+    private void enableRadioButton(GeneratorVew generatorVew, boolean enable) {
         final ButtonGroup buttonGroup = generatorVew.getTypeButtonGroup();
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons
                 .hasMoreElements(); ) {
@@ -41,6 +41,9 @@ public class KotlinCheckBoxStateListener implements ItemListener {
 
             } else if (AnnotationEnum.NONE.getText().equals(button.getText())) {
                 button.setSelected(true);
+
+            } else if (AnnotationEnum.FAST_JSON.getText().equals(button.getText())){
+                button.setEnabled(enable);
             }
         }
     }

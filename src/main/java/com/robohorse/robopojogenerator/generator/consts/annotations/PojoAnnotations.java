@@ -25,4 +25,9 @@ public interface PojoAnnotations {
         String CLASS_ANNOTATION = INFO_ANNOTATION + "\n@AutoValue";
         String ANNOTATION = "@SerializedName(\"%1$s\")";
     }
+
+    interface FAST_JSON {
+        String CLASS_ANNOTATION = INFO_ANNOTATION;
+        String ANNOTATION = "@JSONField(name=\"%1$s\")";
+    }
 }

@@ -26,6 +26,7 @@ public class GeneratorVew {
     private JRadioButton autoValueGsonButton;
     private JCheckBox kotlinCheckBox;
     private JCheckBox useStringCheckBox;
+    private JRadioButton fastJSONRadioButton;
     private ButtonGroup languageGroup;
     private ButtonGroup typeButtonGroup;
 

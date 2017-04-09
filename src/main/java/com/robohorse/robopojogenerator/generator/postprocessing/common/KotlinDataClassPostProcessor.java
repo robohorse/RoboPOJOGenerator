@@ -59,8 +59,7 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
     @Override
     protected String createClassItemText(String packagePath, String imports, String classTemplate) {
         return classTemplateHelper
-                .createClassItemWithoutSemicolon(
-                        packagePath,
+                .createClassItemWithoutSemicolon(packagePath,
                         imports,
                         classTemplate);
     }
@@ -87,6 +86,13 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
                         KotlinAnnotations.JACKSON.CLASS_ANNOTATION,
                         KotlinAnnotations.JACKSON.ANNOTATION,
                         ImportsTemplate.JACKSON.IMPORTS);
+                break;
+            }
+            case FAST_JSON: {
+                generateHelper.setAnnotations(classItem,
+                        KotlinAnnotations.FAST_JSON.CLASS_ANNOTATION,
+                        KotlinAnnotations.FAST_JSON.ANNOTATION,
+                        ImportsTemplate.FAST_JSON.IMPORTS);
                 break;
             }
         }
