@@ -27,7 +27,8 @@ public class CommonJavaPostProcessor extends JavaPostProcessor {
             final String classItemValue = classFields.get(objectName).getJavaItem();
             final String itemNameFormatted = generateHelper.formatClassField(objectName);
             classBodyBuilder.append(classTemplateHelper.createFiled(
-                    new FieldModel.Builder()
+                    new FieldModel
+                            .Builder()
                             .setClassType(classItemValue)
                             .setFieldNameFormatted(itemNameFormatted)
                             .setFieldName(objectName)

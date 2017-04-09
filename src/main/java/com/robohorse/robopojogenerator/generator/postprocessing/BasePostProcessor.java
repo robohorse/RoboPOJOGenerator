@@ -52,8 +52,7 @@ public abstract class BasePostProcessor {
     }
 
     protected String createClassItemText(String packagePath, String imports, String classTemplate) {
-        return classTemplateHelper.createClassItem(
-                packagePath,
+        return classTemplateHelper.createClassItem(packagePath,
                 imports,
                 classTemplate);
     }

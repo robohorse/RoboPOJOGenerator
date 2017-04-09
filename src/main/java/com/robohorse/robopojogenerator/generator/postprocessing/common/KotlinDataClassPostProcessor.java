@@ -59,8 +59,7 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
     @Override
     protected String createClassItemText(String packagePath, String imports, String classTemplate) {
         return classTemplateHelper
-                .createClassItemWithoutSemicolon(
-                        packagePath,
+                .createClassItemWithoutSemicolon(packagePath,
                         imports,
                         classTemplate);
     }
