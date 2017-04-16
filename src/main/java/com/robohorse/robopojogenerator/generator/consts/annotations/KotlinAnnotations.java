@@ -12,7 +12,7 @@ public interface KotlinAnnotations {
 
     interface GSON {
         String CLASS_ANNOTATION = INFO_ANNOTATION;
-        String ANNOTATION = "@field:SerializedName(\"%1$s\")\n\t@field:Expose";
+        String ANNOTATION = "@field:SerializedName(\"%1$s\")";
     }
 
     interface LOGAN_SQUARE {
