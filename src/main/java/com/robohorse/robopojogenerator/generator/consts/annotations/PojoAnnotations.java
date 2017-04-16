@@ -8,7 +8,7 @@ public interface PojoAnnotations {
 
     interface GSON {
         String CLASS_ANNOTATION = INFO_ANNOTATION;
-        String ANNOTATION = "@SerializedName(\"%1$s\")\n\t@Expose";
+        String ANNOTATION = "@SerializedName(\"%1$s\")";
     }
 
     interface LOGAN_SQUARE {
