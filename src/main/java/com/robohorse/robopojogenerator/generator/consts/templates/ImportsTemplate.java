@@ -7,7 +7,6 @@ public interface ImportsTemplate {
     String LIST = "import java.util.List;";
 
     String GENERATED = "import javax.annotation.Generated;";
-    String EXPOSE = "import com.google.gson.annotations.Expose;";
 
     String SERIALIZED_NAME = "import com.google.gson.annotations.SerializedName;";
 
@@ -23,7 +22,7 @@ public interface ImportsTemplate {
     String GSON_IMPORT = "import com.google.gson.Gson;";
 
     interface GSON {
-        String[] IMPORTS = {GENERATED, EXPOSE, SERIALIZED_NAME};
+        String[] IMPORTS = {GENERATED, SERIALIZED_NAME};
     }
 
     interface LOGAN_SQUARE {
