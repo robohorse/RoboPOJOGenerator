@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - oraclejdk8
+
+script:
+ - ./gradlew clean build -PdisablePreDex --continue --stacktrace
+
+branches:
+  only:
+    - master
