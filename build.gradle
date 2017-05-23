@@ -14,10 +14,18 @@ apply plugin: "java"
 apply plugin: "idea"
 apply plugin: "org.jetbrains.intellij"
 apply plugin: "net.ltgt.apt"
+apply plugin: "jacoco"
 
 compileJava {
     sourceCompatibility = 1.6
     targetCompatibility = 1.6
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
 
 repositories {
@@ -30,7 +38,7 @@ version "1.8.3"
 intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
-    //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
+    intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
 
 ext.daggerVersion = '2.6'
