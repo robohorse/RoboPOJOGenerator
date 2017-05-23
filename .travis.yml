@@ -8,3 +8,6 @@ script:
 branches:
   only:
     - master
+    
+after_success:
+- ./gradlew jacocoTestReport coveralls
