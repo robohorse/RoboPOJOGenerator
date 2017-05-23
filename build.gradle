@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
         classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.2.0-SNAPSHOT"
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1'
     }
 }
 apply plugin: "java"
@@ -15,6 +16,7 @@ apply plugin: "idea"
 apply plugin: "org.jetbrains.intellij"
 apply plugin: "net.ltgt.apt"
 apply plugin: "jacoco"
+apply plugin: 'com.github.kt3k.coveralls'
 
 compileJava {
     sourceCompatibility = 1.6
@@ -26,6 +28,10 @@ jacocoTestReport {
         xml.enabled = true
         html.enabled = true
     }
+}
+
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
 }
 
 repositories {
