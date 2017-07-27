@@ -39,7 +39,7 @@ repositories {
 }
 
 group "com.robohorse.robopojogenerator"
-version "1.8.3"
+version "1.8.4"
 
 intellij {
     pluginName "RoboPOJOGenerator"

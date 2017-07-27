@@ -5,10 +5,10 @@ import com.robohorse.robopojogenerator.errors.RoboPluginException;
 import com.robohorse.robopojogenerator.errors.custom.JSONStructureException;
 import com.robohorse.robopojogenerator.errors.custom.WrongClassNameException;
 import com.robohorse.robopojogenerator.generator.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.reserved.ReservedWords;
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
-import com.robohorse.robopojogenerator.generator.consts.reserved.ReservedWords;
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
@@ -21,12 +21,26 @@ public class ClassGenerateHelper {
     public ClassGenerateHelper() {
     }
 
-    public void validateJsonContent(String content) throws RoboPluginException {
+    public String validateJsonContent(String content) throws RoboPluginException {
         try {
             new JSONObject(content);
-        } catch (JSONException exception) {
-            throw new JSONStructureException();
+        } catch (Exception exception) {
+            try {
+                final JSONArray jsonArray = new JSONArray(content);
+                if (jsonArray.length() > 0) {
+                    final JSONObject jsonObject = jsonArray.optJSONObject(0);
+                    if (jsonObject.keySet().size() == 0) {
+                        throw new JSONStructureException();
+                    }
+                    return jsonObject.toString();
+                } else {
+                    throw new JSONStructureException();
+                }
+            } catch (Exception arrayException) {
+                throw new JSONStructureException();
+            }
         }
+        return content;
     }
 
     public void validateClassName(String name) throws RoboPluginException {

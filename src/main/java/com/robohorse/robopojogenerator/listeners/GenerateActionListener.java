@@ -45,11 +45,11 @@ public class GenerateActionListener implements ActionListener {
         final boolean useGetters = generatorVew.getUseGettersCheckBox().isSelected();
         final boolean useStrings = generatorVew.getUseStringCheckBox().isSelected();
 
-        final String content = textArea.getText();
+        String content = textArea.getText();
         final String className = textField.getText();
         try {
             classGenerateHelper.validateClassName(className);
-            classGenerateHelper.validateJsonContent(content);
+            content = classGenerateHelper.validateJsonContent(content);
             eventListener.onJsonDataObtained(new GenerationModel
                     .Builder()
                     .useKotlin(useKotlin)

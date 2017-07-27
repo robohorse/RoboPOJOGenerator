@@ -29,6 +29,41 @@ public class ClassGenerateHelperTest {
     }
 
     @Test
+    public void testModificationArray_isCorrect() throws Exception {
+        Exception exception = null;
+        try {
+            classGenerateHelper.validateJsonContent("[{\"data\":1}]");
+        } catch (RoboPluginException e) {
+            exception = e;
+        }
+        assertNull(exception);
+    }
+
+    @Test
+    public void testModificationArrayToJson_isCorrect() throws Exception {
+        final String jsonItem = "{\"data\":1}";
+        Exception exception = null;
+        try {
+            final String result = classGenerateHelper.validateJsonContent("[" + jsonItem + "]");
+            assertEquals(result, jsonItem);
+        } catch (RoboPluginException e) {
+            exception = e;
+        }
+        assertNull(exception);
+    }
+
+    @Test
+    public void testModificationArray_isCorrect_onError() throws Exception {
+        Exception exception = null;
+        try {
+            classGenerateHelper.validateJsonContent("[1,2]");
+        } catch (RoboPluginException e) {
+            exception = e;
+        }
+        assertNotNull(exception);
+    }
+
+    @Test
     public void testModificationWithWrongStructure_isCorrect() throws Exception {
         Exception exception = null;
         try {
