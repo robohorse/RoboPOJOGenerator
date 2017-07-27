@@ -8,6 +8,7 @@ import com.robohorse.robopojogenerator.generator.common.ClassItem;
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate;
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate;
 import com.robohorse.robopojogenerator.generator.consts.reserved.ReservedWords;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,12 +22,23 @@ public class ClassGenerateHelper {
     public ClassGenerateHelper() {
     }
 
-    public void validateJsonContent(String content) throws RoboPluginException {
+    public String validateJsonContent(String content) throws RoboPluginException {
         try {
             new JSONObject(content);
         } catch (JSONException exception) {
-            throw new JSONStructureException();
+            try {
+                final JSONArray jsonArray = new JSONArray(content);
+                if (jsonArray.length() > 0) {
+                    final JSONObject jsonObject = jsonArray.optJSONObject(0);
+                    return jsonObject.toString();
+                } else {
+                    throw new JSONStructureException();
+                }
+            } catch (JSONException arrayException) {
+                throw new JSONStructureException();
+            }
         }
+        return content;
     }
 
     public void validateClassName(String name) throws RoboPluginException {
