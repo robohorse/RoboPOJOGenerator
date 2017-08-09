@@ -41,9 +41,6 @@ public class KotlinCheckBoxStateListener implements ItemListener {
 
             } else if (AnnotationEnum.NONE.getText().equals(button.getText())) {
                 button.setSelected(true);
-
-            } else if (AnnotationEnum.FAST_JSON.getText().equals(button.getText())){
-                button.setEnabled(enable);
             }
         }
     }

@@ -19,6 +19,6 @@ public class FastJsonSelectionListener implements ItemListener {
     }
 
     private void enableCheckBoxes(GeneratorVew generatorVew, boolean autoValueEnabled) {
-        generatorVew.getKotlinCheckBox().setEnabled(!autoValueEnabled);
+        //generatorVew.getKotlinCheckBox().setEnabled(!autoValueEnabled);
     }
 }
