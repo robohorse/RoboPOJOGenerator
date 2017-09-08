@@ -44,7 +44,7 @@ version "1.8.5"
 intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
-    intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
+//    intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
 
 ext.daggerVersion = '2.6'
