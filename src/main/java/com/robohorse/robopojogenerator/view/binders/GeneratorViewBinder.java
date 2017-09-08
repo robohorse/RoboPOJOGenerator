@@ -2,7 +2,10 @@ package com.robohorse.robopojogenerator.view.binders;
 
 import com.intellij.openapi.ui.DialogBuilder;
 import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum;
-import com.robohorse.robopojogenerator.listeners.*;
+import com.robohorse.robopojogenerator.listeners.AutoValueSelectionListener;
+import com.robohorse.robopojogenerator.listeners.GenerateActionListener;
+import com.robohorse.robopojogenerator.listeners.GuiFormEventListener;
+import com.robohorse.robopojogenerator.listeners.KotlinCheckBoxStateListener;
 import com.robohorse.robopojogenerator.view.ui.GeneratorVew;
 
 import javax.inject.Inject;
@@ -39,8 +42,6 @@ public class GeneratorViewBinder {
                 button.setText(annotationItems.getText());
                 if (annotationItems == AnnotationEnum.AUTO_VALUE_GSON) {
                     button.addItemListener(new AutoValueSelectionListener(generatorVew));
-                } else if (annotationItems == AnnotationEnum.FAST_JSON) {
-                    button.addItemListener(new FastJsonSelectionListener(generatorVew));
                 }
             } else {
                 break;
