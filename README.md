@@ -20,13 +20,13 @@ get it and install from <a href="https://plugins.jetbrains.com/plugin/8634">plug
 Select target package -> new -> Generate POJO from JSON
 
 <p>
-<img src="images/plugin_start_v3.png" height="300">
+<img src="images/plugin_start_v4.png" height="300">
 </p>
 
 put JSON into window and select target POJO type
 
 <p>
-<img src="images/plugin_window_v3.png" height="300">
+<img src="images/plugin_window_v4.png" height="300">
 </p>
 
 see log of changes
