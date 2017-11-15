@@ -95,6 +95,13 @@ public class KotlinDataClassPostProcessor extends BasePostProcessor {
                         ImportsTemplate.FAST_JSON.IMPORTS);
                 break;
             }
+            case MOSHI: {
+                generateHelper.setAnnotations(classItem,
+                        KotlinAnnotations.MOSHI.CLASS_ANNOTATION,
+                        KotlinAnnotations.MOSHI.ANNOTATION,
+                        ImportsTemplate.MOSHI.IMPORTS);
+                break;
+            }
         }
     }
 

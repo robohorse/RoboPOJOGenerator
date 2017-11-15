@@ -29,4 +29,9 @@ public interface KotlinAnnotations {
         String CLASS_ANNOTATION = INFO_ANNOTATION;
         String ANNOTATION = "@JSONField(name=\"%1$s\")";
     }
+
+    interface MOSHI {
+        String CLASS_ANNOTATION = INFO_ANNOTATION;
+        String ANNOTATION = "@Json(name=\"%1$s\")";
+    }
 }
