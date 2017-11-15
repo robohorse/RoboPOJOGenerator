@@ -9,6 +9,7 @@ public enum AnnotationEnum {
     JACKSON("Jackson"),
     LOGAN_SQUARE("Logan Square"),
     FAST_JSON("FastJSON"),
+    MOSHI("Moshi"),
     AUTO_VALUE_GSON("AutoValue (GSON)");
 
     private String text;
