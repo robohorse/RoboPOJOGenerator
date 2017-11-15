@@ -48,6 +48,13 @@ public abstract class JavaPostProcessor extends BasePostProcessor {
                         ImportsTemplate.AUTO_VALUE_GSON.IMPORTS);
                 break;
             }
+            case MOSHI: {
+                generateHelper.setAnnotations(classItem,
+                        PojoAnnotations.MOSHI.CLASS_ANNOTATION,
+                        PojoAnnotations.MOSHI.ANNOTATION,
+                        ImportsTemplate.MOSHI.IMPORTS);
+                break;
+            }
         }
     }
 }

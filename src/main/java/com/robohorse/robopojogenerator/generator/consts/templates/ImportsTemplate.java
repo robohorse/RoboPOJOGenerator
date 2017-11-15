@@ -17,6 +17,8 @@ public interface ImportsTemplate {
 
     String FAST_JSON_PROPERTY = "import com.alibaba.fastjson.annotation.JSONField;";
 
+    String MOSHI_PROPERTY = "import com.squareup.moshi.Json;";
+
     String AUTO_VALUE = "import com.google.auto.value.AutoValue;";
     String TYPED_ADAPTER = "import com.google.gson.TypeAdapter;";
     String GSON_IMPORT = "import com.google.gson.Gson;";
@@ -39,5 +41,9 @@ public interface ImportsTemplate {
 
     interface FAST_JSON {
         String[] IMPORTS = {GENERATED, FAST_JSON_PROPERTY};
+    }
+
+    interface MOSHI{
+        String[] IMPORTS = {GENERATED, MOSHI_PROPERTY};
     }
 }
