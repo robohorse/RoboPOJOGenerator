@@ -27,6 +27,7 @@ public class GeneratorVew {
     private JCheckBox kotlinCheckBox;
     private JCheckBox useStringCheckBox;
     private JRadioButton fastJSONRadioButton;
+    private JRadioButton Moshi;
     private ButtonGroup languageGroup;
     private ButtonGroup typeButtonGroup;
 
