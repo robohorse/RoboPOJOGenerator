@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -71,9 +72,7 @@ public class ClassProcessor {
         final String className = classItem.getClassName();
         if (itemMap.containsKey(className)) {
             final ClassItem storedClassItem = itemMap.get(className);
-            if (storedClassItem.getClassFields().size() > classItem.getClassFields().size()) {
-                return;
-            }
+            classItem.getClassFields().putAll(storedClassItem.getClassFields());
         }
         itemMap.put(className, classItem);
     }
@@ -93,9 +92,15 @@ public class ClassProcessor {
 
                 @Override
                 public void onJsonObjectIdentified() {
+                    final int size = jsonItemArray.getJsonArray().length();
+                    final Map<String, ClassItem> innerItemsMap = new HashMap<String, ClassItem>();
+                    for (int index = 0; index < size; index++) {
+                        final JSONObject jsonObject = (JSONObject) jsonItemArray.getJsonArray().get(index);
+                        final JsonItem jsonItem = new JsonItem(jsonObject, itemName);
+                        proceed(jsonItem, innerItemsMap);
+                    }
                     classField.setClassField(new ClassField(itemName));
-                    final JsonItem jsonItem = new JsonItem((JSONObject) object, itemName);
-                    proceed(jsonItem, itemMap);
+                    itemMap.putAll(innerItemsMap);
                 }
 
                 @Override
