@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.2.0-SNAPSHOT"
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.5.0-SNAPSHOT"
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1'
     }
 }
@@ -19,8 +19,8 @@ apply plugin: "jacoco"
 apply plugin: 'com.github.kt3k.coveralls'
 
 compileJava {
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 }
 
 jacocoTestReport {
@@ -39,7 +39,7 @@ repositories {
 }
 
 group "com.robohorse.robopojogenerator"
-version "1.9.1"
+version "1.9.2"
 
 intellij {
     pluginName "RoboPOJOGenerator"
@@ -47,7 +47,7 @@ intellij {
     //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
 
-ext.daggerVersion = '2.6'
+ext.daggerVersion = '2.27'
 
 dependencies {
     testCompile "junit:junit:4.12"

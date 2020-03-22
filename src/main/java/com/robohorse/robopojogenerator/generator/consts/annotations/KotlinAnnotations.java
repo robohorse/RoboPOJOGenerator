@@ -8,7 +8,7 @@ package com.robohorse.robopojogenerator.generator.consts.annotations;
  * @since 16/10/24 21:07
  */
 public interface KotlinAnnotations {
-    String INFO_ANNOTATION = "@Generated(\"com.robohorse.robopojogenerator\")";
+    String INFO_ANNOTATION = "";
 
     interface GSON {
         String CLASS_ANNOTATION = INFO_ANNOTATION;
