@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>1.9.1</version>
+    <version>1.9.2</version>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
     <description><![CDATA[
@@ -12,22 +12,18 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    Minor bug fix
+    Minor bug fix. Dependencies was updated to support last IDE versions. Generated annotation was removed.
     ]]>
     </change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version since-build="141.0"/>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
-
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
+
+    <depends>com.intellij.modules.java-capable</depends>
 
     <actions>
         <!-- Add your actions here -->

@@ -4,7 +4,7 @@ package com.robohorse.robopojogenerator.generator.consts.annotations;
  * Created by vadim on 02.10.16.
  */
 public interface PojoAnnotations {
-    String INFO_ANNOTATION = "@Generated(\"com.robohorse.robopojogenerator\")";
+    String INFO_ANNOTATION = "";
 
     interface GSON {
         String CLASS_ANNOTATION = INFO_ANNOTATION;
