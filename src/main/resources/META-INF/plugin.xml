@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>1.9.2</version>
+    <version>1.9.3</version>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
     <description><![CDATA[
@@ -12,7 +12,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    Minor bug fix. Dependencies was updated to support last IDE versions. Generated annotation was removed.
+    Minor bug fix. Dependencies was updated to support last IDE versions. Generated annotation was removed. Android studio support fixed.
     ]]>
     </change-notes>
 
@@ -23,7 +23,7 @@
         <!-- Add your extensions here -->
     </extensions>
 
-    <depends>com.intellij.modules.java-capable</depends>
+    <depends>com.intellij.modules.lang</depends>
 
     <actions>
         <!-- Add your actions here -->
