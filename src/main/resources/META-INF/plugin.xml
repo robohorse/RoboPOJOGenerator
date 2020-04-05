@@ -27,7 +27,7 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.actions.GeneratePOJOAction"
+        <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.action.GeneratePOJOAction"
                 icon="/icons/pojo.png"
                 text="Generate POJO from JSON"
                 description="GeneratePOJOAction">

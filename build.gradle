@@ -6,22 +6,20 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.71"
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
         classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.5.0-SNAPSHOT"
         classpath 'com.github.kt3k.coveralls:com.github.kt3k.coveralls.gradle.plugin:2.10.1'
     }
 }
+
 apply plugin: "java"
+apply plugin: "kotlin"
 apply plugin: "idea"
 apply plugin: "org.jetbrains.intellij"
 apply plugin: "net.ltgt.apt"
 apply plugin: "jacoco"
 apply plugin: 'com.github.kt3k.coveralls'
-
-compileJava {
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-}
 
 jacocoTestReport {
     reports {
@@ -34,12 +32,13 @@ coveralls {
     jacocoReportPath = "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
 }
 
-repositories {
-    mavenCentral()
-}
-
 test {
     useJUnitPlatform()
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
 }
 
 group "com.robohorse.robopojogenerator"
@@ -48,23 +47,19 @@ version "1.9.3"
 intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
-    intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
+    //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
+    version 'IC-2019.3.4'
 }
 
-ext.daggerVersion = '2.27'
-
 dependencies {
-    testCompile "junit:junit:4.13"
-    testCompile 'org.mockito:mockito-core:2.0.86-beta'
+    implementation 'org.koin:koin-core:2.1.5'
+    implementation 'org.json:json:20160212'
+    implementation 'commons-io:commons-io:2.4'
+    implementation 'com.google.guava:guava:19.0'
+    implementation 'com.fifesoft:rsyntaxtextarea:3.1.0'
 
-    compile "com.intellij:annotations:+@jar"
-    compile 'org.json:json:20160212'
-    compile 'commons-io:commons-io:2.4'
-    compile 'com.google.guava:guava:19.0'
-
-    compile "com.google.dagger:dagger:$daggerVersion"
-    apt "com.google.dagger:dagger-compiler:$daggerVersion"
-    compile "javax.annotation:jsr250-api:1.0"
-
-    compile 'com.fifesoft:rsyntaxtextarea:2.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testImplementation "io.mockk:mockk:1.9.3"
 }

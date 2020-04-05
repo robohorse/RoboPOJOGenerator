@@ -1,16 +1,15 @@
 package com.robohorse.robopojogenerator.generator.processing;
 
-import com.robohorse.robopojogenerator.generator.common.ClassField;
-import com.robohorse.robopojogenerator.generator.common.ClassItem;
-import com.robohorse.robopojogenerator.generator.common.JsonItem;
-import com.robohorse.robopojogenerator.generator.common.JsonItemArray;
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
+import com.robohorse.robopojogenerator.generator.consts.common.ClassField;
+import com.robohorse.robopojogenerator.generator.consts.common.ClassItem;
+import com.robohorse.robopojogenerator.generator.consts.common.JsonItem;
+import com.robohorse.robopojogenerator.generator.consts.common.JsonItemArray;
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,11 +17,10 @@ import java.util.Map;
  * Created by vadim on 23.09.16.
  */
 public class ClassProcessor {
-    @Inject
     ClassGenerateHelper classGenerateHelper;
 
-    @Inject
-    public ClassProcessor() {
+    public ClassProcessor(ClassGenerateHelper classGenerateHelper) {
+        this.classGenerateHelper = classGenerateHelper;
     }
 
     public void proceed(JsonItem jsonItem, final Map<String, ClassItem> itemMap) {
@@ -33,33 +31,33 @@ public class ClassProcessor {
 
                 @Override
                 public void onInnerObjectIdentified(ClassEnum classType) {
-                    classItem.addClassField(jsonObjectKey, new ClassField(classType));
+                    classItem.getClassFields().put(jsonObjectKey, new ClassField(classType));
                 }
 
                 @Override
                 public void onJsonObjectIdentified() {
                     final String className = classGenerateHelper.formatClassName(jsonObjectKey);
-                    final ClassField classField = new ClassField(className);
-                    final JsonItem jsonItem = new JsonItem((JSONObject) object, jsonObjectKey);
+                    final ClassField classField = new ClassField(null, className);
+                    final JsonItem jsonItem = new JsonItem(jsonObjectKey, (JSONObject) object);
 
-                    classItem.addClassField(jsonObjectKey, classField);
+                    classItem.getClassFields().put(jsonObjectKey, classField);
                     proceed(jsonItem, itemMap);
                 }
 
                 @Override
                 public void onJsonArrayIdentified() {
                     final JSONArray jsonArray = (JSONArray) object;
-                    classItem.addClassImport(ImportsTemplate.LIST);
+                    classItem.getClassImports().add(ImportsTemplate.LIST);
 
                     final ClassField classField = new ClassField();
                     if (jsonArray.length() == 0) {
                         classField.setClassField(new ClassField(ClassEnum.OBJECT));
-                        classItem.addClassField(jsonObjectKey, classField);
+                        classItem.getClassFields().put(jsonObjectKey, classField);
 
                     } else {
-                        final JsonItemArray jsonItemArray = new JsonItemArray((JSONArray) object, jsonObjectKey);
+                        final JsonItemArray jsonItemArray = new JsonItemArray(jsonObjectKey, (JSONArray) object);
                         proceedArray(jsonItemArray, classField, itemMap);
-                        classItem.addClassField(jsonObjectKey, classField);
+                        classItem.getClassFields().put(jsonObjectKey, classField);
                     }
                 }
             };
@@ -81,8 +79,8 @@ public class ClassProcessor {
                               final ClassField classField,
                               final Map<String, ClassItem> itemMap) {
         final String itemName = classGenerateHelper.getClassNameWithItemPostfix(jsonItemArray.getKey());
-        if (jsonItemArray.getJsonArray().length() != 0) {
-            final Object object = jsonItemArray.getJsonArray().get(0);
+        if (jsonItemArray.getJsonObject().length() != 0) {
+            final Object object = jsonItemArray.getJsonObject().get(0);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
 
                 @Override
@@ -92,21 +90,21 @@ public class ClassProcessor {
 
                 @Override
                 public void onJsonObjectIdentified() {
-                    final int size = jsonItemArray.getJsonArray().length();
+                    final int size = jsonItemArray.getJsonObject().length();
                     final Map<String, ClassItem> innerItemsMap = new HashMap<String, ClassItem>();
                     for (int index = 0; index < size; index++) {
-                        final JSONObject jsonObject = (JSONObject) jsonItemArray.getJsonArray().get(index);
-                        final JsonItem jsonItem = new JsonItem(jsonObject, itemName);
+                        final JSONObject jsonObject = (JSONObject) jsonItemArray.getJsonObject().get(index);
+                        final JsonItem jsonItem = new JsonItem(itemName, jsonObject);
                         proceed(jsonItem, innerItemsMap);
                     }
-                    classField.setClassField(new ClassField(itemName));
+                    classField.setClassField(new ClassField(null, itemName));
                     itemMap.putAll(innerItemsMap);
                 }
 
                 @Override
                 public void onJsonArrayIdentified() {
                     classField.setClassField(new ClassField());
-                    final JsonItemArray jsonItemArray = new JsonItemArray((JSONArray) object, itemName);
+                    final JsonItemArray jsonItemArray = new JsonItemArray(itemName, (JSONArray) object);
                     proceedArray(jsonItemArray, classField, itemMap);
                 }
             };
