@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk8
+  - oraclejdk13
 
 script:
  - ./gradlew clean build -PdisablePreDex --continue --stacktrace
@@ -10,4 +10,4 @@ branches:
     - master
     
 after_success:
-- ./gradlew jacoco coveralls
+- ./gradlew jacocoTestReport coveralls
