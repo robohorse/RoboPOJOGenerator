@@ -1,6 +1,7 @@
 # RoboPOJOGenerator
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RoboPOJOGenerator-green.svg?style=true)](https://android-arsenal.com/details/1/4429)
+[![Build Status](https://travis-ci.org/robohorse/RoboPOJOGenerator.svg?branch=master)](https://travis-ci.org/robohorse/RoboPOJOGenerator)
 
 Intellij Idea, Android Studio plugin for JSON to POJO conversion.
 
