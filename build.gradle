@@ -1,25 +1,27 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven { url "http://dl.bintray.com/jetbrains/intellij-plugin-service" }
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.71"
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.5.0-SNAPSHOT"
-        classpath 'com.github.kt3k.coveralls:com.github.kt3k.coveralls.gradle.plugin:2.10.1'
-    }
 }
 
-apply plugin: "java"
-apply plugin: "kotlin"
-apply plugin: "idea"
-apply plugin: "org.jetbrains.intellij"
-apply plugin: "net.ltgt.apt"
-apply plugin: "jacoco"
-apply plugin: 'com.github.kt3k.coveralls'
+plugins {
+    id 'java'
+    id 'idea'
+    id "org.jetbrains.kotlin.jvm" version "1.3.71"
+    id "net.ltgt.apt" version "0.21"
+    id "org.jetbrains.intellij" version "0.4.18"
+    id "com.github.kt3k.coveralls" version "2.10.1"
+    id 'jacoco'
+}
+
+compileJava {
+    sourceCompatibility = 11
+    targetCompatibility = 11
+}
 
 jacocoTestReport {
     reports {
@@ -48,7 +50,7 @@ intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
     //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
-    version 'IC-2019.3.4'
+    version 'IC-2020.1'
 }
 
 dependencies {
