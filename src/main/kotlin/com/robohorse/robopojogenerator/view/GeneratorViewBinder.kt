@@ -29,9 +29,11 @@ class GeneratorViewBinder(
             bindGroupViews(typeButtonGroup, generatorVew)
             builder.setCenterPanel(rootView)
         }
-        builder.setTitle("RoboPOJOGenerator")
-        builder.removeAllActions()
-        builder.show()
+        builder.apply {
+            setTitle(PLUGIN_TITLE)
+            removeAllActions()
+            show()
+        }
     }
 
     private fun bindGroupViews(buttonGroup: ButtonGroup, generatorVew: GeneratorVew) {
@@ -49,3 +51,5 @@ class GeneratorViewBinder(
         }
     }
 }
+
+private const val PLUGIN_TITLE = "RoboPOJOGenerator"

@@ -20,8 +20,7 @@ class FileWriterDelegate(
             projectModel: ProjectModel
     ) {
         val path = projectModel.directory.virtualFile.path
-        val fileName = (classItem.className
-                + if (generationModel.useKotlin) ".kt" else ".java")
+        val fileName = "${classItem.className}${if (generationModel.useKotlin) FILE_KOTLIN else FILE_JAVA}"
         val file = File(path + File.separator + fileName)
         try {
             if (file.exists()) {
@@ -48,10 +47,11 @@ class FileWriterDelegate(
             generationModel: GenerationModel,
             projectModel: ProjectModel,
             file: File
-    ) {
-        val content = prepareClass(classItem, generationModel, projectModel)
-        FileUtils.writeStringToFile(file, content)
-    }
+    ) = FileUtils.writeStringToFile(
+            file,
+            prepareClass(classItem, generationModel, projectModel),
+            ENCODING
+    )
 
     private fun prepareClass(
             classItem: ClassItem,
@@ -63,3 +63,7 @@ class FileWriterDelegate(
         return postProcessor.proceed(classItem, generationModel)
     }
 }
+
+private const val ENCODING = "UTF-8"
+private const val FILE_KOTLIN = ".kt"
+private const val FILE_JAVA = ".java"
