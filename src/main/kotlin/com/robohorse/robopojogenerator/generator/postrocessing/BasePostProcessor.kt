@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
+import java.util.HashSet
 
 abstract class BasePostProcessor(
         protected val generateHelper: ClassGenerateHelper,
@@ -20,7 +21,7 @@ abstract class BasePostProcessor(
         return proceedClass(classItem, generationModel)
     }
 
-    protected abstract fun applyAnnotations(item: AnnotationEnum, classItem: ClassItem)
+    abstract fun applyAnnotations(item: AnnotationEnum, classItem: ClassItem)
 
     abstract fun proceedClassBody(classItem: ClassItem, generationModel: GenerationModel): String?
 
@@ -34,7 +35,7 @@ abstract class BasePostProcessor(
                 proceedClassBody(classItem, generationModel)
         )
         val classTemplate = createClassTemplate(classItem, classBody)
-        val importsBuilder = proceedClassImports(classItem)
+        val importsBuilder = proceedClassImports(classItem.classImports)
         return createClassItemText(
                 classItem.packagePath,
                 importsBuilder.toString(),
@@ -42,8 +43,7 @@ abstract class BasePostProcessor(
         )
     }
 
-    protected open fun proceedClassImports(classItem: ClassItem): StringBuilder {
-        val imports = classItem.classImports
+    open fun proceedClassImports(imports: HashSet<String>): StringBuilder {
         val importsBuilder = StringBuilder()
         for (importItem in imports) {
             importsBuilder.append(importItem)
@@ -52,7 +52,7 @@ abstract class BasePostProcessor(
         return importsBuilder
     }
 
-    protected open fun createClassItemText(
+    open fun createClassItemText(
             packagePath: String?,
             imports: String?,
             classTemplate: String?

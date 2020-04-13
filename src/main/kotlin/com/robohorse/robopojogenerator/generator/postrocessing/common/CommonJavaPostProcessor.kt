@@ -31,6 +31,10 @@ class CommonJavaPostProcessor(
                                 annotation = classItem.annotation
                         )
                 ))
+            }
+            for (objectName in classFields.keys) {
+                val classItemValue = classFields[objectName]?.getJavaItem()
+                val itemNameFormatted = generateHelper.formatClassField(objectName)
                 if (generationModel.useSetters) {
                     append(ClassTemplate.NEW_LINE)
                     append(classTemplateHelper.createSetter(

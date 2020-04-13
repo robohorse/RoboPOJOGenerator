@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.generator.consts.templates
 
 object ClassTemplate {
+    const val EMPTY_STRING = ""
     const val NEW_LINE = "\n"
     const val TAB = "\t"
     const val CLASS_BODY = "public class %1\$s" +
@@ -27,6 +28,7 @@ object ClassTemplate {
             "%2\$s" + NEW_LINE
     const val CLASS_ROOT_WITHOUT_SEMICOLON = "package %1\$s" + NEW_LINE + NEW_LINE +
             "%2\$s" + NEW_LINE
+    const val CLASS_ROOT_NO_PACKAGE = "%1\$s" + NEW_LINE
     const val FIELD = TAB + "private %1\$s %2\$s;" + NEW_LINE
     const val FIELD_AUTO_VALUE = TAB + "public abstract %1\$s %2\$s();" + NEW_LINE
     const val FIELD_KOTLIN_DTO = TAB + "val %1\$s: %2\$s? = null" + "," + NEW_LINE

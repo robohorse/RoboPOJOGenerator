@@ -2,11 +2,14 @@ package com.robohorse.robopojogenerator.di
 
 import com.robohorse.robopojogenerator.controllers.GeneratePOJOActionController
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
-import com.robohorse.robopojogenerator.delegates.FileWriterDelegate
+import com.robohorse.robopojogenerator.delegates.file.CommonFileWriterDelegate
 import com.robohorse.robopojogenerator.delegates.GenerationDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.file.FileWriterDelegate
+import com.robohorse.robopojogenerator.delegates.file.KotlinFileWriterDelegate
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.generator.consts.common.ClassCreator
+import com.robohorse.robopojogenerator.generator.consts.common.FileWriteFactory
 import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.generator.postrocessing.common.AutoValueClassPostProcessor
 import com.robohorse.robopojogenerator.generator.postrocessing.common.CommonJavaPostProcessor
@@ -43,7 +46,19 @@ val appModule = module {
     }
 
     single {
-        FileWriterDelegate(get(), get())
+        FileWriteFactory(get(), get())
+    }
+
+    single {
+        KotlinFileWriterDelegate(get(), get(), get(), get())
+    }
+
+    single {
+        FileWriterDelegate()
+    }
+
+    single {
+        CommonFileWriterDelegate(get(), get(), get())
     }
 
     single {
