@@ -19,7 +19,7 @@ class GenerationDelegate(
             projectModel: ProjectModel
     ) {
         ProgressManager.getInstance().run(object : Backgroundable(projectModel.project,
-                "RoboPOJO Generation", false) {
+                TASK_TITLE, false) {
             override fun run(indicator: ProgressIndicator) {
                 try {
                     classCreator.generateFiles(generationModel, projectModel)
@@ -34,3 +34,5 @@ class GenerationDelegate(
         })
     }
 }
+
+private const val TASK_TITLE = "RoboPOJO Generation"

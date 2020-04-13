@@ -18,15 +18,13 @@ class MessageDelegate {
     }
 
     fun logEventMessage(message: String) {
-        val notification = GROUP_DISPLAY_ID_LOG
-                .createNotification(message, NotificationType.INFORMATION)
-        sendNotification(notification)
+        sendNotification(GROUP_DISPLAY_ID_LOG
+                .createNotification(message, NotificationType.INFORMATION))
     }
 
     fun showSuccessMessage() {
-        val notification = GROUP_DISPLAY_ID_INFO
-                .createNotification("POJO generation: Success", NotificationType.INFORMATION)
-        sendNotification(notification)
+        sendNotification(GROUP_DISPLAY_ID_INFO
+                .createNotification(TITLE_SUCCESS, NotificationType.INFORMATION))
     }
 
     private fun sendNotification(notification: Notification) {
@@ -37,10 +35,12 @@ class MessageDelegate {
     }
 
     private fun showMessage(message: String?, header: String) {
-        Messages.showDialog(message, header, arrayOf("OK"), -1, null)
+        Messages.showDialog(message, header, arrayOf(TITLE_OK), -1, null)
     }
 }
 
+private const val TITLE_OK = "OK"
+private const val TITLE_SUCCESS = "POJO generation: Success"
 private const val GROUP_DISPLAY = "RoboPOJOGenerator"
 private const val GROUP_DISPLAY_LOG = "RoboPOJOGenerator LOG"
 private val GROUP_DISPLAY_ID_INFO = NotificationGroup(GROUP_DISPLAY, BALLOON, true)

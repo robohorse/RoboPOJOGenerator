@@ -10,6 +10,7 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import org.json.JSONArray
 import org.json.JSONObject
 
+@Deprecated("Will be refactored soon...")
 class ClassGenerateHelper {
 
     fun validateJsonContent(content: String): String {

@@ -16,6 +16,7 @@ import java.util.Map;
 /**
  * Created by vadim on 23.09.16.
  */
+@Deprecated
 public class ClassProcessor {
     ClassGenerateHelper classGenerateHelper;
 

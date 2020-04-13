@@ -39,13 +39,6 @@ class GeneratePOJOActionControllerTest {
     lateinit var generatePOJOActionController: GeneratePOJOActionController
 
     @Test
-    fun onActionHandled() {
-        every { environmentDelegate.obtainProjectModel(event) }.returns(projectModel)
-        generatePOJOActionController.onActionHandled(event)
-        verify { generatorViewBinder.bindView(any(), any()) }
-    }
-
-    @Test
     fun onActionHandled_withError() {
         val exception = RoboPluginException("", "")
         every { environmentDelegate.obtainProjectModel(event) }.throws(exception)

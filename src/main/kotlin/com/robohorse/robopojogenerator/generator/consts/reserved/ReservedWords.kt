@@ -55,5 +55,5 @@ object ReservedWords {
             "super",
             "while"
     )
-    val WORDS_SET: Set<String> = HashSet(WORDS.asList())
+    val WORDS_SET = HashSet(WORDS.asList())
 }
