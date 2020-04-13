@@ -20,11 +20,11 @@ sealed class ImportsTemplate(
     }
 }
 
-private const val JSON_OBJECT = "import com.bluelinelabs.logansquare.annotation.JsonObject;"
-private const val JSON_FIELD = "import com.bluelinelabs.logansquare.annotation.JsonField;"
-private const val JSON_PROPERTY = "import com.fasterxml.jackson.annotation.JsonProperty;"
-private const val FAST_JSON_PROPERTY = "import com.alibaba.fastjson.annotation.JSONField;"
-private const val MOSHI_PROPERTY = "import com.squareup.moshi.Json;"
-private const val AUTO_VALUE = "import com.google.auto.value.AutoValue;"
-private const val TYPED_ADAPTER = "import com.google.gson.TypeAdapter;"
-private const val GSON_IMPORT = "import com.google.gson.Gson;"
+const val JSON_OBJECT = "import com.bluelinelabs.logansquare.annotation.JsonObject;"
+const val JSON_FIELD = "import com.bluelinelabs.logansquare.annotation.JsonField;"
+const val JSON_PROPERTY = "import com.fasterxml.jackson.annotation.JsonProperty;"
+const val FAST_JSON_PROPERTY = "import com.alibaba.fastjson.annotation.JSONField;"
+const val MOSHI_PROPERTY = "import com.squareup.moshi.Json;"
+const val AUTO_VALUE = "import com.google.auto.value.AutoValue;"
+const val TYPED_ADAPTER = "import com.google.gson.TypeAdapter;"
+const val GSON_IMPORT = "import com.google.gson.Gson;"
