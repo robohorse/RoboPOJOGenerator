@@ -1,8 +1,8 @@
 package com.robohorse.robopojogenerator.generator
 
-import com.robohorse.robopojogenerator.delegates.FileWriterDelegate
 import com.robohorse.robopojogenerator.generator.consts.common.ClassCreator
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
+import com.robohorse.robopojogenerator.generator.consts.common.FileWriteFactory
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import io.mockk.every
@@ -21,7 +21,7 @@ class ClassCreatorTest {
     lateinit var roboPOJOGenerator: RoboPOJOGenerator
 
     @RelaxedMockK
-    lateinit var fileWriterDelegate: FileWriterDelegate
+    lateinit var fileWriteFactory: FileWriteFactory
 
     @RelaxedMockK
     lateinit var generationModel: GenerationModel
@@ -39,6 +39,6 @@ class ClassCreatorTest {
         classItemSet.add(classItem)
         every { roboPOJOGenerator.generate(generationModel) }.returns(classItemSet)
         classCreator.generateFiles(generationModel, projectModel)
-        verify { fileWriterDelegate.writeFile(classItem, generationModel, projectModel) }
+        verify { fileWriteFactory.createFileWriter(generationModel, projectModel) }
     }
 }

@@ -51,32 +51,23 @@ class ClassGenerateHelper {
         return classBody
     }
 
-    fun formatClassName(name: String): String {
-        return upperCaseFirst(proceedField(name))
+    fun formatClassName(name: String) = upperCaseFirst(proceedField(name))
+
+    fun getClassNameWithItemPostfix(name: String) =
+            String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(name)))
+
+    fun upperCaseFirst(name: String) = if (name.length > 1) {
+        Character.toUpperCase(name[0]).toString() + name.substring(1)
+    } else {
+        name
     }
 
-    fun getClassNameWithItemPostfix(name: String): String {
-        return String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(name)))
-    }
+    fun formatClassField(name: String) = lowerCaseFirst(proceedField(name))
 
-    fun upperCaseFirst(name: String): String {
-        var name = name
-        if (name.length > 1) {
-            name = Character.toUpperCase(name[0]).toString() + name.substring(1)
-        }
-        return name
-    }
-
-    fun formatClassField(name: String): String {
-        return lowerCaseFirst(proceedField(name))
-    }
-
-    fun lowerCaseFirst(name: String): String {
-        var name = name
-        if (name.length > 1) {
-            name = Character.toLowerCase(name[0]).toString() + name.substring(1)
-        }
-        return name
+    fun lowerCaseFirst(name: String) = if (name.length > 1) {
+        Character.toLowerCase(name[0]).toString() + name.substring(1)
+    } else {
+        name
     }
 
     fun setAnnotations(
@@ -86,9 +77,7 @@ class ClassGenerateHelper {
             imports: Array<String>) {
         classItem.classAnnotation = classAnnotation
         classItem.annotation = annotation
-        for (value in imports) {
-            classItem.classImports.plus(value)
-        }
+        classItem.classImports.addAll(imports)
     }
 
     fun updateClassModel(classBodyBuilder: StringBuilder) {
@@ -99,15 +88,15 @@ class ClassGenerateHelper {
         }
     }
 
-    fun proceedField(objectName: String): String {
-        var objectName = objectName
+    fun proceedField(fieldName: String): String {
+        var objectName = fieldName
         objectName = objectName
                 .replace("[^A-Za-z0-9]".toRegex(), "_")
                 .replace("_{2,}".toRegex(), "_")
-        val isDigitFirst = (objectName.length > 0 && Character.isDigit(objectName[0])
+        val isDigitFirst = (objectName.isNotBlank() && Character.isDigit(objectName[0])
                 || objectName.length > 1 && objectName[0] == '_' &&
                 Character.isDigit(objectName[1]))
-        if (objectName.length == 0 || isDigitFirst || ReservedWords.WORDS_SET.contains(objectName)) {
+        if (objectName.isBlank() || isDigitFirst || ReservedWords.WORDS_SET.contains(objectName)) {
             objectName = "json_member_$objectName"
         }
         objectName = objectName.replace("([A-Z])".toRegex(), "_$1")

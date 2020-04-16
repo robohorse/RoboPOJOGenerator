@@ -99,39 +99,46 @@ class ClassTemplateHelper(
             packagePath: String?,
             imports: String?,
             body: String?
-    ) =
-            if (null != imports && imports.isNotEmpty()) {
-                String.format(
-                        ClassTemplate.CLASS_ROOT_IMPORTS,
-                        packagePath,
-                        imports,
-                        body
-                )
-            } else {
-                String.format(
-                        ClassTemplate.CLASS_ROOT,
-                        packagePath,
-                        body
-                )
-            }
+    ) = if (packagePath?.isNotEmpty() == true) {
+        if (null != imports && imports.isNotEmpty()) {
+            String.format(
+                    ClassTemplate.CLASS_ROOT_IMPORTS,
+                    packagePath,
+                    imports,
+                    body
+            )
+        } else {
+            String.format(
+                    ClassTemplate.CLASS_ROOT,
+                    packagePath,
+                    body
+            )
+        }
+    } else {
+        String.format(ClassTemplate.CLASS_ROOT_NO_PACKAGE, body)
+    }
 
     fun createClassItemWithoutSemicolon(
             packagePath: String?,
             imports: String?,
             body: String?
-    ) = if (null != imports && imports.isNotEmpty()) {
-        String.format(
-                ClassTemplate.CLASS_ROOT_IMPORTS_WITHOUT_SEMICOLON,
-                packagePath,
-                imports,
-                body
-        )
+    ) = if (packagePath?.isNotEmpty() == true) {
+        if (null != imports && imports.isNotEmpty()) {
+            String.format(
+                    ClassTemplate.CLASS_ROOT_IMPORTS_WITHOUT_SEMICOLON,
+                    packagePath,
+                    imports,
+                    body
+            )
+        } else {
+            String.format(
+                    ClassTemplate.CLASS_ROOT_WITHOUT_SEMICOLON,
+                    packagePath,
+                    body
+            )
+        }
     } else {
-        String.format(
-                ClassTemplate.CLASS_ROOT_WITHOUT_SEMICOLON,
-                packagePath,
-                body
-        )
+        String.format(ClassTemplate.CLASS_ROOT_NO_PACKAGE, body)
     }
 
     private fun createClassBodyAnnotated(

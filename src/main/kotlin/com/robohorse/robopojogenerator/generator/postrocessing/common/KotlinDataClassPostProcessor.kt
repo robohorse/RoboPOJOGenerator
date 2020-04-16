@@ -10,6 +10,7 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
+import java.util.HashSet
 
 class KotlinDataClassPostProcessor(
         generateHelper: ClassGenerateHelper,
@@ -17,11 +18,11 @@ class KotlinDataClassPostProcessor(
 ) : BasePostProcessor(generateHelper, classTemplateHelper) {
 
     override fun proceedClassImports(
-            classItem: ClassItem
+            imports: HashSet<String>
     ): StringBuilder {
-        classItem.classImports.remove(ImportsTemplate.LIST)
+       imports.remove(ImportsTemplate.LIST)
         val importsBuilder = StringBuilder()
-        for (importItem in classItem.classImports) {
+        for (importItem in imports) {
             importsBuilder.append(importItem.replace(";", ""))
             importsBuilder.append(ClassTemplate.NEW_LINE)
         }
