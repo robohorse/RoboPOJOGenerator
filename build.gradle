@@ -19,8 +19,8 @@ plugins {
 }
 
 compileJava {
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 }
 
 jacocoTestReport {
@@ -50,7 +50,7 @@ intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
     //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
-    version 'IC-2020.1'
+    version 'IC-2019.3.4'
 }
 
 dependencies {

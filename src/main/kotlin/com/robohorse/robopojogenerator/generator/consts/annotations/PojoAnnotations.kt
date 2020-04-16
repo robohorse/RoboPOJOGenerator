@@ -10,7 +10,7 @@ sealed class PojoAnnotations(
 
     object LOGAN_SQUARE : PojoAnnotations(
             classAnnotation = "@JsonObject",
-            annotation = "@SerializedName(\"%1\$s\")\n\t@JsonField(name =\"%1\$s\")"
+            annotation = "@JsonField(name =\"%1\$s\")"
     )
 
     object JACKSON : PojoAnnotations(

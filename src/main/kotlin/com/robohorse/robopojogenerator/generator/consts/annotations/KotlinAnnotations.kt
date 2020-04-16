@@ -10,7 +10,7 @@ sealed class KotlinAnnotations(
 
     object LOGAN_SQUARE : KotlinAnnotations(
             classAnnotation = "@JsonObject",
-            annotation = "@field:SerializedName(\"%1\$s\")\n\t@field:JsonField(name = arrayOf(\"%1\$s\"))"
+            annotation = "@field:JsonField(name = [\"%1\$s\"])"
     )
 
     object JACKSON : KotlinAnnotations(
