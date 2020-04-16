@@ -5,7 +5,7 @@ sealed class ImportsTemplate(
 ) {
     object GSON : ImportsTemplate(arrayOf(SERIALIZED_NAME))
 
-    object LOGAN_SQUARE : ImportsTemplate(arrayOf(SERIALIZED_NAME, JSON_OBJECT, JSON_FIELD))
+    object LOGAN_SQUARE : ImportsTemplate(arrayOf(JSON_OBJECT, JSON_FIELD))
 
     object JACKSON : ImportsTemplate(arrayOf(JSON_PROPERTY))
 

@@ -14,9 +14,8 @@ class ImportsTemplateTest {
 
     @Test
     fun check_LOGAN_SQUARE() {
-        assertEquals(LOGAN_SQUARE.imports[0], SERIALIZED_NAME)
-        assertEquals(LOGAN_SQUARE.imports[1], JSON_OBJECT)
-        assertEquals(LOGAN_SQUARE.imports[2], JSON_FIELD)
+        assertEquals(LOGAN_SQUARE.imports[0], JSON_OBJECT)
+        assertEquals(LOGAN_SQUARE.imports[1], JSON_FIELD)
     }
 
     @Test
