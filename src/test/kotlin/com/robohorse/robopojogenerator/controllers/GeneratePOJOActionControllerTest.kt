@@ -6,7 +6,7 @@ import com.robohorse.robopojogenerator.delegates.GenerationDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.models.ProjectModel
-import com.robohorse.robopojogenerator.view.GeneratorViewBinder
+import com.robohorse.robopojogenerator.view.GeneratorViewFactory
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -24,7 +24,7 @@ class GeneratePOJOActionControllerTest {
     lateinit var messageDelegate: MessageDelegate
 
     @RelaxedMockK
-    lateinit var generatorViewBinder: GeneratorViewBinder
+    lateinit var generatorViewFactory: GeneratorViewFactory
 
     @RelaxedMockK
     lateinit var generationDelegate: GenerationDelegate

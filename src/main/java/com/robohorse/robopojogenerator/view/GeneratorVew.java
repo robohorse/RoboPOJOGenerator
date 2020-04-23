@@ -14,41 +14,55 @@ public class GeneratorVew {
     private JPanel rootView;
     private JButton generateButton;
     private RSyntaxTextArea textArea;
-    private JRadioButton NONERadioButton;
-    private JRadioButton jackson2RadioButton;
-    private JRadioButton loganSquareRadioButton;
-    private JRadioButton GSONRadioButton;
     private JCheckBox rewriteExistingClassesCheckBox;
     private JTextField className;
-    private JScrollPane scrollView;
-    private JCheckBox useSettersCheckBox;
-    private JCheckBox useGettersCheckBox;
-    private JRadioButton autoValueGsonButton;
-    private JCheckBox kotlinCheckBox;
-    private JCheckBox useStringCheckBox;
-    private JRadioButton fastJSONRadioButton;
-    private JRadioButton Moshi;
+    private JScrollPane jsonAreaScrollView;
+    private JRadioButton JSONRadioButton;
+    private JRadioButton JSONSchemaRadioButton;
+    private JRadioButton javaRadioButton;
+    private JRadioButton kotlinRadioButton;
+    private JPanel sourcePanel;
+    private JPanel languagePanel;
+    private JPanel frameworkPanel;
+    private JList<String> list1;
+    private JPanel actionPanel;
+    private JPanel propertiesPanel;
+    private JPanel commonInfoPanel;
+    private JPanel controlsPanel;
+    private JScrollPane scrollPropertiesPanel;
+    private ButtonGroup sourceGroup;
     private ButtonGroup languageGroup;
-    private ButtonGroup typeButtonGroup;
 
-    public JCheckBox getKotlinCheckBox() {
-        return kotlinCheckBox;
+    public JRadioButton getJavaRadioButton() {
+        return javaRadioButton;
     }
 
-    public JCheckBox getUseSettersCheckBox() {
-        return useSettersCheckBox;
+    public JPanel getSourcePanel() {
+        return sourcePanel;
     }
 
-    public JCheckBox getUseGettersCheckBox() {
-        return useGettersCheckBox;
+    public JRadioButton getJSONRadioButton() {
+        return JSONRadioButton;
+    }
+
+    public JRadioButton getJSONSchemaRadioButton() {
+        return JSONSchemaRadioButton;
+    }
+
+    public JPanel getPropertiesPanel() {
+        return propertiesPanel;
+    }
+
+    public JRadioButton getKotlinRadioButton() {
+        return kotlinRadioButton;
     }
 
     public JPanel getRootView() {
         return rootView;
     }
 
-    public ButtonGroup getTypeButtonGroup() {
-        return typeButtonGroup;
+    public JList<String> getList1() {
+        return list1;
     }
 
     public JTextField getClassNameTextField() {
@@ -63,46 +77,25 @@ public class GeneratorVew {
         return textArea;
     }
 
-    public JRadioButton getNONERadioButton() {
-        return NONERadioButton;
-    }
-
-    public JRadioButton getJackson2RadioButton() {
-        return jackson2RadioButton;
-    }
-
-    public JRadioButton getLoganSquareRadioButton() {
-        return loganSquareRadioButton;
-    }
-
-    public JRadioButton getGSONRadioButton() {
-        return GSONRadioButton;
+    public JTextField getClassName() {
+        return className;
     }
 
     public JCheckBox getRewriteExistingClassesCheckBox() {
         return rewriteExistingClassesCheckBox;
     }
 
-    public JCheckBox getUseStringCheckBox() {
-        return useStringCheckBox;
-    }
-
     private void createUIComponents() {
         textArea = new RSyntaxTextArea();
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JSON);
         textArea.setCodeFoldingEnabled(true);
-        scrollView = new JScrollPane(textArea);
+        jsonAreaScrollView = new JScrollPane(textArea);
         try {
-            Theme theme = Theme.load(getClass().getResourceAsStream(
+            final Theme theme = Theme.load(getClass().getResourceAsStream(
                     "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
             theme.apply(textArea);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-    }
-
-
-    public ButtonGroup getLanguageGroup() {
-        return languageGroup;
     }
 }

@@ -1,12 +1,12 @@
 package com.robohorse.robopojogenerator.generator.postrocessing
 
-import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
-import java.util.HashSet
+import com.robohorse.robopojogenerator.view.FrameworkVW
+import java.util.*
 
 abstract class BasePostProcessor(
         protected val generateHelper: ClassGenerateHelper,
@@ -21,7 +21,7 @@ abstract class BasePostProcessor(
         return proceedClass(classItem, generationModel)
     }
 
-    abstract fun applyAnnotations(item: AnnotationEnum, classItem: ClassItem)
+    abstract fun applyAnnotations(item: FrameworkVW, classItem: ClassItem)
 
     abstract fun proceedClassBody(classItem: ClassItem, generationModel: GenerationModel): String?
 

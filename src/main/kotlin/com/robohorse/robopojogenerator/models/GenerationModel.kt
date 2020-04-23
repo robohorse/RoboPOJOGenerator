@@ -3,12 +3,12 @@ package com.robohorse.robopojogenerator.models
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
-import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
+import com.robohorse.robopojogenerator.view.FrameworkVW
 
 data class GenerationModel(
         val rewriteClasses: Boolean,
         val useKotlin: Boolean,
-        val annotationEnum: AnnotationEnum,
+        val annotationEnum: FrameworkVW,
         val rootClassName: String,
         val content: String?,
         val useSetters: Boolean,
