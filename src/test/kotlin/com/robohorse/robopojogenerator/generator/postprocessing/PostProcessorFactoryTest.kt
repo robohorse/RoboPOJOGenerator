@@ -1,11 +1,11 @@
 package com.robohorse.robopojogenerator.generator.postprocessing
 
-import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.generator.postrocessing.common.AutoValueClassPostProcessor
 import com.robohorse.robopojogenerator.generator.postrocessing.common.CommonJavaPostProcessor
 import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.models.GenerationModel
+import com.robohorse.robopojogenerator.view.FrameworkVW
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -28,6 +28,9 @@ class PostProcessorFactoryTest {
     @RelaxedMockK
     lateinit var generationModel: GenerationModel
 
+    @RelaxedMockK
+    lateinit var autoValueAnnotation: FrameworkVW.AutoValue
+
     @InjectMockKs
     lateinit var factory: PostProcessorFactory
 
@@ -40,7 +43,7 @@ class PostProcessorFactoryTest {
 
     @Test
     fun check_autoValueClassPostProcessor_creation() {
-        every { generationModel.annotationEnum }.returns(AnnotationEnum.AUTO_VALUE_GSON)
+        every { generationModel.annotationEnum }.returns(autoValueAnnotation)
         val result = factory.createPostProcessor(generationModel)
         assertEquals(result, autoValueClassPostProcessor)
     }

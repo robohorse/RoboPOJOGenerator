@@ -8,12 +8,12 @@ import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.GeneratorViewBinder
+import com.robohorse.robopojogenerator.view.GeneratorViewFactory
 
 class GeneratePOJOActionController(
         private val environmentDelegate: EnvironmentDelegate,
         private val messageDelegate: MessageDelegate,
-        private val generatorViewBinder: GeneratorViewBinder,
+        private val generatorViewFactory: GeneratorViewFactory,
         private val generationDelegate: GenerationDelegate
 ) {
 
@@ -29,7 +29,7 @@ class GeneratePOJOActionController(
         val projectModel = environmentDelegate.obtainProjectModel(event)
         val dialogBuilder = DialogBuilder()
         val window = dialogBuilder.window
-        generatorViewBinder.bindView(dialogBuilder, object : GuiFormEventListener {
+        generatorViewFactory.bindView(dialogBuilder, object : GuiFormEventListener {
             override fun onJsonDataObtained(model: GenerationModel) {
                 window.dispose()
                 generationDelegate.runGenerationTask(model, projectModel)

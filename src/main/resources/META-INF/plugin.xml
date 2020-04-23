@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
     <description><![CDATA[
@@ -12,7 +12,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    Extended support for Kotlin data classes. All generated Kotlin data classes will be included into one single file.
+    Plugin design was updated to simplify new features development.
     ]]>
     </change-notes>
 
