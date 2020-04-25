@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(MockKExtension::class)
-class KotlinFileWriterDelegateTest {
+class KotlinSingleFileWriterDelegateTest {
     @RelaxedMockK
     lateinit var classItem: ClassItem
 
@@ -38,7 +38,7 @@ class KotlinFileWriterDelegateTest {
     lateinit var kotlinDataClassPostProcessor: KotlinDataClassPostProcessor
 
     @InjectMockKs
-    lateinit var delegate: KotlinFileWriterDelegate
+    lateinit var delegateSingle: KotlinSingleFileWriterDelegate
 
     @Test
     fun check_writeFiles() {
@@ -47,8 +47,8 @@ class KotlinFileWriterDelegateTest {
         every { classItem.className }.returns(ROOT_CLASS_NAME)
         every { classItem.classImports }.returns(hashSetOf())
         every { projectModel.packageName }.returns(PACKAGE)
-        every { kotlinDataClassPostProcessor.proceedClassImports(any()) }.returns(StringBuilder())
-        delegate.writeFiles(set, generationModel, projectModel)
+        every { kotlinDataClassPostProcessor.proceedClassImports(any(), generationModel) }.returns(StringBuilder())
+        delegateSingle.writeFiles(set, generationModel, projectModel)
         verify { fileWriterDelegate.writeToFile(any(), any()) }
     }
 }

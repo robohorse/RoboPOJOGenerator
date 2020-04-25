@@ -36,6 +36,6 @@ class AutoValueClassPostProcessor(
     }
 
     override fun createClassTemplate(
-            classItem: ClassItem, classBody: String?
+            classItem: ClassItem, classBody: String?, generationModel: GenerationModel
     ) = classTemplateHelper.createClassBodyAbstract(classItem, classBody)
 }

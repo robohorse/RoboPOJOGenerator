@@ -6,7 +6,7 @@ import com.robohorse.robopojogenerator.delegates.file.CommonFileWriterDelegate
 import com.robohorse.robopojogenerator.delegates.GenerationDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.delegates.file.FileWriterDelegate
-import com.robohorse.robopojogenerator.delegates.file.KotlinFileWriterDelegate
+import com.robohorse.robopojogenerator.delegates.file.KotlinSingleFileWriterDelegate
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.generator.consts.common.ClassCreator
 import com.robohorse.robopojogenerator.generator.consts.common.FileWriteFactory
@@ -65,7 +65,7 @@ val appModule = module {
     }
 
     single {
-        KotlinFileWriterDelegate(get(), get(), get(), get())
+        KotlinSingleFileWriterDelegate(get(), get(), get(), get())
     }
 
     single {

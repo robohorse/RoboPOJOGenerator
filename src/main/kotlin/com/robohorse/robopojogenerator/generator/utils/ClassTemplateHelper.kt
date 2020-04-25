@@ -88,12 +88,19 @@ class ClassTemplateHelper(
                     classBody
             ))
 
-    fun createClassBodyKotlinDataClass(classItem: ClassItem, classBody: String?) =
-            createClassBodyAnnotated(classItem, String.format(
-                    ClassTemplate.CLASS_BODY_KOTLIN_DTO,
-                    classItem.className,
-                    classBody
-            ))
+    fun createClassBodyKotlinDataClass(
+            classItem: ClassItem,
+            classBody: String?,
+            parcelable: Boolean = false
+    ) = createClassBodyAnnotated(classItem, String.format(
+            if (parcelable) {
+                ClassTemplate.CLASS_BODY_KOTLIN_DTO_PARCELABLE
+            } else {
+                ClassTemplate.CLASS_BODY_KOTLIN_DTO
+            },
+            classItem.className,
+            classBody
+    ))
 
     fun createClassItem(
             packagePath: String?,

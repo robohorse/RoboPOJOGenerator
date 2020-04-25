@@ -60,12 +60,30 @@ class PropertiesFactory {
             )
             ),
             Kotlin(frameworks = listOf(
-                    None(),
-                    Gson(),
-                    Jackson(),
-                    LoganSquare(),
-                    Moshi(),
-                    FastJson()
+                    None(properties = listOf(
+                            UseKotlinSingleDataClass(selected = true),
+                            UseKotlinParcelable()
+                    )),
+                    Gson(properties = listOf(
+                            UseKotlinSingleDataClass(selected = true),
+                            UseKotlinParcelable()
+                    )),
+                    Jackson(properties = listOf(
+                            UseKotlinSingleDataClass(selected = true),
+                            UseKotlinParcelable()
+                    )),
+                    LoganSquare(properties = listOf(
+                            UseKotlinSingleDataClass(selected = true),
+                            UseKotlinParcelable()
+                    )),
+                    Moshi(properties = listOf(
+                            UseKotlinSingleDataClass(selected = true),
+                            UseKotlinParcelable()
+                    )),
+                    FastJson(properties = listOf(
+                            UseKotlinSingleDataClass(selected = true),
+                            UseKotlinParcelable()
+                    ))
             )
             )
     )

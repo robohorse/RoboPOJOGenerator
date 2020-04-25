@@ -16,6 +16,10 @@ object ClassTemplate {
             "(" + NEW_LINE +
             "%2\$s" + NEW_LINE +
             ")"
+    const val CLASS_BODY_KOTLIN_DTO_PARCELABLE = "@Parcelize\ndata class %1\$s" +
+            "(" + NEW_LINE +
+            "%2\$s" + NEW_LINE +
+            ") : Parcelable"
     const val CLASS_BODY_ANNOTATED = "%1\$s" + NEW_LINE +
             "%2\$s"
     const val CLASS_ROOT_IMPORTS = ("package %1\$s;" + NEW_LINE + NEW_LINE +

@@ -6,7 +6,7 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplat
 import com.robohorse.robopojogenerator.generator.postrocessing.BasePostProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
-import com.robohorse.robopojogenerator.view.FrameworkVW
+import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.view.FrameworkVW.*
 
 abstract class JavaPostProcessor(
@@ -15,10 +15,10 @@ abstract class JavaPostProcessor(
 ) : BasePostProcessor(generateHelper, classTemplateHelper) {
 
     override fun applyAnnotations(
-            item: FrameworkVW,
+            generationModel: GenerationModel,
             classItem: ClassItem
     ) {
-        when (item) {
+        when (generationModel.annotationEnum) {
             is Gson -> {
                 generateHelper.setAnnotations(classItem,
                         PojoAnnotations.GSON.classAnnotation,
