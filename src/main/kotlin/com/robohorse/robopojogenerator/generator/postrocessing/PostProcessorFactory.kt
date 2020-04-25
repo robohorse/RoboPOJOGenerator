@@ -1,10 +1,10 @@
 package com.robohorse.robopojogenerator.generator.postrocessing
 
-import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum.AUTO_VALUE_GSON
 import com.robohorse.robopojogenerator.generator.postrocessing.common.AutoValueClassPostProcessor
 import com.robohorse.robopojogenerator.generator.postrocessing.common.CommonJavaPostProcessor
 import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.models.GenerationModel
+import com.robohorse.robopojogenerator.view.FrameworkVW.AutoValue
 
 class PostProcessorFactory(
         private val kotlinDataClassPostProcessor: KotlinDataClassPostProcessor,
@@ -16,7 +16,7 @@ class PostProcessorFactory(
     ): BasePostProcessor = with(generationModel) {
         if (useKotlin) {
             kotlinDataClassPostProcessor
-        } else if (annotationEnum === AUTO_VALUE_GSON) {
+        } else if (annotationEnum is AutoValue) {
             autoValueClassPostProcessor
         } else {
             commonJavaPostProcessor

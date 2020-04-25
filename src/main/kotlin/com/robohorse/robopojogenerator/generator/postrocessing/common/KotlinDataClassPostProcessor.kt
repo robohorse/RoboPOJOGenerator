@@ -1,6 +1,5 @@
 package com.robohorse.robopojogenerator.generator.postrocessing.common
 
-import com.robohorse.robopojogenerator.generator.consts.annotations.AnnotationEnum
 import com.robohorse.robopojogenerator.generator.consts.annotations.KotlinAnnotations
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
@@ -10,7 +9,9 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
-import java.util.HashSet
+import com.robohorse.robopojogenerator.view.FrameworkVW
+import com.robohorse.robopojogenerator.view.FrameworkVW.*
+import java.util.*
 
 class KotlinDataClassPostProcessor(
         generateHelper: ClassGenerateHelper,
@@ -20,7 +21,7 @@ class KotlinDataClassPostProcessor(
     override fun proceedClassImports(
             imports: HashSet<String>
     ): StringBuilder {
-       imports.remove(ImportsTemplate.LIST)
+        imports.remove(ImportsTemplate.LIST)
         val importsBuilder = StringBuilder()
         for (importItem in imports) {
             importsBuilder.append(importItem.replace(";", ""))
@@ -53,37 +54,40 @@ class KotlinDataClassPostProcessor(
                         classTemplate)
     }
 
-    override fun applyAnnotations(item: AnnotationEnum, classItem: ClassItem) {
+    override fun applyAnnotations(item: FrameworkVW, classItem: ClassItem) {
         when (item) {
-            AnnotationEnum.GSON -> {
+            is Gson -> {
                 generateHelper.setAnnotations(classItem,
                         KotlinAnnotations.GSON.classAnnotation,
                         KotlinAnnotations.GSON.annotation,
                         ImportsTemplate.GSON.imports)
             }
-            AnnotationEnum.LOGAN_SQUARE -> {
+            is LoganSquare -> {
                 generateHelper.setAnnotations(classItem,
                         KotlinAnnotations.LOGAN_SQUARE.classAnnotation,
                         KotlinAnnotations.LOGAN_SQUARE.annotation,
                         ImportsTemplate.LOGAN_SQUARE.imports)
             }
-            AnnotationEnum.JACKSON -> {
+            is Jackson -> {
                 generateHelper.setAnnotations(classItem,
                         KotlinAnnotations.JACKSON.classAnnotation,
                         KotlinAnnotations.JACKSON.annotation,
                         ImportsTemplate.JACKSON.imports)
             }
-            AnnotationEnum.FAST_JSON -> {
+            is FastJson -> {
                 generateHelper.setAnnotations(classItem,
                         KotlinAnnotations.FAST_JSON.classAnnotation,
                         KotlinAnnotations.FAST_JSON.annotation,
                         ImportsTemplate.FAST_JSON.imports)
             }
-            AnnotationEnum.MOSHI -> {
+            is Moshi -> {
                 generateHelper.setAnnotations(classItem,
                         KotlinAnnotations.MOSHI.classAnnotation,
                         KotlinAnnotations.MOSHI.annotation,
                         ImportsTemplate.MOSHI.imports)
+            }
+            else -> {
+                //NO OP
             }
         }
     }

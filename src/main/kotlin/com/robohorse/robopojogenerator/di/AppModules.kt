@@ -18,6 +18,9 @@ import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.view.GeneratorViewBinder
+import com.robohorse.robopojogenerator.view.GeneratorViewFactory
+import com.robohorse.robopojogenerator.view.PropertiesFactory
+import com.robohorse.robopojogenerator.view.ViewModelMapper
 import org.koin.dsl.module
 
 val appModule = module {
@@ -34,7 +37,19 @@ val appModule = module {
     }
 
     single {
-        GeneratorViewBinder(get(), get())
+        GeneratorViewFactory(get(), get(), get(), get())
+    }
+
+    single {
+        ViewModelMapper(get())
+    }
+
+    single {
+        GeneratorViewBinder(get())
+    }
+
+    single {
+        PropertiesFactory()
     }
 
     single {
