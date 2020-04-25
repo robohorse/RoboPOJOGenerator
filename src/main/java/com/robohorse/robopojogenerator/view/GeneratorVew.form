@@ -155,7 +155,7 @@
           <scrollpane id="b86d3" binding="scrollPropertiesPanel">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="70"/>
+                <minimum-size width="250" height="70"/>
               </grid>
             </constraints>
             <properties/>

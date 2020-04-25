@@ -4,6 +4,8 @@ import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.GETTERS
 import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.SETTERS
 import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.TO_STRING
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.KOTLIN_PARCELABLE
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.KOTLIN_SINGLE_DATA_CLASS
 
 class ViewModelMapper(
         private val generatorViewBinder: GeneratorViewBinder
@@ -15,11 +17,13 @@ class ViewModelMapper(
                         rewriteClasses = rewriteExistingClassesCheckBox.isSelected,
                         annotationEnum = resolveFramework(),
                         useKotlin = isKotlinSelected(),
+                        content = textArea.text,
+                        rootClassName = classNameTextField.text,
                         useSetters = resolveCheckBox(SETTERS),
                         useGetters = resolveCheckBox(GETTERS),
                         useStrings = resolveCheckBox(TO_STRING),
-                        content = textArea.text,
-                        rootClassName = classNameTextField.text
+                        useKotlinParcelable = resolveCheckBox(KOTLIN_PARCELABLE),
+                        useKotlinSingleDataClass = resolveCheckBox(KOTLIN_SINGLE_DATA_CLASS)
                 )
             }
 

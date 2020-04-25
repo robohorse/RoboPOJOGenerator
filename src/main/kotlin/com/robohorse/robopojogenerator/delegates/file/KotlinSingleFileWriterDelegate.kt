@@ -9,7 +9,7 @@ import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 import java.util.*
 
-class KotlinFileWriterDelegate(
+class KotlinSingleFileWriterDelegate(
         messageDelegate: MessageDelegate,
         factory: PostProcessorFactory,
         fileWriterDelegate: FileWriterDelegate,
@@ -42,7 +42,7 @@ class KotlinFileWriterDelegate(
         val classBody = kotlinDataClassPostProcessor.createClassItemText(
                 packagePath = projectModel.packageName,
                 classTemplate = rootClassBuilder.toString(),
-                imports = kotlinDataClassPostProcessor.proceedClassImports(imports).toString()
+                imports = kotlinDataClassPostProcessor.proceedClassImports(imports, generationModel).toString()
         )
         writeFile(
                 className = generationModel.rootClassName,
@@ -59,7 +59,7 @@ class KotlinFileWriterDelegate(
             set.forEach { addAll(it.classImports) }
         }
         val universalClassItem = ClassItem()
-        kotlinDataClassPostProcessor.applyAnnotations(generationModel.annotationEnum, universalClassItem)
+        kotlinDataClassPostProcessor.applyAnnotations(generationModel, universalClassItem)
         imports.addAll(universalClassItem.classImports)
         return imports
     }

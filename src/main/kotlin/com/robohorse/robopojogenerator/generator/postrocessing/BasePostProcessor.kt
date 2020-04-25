@@ -5,7 +5,6 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.FrameworkVW
 import java.util.*
 
 abstract class BasePostProcessor(
@@ -17,15 +16,19 @@ abstract class BasePostProcessor(
             classItem: ClassItem,
             generationModel: GenerationModel
     ): String {
-        applyAnnotations(generationModel.annotationEnum, classItem)
+        applyAnnotations(generationModel, classItem)
         return proceedClass(classItem, generationModel)
     }
 
-    abstract fun applyAnnotations(item: FrameworkVW, classItem: ClassItem)
+    abstract fun applyAnnotations(generationModel: GenerationModel, classItem: ClassItem)
 
     abstract fun proceedClassBody(classItem: ClassItem, generationModel: GenerationModel): String?
 
-    abstract fun createClassTemplate(classItem: ClassItem, classBody: String?): String
+    abstract fun createClassTemplate(
+            classItem: ClassItem,
+            classBody: String?,
+            generationModel: GenerationModel
+    ): String
 
     private fun proceedClass(
             classItem: ClassItem,
@@ -34,8 +37,8 @@ abstract class BasePostProcessor(
         val classBody = generateHelper.updateClassBody(
                 proceedClassBody(classItem, generationModel)
         )
-        val classTemplate = createClassTemplate(classItem, classBody)
-        val importsBuilder = proceedClassImports(classItem.classImports)
+        val classTemplate = createClassTemplate(classItem, classBody, generationModel)
+        val importsBuilder = proceedClassImports(classItem.classImports, generationModel)
         return createClassItemText(
                 classItem.packagePath,
                 importsBuilder.toString(),
@@ -43,7 +46,10 @@ abstract class BasePostProcessor(
         )
     }
 
-    open fun proceedClassImports(imports: HashSet<String>): StringBuilder {
+    open fun proceedClassImports(
+            imports: HashSet<String>,
+            generationModel: GenerationModel
+    ): StringBuilder {
         val importsBuilder = StringBuilder()
         for (importItem in imports) {
             importsBuilder.append(importItem)

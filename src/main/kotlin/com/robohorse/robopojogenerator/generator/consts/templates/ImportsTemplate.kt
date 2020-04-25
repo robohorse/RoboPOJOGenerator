@@ -28,3 +28,6 @@ const val MOSHI_PROPERTY = "import com.squareup.moshi.Json;"
 const val AUTO_VALUE = "import com.google.auto.value.AutoValue;"
 const val TYPED_ADAPTER = "import com.google.gson.TypeAdapter;"
 const val GSON_IMPORT = "import com.google.gson.Gson;"
+
+const val PARCELABLE_ANDROID = "import android.os.Parcelable"
+const val PARCELIZE_KOTLINX = "import kotlinx.android.parcel.Parcelize"

@@ -4,6 +4,7 @@ import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
+import com.robohorse.robopojogenerator.models.GenerationModel
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.junit5.MockKExtension
@@ -22,13 +23,16 @@ class KotlinDataClassPostProcessorTest {
     @RelaxedMockK
     lateinit var classItem: ClassItem
 
+    @RelaxedMockK
+    lateinit var generationModel: GenerationModel
+
     @InjectMockKs
     lateinit var processor: KotlinDataClassPostProcessor
 
     @Test
     fun check_createClassTemplate() {
         val classBody = "Class"
-        processor.createClassTemplate(classItem, classBody)
+        processor.createClassTemplate(classItem, classBody, generationModel)
         verify { classTemplateHelper.createClassBodyKotlinDataClass(classItem, classBody) }
     }
 }

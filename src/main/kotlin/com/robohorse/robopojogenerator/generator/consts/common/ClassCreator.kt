@@ -13,7 +13,6 @@ class ClassCreator(
             generationModel: GenerationModel,
             projectModel: ProjectModel
     ) = fileWriteFactory.createFileWriter(
-            generationModel,
-            projectModel
+            generationModel
     ).writeFiles(roboPOJOGenerator.generate(generationModel), generationModel, projectModel)
 }

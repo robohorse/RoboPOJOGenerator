@@ -39,6 +39,6 @@ class ClassCreatorTest {
         classItemSet.add(classItem)
         every { roboPOJOGenerator.generate(generationModel) }.returns(classItemSet)
         classCreator.generateFiles(generationModel, projectModel)
-        verify { fileWriteFactory.createFileWriter(generationModel, projectModel) }
+        verify { fileWriteFactory.createFileWriter(generationModel) }
     }
 }

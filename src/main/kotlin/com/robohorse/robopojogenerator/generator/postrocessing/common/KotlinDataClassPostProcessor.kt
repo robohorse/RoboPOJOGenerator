@@ -4,12 +4,13 @@ import com.robohorse.robopojogenerator.generator.consts.annotations.KotlinAnnota
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
+import com.robohorse.robopojogenerator.generator.consts.templates.PARCELABLE_ANDROID
+import com.robohorse.robopojogenerator.generator.consts.templates.PARCELIZE_KOTLINX
 import com.robohorse.robopojogenerator.generator.postrocessing.BasePostProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.FrameworkVW
 import com.robohorse.robopojogenerator.view.FrameworkVW.*
 import java.util.*
 
@@ -19,9 +20,13 @@ class KotlinDataClassPostProcessor(
 ) : BasePostProcessor(generateHelper, classTemplateHelper) {
 
     override fun proceedClassImports(
-            imports: HashSet<String>
+            imports: HashSet<String>, generationModel: GenerationModel
     ): StringBuilder {
         imports.remove(ImportsTemplate.LIST)
+        if (generationModel.useKotlinParcelable) {
+            imports.add(PARCELABLE_ANDROID)
+            imports.add(PARCELIZE_KOTLINX)
+        }
         val importsBuilder = StringBuilder()
         for (importItem in imports) {
             importsBuilder.append(importItem.replace(";", ""))
@@ -54,8 +59,11 @@ class KotlinDataClassPostProcessor(
                         classTemplate)
     }
 
-    override fun applyAnnotations(item: FrameworkVW, classItem: ClassItem) {
-        when (item) {
+    override fun applyAnnotations(
+            generationModel: GenerationModel,
+            classItem: ClassItem
+    ) {
+        when (generationModel.annotationEnum) {
             is Gson -> {
                 generateHelper.setAnnotations(classItem,
                         KotlinAnnotations.GSON.classAnnotation,
@@ -92,7 +100,13 @@ class KotlinDataClassPostProcessor(
         }
     }
 
-    override fun createClassTemplate(classItem: ClassItem, classBody: String?): String {
-        return classTemplateHelper.createClassBodyKotlinDataClass(classItem, classBody)
+    override fun createClassTemplate(
+            classItem: ClassItem, classBody: String?, generationModel: GenerationModel
+    ): String {
+        return classTemplateHelper.createClassBodyKotlinDataClass(
+                classItem,
+                classBody,
+                generationModel.useKotlinParcelable
+        )
     }
 }

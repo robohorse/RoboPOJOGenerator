@@ -106,9 +106,19 @@ sealed class AdditionalPropertiesVM(
             selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, TO_STRING)
 
+    class UseKotlinParcelable(
+            selected: Boolean = false
+    ) : AdditionalPropertiesVM(selected, KOTLIN_PARCELABLE)
+
+    class UseKotlinSingleDataClass(
+            selected: Boolean = false
+    ) : AdditionalPropertiesVM(selected, KOTLIN_SINGLE_DATA_CLASS)
+
     companion object {
-        const val SETTERS = "use setters"
-        const val GETTERS = "use getters"
-        const val TO_STRING = "use to string"
+        const val SETTERS = "create setters"
+        const val GETTERS = "create getters"
+        const val TO_STRING = "override toString()"
+        const val KOTLIN_PARCELABLE = "parcelable (Android)"
+        const val KOTLIN_SINGLE_DATA_CLASS = "single data class"
     }
 }

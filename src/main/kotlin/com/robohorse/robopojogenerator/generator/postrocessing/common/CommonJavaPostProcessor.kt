@@ -60,6 +60,6 @@ class CommonJavaPostProcessor(
     }
 
     override fun createClassTemplate(
-            classItem: ClassItem, classBody: String?
+            classItem: ClassItem, classBody: String?, generationModel: GenerationModel
     ) = classTemplateHelper.createClassBody(classItem, classBody)
 }
