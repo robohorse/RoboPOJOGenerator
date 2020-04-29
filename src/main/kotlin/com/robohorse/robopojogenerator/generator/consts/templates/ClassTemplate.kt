@@ -36,6 +36,7 @@ object ClassTemplate {
     const val FIELD = TAB + "private %1\$s %2\$s;" + NEW_LINE
     const val FIELD_AUTO_VALUE = TAB + "public abstract %1\$s %2\$s();" + NEW_LINE
     const val FIELD_KOTLIN_DTO = TAB + "val %1\$s: %2\$s? = null" + "," + NEW_LINE
+    const val FIELD_KOTLIN_DTO_NON_NULL = TAB + "val %1\$s: %2\$s" + "," + NEW_LINE
     const val FIELD_KOTLIN_DOT_DEFAULT = TAB + "val any: Any? = null"
     const val FIELD_ANNOTATED = "$NEW_LINE$TAB%1\$s$NEW_LINE%2\$s"
     const val TYPE_ADAPTER = (TAB + "public static TypeAdapter<%1\$s> typeAdapter(Gson gson) {" +

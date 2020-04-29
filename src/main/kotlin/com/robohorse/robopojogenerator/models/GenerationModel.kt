@@ -15,7 +15,8 @@ data class GenerationModel(
         val useGetters: Boolean,
         val useStrings: Boolean,
         val useKotlinSingleDataClass: Boolean,
-        val useKotlinParcelable: Boolean
+        val useKotlinParcelable: Boolean,
+        val kotlinNullableFields: Boolean
 )
 
 data class ProjectModel(

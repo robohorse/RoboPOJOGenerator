@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.SET
 import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.TO_STRING
 import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.KOTLIN_PARCELABLE
 import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.KOTLIN_SINGLE_DATA_CLASS
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.Companion.KOTLIN_NULLABLE_FIELDS
 
 class ViewModelMapper(
         private val generatorViewBinder: GeneratorViewBinder
@@ -23,7 +24,8 @@ class ViewModelMapper(
                         useGetters = resolveCheckBox(GETTERS),
                         useStrings = resolveCheckBox(TO_STRING),
                         useKotlinParcelable = resolveCheckBox(KOTLIN_PARCELABLE),
-                        useKotlinSingleDataClass = resolveCheckBox(KOTLIN_SINGLE_DATA_CLASS)
+                        useKotlinSingleDataClass = resolveCheckBox(KOTLIN_SINGLE_DATA_CLASS),
+                        kotlinNullableFields = resolveCheckBox(KOTLIN_NULLABLE_FIELDS)
                 )
             }
 

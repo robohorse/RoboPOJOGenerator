@@ -114,11 +114,16 @@ sealed class AdditionalPropertiesVM(
             selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, KOTLIN_SINGLE_DATA_CLASS)
 
+    class UseKotlinNullableFields(
+            selected: Boolean = false
+    ) : AdditionalPropertiesVM(selected, KOTLIN_NULLABLE_FIELDS)
+
     companion object {
         const val SETTERS = "create setters"
         const val GETTERS = "create getters"
         const val TO_STRING = "override toString()"
         const val KOTLIN_PARCELABLE = "parcelable (Android)"
         const val KOTLIN_SINGLE_DATA_CLASS = "single data class"
+        const val KOTLIN_NULLABLE_FIELDS = "nullable fields"
     }
 }
