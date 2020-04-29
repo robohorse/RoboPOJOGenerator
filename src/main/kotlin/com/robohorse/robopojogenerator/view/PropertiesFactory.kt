@@ -27,31 +27,37 @@ class PropertiesFactory {
     private fun createJsonLanguages() = listOf(
             Java(frameworks = listOf(
                     None(properties = listOf(
+                            UseJavaPrimitives(selected = true),
                             UseSetters(),
                             UseGetters(selected = true),
                             UseToString()
                     )),
                     Gson(properties = listOf(
+                            UseJavaPrimitives(selected = true),
                             UseSetters(),
                             UseGetters(selected = true),
                             UseToString()
                     )),
                     Jackson(properties = listOf(
+                            UseJavaPrimitives(selected = true),
                             UseSetters(),
                             UseGetters(selected = true),
                             UseToString()
                     )),
                     LoganSquare(properties = listOf(
+                            UseJavaPrimitives(selected = true),
                             UseSetters(),
                             UseGetters(selected = true),
                             UseToString()
                     )),
                     Moshi(properties = listOf(
+                            UseJavaPrimitives(selected = true),
                             UseSetters(),
                             UseGetters(selected = true),
                             UseToString()
                     )),
                     FastJson(properties = listOf(
+                            UseJavaPrimitives(selected = true),
                             UseSetters(),
                             UseGetters(selected = true),
                             UseToString()
