@@ -40,6 +40,7 @@ class KotlinDataClassPostProcessor(
         val classFields = classItem.classFields
         for (objectName in classFields.keys) {
             classBodyBuilder.append(classTemplateHelper.createKotlinDataClassField(
+                    generationModel,
                     FieldModel(
                             classType = classFields[objectName]?.getKotlinItem(),
                             annotation = classItem.annotation,

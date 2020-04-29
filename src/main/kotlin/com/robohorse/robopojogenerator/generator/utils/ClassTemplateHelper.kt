@@ -4,6 +4,7 @@ import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.models.FieldModel
+import com.robohorse.robopojogenerator.models.GenerationModel
 
 class ClassTemplateHelper(
         private val classGenerateHelper: ClassGenerateHelper
@@ -64,12 +65,20 @@ class ClassTemplateHelper(
                     model.fieldNameFormatted
             ))
 
-    fun createKotlinDataClassField(model: FieldModel) =
-            createAnnotatedField(model.fieldName, model.annotation, String.format(
-                    ClassTemplate.FIELD_KOTLIN_DTO,
-                    model.fieldNameFormatted,
-                    model.classType
-            ).replace(">", "?>"))
+    fun createKotlinDataClassField(generationModel: GenerationModel, model: FieldModel) =
+            if (generationModel.kotlinNullableFields) {
+                createAnnotatedField(model.fieldName, model.annotation, String.format(
+                        ClassTemplate.FIELD_KOTLIN_DTO,
+                        model.fieldNameFormatted,
+                        model.classType
+                ).replace(">", "?>"))
+            } else {
+                createAnnotatedField(model.fieldName, model.annotation, String.format(
+                        ClassTemplate.FIELD_KOTLIN_DTO_NON_NULL,
+                        model.fieldNameFormatted,
+                        model.classType
+                ))
+            }
 
     fun createClassBody(classItem: ClassItem, classBody: String?) =
             createClassBodyAnnotated(classItem, String.format(
