@@ -21,7 +21,9 @@ class CommonJavaPostProcessor(
         val classFields = classItem.classFields
         with(classBodyBuilder) {
             for (objectName in classFields.keys) {
-                val classItemValue = classFields[objectName]?.getJavaItem()
+                val classItemValue = classFields[objectName]?.getJavaItem(
+                        primitive = generationModel.javaPrimitives
+                )
                 val itemNameFormatted = generateHelper.formatClassField(objectName)
                 append(classTemplateHelper.createFiled(
                         FieldModel(
@@ -33,7 +35,9 @@ class CommonJavaPostProcessor(
                 ))
             }
             for (objectName in classFields.keys) {
-                val classItemValue = classFields[objectName]?.getJavaItem()
+                val classItemValue = classFields[objectName]?.getJavaItem(
+                        primitive = generationModel.javaPrimitives
+                )
                 val itemNameFormatted = generateHelper.formatClassField(objectName)
                 if (generationModel.useSetters) {
                     append(ClassTemplate.NEW_LINE)

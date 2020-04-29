@@ -9,7 +9,14 @@ data class ClassField @JvmOverloads constructor(
         var className: String? = null,
         var classField: ClassField? = null
 ) {
-    fun getJavaItem(): String? {
+    fun getJavaItem(primitive: Boolean = true) =
+            if (primitive) {
+                getJavaItemPrimitive()
+            } else {
+                getJavaBoxed()
+            }
+
+    private fun getJavaItemPrimitive(): String? {
         return if (null != classField) wrapListJava() else if (null != className) className else classEnum?.primitive
     }
 
