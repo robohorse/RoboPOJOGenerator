@@ -1,10 +1,8 @@
 package com.robohorse.robopojogenerator.di
 
 import com.robohorse.robopojogenerator.controllers.GeneratePOJOActionController
-import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
+import com.robohorse.robopojogenerator.delegates.*
 import com.robohorse.robopojogenerator.delegates.file.CommonFileWriterDelegate
-import com.robohorse.robopojogenerator.delegates.GenerationDelegate
-import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.delegates.file.FileWriterDelegate
 import com.robohorse.robopojogenerator.delegates.file.KotlinSingleFileWriterDelegate
 import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
@@ -65,7 +63,7 @@ val appModule = module {
     }
 
     single {
-        KotlinSingleFileWriterDelegate(get(), get(), get(), get())
+        KotlinSingleFileWriterDelegate(get(), get(), get(), get(), get())
     }
 
     single {
@@ -73,7 +71,15 @@ val appModule = module {
     }
 
     single {
-        CommonFileWriterDelegate(get(), get(), get())
+        CommonFileWriterDelegate(get(), get(), get(), get())
+    }
+
+    single {
+        PreWriterDelegate(get())
+    }
+
+    single {
+        IndentationDelegate()
     }
 
     single {

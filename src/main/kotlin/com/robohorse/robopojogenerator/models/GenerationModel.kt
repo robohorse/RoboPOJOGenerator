@@ -17,7 +17,8 @@ data class GenerationModel(
         val useKotlinSingleDataClass: Boolean,
         val useKotlinParcelable: Boolean,
         val kotlinNullableFields: Boolean,
-        val javaPrimitives: Boolean
+        val javaPrimitives: Boolean,
+        val useTabsIndentation: Boolean
 )
 
 data class ProjectModel(

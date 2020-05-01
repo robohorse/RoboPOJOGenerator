@@ -27,7 +27,8 @@ class ViewModelMapper(
                         useKotlinParcelable = resolveCheckBox(KOTLIN_PARCELABLE),
                         useKotlinSingleDataClass = resolveCheckBox(KOTLIN_SINGLE_DATA_CLASS),
                         kotlinNullableFields = resolveCheckBox(KOTLIN_NULLABLE_FIELDS),
-                        javaPrimitives = resolveCheckBox(JAVA_PRIMITIVE_TYPES)
+                        javaPrimitives = resolveCheckBox(JAVA_PRIMITIVE_TYPES),
+                        useTabsIndentation = useTabsIndentation.isSelected
                 )
             }
 
