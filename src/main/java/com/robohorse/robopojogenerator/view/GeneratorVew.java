@@ -30,8 +30,13 @@ public class GeneratorVew {
     private JPanel commonInfoPanel;
     private JPanel controlsPanel;
     private JScrollPane scrollPropertiesPanel;
+    private JCheckBox useTabsIndentation;
     private ButtonGroup sourceGroup;
     private ButtonGroup languageGroup;
+
+    public JCheckBox getUseTabsIndentation() {
+        return useTabsIndentation;
+    }
 
     public JRadioButton getJavaRadioButton() {
         return javaRadioButton;

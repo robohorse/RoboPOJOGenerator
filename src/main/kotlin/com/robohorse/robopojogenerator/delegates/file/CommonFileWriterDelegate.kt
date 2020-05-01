@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.delegates.file
 
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.models.GenerationModel
@@ -9,8 +10,9 @@ import com.robohorse.robopojogenerator.models.ProjectModel
 class CommonFileWriterDelegate(
         messageDelegate: MessageDelegate,
         factory: PostProcessorFactory,
-        fileWriterDelegate: FileWriterDelegate
-) : BaseWriterDelegate(messageDelegate, factory, fileWriterDelegate) {
+        fileWriterDelegate: FileWriterDelegate,
+        preWriterDelegate: PreWriterDelegate
+) : BaseWriterDelegate(messageDelegate, factory, fileWriterDelegate, preWriterDelegate) {
 
     override fun writeFiles(
             set: Set<ClassItem>,

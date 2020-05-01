@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.delegates.file
 
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
 import com.robohorse.robopojogenerator.errors.FileWriteException
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
@@ -12,7 +13,8 @@ import java.io.IOException
 abstract class BaseWriterDelegate(
         private val messageDelegate: MessageDelegate,
         private val factory: PostProcessorFactory,
-        private val fileWriterDelegate: FileWriterDelegate
+        private val fileWriterDelegate: FileWriterDelegate,
+        private val preWriterDelegate: PreWriterDelegate
 ) {
 
     abstract fun writeFiles(set: Set<ClassItem>,
@@ -47,7 +49,9 @@ abstract class BaseWriterDelegate(
             } else {
                 messageDelegate.logEventMessage("created $fileName")
             }
-            fileWriterDelegate.writeToFile(classItemBody, file)
+            fileWriterDelegate.writeToFile(
+                    preWriterDelegate.updateFileBody(generationModel, classItemBody), file
+            )
         } catch (e: IOException) {
             throw FileWriteException(e.message)
         }

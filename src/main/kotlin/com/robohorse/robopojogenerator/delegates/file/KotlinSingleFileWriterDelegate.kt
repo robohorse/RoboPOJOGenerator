@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.delegates.file
 
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
@@ -13,8 +14,9 @@ class KotlinSingleFileWriterDelegate(
         messageDelegate: MessageDelegate,
         factory: PostProcessorFactory,
         fileWriterDelegate: FileWriterDelegate,
+        preWriterDelegate: PreWriterDelegate,
         private val kotlinDataClassPostProcessor: KotlinDataClassPostProcessor
-) : BaseWriterDelegate(messageDelegate, factory, fileWriterDelegate) {
+) : BaseWriterDelegate(messageDelegate, factory, fileWriterDelegate, preWriterDelegate) {
 
     override fun writeFiles(
             set: Set<ClassItem>,
