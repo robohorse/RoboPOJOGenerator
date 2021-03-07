@@ -15,6 +15,7 @@ import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinData
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
+import com.robohorse.robopojogenerator.generator.utils.ProcessingModelManager
 import com.robohorse.robopojogenerator.view.GeneratorViewBinder
 import com.robohorse.robopojogenerator.view.GeneratorViewFactory
 import com.robohorse.robopojogenerator.view.PropertiesFactory
@@ -103,7 +104,11 @@ val appModule = module {
     }
 
     single {
-        RoboPOJOGenerator(get())
+        RoboPOJOGenerator(get(), get())
+    }
+
+    single {
+        ProcessingModelManager()
     }
 
     single {
