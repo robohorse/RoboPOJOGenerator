@@ -12,15 +12,15 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    Array deserialization error was fixed.
+    Array deserialization error was fixed. Some minor improvements were implemented.
     ]]>
     </change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="162.0"/>
+    <idea-version since-build="193.0"/>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <notificationGroup id="RoboPOJO Generator" displayType="BALLOON" key="com.robohorse.robopojogenerator"/>
     </extensions>
 
     <depends>com.intellij.modules.lang</depends>

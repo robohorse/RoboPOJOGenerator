@@ -3,9 +3,9 @@ package com.robohorse.robopojogenerator
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.robohorse.robopojogenerator.controllers.GeneratePOJOActionController
 import com.robohorse.robopojogenerator.di.appModule
-import org.koin.core.KoinComponent
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.core.context.startKoin
-import org.koin.core.inject
 
 class PluginApplication : KoinComponent {
     init {

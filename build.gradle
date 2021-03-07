@@ -11,10 +11,10 @@ buildscript {
 plugins {
     id 'java'
     id 'idea'
-    id "org.jetbrains.kotlin.jvm" version "1.3.71"
+    id "org.jetbrains.kotlin.jvm" version "1.5.0-M1"
     id "net.ltgt.apt" version "0.21"
-    id "org.jetbrains.intellij" version "0.4.18"
-    id "com.github.kt3k.coveralls" version "2.10.1"
+    id "org.jetbrains.intellij" version "0.7.2"
+    id "com.github.kt3k.coveralls" version "2.10.2"
     id 'jacoco'
 }
 
@@ -49,18 +49,24 @@ version "2.2.1"
 intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
-    intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
+//    intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
 
 dependencies {
-    implementation 'org.koin:koin-core:2.1.5'
+    implementation 'org.koin:koin-core:2.2.2'
     implementation 'org.json:json:20160212'
     implementation 'commons-io:commons-io:2.4'
     implementation 'com.google.guava:guava:19.0'
     implementation 'com.fifesoft:rsyntaxtextarea:3.1.2'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.3.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-    testImplementation "io.mockk:mockk:1.9.3"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0-M1'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.8.0-M1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1'
+    testImplementation 'io.mockk:mockk:1.10.6'
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
