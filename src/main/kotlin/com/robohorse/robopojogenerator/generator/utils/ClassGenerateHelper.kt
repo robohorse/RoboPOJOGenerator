@@ -10,7 +10,6 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import org.json.JSONArray
 import org.json.JSONObject
 
-@Deprecated("Will be refactored soon...")
 class ClassGenerateHelper {
 
     fun validateJsonContent(content: String): String {
@@ -81,7 +80,7 @@ class ClassGenerateHelper {
     }
 
     fun updateClassModel(classBodyBuilder: StringBuilder) {
-        if (classBodyBuilder.isEmpty()) {
+        if (classBodyBuilder.length == 0) {
             classBodyBuilder.append(ClassTemplate.FIELD_KOTLIN_DOT_DEFAULT)
         } else {
             classBodyBuilder.deleteCharAt(classBodyBuilder.lastIndexOf(","))

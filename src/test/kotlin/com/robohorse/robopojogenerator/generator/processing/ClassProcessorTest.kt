@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.processing
 
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.common.JsonItem
+import com.robohorse.robopojogenerator.generator.consts.common.JsonModel.JsonItem
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.JsonReader
 import io.mockk.every

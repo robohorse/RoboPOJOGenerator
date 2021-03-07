@@ -3,8 +3,9 @@ package com.robohorse.robopojogenerator.generator.processing;
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum;
 import com.robohorse.robopojogenerator.generator.consts.common.ClassField;
 import com.robohorse.robopojogenerator.generator.consts.common.ClassItem;
-import com.robohorse.robopojogenerator.generator.consts.common.JsonItem;
-import com.robohorse.robopojogenerator.generator.consts.common.JsonItemArray;
+import com.robohorse.robopojogenerator.generator.consts.common.JsonModel;
+import com.robohorse.robopojogenerator.generator.consts.common.JsonModel.JsonItem;
+import com.robohorse.robopojogenerator.generator.consts.common.JsonModel.JsonItemArray;
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate;
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper;
 import org.json.JSONArray;
@@ -16,7 +17,6 @@ import java.util.Map;
 /**
  * Created by vadim on 23.09.16.
  */
-@Deprecated
 public class ClassProcessor {
     ClassGenerateHelper classGenerateHelper;
 
@@ -24,8 +24,36 @@ public class ClassProcessor {
         this.classGenerateHelper = classGenerateHelper;
     }
 
-    public void proceed(JsonItem jsonItem, final Map<String, ClassItem> itemMap) {
+    public void proceed(JsonModel jsonItem, final Map<String, ClassItem> itemMap) {
         final ClassItem classItem = new ClassItem(classGenerateHelper.formatClassName(jsonItem.getKey()));
+        if (jsonItem instanceof JsonItem) {
+            processSingleObject((JsonItem) jsonItem, itemMap, classItem);
+        } else {
+            processArrayObject((JsonItemArray) jsonItem, itemMap, classItem);
+        }
+        appendItemsMap(itemMap, classItem);
+    }
+
+    private void processArrayObject(JsonItemArray arrayItem,
+                                    final Map<String, ClassItem> itemMap,
+                                    final ClassItem classItem) {
+        final JSONArray jsonArray = arrayItem.getJsonObject();
+        classItem.getClassImports().add(ImportsTemplate.LIST);
+
+        final ClassField classField = new ClassField();
+        if (jsonArray.length() == 0) {
+            classField.setClassField(new ClassField(ClassEnum.OBJECT));
+            classItem.getClassFields().put(arrayItem.getKey(), classField);
+        } else {
+            final JsonItemArray jsonItemArray = new JsonItemArray(arrayItem.getKey(), jsonArray);
+            proceedArray(jsonItemArray, classField, itemMap);
+            classItem.getClassFields().put(arrayItem.getKey(), classField);
+        }
+    }
+
+    private void processSingleObject(JsonItem jsonItem,
+                                     final Map<String, ClassItem> itemMap,
+                                     final ClassItem classItem) {
         for (final String jsonObjectKey : jsonItem.getJsonObject().keySet()) {
             final Object object = jsonItem.getJsonObject().get(jsonObjectKey);
             final InnerObjectResolver innerObjectResolver = new InnerObjectResolver() {
@@ -64,7 +92,6 @@ public class ClassProcessor {
             };
             innerObjectResolver.resolveClassType(object);
         }
-        appendItemsMap(itemMap, classItem);
     }
 
     private void appendItemsMap(Map<String, ClassItem> itemMap, ClassItem classItem) {

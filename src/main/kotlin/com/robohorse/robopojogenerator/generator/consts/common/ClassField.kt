@@ -3,7 +3,6 @@ package com.robohorse.robopojogenerator.generator.consts.common
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 
-@Deprecated("Will be refactored soon...")
 data class ClassField @JvmOverloads constructor(
         var classEnum: ClassEnum? = null,
         var className: String? = null,
