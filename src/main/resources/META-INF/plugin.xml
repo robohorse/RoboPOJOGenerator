@@ -1,18 +1,18 @@
 <idea-plugin>
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>2.2.2</version>
+    <version>2.3.0</version>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
     <description><![CDATA[
-      Generate Java and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, empty annotations template.<br>
+      Generate Java and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, empty annotations template.<br>
       Supports: primitive types, multiple inner JSONArrays.
 
-      key words: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable
+      key words: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok
     ]]></description>
 
     <change-notes><![CDATA[
-    New notifications api support was added.
+    Lombok experimental support was added.
     ]]>
     </change-notes>
 

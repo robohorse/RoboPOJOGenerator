@@ -55,6 +55,10 @@ sealed class FrameworkVW(
             properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(NONE, properties)
 
+    class NoneLombok(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(NONE_LOMBOK, properties)
+
     class Gson(
             properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(GSON, properties)
@@ -81,6 +85,7 @@ sealed class FrameworkVW(
 
     companion object {
         const val NONE = "none"
+        const val NONE_LOMBOK = "Lombok"
         const val GSON = "GSON"
         const val JACKSON = "Jackson"
         const val LOGAN_SQUARE = "Logan Square"

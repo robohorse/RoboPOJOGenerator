@@ -8,6 +8,10 @@ object ClassTemplate {
             "{" + NEW_LINE +
             "%2\$s" + NEW_LINE +
             "}"
+    const val CLASS_BODY_LOMBOK = "public @Data class %1\$s" +
+            "{" + NEW_LINE +
+            "%2\$s" + NEW_LINE +
+            "}"
     const val CLASS_BODY_ABSTRACT = "public abstract class %1\$s" +
             "{" + NEW_LINE +
             "%2\$s" + NEW_LINE +

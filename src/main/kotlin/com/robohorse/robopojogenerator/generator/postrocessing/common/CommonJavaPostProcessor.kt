@@ -6,15 +6,16 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
+import com.robohorse.robopojogenerator.view.FrameworkVW
 
 class CommonJavaPostProcessor(
-        generateHelper: ClassGenerateHelper,
-        classTemplateHelper: ClassTemplateHelper
+    generateHelper: ClassGenerateHelper,
+    classTemplateHelper: ClassTemplateHelper
 ) : JavaPostProcessor(generateHelper, classTemplateHelper) {
 
     override fun proceedClassBody(
-            classItem: ClassItem,
-            generationModel: GenerationModel
+        classItem: ClassItem,
+        generationModel: GenerationModel
     ): String {
         val classBodyBuilder = StringBuilder()
         val classMethodBuilder = StringBuilder()
@@ -22,41 +23,51 @@ class CommonJavaPostProcessor(
         with(classBodyBuilder) {
             for (objectName in classFields.keys) {
                 val classItemValue = classFields[objectName]?.getJavaItem(
-                        primitive = generationModel.javaPrimitives
+                    primitive = generationModel.javaPrimitives
                 )
                 val itemNameFormatted = generateHelper.formatClassField(objectName)
-                append(classTemplateHelper.createFiled(
+                append(
+                    classTemplateHelper.createFiled(
                         FieldModel(
-                                classType = classItemValue,
-                                fieldNameFormatted = itemNameFormatted,
-                                fieldName = objectName,
-                                annotation = classItem.annotation
+                            classType = classItemValue,
+                            fieldNameFormatted = itemNameFormatted,
+                            fieldName = objectName,
+                            annotation = classItem.annotation
                         )
-                ))
+                    )
+                )
             }
             for (objectName in classFields.keys) {
                 val classItemValue = classFields[objectName]?.getJavaItem(
-                        primitive = generationModel.javaPrimitives
+                    primitive = generationModel.javaPrimitives
                 )
                 val itemNameFormatted = generateHelper.formatClassField(objectName)
                 if (generationModel.useSetters) {
                     append(ClassTemplate.NEW_LINE)
-                    append(classTemplateHelper.createSetter(
+                    append(
+                        classTemplateHelper.createSetter(
                             itemNameFormatted,
-                            classItemValue))
+                            classItemValue
+                        )
+                    )
                 }
                 if (generationModel.useGetters) {
                     append(ClassTemplate.NEW_LINE)
-                    append(classTemplateHelper.createGetter(
+                    append(
+                        classTemplateHelper.createGetter(
                             itemNameFormatted,
-                            classItemValue))
+                            classItemValue
+                        )
+                    )
                 }
             }
             if (generationModel.useStrings) {
                 append(ClassTemplate.NEW_LINE)
-                append(classTemplateHelper.createToString(
+                append(
+                    classTemplateHelper.createToString(
                         classItem
-                ))
+                    )
+                )
             }
             append(classMethodBuilder)
             return toString()
@@ -64,6 +75,11 @@ class CommonJavaPostProcessor(
     }
 
     override fun createClassTemplate(
-            classItem: ClassItem, classBody: String?, generationModel: GenerationModel
-    ) = classTemplateHelper.createClassBody(classItem, classBody)
+        classItem: ClassItem, classBody: String?, generationModel: GenerationModel
+    ) = with(classTemplateHelper) {
+            when (generationModel.annotationEnum) {
+                is FrameworkVW.NoneLombok -> createClassBodyAnnotatedName(classItem, classBody)
+                else -> createClassBody(classItem, classBody)
+            }
+        }
 }

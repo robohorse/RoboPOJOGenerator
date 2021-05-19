@@ -44,12 +44,12 @@ repositories {
 }
 
 group "com.robohorse.robopojogenerator"
-version "2.2.2"
+version "2.3.0"
 
 intellij {
     pluginName "RoboPOJOGenerator"
     intellij.updateSinceUntilBuild false
- //   intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
+    //intellij.localPath = "/Applications/IntelliJ IDEA CE.app/Contents"
 }
 
 dependencies {

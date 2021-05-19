@@ -87,6 +87,13 @@ class ClassTemplateHelper(
                     classBody
             ))
 
+    fun createClassBodyAnnotatedName(classItem: ClassItem, classBody: String?) =
+        createClassBodyAnnotated(classItem, String.format(
+            ClassTemplate.CLASS_BODY_LOMBOK,
+            classItem.className,
+            classBody
+        ))
+
     fun createTypeAdapter(classItem: ClassItem) =
             String.format(ClassTemplate.TYPE_ADAPTER, classItem.className)
 

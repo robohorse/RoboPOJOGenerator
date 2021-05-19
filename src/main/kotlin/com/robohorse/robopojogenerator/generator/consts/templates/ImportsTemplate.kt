@@ -14,6 +14,9 @@ sealed class ImportsTemplate(
     object FAST_JSON : ImportsTemplate(arrayOf(FAST_JSON_PROPERTY))
 
     object MOSHI : ImportsTemplate(arrayOf(MOSHI_PROPERTY))
+
+    object LOMBOK: ImportsTemplate(arrayOf(LOMBOK_PROPERTY))
+
     companion object {
         const val LIST = "import java.util.List;"
         const val SERIALIZED_NAME = "import com.google.gson.annotations.SerializedName;"
@@ -25,6 +28,7 @@ const val JSON_FIELD = "import com.bluelinelabs.logansquare.annotation.JsonField
 const val JSON_PROPERTY = "import com.fasterxml.jackson.annotation.JsonProperty;"
 const val FAST_JSON_PROPERTY = "import com.alibaba.fastjson.annotation.JSONField;"
 const val MOSHI_PROPERTY = "import com.squareup.moshi.Json;"
+const val LOMBOK_PROPERTY = "import lombok.Data;"
 const val AUTO_VALUE = "import com.google.auto.value.AutoValue;"
 const val TYPED_ADAPTER = "import com.google.gson.TypeAdapter;"
 const val GSON_IMPORT = "import com.google.gson.Gson;"
