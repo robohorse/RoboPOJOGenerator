@@ -53,7 +53,7 @@ object ClassTemplate {
     const val GETTER = (TAB + "public %3\$s get%1\$s(){" + NEW_LINE +
             TAB + TAB + "return %2\$s;" + NEW_LINE
             + TAB + "}" + NEW_LINE)
-    const val GETTER_BOOLEAN = (TAB + "public boolean is%1\$s(){" + NEW_LINE +
+    const val GETTER_BOOLEAN = (TAB + "public %3\$s is%1\$s(){" + NEW_LINE +
             TAB + TAB + "return %2\$s;" + NEW_LINE
             + TAB + "}" + NEW_LINE)
     const val TO_STRING = (TAB + "@Override" + NEW_LINE + " " + TAB +
