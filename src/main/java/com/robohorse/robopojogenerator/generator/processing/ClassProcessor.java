@@ -126,7 +126,15 @@ public class ClassProcessor {
                         proceed(jsonItem, innerItemsMap);
                     }
                     classField.setClassField(new ClassField(null, itemName));
-                    itemMap.putAll(innerItemsMap);
+                    innerItemsMap.forEach((key, value) -> {
+                        ClassItem existing = itemMap.get(key);
+                        if (existing != null) {
+                            value.getClassFields().forEach((classKey, classValue) -> existing.getClassFields().putIfAbsent(classKey, classValue));
+                            existing.getClassImports().addAll(value.getClassImports());
+                        } else {
+                            itemMap.put(key, value);
+                        }
+                    });
                 }
 
                 @Override
