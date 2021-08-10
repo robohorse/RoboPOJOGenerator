@@ -1,0 +1,29 @@
+{
+  "Outsides": [
+    {
+      "Outside": {
+        "Insides": [
+          {
+            "Inside": {
+              "A": "value",
+              "B": "value",
+              "C": "value"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Outside": {
+        "Insides": [
+          {
+            "Inside": {
+              "A": "value2",
+              "B": "value2"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

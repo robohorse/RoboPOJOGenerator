@@ -139,4 +139,21 @@ class ClassProcessorTest {
             }
         }
     }
+
+    @Test
+    fun testNestedArrayElementsConsolidateObjectProperties() {
+        val jsonObject = jsonReader.read("nested_array_elements.json") as JSONObject
+        val name = "Response"
+        val classItemMap: Map<String, ClassItem> = HashMap()
+        val jsonItem = JsonItem(name, jsonObject)
+        classProcessor.proceed(jsonItem, classItemMap)
+        assertTrue(classItemMap.size == 1)
+        val classFields = classItemMap.values.firstOrNull()?.classFields
+        assertNotNull(classFields)
+        // when using "itemMap.putAll(innerItemsMap);" element "C" will be missing as newer instances of objects in
+        // innerItemsMap of the same name/type overwrite existing map (itemMap) entries
+        listOf("Outsides", "Outside", "Insides", "Inside", "A", "B", "C").listIterator().forEach {
+            assertTrue(classFields.containsKey(it), "Missing element: $it")
+        }
+    }
 }
