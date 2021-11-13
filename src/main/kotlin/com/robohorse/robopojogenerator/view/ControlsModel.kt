@@ -127,11 +127,16 @@ sealed class AdditionalPropertiesVM(
             selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, KOTLIN_NULLABLE_FIELDS)
 
+    class UseLombokValue(
+        selected: Boolean = false
+    ) : AdditionalPropertiesVM(selected, LOMBOK_VALUE)
+
     companion object {
         const val SETTERS = "create setters"
         const val GETTERS = "create getters"
         const val JAVA_PRIMITIVE_TYPES = "use Java primitive fields"
         const val TO_STRING = "override toString()"
+        const val LOMBOK_VALUE = "use @Value"
 
         const val KOTLIN_PARCELABLE = "parcelable (Android)"
         const val KOTLIN_SINGLE_DATA_CLASS = "single data class"

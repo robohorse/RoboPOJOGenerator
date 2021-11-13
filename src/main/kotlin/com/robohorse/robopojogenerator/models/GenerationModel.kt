@@ -18,7 +18,8 @@ data class GenerationModel(
         val useKotlinParcelable: Boolean,
         val kotlinNullableFields: Boolean,
         val javaPrimitives: Boolean,
-        val useTabsIndentation: Boolean
+        val useTabsIndentation: Boolean,
+        val useLombokValue: Boolean
 )
 
 data class ProjectModel(
@@ -32,5 +33,10 @@ data class FieldModel(
         val classType: String? = null,
         val fieldName: String? = null,
         val fieldNameFormatted: String? = null,
-        val annotation: String? = null
+        val annotation: String? = null,
+        val visibility: Visibility = Visibility.NONE
 )
+
+enum class Visibility(val value: String) {
+        NONE(""), PRIVATE("private")
+}

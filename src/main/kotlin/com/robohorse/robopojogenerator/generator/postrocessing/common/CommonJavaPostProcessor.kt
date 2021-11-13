@@ -6,7 +6,7 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.view.FrameworkVW
+import com.robohorse.robopojogenerator.models.Visibility
 
 class CommonJavaPostProcessor(
     generateHelper: ClassGenerateHelper,
@@ -27,12 +27,13 @@ class CommonJavaPostProcessor(
                 )
                 val itemNameFormatted = generateHelper.formatClassField(objectName)
                 append(
-                    classTemplateHelper.createFiled(
+                    classTemplateHelper.createField(
                         FieldModel(
                             classType = classItemValue,
                             fieldNameFormatted = itemNameFormatted,
                             fieldName = objectName,
-                            annotation = classItem.annotation
+                            annotation = classItem.annotation,
+                            visibility = if (generationModel.useLombokValue) Visibility.NONE else Visibility.PRIVATE
                         )
                     )
                 )
@@ -76,10 +77,5 @@ class CommonJavaPostProcessor(
 
     override fun createClassTemplate(
         classItem: ClassItem, classBody: String?, generationModel: GenerationModel
-    ) = with(classTemplateHelper) {
-            when (generationModel.annotationEnum) {
-                is FrameworkVW.NoneLombok -> createClassBodyAnnotatedName(classItem, classBody)
-                else -> createClassBody(classItem, classBody)
-            }
-        }
+    ) = classTemplateHelper.createClassBody(classItem, classBody)
 }

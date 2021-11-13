@@ -4,6 +4,7 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
+import com.robohorse.robopojogenerator.models.Visibility
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
@@ -78,11 +79,12 @@ class ClassTemplateHelperTest {
         val target = (ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        assertEquals(target, classTemplateHelper.createFiled(
+        assertEquals(target, classTemplateHelper.createField(
                 FieldModel(
                         classType = type,
                         fieldNameFormatted = field,
-                        fieldName = field
+                        fieldName = field,
+                        visibility = Visibility.PRIVATE
                 )
         ))
     }
@@ -96,12 +98,29 @@ class ClassTemplateHelperTest {
                 ClassTemplate.TAB + "private " + type + " " + field + ";"
                 + ClassTemplate.NEW_LINE)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        assertEquals(target, classTemplateHelper.createFiled(
+        assertEquals(target, classTemplateHelper.createField(
+                FieldModel(
+                        classType = type,
+                        fieldName = field,
+                        fieldNameFormatted = field,
+                        annotation = annotation,
+                        visibility = Visibility.PRIVATE
+                )
+        ))
+    }
+
+    @Test
+    fun testCreateFieldWithoutVisibility() {
+        val field = "item"
+        val type = "boolean"
+        val target = (ClassTemplate.TAB + type + " " + field + ";" + ClassTemplate.NEW_LINE)
+        every { classGenerateHelper.formatClassField(field) }.returns(field)
+        assertEquals(target, classTemplateHelper.createField(
                 FieldModel(
                         classType = type,
                         fieldNameFormatted = field,
                         fieldName = field,
-                        annotation = annotation
+                        visibility = Visibility.NONE
                 )
         ))
     }

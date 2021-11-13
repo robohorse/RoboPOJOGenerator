@@ -30,7 +30,9 @@ sealed class PojoAnnotations(
             annotation = "@Json(name = \"%1\$s\")"
     )
 
-    object LOMBOK : PojoAnnotations()
+    class Lombok(useValue: Boolean) : PojoAnnotations(
+            classAnnotation = if (useValue) "@Value" else "@Data"
+    )
 }
 
 private const val EMPTY_ANNOTATION = ""
