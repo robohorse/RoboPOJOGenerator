@@ -5,6 +5,7 @@ import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
+import com.robohorse.robopojogenerator.models.Visibility
 
 class ClassTemplateHelper(
         private val classGenerateHelper: ClassGenerateHelper
@@ -51,12 +52,19 @@ class ClassTemplateHelper(
         return fieldToStringStatement.toString()
     }
 
-    fun createFiled(model: FieldModel) =
-            createAnnotatedField(model.fieldName, model.annotation, String.format(
-                    ClassTemplate.FIELD,
-                    model.classType,
-                    model.fieldNameFormatted
-            ))
+    fun createField(model: FieldModel): String {
+        val fieldDeclaration = if (model.visibility == Visibility.NONE) String.format(
+            ClassTemplate.FIELD,
+            model.classType,
+            model.fieldNameFormatted
+        ) else (String.format(
+            ClassTemplate.FIELD_WITH_VISIBILITY,
+            model.visibility.value,
+            model.classType,
+            model.fieldNameFormatted
+        ))
+        return createAnnotatedField(model.fieldName, model.annotation, fieldDeclaration)
+    }
 
     fun createAutoValueField(model: FieldModel) =
             createAnnotatedField(model.fieldName, model.annotation, String.format(
@@ -86,13 +94,6 @@ class ClassTemplateHelper(
                     classItem.className,
                     classBody
             ))
-
-    fun createClassBodyAnnotatedName(classItem: ClassItem, classBody: String?) =
-        createClassBodyAnnotated(classItem, String.format(
-            ClassTemplate.CLASS_BODY_LOMBOK,
-            classItem.className,
-            classBody
-        ))
 
     fun createTypeAdapter(classItem: ClassItem) =
             String.format(ClassTemplate.TYPE_ADAPTER, classItem.className)

@@ -8,10 +8,6 @@ object ClassTemplate {
             "{" + NEW_LINE +
             "%2\$s" + NEW_LINE +
             "}"
-    const val CLASS_BODY_LOMBOK = "public @Data class %1\$s" +
-            "{" + NEW_LINE +
-            "%2\$s" + NEW_LINE +
-            "}"
     const val CLASS_BODY_ABSTRACT = "public abstract class %1\$s" +
             "{" + NEW_LINE +
             "%2\$s" + NEW_LINE +
@@ -37,7 +33,8 @@ object ClassTemplate {
     const val CLASS_ROOT_WITHOUT_SEMICOLON = "package %1\$s" + NEW_LINE + NEW_LINE +
             "%2\$s" + NEW_LINE
     const val CLASS_ROOT_NO_PACKAGE = "%1\$s" + NEW_LINE
-    const val FIELD = TAB + "private %1\$s %2\$s;" + NEW_LINE
+    const val FIELD = "$TAB%1\$s %2\$s;$NEW_LINE"
+    const val FIELD_WITH_VISIBILITY = "$TAB%1\$s %2\$s %3\$s;$NEW_LINE"
     const val FIELD_AUTO_VALUE = TAB + "public abstract %1\$s %2\$s();" + NEW_LINE
     const val FIELD_KOTLIN_DTO = TAB + "val %1\$s: %2\$s? = null" + "," + NEW_LINE
     const val FIELD_KOTLIN_DTO_NON_NULL = TAB + "val %1\$s: %2\$s" + "," + NEW_LINE

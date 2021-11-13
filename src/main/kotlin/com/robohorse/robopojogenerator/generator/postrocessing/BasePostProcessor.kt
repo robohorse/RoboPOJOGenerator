@@ -5,7 +5,6 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
-import java.util.*
 
 abstract class BasePostProcessor(
         protected val generateHelper: ClassGenerateHelper,

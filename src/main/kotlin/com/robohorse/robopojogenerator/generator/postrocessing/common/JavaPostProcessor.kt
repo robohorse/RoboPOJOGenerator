@@ -56,10 +56,12 @@ abstract class JavaPostProcessor(
                         ImportsTemplate.MOSHI.imports)
             }
             is NoneLombok ->{
+                val annotations = PojoAnnotations.Lombok(generationModel.useLombokValue)
+                val importsTemplate = ImportsTemplate.Lombok(generationModel.useLombokValue)
                 generateHelper.setAnnotations(classItem,
-                    PojoAnnotations.LOMBOK.classAnnotation,
-                    PojoAnnotations.LOMBOK.annotation,
-                    ImportsTemplate.LOMBOK.imports)
+                    annotations.classAnnotation,
+                    annotations.annotation,
+                    importsTemplate.imports)
             }
             is None -> {// NO OP
             }

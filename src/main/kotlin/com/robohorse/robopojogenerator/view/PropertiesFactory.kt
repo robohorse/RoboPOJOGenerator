@@ -39,7 +39,8 @@ class PropertiesFactory {
                 ),
                 NoneLombok(
                     properties = listOf(
-                        UseJavaPrimitives(selected = true)
+                        UseJavaPrimitives(selected = true),
+                        UseLombokValue()
                     )
                 ),
                 Gson(

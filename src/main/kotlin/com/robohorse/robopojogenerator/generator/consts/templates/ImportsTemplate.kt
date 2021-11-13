@@ -15,7 +15,9 @@ sealed class ImportsTemplate(
 
     object MOSHI : ImportsTemplate(arrayOf(MOSHI_PROPERTY))
 
-    object LOMBOK: ImportsTemplate(arrayOf(LOMBOK_PROPERTY))
+    class Lombok(useValue: Boolean) : ImportsTemplate(
+            imports = if (useValue) arrayOf(LOMBOK_VALUE) else arrayOf(LOMBOK_DATA)
+    )
 
     companion object {
         const val LIST = "import java.util.List;"
@@ -28,7 +30,8 @@ const val JSON_FIELD = "import com.bluelinelabs.logansquare.annotation.JsonField
 const val JSON_PROPERTY = "import com.fasterxml.jackson.annotation.JsonProperty;"
 const val FAST_JSON_PROPERTY = "import com.alibaba.fastjson.annotation.JSONField;"
 const val MOSHI_PROPERTY = "import com.squareup.moshi.Json;"
-const val LOMBOK_PROPERTY = "import lombok.Data;"
+const val LOMBOK_DATA = "import lombok.Data;"
+const val LOMBOK_VALUE = "import lombok.Value;"
 const val AUTO_VALUE = "import com.google.auto.value.AutoValue;"
 const val TYPED_ADAPTER = "import com.google.gson.TypeAdapter;"
 const val GSON_IMPORT = "import com.google.gson.Gson;"
