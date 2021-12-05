@@ -2,7 +2,6 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RoboPOJOGenerator-green.svg?style=true)](https://android-arsenal.com/details/1/4429)
 [![Build Status](https://travis-ci.org/robohorse/RoboPOJOGenerator.svg?branch=master)](https://travis-ci.org/robohorse/RoboPOJOGenerator)
-[![Coverage Status](https://coveralls.io/repos/github/robohorse/RoboPOJOGenerator/badge.svg?branch=master)](https://coveralls.io/github/robohorse/RoboPOJOGenerator?branch=master)
 
 <!-- Plugin description -->
 Intellij Idea and Android Studio plugin for JSON to POJO transformation.
