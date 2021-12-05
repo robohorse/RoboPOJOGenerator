@@ -1,7 +1,11 @@
 package com.robohorse.robopojogenerator.di
 
 import com.robohorse.robopojogenerator.controllers.GeneratePOJOActionController
-import com.robohorse.robopojogenerator.delegates.*
+import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
+import com.robohorse.robopojogenerator.delegates.GenerationDelegate
+import com.robohorse.robopojogenerator.delegates.IndentationDelegate
+import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
 import com.robohorse.robopojogenerator.delegates.file.CommonFileWriterDelegate
 import com.robohorse.robopojogenerator.delegates.file.FileWriterDelegate
 import com.robohorse.robopojogenerator.delegates.file.KotlinSingleFileWriterDelegate

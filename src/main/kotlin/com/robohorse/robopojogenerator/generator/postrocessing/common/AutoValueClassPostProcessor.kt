@@ -7,26 +7,28 @@ import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 
-class AutoValueClassPostProcessor(
-        generateHelper: ClassGenerateHelper,
-        classTemplateHelper: ClassTemplateHelper
+internal class AutoValueClassPostProcessor(
+    generateHelper: ClassGenerateHelper,
+    classTemplateHelper: ClassTemplateHelper
 ) : JavaPostProcessor(generateHelper, classTemplateHelper) {
 
     override fun proceedClassBody(
-            classItem: ClassItem,
-            generationModel: GenerationModel
+        classItem: ClassItem,
+        generationModel: GenerationModel
     ): String {
         val classBodyBuilder = StringBuilder()
         val classFields = classItem.classFields
         with(classBodyBuilder) {
             for (objectName in classFields.keys) {
-                append(classTemplateHelper.createAutoValueField(
+                append(
+                    classTemplateHelper.createAutoValueField(
                         FieldModel(
-                                classType = classFields[objectName]?.getJavaItem(),
-                                annotation = classItem.annotation,
-                                fieldName = objectName,
-                                fieldNameFormatted = generateHelper.formatClassField(objectName)
-                        ))
+                            classType = classFields[objectName]?.getJavaItem(),
+                            annotation = classItem.annotation,
+                            fieldName = objectName,
+                            fieldNameFormatted = generateHelper.formatClassField(objectName)
+                        )
+                    )
                 )
             }
             append(ClassTemplate.NEW_LINE)
@@ -36,6 +38,8 @@ class AutoValueClassPostProcessor(
     }
 
     override fun createClassTemplate(
-            classItem: ClassItem, classBody: String?, generationModel: GenerationModel
+        classItem: ClassItem,
+        classBody: String?,
+        generationModel: GenerationModel
     ) = classTemplateHelper.createClassBodyAbstract(classItem, classBody)
 }

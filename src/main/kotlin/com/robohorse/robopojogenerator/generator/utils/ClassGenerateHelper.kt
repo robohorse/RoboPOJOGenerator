@@ -10,7 +10,7 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ClassGenerateHelper {
+internal class ClassGenerateHelper {
 
     fun validateJsonContent(content: String): String {
         try {
@@ -53,7 +53,7 @@ class ClassGenerateHelper {
     fun formatClassName(name: String) = upperCaseFirst(proceedField(name))
 
     fun getClassNameWithItemPostfix(name: String) =
-            String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(name)))
+        String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(name)))
 
     fun upperCaseFirst(name: String) = if (name.length > 1) {
         Character.toUpperCase(name[0]).toString() + name.substring(1)
@@ -70,10 +70,11 @@ class ClassGenerateHelper {
     }
 
     fun setAnnotations(
-            classItem: ClassItem,
-            classAnnotation: String,
-            annotation: String,
-            imports: Array<String>) {
+        classItem: ClassItem,
+        classAnnotation: String,
+        annotation: String,
+        imports: Array<String>
+    ) {
         classItem.classAnnotation = classAnnotation
         classItem.annotation = annotation
         classItem.classImports.addAll(imports)
@@ -90,11 +91,13 @@ class ClassGenerateHelper {
     fun proceedField(fieldName: String): String {
         var objectName = fieldName
         objectName = objectName
-                .replace("[^A-Za-z0-9]".toRegex(), "_")
-                .replace("_{2,}".toRegex(), "_")
-        val isDigitFirst = (objectName.isNotBlank() && Character.isDigit(objectName[0])
-                || objectName.length > 1 && objectName[0] == '_' &&
-                Character.isDigit(objectName[1]))
+            .replace("[^A-Za-z0-9]".toRegex(), "_")
+            .replace("_{2,}".toRegex(), "_")
+        val isDigitFirst = (
+            objectName.isNotBlank() && Character.isDigit(objectName[0]) ||
+                objectName.length > 1 && objectName[0] == '_' &&
+                Character.isDigit(objectName[1])
+            )
         if (objectName.isBlank() || isDigitFirst || ReservedWords.WORDS_SET.contains(objectName)) {
             objectName = "json_member_$objectName"
         }

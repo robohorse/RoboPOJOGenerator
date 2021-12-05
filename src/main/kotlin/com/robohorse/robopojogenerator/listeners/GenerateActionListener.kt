@@ -8,12 +8,12 @@ import com.robohorse.robopojogenerator.view.ViewModelMapper
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 
-class GenerateActionListener(
-        private val generatorVew: GeneratorVew,
-        private val eventListener: GuiFormEventListener,
-        private val messageDelegate: MessageDelegate,
-        private val classGenerateHelper: ClassGenerateHelper,
-        private val viewModelMapper: ViewModelMapper
+internal class GenerateActionListener(
+    private val generatorVew: GeneratorVew,
+    private val eventListener: GuiFormEventListener,
+    private val messageDelegate: MessageDelegate,
+    private val classGenerateHelper: ClassGenerateHelper,
+    private val viewModelMapper: ViewModelMapper
 ) : ActionListener {
 
     override fun actionPerformed(actionEvent: ActionEvent) {

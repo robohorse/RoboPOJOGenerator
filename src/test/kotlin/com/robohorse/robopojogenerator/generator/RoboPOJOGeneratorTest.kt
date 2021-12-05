@@ -12,7 +12,7 @@ import io.mockk.verify
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class RoboPOJOGeneratorTest {
+internal class RoboPOJOGeneratorTest {
     @RelaxedMockK
     lateinit var processor: ClassProcessor
 

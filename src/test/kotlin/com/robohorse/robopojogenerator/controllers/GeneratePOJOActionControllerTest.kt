@@ -15,7 +15,7 @@ import io.mockk.verify
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class GeneratePOJOActionControllerTest {
+internal class GeneratePOJOActionControllerTest {
     @RelaxedMockK
     lateinit var environmentDelegate: EnvironmentDelegate
 

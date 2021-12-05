@@ -1,17 +1,17 @@
 package com.robohorse.robopojogenerator.view
 
 import java.awt.event.ItemEvent
-import java.util.*
+import java.util.Vector
 import javax.swing.BoxLayout
 import javax.swing.JCheckBox
 
-class GeneratorViewBinder(
-        private val propertiesFactory: PropertiesFactory
+internal class GeneratorViewBinder(
+    private val propertiesFactory: PropertiesFactory
 ) {
     var properties: ControlsModel? = null
 
     fun bindView(
-            generatorVew: GeneratorVew
+        generatorVew: GeneratorVew
     ) {
         properties = propertiesFactory.createControls()
         bindSource(generatorVew)
@@ -31,16 +31,18 @@ class GeneratorViewBinder(
             with(properties?.selectedSource?.selectedLanguage) {
                 this?.selectedFramework?.properties?.let { properties ->
                     properties.forEach { itemProperty ->
-                        add(JCheckBox(itemProperty.propertyName).apply {
-                            isSelected = itemProperty.selected
-                            addItemListener { itemEvent ->
-                                properties.firstOrNull {
-                                    it.propertyName == text
-                                }?.let { targetProperty ->
-                                    targetProperty.selected = itemEvent.stateChange == ItemEvent.SELECTED
+                        add(
+                            JCheckBox(itemProperty.propertyName).apply {
+                                isSelected = itemProperty.selected
+                                addItemListener { itemEvent ->
+                                    properties.firstOrNull {
+                                        it.propertyName == text
+                                    }?.let { targetProperty ->
+                                        targetProperty.selected = itemEvent.stateChange == ItemEvent.SELECTED
+                                    }
                                 }
                             }
-                        })
+                        )
                     }
                 }
             }
@@ -61,7 +63,7 @@ class GeneratorViewBinder(
                     resolveSource(SourceVM.JSON_SCHEMA)
                 }
             }
-            //TODO: disable when Json Schema support will be added
+            // TODO: disable when Json Schema support will be added
             sourcePanel.isVisible = false
         }
     }
@@ -102,11 +104,13 @@ class GeneratorViewBinder(
     private fun bindFrameworks(generatorVew: GeneratorVew) {
         generatorVew.frameworkList.apply {
             removeAll()
-            setListData(Vector<String>().apply {
-                properties?.selectedSource?.selectedLanguage?.frameworks?.let { list ->
-                    addAll(list.map { it.propertyName })
+            setListData(
+                Vector<String>().apply {
+                    properties?.selectedSource?.selectedLanguage?.frameworks?.let { list ->
+                        addAll(list.map { it.propertyName })
+                    }
                 }
-            })
+            )
             selectedIndex = with(properties?.selectedSource?.selectedLanguage) {
                 this?.selectedFramework?.let {
                     this.frameworks.indexOf(selectedFramework as FrameworkVW)

@@ -13,7 +13,7 @@ import io.mockk.verify
 import org.junit.Test
 import kotlin.test.BeforeTest
 
-class ClassCreatorTest {
+internal class ClassCreatorTest {
 
     @RelaxedMockK
     lateinit var roboPOJOGenerator: RoboPOJOGenerator

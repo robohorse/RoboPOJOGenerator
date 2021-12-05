@@ -8,20 +8,19 @@ import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFact
 import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
-import java.util.*
 
-class KotlinSingleFileWriterDelegate(
-        messageDelegate: MessageDelegate,
-        factory: PostProcessorFactory,
-        fileWriterDelegate: FileWriterDelegate,
-        preWriterDelegate: PreWriterDelegate,
-        private val kotlinDataClassPostProcessor: KotlinDataClassPostProcessor
+internal class KotlinSingleFileWriterDelegate(
+    messageDelegate: MessageDelegate,
+    factory: PostProcessorFactory,
+    fileWriterDelegate: FileWriterDelegate,
+    preWriterDelegate: PreWriterDelegate,
+    private val kotlinDataClassPostProcessor: KotlinDataClassPostProcessor
 ) : BaseWriterDelegate(messageDelegate, factory, fileWriterDelegate, preWriterDelegate) {
 
     override fun writeFiles(
-            set: Set<ClassItem>,
-            generationModel: GenerationModel,
-            projectModel: ProjectModel
+        set: Set<ClassItem>,
+        generationModel: GenerationModel,
+        projectModel: ProjectModel
     ) {
         val imports = resolveImports(set, generationModel)
         val targets = set.toMutableList()
@@ -42,20 +41,21 @@ class KotlinSingleFileWriterDelegate(
             }
         }
         val classBody = kotlinDataClassPostProcessor.createClassItemText(
-                packagePath = projectModel.packageName,
-                classTemplate = rootClassBuilder.toString(),
-                imports = kotlinDataClassPostProcessor.proceedClassImports(imports, generationModel).toString()
+            packagePath = projectModel.packageName,
+            classTemplate = rootClassBuilder.toString(),
+            imports = kotlinDataClassPostProcessor.proceedClassImports(imports, generationModel).toString()
         )
         writeFile(
-                className = generationModel.rootClassName,
-                classItemBody = classBody,
-                generationModel = generationModel,
-                projectModel = projectModel
+            className = generationModel.rootClassName,
+            classItemBody = classBody,
+            generationModel = generationModel,
+            projectModel = projectModel
         )
     }
 
     private fun resolveImports(
-            set: Set<ClassItem>, generationModel: GenerationModel
+        set: Set<ClassItem>,
+        generationModel: GenerationModel
     ): HashSet<String> {
         val imports = HashSet<String>().apply {
             set.forEach { addAll(it.classImports) }

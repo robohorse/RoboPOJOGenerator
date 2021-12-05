@@ -6,7 +6,7 @@ import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplat
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ImportsTemplateTest {
+internal class ImportsTemplateTest {
     @Test
     fun check_GSON() {
         assertEquals(GSON.imports[0], SERIALIZED_NAME)

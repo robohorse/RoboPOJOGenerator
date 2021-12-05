@@ -1,9 +1,9 @@
 package com.robohorse.robopojogenerator.generator.consts
 
-enum class ClassEnum(
-        val boxed: String,
-        val primitive: String,
-        val kotlin: String
+internal enum class ClassEnum(
+    val boxed: String,
+    val primitive: String,
+    val kotlin: String
 ) {
     STRING("String", "String", "String"),
     INTEGER("Integer", "int", "Int"),

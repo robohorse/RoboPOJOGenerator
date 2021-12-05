@@ -12,12 +12,13 @@ import io.mockk.verify
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class KotlinDataClassPostProcessorTest {
-    @RelaxedMockK
-    lateinit var generateHelper: ClassGenerateHelper
+internal class KotlinDataClassPostProcessorTest {
 
     @RelaxedMockK
     lateinit var classTemplateHelper: ClassTemplateHelper
+
+    @RelaxedMockK
+    lateinit var generateHelper: ClassGenerateHelper
 
     @RelaxedMockK
     lateinit var classItem: ClassItem

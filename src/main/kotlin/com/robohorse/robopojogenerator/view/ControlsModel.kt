@@ -1,23 +1,23 @@
 package com.robohorse.robopojogenerator.view
 
-data class ControlsModel(
-        val sources: List<SourceVM>,
-        var selectedSource: SourceVM? = null
+internal data class ControlsModel(
+    val sources: List<SourceVM>,
+    var selectedSource: SourceVM? = null
 )
 
-sealed class SourceVM(
-        val languages: List<LanguageVM>,
-        var selectedLanguage: LanguageVM? = null,
-        val propertyName: String
+internal sealed class SourceVM(
+    val languages: List<LanguageVM>,
+    var selectedLanguage: LanguageVM? = null,
+    val propertyName: String
 ) {
     class Json(
-            languages: List<LanguageVM>,
-            selected: LanguageVM? = null
+        languages: List<LanguageVM>,
+        selected: LanguageVM? = null
     ) : SourceVM(languages, selected, JSON)
 
     class JsonSchema(
-            languages: List<LanguageVM>,
-            selected: LanguageVM? = null
+        languages: List<LanguageVM>,
+        selected: LanguageVM? = null
     ) : SourceVM(languages, selected, JSON_SCHEMA)
 
     companion object {
@@ -26,19 +26,19 @@ sealed class SourceVM(
     }
 }
 
-sealed class LanguageVM(
-        val frameworks: List<FrameworkVW>,
-        var selectedFramework: FrameworkVW? = null,
-        val propertyName: String
+internal sealed class LanguageVM(
+    val frameworks: List<FrameworkVW>,
+    var selectedFramework: FrameworkVW? = null,
+    val propertyName: String
 ) {
     class Java(
-            frameworks: List<FrameworkVW>,
-            selected: FrameworkVW? = null
+        frameworks: List<FrameworkVW>,
+        selected: FrameworkVW? = null
     ) : LanguageVM(frameworks, selected, JAVA)
 
     class Kotlin(
-            frameworks: List<FrameworkVW>,
-            selected: FrameworkVW? = null
+        frameworks: List<FrameworkVW>,
+        selected: FrameworkVW? = null
     ) : LanguageVM(frameworks, selected, KOTLIN)
 
     companion object {
@@ -47,12 +47,12 @@ sealed class LanguageVM(
     }
 }
 
-sealed class FrameworkVW(
-        val propertyName: String,
-        val properties: List<AdditionalPropertiesVM>
+internal sealed class FrameworkVW(
+    val propertyName: String,
+    val properties: List<AdditionalPropertiesVM>
 ) {
     class None(
-            properties: List<AdditionalPropertiesVM> = emptyList()
+        properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(NONE, properties)
 
     class NoneLombok(
@@ -60,27 +60,27 @@ sealed class FrameworkVW(
     ) : FrameworkVW(NONE_LOMBOK, properties)
 
     class Gson(
-            properties: List<AdditionalPropertiesVM> = emptyList()
+        properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(GSON, properties)
 
     class Jackson(
-            properties: List<AdditionalPropertiesVM> = emptyList()
+        properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(JACKSON, properties)
 
     class LoganSquare(
-            properties: List<AdditionalPropertiesVM> = emptyList()
+        properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(LOGAN_SQUARE, properties)
 
     class Moshi(
-            properties: List<AdditionalPropertiesVM> = emptyList()
+        properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(MOSHI, properties)
 
     class AutoValue(
-            properties: List<AdditionalPropertiesVM> = emptyList()
+        properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(AUTO_VALUE, properties)
 
     class FastJson(
-            properties: List<AdditionalPropertiesVM> = emptyList()
+        properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(FAST_JSON, properties)
 
     companion object {
@@ -95,36 +95,36 @@ sealed class FrameworkVW(
     }
 }
 
-sealed class AdditionalPropertiesVM(
-        var selected: Boolean,
-        val propertyName: String
+internal sealed class AdditionalPropertiesVM(
+    var selected: Boolean,
+    val propertyName: String
 ) {
     class UseSetters(
-            selected: Boolean = false
+        selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, SETTERS)
 
     class UseGetters(
-            selected: Boolean = false
+        selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, GETTERS)
 
     class UseToString(
-            selected: Boolean = false
+        selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, TO_STRING)
 
     class UseJavaPrimitives(
-            selected: Boolean = false
+        selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, JAVA_PRIMITIVE_TYPES)
 
     class UseKotlinParcelable(
-            selected: Boolean = false
+        selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, KOTLIN_PARCELABLE)
 
     class UseKotlinSingleDataClass(
-            selected: Boolean = false
+        selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, KOTLIN_SINGLE_DATA_CLASS)
 
     class UseKotlinNullableFields(
-            selected: Boolean = false
+        selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, KOTLIN_NULLABLE_FIELDS)
 
     class UseLombokValue(

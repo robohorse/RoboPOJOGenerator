@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.delegates
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class IndentationDelegateTest {
+internal class IndentationDelegateTest {
     private val indentationDelegate = IndentationDelegate()
 
     @Test

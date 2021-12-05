@@ -4,15 +4,19 @@ import com.robohorse.robopojogenerator.generator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 
-class ClassCreator(
-        private val roboPOJOGenerator: RoboPOJOGenerator,
-        private val fileWriteFactory: FileWriteFactory
+internal class ClassCreator(
+    private val roboPOJOGenerator: RoboPOJOGenerator,
+    private val fileWriteFactory: FileWriteFactory
 ) {
 
     fun generateFiles(
-            generationModel: GenerationModel,
-            projectModel: ProjectModel
+        generationModel: GenerationModel,
+        projectModel: ProjectModel
     ) = fileWriteFactory.createFileWriter(
-            generationModel
-    ).writeFiles(roboPOJOGenerator.generate(generationModel), generationModel, projectModel)
+        generationModel
+    ).writeFiles(
+        roboPOJOGenerator.generate(generationModel),
+        generationModel,
+        projectModel
+    )
 }

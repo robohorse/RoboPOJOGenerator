@@ -3,17 +3,18 @@ package com.robohorse.robopojogenerator.generator.consts.common
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
 import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
 
-data class ClassField @JvmOverloads constructor(
-        var classEnum: ClassEnum? = null,
-        var className: String? = null,
-        var classField: ClassField? = null
+internal data class ClassField @JvmOverloads constructor(
+    var classEnum: ClassEnum? = null,
+    var className: String? = null,
+    var classField: ClassField? = null
 ) {
+
     fun getJavaItem(primitive: Boolean = true) =
-            if (primitive) {
-                getJavaItemPrimitive()
-            } else {
-                getJavaBoxed()
-            }
+        if (primitive) {
+            getJavaItemPrimitive()
+        } else {
+            getJavaBoxed()
+        }
 
     private fun getJavaItemPrimitive(): String? {
         return if (null != classField) wrapListJava() else if (null != className) className else classEnum?.primitive

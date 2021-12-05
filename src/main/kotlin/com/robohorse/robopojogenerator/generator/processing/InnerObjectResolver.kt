@@ -1,11 +1,17 @@
 package com.robohorse.robopojogenerator.generator.processing
 
 import com.robohorse.robopojogenerator.generator.consts.ClassEnum
-import com.robohorse.robopojogenerator.generator.consts.ClassEnum.*
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum.BOOLEAN
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum.DOUBLE
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum.FLOAT
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum.INTEGER
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum.LONG
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum.OBJECT
+import com.robohorse.robopojogenerator.generator.consts.ClassEnum.STRING
 import org.json.JSONArray
 import org.json.JSONObject
 
-abstract class InnerObjectResolver {
+internal abstract class InnerObjectResolver {
 
     fun resolveClassType(targetItem: Any) {
         when (targetItem) {
