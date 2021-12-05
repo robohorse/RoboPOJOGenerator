@@ -5,14 +5,13 @@ import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinData
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.GenerationModel
+import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
 import io.mockk.verify
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 
-@ExtendWith(MockKExtension::class)
 class KotlinDataClassPostProcessorTest {
     @RelaxedMockK
     lateinit var generateHelper: ClassGenerateHelper
@@ -28,6 +27,9 @@ class KotlinDataClassPostProcessorTest {
 
     @InjectMockKs
     lateinit var processor: KotlinDataClassPostProcessor
+
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
     fun check_createClassTemplate() {

@@ -4,15 +4,14 @@ import com.robohorse.robopojogenerator.generator.consts.common.JsonModel.JsonIte
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
 import com.robohorse.robopojogenerator.generator.utils.ProcessingModelManager
 import com.robohorse.robopojogenerator.models.GenerationModel
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
 import io.mockk.verify
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 
-@ExtendWith(MockKExtension::class)
 class RoboPOJOGeneratorTest {
     @RelaxedMockK
     lateinit var processor: ClassProcessor
@@ -28,6 +27,9 @@ class RoboPOJOGeneratorTest {
 
     @InjectMockKs
     lateinit var generator: RoboPOJOGenerator
+
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
     fun check_generation() {

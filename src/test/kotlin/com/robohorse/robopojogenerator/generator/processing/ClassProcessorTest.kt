@@ -4,19 +4,13 @@ import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.common.JsonModel.JsonItem
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.JsonReader
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
 import org.json.JSONObject
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import java.util.*
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
-@ExtendWith(MockKExtension::class)
 class ClassProcessorTest {
     private val jsonReader: JsonReader = JsonReader()
 
@@ -25,6 +19,9 @@ class ClassProcessorTest {
 
     @RelaxedMockK
     lateinit var classGenerateHelper: ClassGenerateHelper
+
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
     fun testSingleObjectGeneration_isCorrect() {

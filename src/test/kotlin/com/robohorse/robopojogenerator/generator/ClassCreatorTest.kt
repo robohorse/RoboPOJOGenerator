@@ -5,16 +5,14 @@ import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
 import com.robohorse.robopojogenerator.generator.consts.common.FileWriteFactory
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
 import io.mockk.verify
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import java.util.*
+import org.junit.Test
+import kotlin.test.BeforeTest
 
-@ExtendWith(MockKExtension::class)
 class ClassCreatorTest {
 
     @RelaxedMockK
@@ -31,6 +29,9 @@ class ClassCreatorTest {
 
     @InjectMockKs
     lateinit var classCreator: ClassCreator
+
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
     fun generateFiles() {
