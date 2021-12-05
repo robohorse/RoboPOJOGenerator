@@ -45,6 +45,6 @@ class GeneratePOJOActionControllerTest {
         val exception = RoboPluginException("", "")
         every { environmentDelegate.obtainProjectModel(event) }.throws(exception)
         generatePOJOActionController.onActionHandled(event)
-        verify { messageDelegate.showSuccessMessage() }
+        verify { messageDelegate.onPluginExceptionHandled(exception) }
     }
 }

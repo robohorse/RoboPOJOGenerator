@@ -5,21 +5,23 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.Visibility
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@ExtendWith(MockKExtension::class)
 class ClassTemplateHelperTest {
     @RelaxedMockK
     lateinit var classGenerateHelper: ClassGenerateHelper
 
     @InjectMockKs
     lateinit var classTemplateHelper: ClassTemplateHelper
+
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
     fun testCreateSetter() {

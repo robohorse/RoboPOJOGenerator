@@ -1,15 +1,14 @@
 package com.robohorse.robopojogenerator.delegates
 
 import com.robohorse.robopojogenerator.models.GenerationModel
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@ExtendWith(MockKExtension::class)
 class PreWriterDelegateTest {
     @RelaxedMockK
     lateinit var indentationDelegate: IndentationDelegate
@@ -19,6 +18,9 @@ class PreWriterDelegateTest {
 
     @InjectMockKs
     lateinit var preWriterDelegate: PreWriterDelegate
+
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
     fun checkIndentationApply() {

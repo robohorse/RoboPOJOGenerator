@@ -6,15 +6,14 @@ import com.robohorse.robopojogenerator.generator.postrocessing.common.CommonJava
 import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.view.FrameworkVW
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@ExtendWith(MockKExtension::class)
 class PostProcessorFactoryTest {
     @RelaxedMockK
     lateinit var kotlinDataClassPostProcessor: KotlinDataClassPostProcessor
@@ -33,6 +32,9 @@ class PostProcessorFactoryTest {
 
     @InjectMockKs
     lateinit var factory: PostProcessorFactory
+
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
     fun check_kotlinDataClassPostProcessor_creation() {

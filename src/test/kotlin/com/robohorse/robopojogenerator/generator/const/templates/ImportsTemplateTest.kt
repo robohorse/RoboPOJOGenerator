@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.generator.const.templates
 import com.robohorse.robopojogenerator.generator.consts.templates.*
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate.*
 import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate.Companion.SERIALIZED_NAME
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ImportsTemplateTest {
