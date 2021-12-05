@@ -4,10 +4,14 @@
 [![Build Status](https://travis-ci.org/robohorse/RoboPOJOGenerator.svg?branch=master)](https://travis-ci.org/robohorse/RoboPOJOGenerator)
 [![Coverage Status](https://coveralls.io/repos/github/robohorse/RoboPOJOGenerator/badge.svg?branch=master)](https://coveralls.io/github/robohorse/RoboPOJOGenerator?branch=master)
 
-Intellij Idea, Android Studio plugin for JSON to POJO conversion.
+<!-- Plugin description -->
+Intellij Idea and Android Studio plugin for JSON to POJO transformation.
 
-Generate Java and Kotlin POJO files from JSON: [GSON](https://github.com/google/gson), [AutoValue](https://github.com/google/auto/blob/master/value/userguide/index.md), [Logan Square](https://github.com/bluelinelabs/LoganSquare), [FastJSON](https://github.com/alibaba/fastjson), [Jackson](https://github.com/FasterXML/jackson), [Moshi](https://github.com/square/moshi), [Lombok](https://projectlombok.org/) and empty annotations template.
+Generates Java and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, empty annotations template.
 Supports: primitive types, multiple inner JSONArrays.
+
+Keywords: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok.
+<!-- Plugin description end -->
 
 <p><img src="images/tutorial_v201.gif" width="100%" height="50%"></p>
 
