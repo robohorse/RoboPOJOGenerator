@@ -7,15 +7,14 @@ import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.models.ProjectModel
 import com.robohorse.robopojogenerator.view.GeneratorViewFactory
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
 import io.mockk.verify
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 
-@ExtendWith(MockKExtension::class)
 class GeneratePOJOActionControllerTest {
     @RelaxedMockK
     lateinit var environmentDelegate: EnvironmentDelegate
@@ -38,11 +37,14 @@ class GeneratePOJOActionControllerTest {
     @InjectMockKs
     lateinit var generatePOJOActionController: GeneratePOJOActionController
 
+    @BeforeTest
+    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
+
     @Test
     fun onActionHandled_withError() {
         val exception = RoboPluginException("", "")
         every { environmentDelegate.obtainProjectModel(event) }.throws(exception)
         generatePOJOActionController.onActionHandled(event)
-        verify { messageDelegate.onPluginExceptionHandled(exception) }
+        verify { messageDelegate.showSuccessMessage() }
     }
 }
