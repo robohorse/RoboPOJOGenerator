@@ -7,29 +7,30 @@ import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFact
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 
-class CommonFileWriterDelegate(
-        messageDelegate: MessageDelegate,
-        factory: PostProcessorFactory,
-        fileWriterDelegate: FileWriterDelegate,
-        preWriterDelegate: PreWriterDelegate
+internal class CommonFileWriterDelegate(
+    messageDelegate: MessageDelegate,
+    factory: PostProcessorFactory,
+    fileWriterDelegate: FileWriterDelegate,
+    preWriterDelegate: PreWriterDelegate
 ) : BaseWriterDelegate(messageDelegate, factory, fileWriterDelegate, preWriterDelegate) {
 
     override fun writeFiles(
-            set: Set<ClassItem>,
-            generationModel: GenerationModel,
-            projectModel: ProjectModel
-    ) {
-        set.forEach {
-            it.className?.let { className ->
-                writeFile(
-                        classItemBody = prepareClass(it.apply {
-                            packagePath = projectModel.packageName
-                        }, generationModel),
-                        className = className,
-                        generationModel = generationModel,
-                        projectModel = projectModel
-                )
-            }
+        set: Set<ClassItem>,
+        generationModel: GenerationModel,
+        projectModel: ProjectModel
+    ) = set.forEach { classItem ->
+        classItem.className?.let { className ->
+            writeFile(
+                classItemBody = prepareClass(
+                    classItem.apply {
+                        packagePath = projectModel.packageName
+                    },
+                    generationModel
+                ),
+                className = className,
+                generationModel = generationModel,
+                projectModel = projectModel
+            )
         }
     }
 }

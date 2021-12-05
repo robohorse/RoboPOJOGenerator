@@ -3,9 +3,9 @@ package com.robohorse.robopojogenerator.generator.consts.common
 import org.json.JSONArray
 import org.json.JSONObject
 
-sealed class JsonModel(
+internal sealed class JsonModel(
     open val key: String,
-    val keySet:Set<String>
+    val keySet: Set<String>
 ) {
     data class JsonItem(
         override val key: String,

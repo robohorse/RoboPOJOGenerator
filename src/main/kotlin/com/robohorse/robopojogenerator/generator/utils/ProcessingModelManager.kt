@@ -5,7 +5,7 @@ import com.robohorse.robopojogenerator.models.GenerationModel
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ProcessingModelManager {
+internal class ProcessingModelManager {
 
     fun resolveJsonModel(model: GenerationModel): JsonModel =
         try {

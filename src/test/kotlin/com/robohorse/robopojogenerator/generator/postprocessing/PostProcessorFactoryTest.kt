@@ -14,7 +14,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class PostProcessorFactoryTest {
+internal class PostProcessorFactoryTest {
     @RelaxedMockK
     lateinit var kotlinDataClassPostProcessor: KotlinDataClassPostProcessor
 

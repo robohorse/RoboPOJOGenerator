@@ -6,13 +6,13 @@ import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinData
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.view.FrameworkVW.AutoValue
 
-class PostProcessorFactory(
-        private val kotlinDataClassPostProcessor: KotlinDataClassPostProcessor,
-        private val autoValueClassPostProcessor: AutoValueClassPostProcessor,
-        private val commonJavaPostProcessor: CommonJavaPostProcessor
+internal class PostProcessorFactory(
+    private val kotlinDataClassPostProcessor: KotlinDataClassPostProcessor,
+    private val autoValueClassPostProcessor: AutoValueClassPostProcessor,
+    private val commonJavaPostProcessor: CommonJavaPostProcessor
 ) {
     fun createPostProcessor(
-            generationModel: GenerationModel
+        generationModel: GenerationModel
     ): BasePostProcessor = with(generationModel) {
         if (useKotlin) {
             kotlinDataClassPostProcessor

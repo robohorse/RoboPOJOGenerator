@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.errors
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class RoboPluginExceptionTest {
+internal class RoboPluginExceptionTest {
     @Test
     fun check_FileWriteException() {
         val message = "Something was wrong..."
@@ -23,8 +23,8 @@ class RoboPluginExceptionTest {
     fun check_PathException() {
         val exception = PathException()
         assertEquals(
-                "You should choose directory for POJO files, before call RoboPOJOGenerator",
-                exception.message
+            "You should choose directory for POJO files, before call RoboPOJOGenerator",
+            exception.message
         )
         assertEquals("No directory was selected:", exception.header)
     }

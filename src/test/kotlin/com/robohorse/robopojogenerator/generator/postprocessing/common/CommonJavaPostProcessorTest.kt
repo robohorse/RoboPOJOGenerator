@@ -12,7 +12,7 @@ import io.mockk.verify
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class CommonJavaPostProcessorTest {
+internal class CommonJavaPostProcessorTest {
     @RelaxedMockK
     lateinit var generateHelper: ClassGenerateHelper
 

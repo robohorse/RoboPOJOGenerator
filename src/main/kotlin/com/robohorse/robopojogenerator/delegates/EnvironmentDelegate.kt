@@ -11,21 +11,21 @@ import com.intellij.psi.PsiDirectory
 import com.robohorse.robopojogenerator.errors.PathException
 import com.robohorse.robopojogenerator.models.ProjectModel
 
-class EnvironmentDelegate {
+internal class EnvironmentDelegate {
 
     fun obtainProjectModel(event: AnActionEvent): ProjectModel {
         val directory = checkPath(event)
         val project = event.project as Project
         val virtualFolder = event.getData(LangDataKeys.VIRTUAL_FILE) as VirtualFile
         val packageName = ProjectRootManager
-                .getInstance(project)
-                .fileIndex
-                .getPackageNameByDirectory(virtualFolder)
+            .getInstance(project)
+            .fileIndex
+            .getPackageNameByDirectory(virtualFolder)
         return ProjectModel(
-                directory = directory,
-                packageName = packageName,
-                project = project,
-                virtualFolder = virtualFolder
+            directory = directory,
+            packageName = packageName,
+            project = project,
+            virtualFolder = virtualFolder
         )
     }
 

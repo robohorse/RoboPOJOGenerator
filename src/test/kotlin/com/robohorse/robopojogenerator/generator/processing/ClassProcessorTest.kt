@@ -11,7 +11,7 @@ import io.mockk.impl.annotations.RelaxedMockK
 import org.json.JSONObject
 import kotlin.test.*
 
-class ClassProcessorTest {
+internal class ClassProcessorTest {
     private val jsonReader: JsonReader = JsonReader()
 
     @InjectMockKs

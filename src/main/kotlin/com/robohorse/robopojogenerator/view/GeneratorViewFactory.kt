@@ -6,21 +6,21 @@ import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
 
-class GeneratorViewFactory(
-        private val messageDelegate: MessageDelegate,
-        private val classGenerateHelper: ClassGenerateHelper,
-        private val generatorViewBinder: GeneratorViewBinder,
-        private val viewModelMapper: ViewModelMapper
+internal class GeneratorViewFactory(
+    private val messageDelegate: MessageDelegate,
+    private val classGenerateHelper: ClassGenerateHelper,
+    private val generatorViewBinder: GeneratorViewBinder,
+    private val viewModelMapper: ViewModelMapper
 ) {
 
     fun bindView(builder: DialogBuilder, eventListener: GuiFormEventListener) {
         val generatorVew = GeneratorVew()
         val actionListener = GenerateActionListener(
-                generatorVew = generatorVew,
-                eventListener = eventListener,
-                messageDelegate = messageDelegate,
-                classGenerateHelper = classGenerateHelper,
-                viewModelMapper = viewModelMapper
+            generatorVew = generatorVew,
+            eventListener = eventListener,
+            messageDelegate = messageDelegate,
+            classGenerateHelper = classGenerateHelper,
+            viewModelMapper = viewModelMapper
         )
         with(generatorVew) {
             generatorViewBinder.bindView(this)

@@ -13,7 +13,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ClassTemplateHelperTest {
+internal class ClassTemplateHelperTest {
     @RelaxedMockK
     lateinit var classGenerateHelper: ClassGenerateHelper
 
@@ -31,12 +31,14 @@ class ClassTemplateHelperTest {
         every { classGenerateHelper.upperCaseFirst(field) }.returns(fieldUpper)
         every { classGenerateHelper.lowerCaseFirst(field) }.returns(field)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        val target = (ClassTemplate.TAB + "public void set" + fieldUpper + "(" + type + " " + field + "){"
-                + ClassTemplate.NEW_LINE +
-                ClassTemplate.TAB + ClassTemplate.TAB + "this." + field + " = " + field + ";"
-                + ClassTemplate.NEW_LINE
-                + ClassTemplate.TAB + "}"
-                + ClassTemplate.NEW_LINE)
+        val target = (
+            ClassTemplate.TAB + "public void set" + fieldUpper + "(" + type + " " + field + "){" +
+                ClassTemplate.NEW_LINE +
+                ClassTemplate.TAB + ClassTemplate.TAB + "this." + field + " = " + field + ";" +
+                ClassTemplate.NEW_LINE +
+                ClassTemplate.TAB + "}" +
+                ClassTemplate.NEW_LINE
+            )
         assertEquals(target, classTemplateHelper.createSetter(field, type))
     }
 
@@ -48,12 +50,14 @@ class ClassTemplateHelperTest {
         every { classGenerateHelper.upperCaseFirst(field) }.returns(fieldUpper)
         every { classGenerateHelper.lowerCaseFirst(field) }.returns(field)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        val target = (ClassTemplate.TAB + "public " + type + " get" + fieldUpper + "(){"
-                + ClassTemplate.NEW_LINE +
-                ClassTemplate.TAB + ClassTemplate.TAB + "return " + field + ";"
-                + ClassTemplate.NEW_LINE
-                + ClassTemplate.TAB + "}"
-                + ClassTemplate.NEW_LINE)
+        val target = (
+            ClassTemplate.TAB + "public " + type + " get" + fieldUpper + "(){" +
+                ClassTemplate.NEW_LINE +
+                ClassTemplate.TAB + ClassTemplate.TAB + "return " + field + ";" +
+                ClassTemplate.NEW_LINE +
+                ClassTemplate.TAB + "}" +
+                ClassTemplate.NEW_LINE
+            )
         assertEquals(target, classTemplateHelper.createGetter(field, type))
     }
 
@@ -65,12 +69,14 @@ class ClassTemplateHelperTest {
         every { classGenerateHelper.upperCaseFirst(field) }.returns(fieldUpper)
         every { classGenerateHelper.lowerCaseFirst(field) }.returns(field)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        val target = (ClassTemplate.TAB + "public boolean is" + fieldUpper + "(){"
-                + ClassTemplate.NEW_LINE +
-                ClassTemplate.TAB + ClassTemplate.TAB + "return " + field + ";"
-                + ClassTemplate.NEW_LINE
-                + ClassTemplate.TAB + "}"
-                + ClassTemplate.NEW_LINE)
+        val target = (
+            ClassTemplate.TAB + "public boolean is" + fieldUpper + "(){" +
+                ClassTemplate.NEW_LINE +
+                ClassTemplate.TAB + ClassTemplate.TAB + "return " + field + ";" +
+                ClassTemplate.NEW_LINE +
+                ClassTemplate.TAB + "}" +
+                ClassTemplate.NEW_LINE
+            )
         assertEquals(target, classTemplateHelper.createGetter(field, type))
     }
 
@@ -78,17 +84,22 @@ class ClassTemplateHelperTest {
     fun testCreateField() {
         val field = "item"
         val type = "boolean"
-        val target = (ClassTemplate.TAB + "private " + type + " " + field + ";"
-                + ClassTemplate.NEW_LINE)
+        val target = (
+            ClassTemplate.TAB + "private " + type + " " + field + ";" +
+                ClassTemplate.NEW_LINE
+            )
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        assertEquals(target, classTemplateHelper.createField(
+        assertEquals(
+            target,
+            classTemplateHelper.createField(
                 FieldModel(
-                        classType = type,
-                        fieldNameFormatted = field,
-                        fieldName = field,
-                        visibility = Visibility.PRIVATE
+                    classType = type,
+                    fieldNameFormatted = field,
+                    fieldName = field,
+                    visibility = Visibility.PRIVATE
                 )
-        ))
+            )
+        )
     }
 
     @Test
@@ -96,19 +107,24 @@ class ClassTemplateHelperTest {
         val field = "item"
         val type = "boolean"
         val annotation = "@JsonField"
-        val target = (ClassTemplate.NEW_LINE + ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
-                ClassTemplate.TAB + "private " + type + " " + field + ";"
-                + ClassTemplate.NEW_LINE)
+        val target = (
+            ClassTemplate.NEW_LINE + ClassTemplate.TAB + annotation + ClassTemplate.NEW_LINE +
+                ClassTemplate.TAB + "private " + type + " " + field + ";" +
+                ClassTemplate.NEW_LINE
+            )
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        assertEquals(target, classTemplateHelper.createField(
+        assertEquals(
+            target,
+            classTemplateHelper.createField(
                 FieldModel(
-                        classType = type,
-                        fieldName = field,
-                        fieldNameFormatted = field,
-                        annotation = annotation,
-                        visibility = Visibility.PRIVATE
+                    classType = type,
+                    fieldName = field,
+                    fieldNameFormatted = field,
+                    annotation = annotation,
+                    visibility = Visibility.PRIVATE
                 )
-        ))
+            )
+        )
     }
 
     @Test
@@ -117,13 +133,16 @@ class ClassTemplateHelperTest {
         val type = "boolean"
         val target = (ClassTemplate.TAB + type + " " + field + ";" + ClassTemplate.NEW_LINE)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
-        assertEquals(target, classTemplateHelper.createField(
+        assertEquals(
+            target,
+            classTemplateHelper.createField(
                 FieldModel(
-                        classType = type,
-                        fieldNameFormatted = field,
-                        fieldName = field,
-                        visibility = Visibility.NONE
+                    classType = type,
+                    fieldNameFormatted = field,
+                    fieldName = field,
+                    visibility = Visibility.NONE
                 )
-        ))
+            )
+        )
     }
 }

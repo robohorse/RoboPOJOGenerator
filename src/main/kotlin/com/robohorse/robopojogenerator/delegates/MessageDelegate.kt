@@ -8,8 +8,7 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.ui.Messages
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 
-
-class MessageDelegate {
+internal class MessageDelegate {
 
     fun onPluginExceptionHandled(exception: RoboPluginException) {
         showMessage(exception.message, exception.header)

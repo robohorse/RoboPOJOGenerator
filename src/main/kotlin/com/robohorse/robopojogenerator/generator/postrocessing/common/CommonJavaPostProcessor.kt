@@ -8,7 +8,7 @@ import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.Visibility
 
-class CommonJavaPostProcessor(
+internal class CommonJavaPostProcessor(
     generateHelper: ClassGenerateHelper,
     classTemplateHelper: ClassTemplateHelper
 ) : JavaPostProcessor(generateHelper, classTemplateHelper) {
@@ -76,6 +76,8 @@ class CommonJavaPostProcessor(
     }
 
     override fun createClassTemplate(
-        classItem: ClassItem, classBody: String?, generationModel: GenerationModel
+        classItem: ClassItem,
+        classBody: String?,
+        generationModel: GenerationModel
     ) = classTemplateHelper.createClassBody(classItem, classBody)
 }

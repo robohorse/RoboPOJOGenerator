@@ -7,7 +7,7 @@ import org.junit.Assert
 import java.io.IOException
 import java.io.InputStreamReader
 
-class JsonReader {
+internal class JsonReader {
 
     fun read(name: String): JSONObject? {
         var json: JSONObject? = null

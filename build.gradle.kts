@@ -8,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.6.0"
     id("org.jetbrains.intellij") version "1.3.0"
     id("org.jetbrains.changelog") version "1.3.1"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 group = properties("pluginGroup")
@@ -19,15 +20,14 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("io.insert-koin:koin-core:3.0.1")
+    implementation("io.insert-koin:koin-core:3.1.4")
     implementation("org.json:json:20160212")
     implementation("commons-io:commons-io:2.4")
     implementation("com.google.guava:guava:19.0")
     implementation("com.fifesoft:rsyntaxtextarea:3.1.3")
 
-
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    testImplementation("io.mockk:mockk:1.10.6")
+    testImplementation("io.mockk:mockk:1.12.1")
 }
 
 intellij {
@@ -37,7 +37,6 @@ intellij {
 
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
 }
-
 
 changelog {
     version.set(properties("pluginVersion"))
@@ -76,10 +75,12 @@ tasks {
             }.joinToString("\n").run { markdownToHTML(this) }
         )
 
-        changeNotes.set(provider {
-            changelog.run {
-                getOrNull(properties("pluginVersion")) ?: getLatest()
-            }.toHTML()
-        })
+        changeNotes.set(
+            provider {
+                changelog.run {
+                    getOrNull(properties("pluginVersion")) ?: getLatest()
+                }.toHTML()
+            }
+        )
     }
 }

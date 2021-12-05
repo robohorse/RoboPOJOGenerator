@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.consts.templates
 
-sealed class ImportsTemplate(
-        val imports: Array<String>
+internal sealed class ImportsTemplate(
+    val imports: Array<String>
 ) {
     object GSON : ImportsTemplate(arrayOf(SERIALIZED_NAME))
 
@@ -16,7 +16,7 @@ sealed class ImportsTemplate(
     object MOSHI : ImportsTemplate(arrayOf(MOSHI_PROPERTY))
 
     class Lombok(useValue: Boolean) : ImportsTemplate(
-            imports = if (useValue) arrayOf(LOMBOK_VALUE) else arrayOf(LOMBOK_DATA)
+        imports = if (useValue) arrayOf(LOMBOK_VALUE) else arrayOf(LOMBOK_DATA)
     )
 
     companion object {

@@ -12,7 +12,7 @@ import io.mockk.verify
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-class AutoValueClassPostProcessorTest {
+internal class AutoValueClassPostProcessorTest {
     @RelaxedMockK
     lateinit var generateHelper: ClassGenerateHelper
 

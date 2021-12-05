@@ -1,13 +1,27 @@
 package com.robohorse.robopojogenerator.view
 
-import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.*
-import com.robohorse.robopojogenerator.view.FrameworkVW.*
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseGetters
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseJavaPrimitives
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseKotlinNullableFields
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseKotlinParcelable
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseKotlinSingleDataClass
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseLombokValue
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseSetters
+import com.robohorse.robopojogenerator.view.AdditionalPropertiesVM.UseToString
+import com.robohorse.robopojogenerator.view.FrameworkVW.AutoValue
+import com.robohorse.robopojogenerator.view.FrameworkVW.FastJson
+import com.robohorse.robopojogenerator.view.FrameworkVW.Gson
+import com.robohorse.robopojogenerator.view.FrameworkVW.Jackson
+import com.robohorse.robopojogenerator.view.FrameworkVW.LoganSquare
+import com.robohorse.robopojogenerator.view.FrameworkVW.Moshi
+import com.robohorse.robopojogenerator.view.FrameworkVW.None
+import com.robohorse.robopojogenerator.view.FrameworkVW.NoneLombok
 import com.robohorse.robopojogenerator.view.LanguageVM.Java
 import com.robohorse.robopojogenerator.view.LanguageVM.Kotlin
 import com.robohorse.robopojogenerator.view.SourceVM.Json
 import com.robohorse.robopojogenerator.view.SourceVM.JsonSchema
 
-class PropertiesFactory {
+internal class PropertiesFactory {
 
     fun createControls(): ControlsModel {
         val result = ControlsModel(

@@ -10,30 +10,29 @@ import com.robohorse.robopojogenerator.models.ProjectModel
 import java.io.File
 import java.io.IOException
 
-abstract class BaseWriterDelegate(
-        private val messageDelegate: MessageDelegate,
-        private val factory: PostProcessorFactory,
-        private val fileWriterDelegate: FileWriterDelegate,
-        private val preWriterDelegate: PreWriterDelegate
+internal abstract class BaseWriterDelegate(
+    private val messageDelegate: MessageDelegate,
+    private val factory: PostProcessorFactory,
+    private val fileWriterDelegate: FileWriterDelegate,
+    private val preWriterDelegate: PreWriterDelegate
 ) {
 
-    abstract fun writeFiles(set: Set<ClassItem>,
-                            generationModel: GenerationModel,
-                            projectModel: ProjectModel)
+    abstract fun writeFiles(
+        set: Set<ClassItem>,
+        generationModel: GenerationModel,
+        projectModel: ProjectModel
+    )
 
     protected fun prepareClass(
-            classItem: ClassItem,
-            generationModel: GenerationModel
-    ): String {
-        val postProcessor = factory.createPostProcessor(generationModel)
-        return postProcessor.proceed(classItem, generationModel)
-    }
+        classItem: ClassItem,
+        generationModel: GenerationModel
+    ) = factory.createPostProcessor(generationModel).proceed(classItem, generationModel)
 
     protected fun writeFile(
-            classItemBody: String,
-            className: String,
-            generationModel: GenerationModel,
-            projectModel: ProjectModel
+        classItemBody: String,
+        className: String,
+        generationModel: GenerationModel,
+        projectModel: ProjectModel
     ) {
         val path = projectModel.directory.virtualFile.path
         val fileName = "$className${if (generationModel.useKotlin) FILE_KOTLIN else FILE_JAVA}"
@@ -50,7 +49,7 @@ abstract class BaseWriterDelegate(
                 messageDelegate.logEventMessage("created $fileName")
             }
             fileWriterDelegate.writeToFile(
-                    preWriterDelegate.updateFileBody(generationModel, classItemBody), file
+                preWriterDelegate.updateFileBody(generationModel, classItemBody), file
             )
         } catch (e: IOException) {
             throw FileWriteException(e.message)

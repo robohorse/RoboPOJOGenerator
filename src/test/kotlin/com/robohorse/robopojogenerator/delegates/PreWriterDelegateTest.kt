@@ -9,7 +9,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class PreWriterDelegateTest {
+internal class PreWriterDelegateTest {
     @RelaxedMockK
     lateinit var indentationDelegate: IndentationDelegate
 
