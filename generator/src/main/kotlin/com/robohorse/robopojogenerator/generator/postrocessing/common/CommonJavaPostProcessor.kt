@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator.generator.postrocessing.common
 
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.models.FieldModel

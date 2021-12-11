@@ -1,11 +1,11 @@
 package com.robohorse.robopojogenerator.generator.processing
 
-import com.robohorse.robopojogenerator.generator.consts.ClassEnum
-import com.robohorse.robopojogenerator.generator.consts.common.ClassField
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.common.JsonModel
-import com.robohorse.robopojogenerator.generator.consts.common.JsonModel.JsonItemArray
-import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
+import com.robohorse.robopojogenerator.generator.common.ClassEnum
+import com.robohorse.robopojogenerator.generator.common.common.ClassField
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.common.JsonModel
+import com.robohorse.robopojogenerator.generator.common.common.JsonModel.JsonItemArray
+import com.robohorse.robopojogenerator.generator.common.templates.ImportsTemplate
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import org.json.JSONArray
 import org.json.JSONObject

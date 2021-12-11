@@ -1,8 +1,8 @@
 package com.robohorse.robopojogenerator.generator.postrocessing.common
 
-import com.robohorse.robopojogenerator.generator.consts.annotations.PojoAnnotations
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
+import com.robohorse.robopojogenerator.generator.common.annotations.PojoAnnotations
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.templates.ImportsTemplate
 import com.robohorse.robopojogenerator.generator.postrocessing.BasePostProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper

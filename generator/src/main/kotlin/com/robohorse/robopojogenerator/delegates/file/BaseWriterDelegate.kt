@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.delegates.file
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
 import com.robohorse.robopojogenerator.errors.FileWriteException
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
 import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel

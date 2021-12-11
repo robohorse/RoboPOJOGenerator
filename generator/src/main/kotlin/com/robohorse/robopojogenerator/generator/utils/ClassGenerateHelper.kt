@@ -3,10 +3,10 @@ package com.robohorse.robopojogenerator.generator.utils
 import com.google.common.base.CaseFormat
 import com.robohorse.robopojogenerator.errors.JSONStructureException
 import com.robohorse.robopojogenerator.errors.WrongClassNameException
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.reserved.ReservedWords
-import com.robohorse.robopojogenerator.generator.consts.templates.ArrayItemsTemplate
-import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.reserved.ReservedWords
+import com.robohorse.robopojogenerator.generator.common.templates.ArrayItemsTemplate
+import com.robohorse.robopojogenerator.generator.common.templates.ClassTemplate
 import org.json.JSONArray
 import org.json.JSONObject
 

@@ -1,8 +1,8 @@
 package com.robohorse.robopojogenerator.generator.utils
 
-import com.robohorse.robopojogenerator.generator.consts.ClassEnum
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
+import com.robohorse.robopojogenerator.generator.common.ClassEnum
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.templates.ClassTemplate
 import com.robohorse.robopojogenerator.models.FieldModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.Visibility

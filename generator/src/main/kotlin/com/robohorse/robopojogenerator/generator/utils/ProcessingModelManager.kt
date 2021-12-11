@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator.utils
 
-import com.robohorse.robopojogenerator.generator.consts.common.JsonModel
+import com.robohorse.robopojogenerator.generator.common.common.JsonModel
 import com.robohorse.robopojogenerator.models.GenerationModel
 import org.json.JSONArray
 import org.json.JSONObject

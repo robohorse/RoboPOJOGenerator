@@ -4,7 +4,7 @@ import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task.Backgroundable
 import com.robohorse.robopojogenerator.errors.RoboPluginException
-import com.robohorse.robopojogenerator.generator.consts.common.ClassCreator
+import com.robohorse.robopojogenerator.generator.common.common.ClassCreator
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 

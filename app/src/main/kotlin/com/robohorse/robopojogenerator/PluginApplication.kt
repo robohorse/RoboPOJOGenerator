@@ -10,7 +10,9 @@ import org.koin.core.context.startKoin
 internal class PluginApplication : KoinComponent {
     init {
         GlobalContext.getOrNull() ?: startKoin {
-            modules(appModule + generatorModule)
+            modules(
+                appModule + generatorModule + coreModule
+            )
         }
     }
 

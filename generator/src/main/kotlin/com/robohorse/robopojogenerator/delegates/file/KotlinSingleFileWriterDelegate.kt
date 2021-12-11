@@ -2,8 +2,8 @@ package com.robohorse.robopojogenerator.delegates.file
 
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.templates.ClassTemplate
 import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.generator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.models.GenerationModel

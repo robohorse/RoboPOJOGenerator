@@ -1,11 +1,11 @@
 package com.robohorse.robopojogenerator.generator.postrocessing.common
 
-import com.robohorse.robopojogenerator.generator.consts.annotations.KotlinAnnotations
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
-import com.robohorse.robopojogenerator.generator.consts.templates.ClassTemplate
-import com.robohorse.robopojogenerator.generator.consts.templates.ImportsTemplate
-import com.robohorse.robopojogenerator.generator.consts.templates.PARCELABLE_ANDROID
-import com.robohorse.robopojogenerator.generator.consts.templates.PARCELIZE_KOTLINX
+import com.robohorse.robopojogenerator.generator.common.annotations.KotlinAnnotations
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.templates.ClassTemplate
+import com.robohorse.robopojogenerator.generator.common.templates.ImportsTemplate
+import com.robohorse.robopojogenerator.generator.common.templates.PARCELABLE_ANDROID
+import com.robohorse.robopojogenerator.generator.common.templates.PARCELIZE_KOTLINX
 import com.robohorse.robopojogenerator.generator.postrocessing.BasePostProcessor
 import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.generator.utils.ClassTemplateHelper

@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.generator
 
-import com.robohorse.robopojogenerator.generator.consts.common.ClassItem
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
 import com.robohorse.robopojogenerator.generator.processing.ClassProcessor
 import com.robohorse.robopojogenerator.generator.utils.ProcessingModelManager
 import com.robohorse.robopojogenerator.models.GenerationModel
