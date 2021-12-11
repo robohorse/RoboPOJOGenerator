@@ -1,0 +1,61 @@
+package com.robohorse.robopojogenerator.delegates.file
+
+import com.robohorse.robopojogenerator.delegates.MessageDelegate
+import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
+import com.robohorse.robopojogenerator.errors.FileWriteException
+import com.robohorse.robopojogenerator.generator.common.common.ClassItem
+import com.robohorse.robopojogenerator.generator.postrocessing.PostProcessorFactory
+import com.robohorse.robopojogenerator.models.GenerationModel
+import com.robohorse.robopojogenerator.models.ProjectModel
+import java.io.File
+import java.io.IOException
+
+internal abstract class BaseWriterDelegate(
+    private val messageDelegate: MessageDelegate,
+    private val factory: PostProcessorFactory,
+    private val fileWriterDelegate: FileWriterDelegate,
+    private val preWriterDelegate: PreWriterDelegate
+) {
+
+    abstract fun writeFiles(
+        set: Set<ClassItem>,
+        generationModel: GenerationModel,
+        projectModel: ProjectModel
+    )
+
+    protected fun prepareClass(
+        classItem: ClassItem,
+        generationModel: GenerationModel
+    ) = factory.createPostProcessor(generationModel).proceed(classItem, generationModel)
+
+    protected fun writeFile(
+        classItemBody: String,
+        className: String,
+        generationModel: GenerationModel,
+        projectModel: ProjectModel
+    ) {
+        val path = projectModel.directory.virtualFile.path
+        val fileName = "$className${if (generationModel.useKotlin) FILE_KOTLIN else FILE_JAVA}"
+        val file = File(path + File.separator + fileName)
+        try {
+            if (file.exists()) {
+                if (generationModel.rewriteClasses) {
+                    file.delete()
+                    messageDelegate.logEventMessage("updated $fileName")
+                } else {
+                    messageDelegate.logEventMessage("skipped $fileName")
+                }
+            } else {
+                messageDelegate.logEventMessage("created $fileName")
+            }
+            fileWriterDelegate.writeToFile(
+                preWriterDelegate.updateFileBody(generationModel, classItemBody), file
+            )
+        } catch (e: IOException) {
+            throw FileWriteException(e.message)
+        }
+    }
+}
+
+const val FILE_KOTLIN = ".kt"
+const val FILE_JAVA = ".java"
