@@ -1,2 +1,3 @@
 rootProject.name = 'RoboPOJOGenerator'
-
+include 'app'
+include 'generator'
