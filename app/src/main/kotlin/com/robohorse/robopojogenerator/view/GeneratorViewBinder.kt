@@ -15,9 +15,7 @@ internal class GeneratorViewBinder(
 ) {
     var properties: ControlsModel? = null
 
-    fun bindView(
-        generatorVew: GeneratorVew
-    ) {
+    fun bindView(generatorVew: GeneratorVew) {
         properties = propertiesFactory.createControls()
         bindSource(generatorVew)
         bindLanguage(generatorVew)

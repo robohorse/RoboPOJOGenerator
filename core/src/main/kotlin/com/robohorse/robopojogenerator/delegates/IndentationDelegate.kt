@@ -1,7 +1,6 @@
 package com.robohorse.robopojogenerator.delegates
 
 internal class IndentationDelegate {
-
     fun updateFileBody(body: String) =
         body.replace(TAB, "$SPACE$SPACE$SPACE$SPACE")
 }

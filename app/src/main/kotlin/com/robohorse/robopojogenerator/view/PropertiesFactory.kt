@@ -31,11 +31,11 @@ internal class PropertiesFactory {
                 JsonSchema(languages = createJsonLanguages())
             )
         )
-        result.selectedSource = result.sources[0]
+        result.selectedSource = result.sources.first()
         result.selectedSource?.let { source ->
-            source.selectedLanguage = source.languages[0]
+            source.selectedLanguage = source.languages.first()
             source.selectedLanguage?.let { language ->
-                language.selectedFramework = language.frameworks[0]
+                language.selectedFramework = language.frameworks.first()
             }
         }
         return result

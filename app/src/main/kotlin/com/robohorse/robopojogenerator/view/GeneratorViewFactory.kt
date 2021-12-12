@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator.view
 import com.intellij.openapi.ui.DialogBuilder
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.form.GeneratorVew
-import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
+import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
 

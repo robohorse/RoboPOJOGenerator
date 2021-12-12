@@ -1,9 +1,9 @@
 package com.robohorse.robopojogenerator.form
 
+import com.intellij.ui.components.JBScrollPane
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants
 import org.fife.ui.rsyntaxtextarea.Theme
-import java.io.IOException
 import javax.swing.ButtonGroup
 import javax.swing.JButton
 import javax.swing.JCheckBox
@@ -13,9 +13,6 @@ import javax.swing.JRadioButton
 import javax.swing.JScrollPane
 import javax.swing.JTextField
 
-/**
- * Created by vadim on 24.09.16.
- */
 class GeneratorVew {
     lateinit var rootView: JPanel
     lateinit var generateButton: JButton
@@ -41,19 +38,19 @@ class GeneratorVew {
     lateinit var languageGroup: ButtonGroup
 
     private fun createUIComponents() {
-        textArea = RSyntaxTextArea()
-        textArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JSON
-        textArea.isCodeFoldingEnabled = true
-        jsonAreaScrollView = JScrollPane(textArea)
-        try {
-            val theme = Theme.load(
-                javaClass.getResourceAsStream(
-                    "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"
-                )
-            )
-            theme.apply(textArea)
-        } catch (ioe: IOException) {
-            ioe.printStackTrace()
+        textArea = RSyntaxTextArea().apply {
+            syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JSON
+            isCodeFoldingEnabled = true
+            applyTheme(this)
         }
+        jsonAreaScrollView = JBScrollPane(textArea)
+    }
+
+    private fun applyTheme(textArea: RSyntaxTextArea) = runCatching {
+        Theme.load(javaClass.getResourceAsStream(THEME)).apply(textArea)
+    }.onFailure {
+        it.printStackTrace()
     }
 }
+
+private const val THEME = "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"
