@@ -1,23 +1,7 @@
 <idea-plugin>
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>2.3.3</version>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
-
-    <description><![CDATA[
-      Generate Java and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, empty annotations template.<br>
-      Supports: primitive types, multiple inner JSONArrays.
-
-      key words: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok
-    ]]></description>
-
-    <change-notes><![CDATA[
-    Lombok @Value annotation support was added.
-    ]]>
-    </change-notes>
-
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="203.0"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup id="RoboPOJO Generator" displayType="BALLOON" key="com.robohorse.robopojogenerator"/>
@@ -26,7 +10,6 @@
     <depends>com.intellij.modules.lang</depends>
 
     <actions>
-        <!-- Add your actions here -->
         <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.action.GeneratePOJOAction"
                 icon="/icons/pojo.png"
                 text="Generate POJO from JSON"
