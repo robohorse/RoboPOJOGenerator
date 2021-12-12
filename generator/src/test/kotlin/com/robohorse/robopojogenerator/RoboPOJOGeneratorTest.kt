@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator
 
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.processing.ClassProcessor
+import com.robohorse.robopojogenerator.processing.InputDataParser
 import com.robohorse.robopojogenerator.properties.JsonModel.JsonItem
 import com.robohorse.robopojogenerator.utils.ProcessingModelResolver
 import io.mockk.MockKAnnotations
@@ -14,7 +14,7 @@ import kotlin.test.Test
 
 internal class RoboPOJOGeneratorTest {
     @RelaxedMockK
-    lateinit var processor: ClassProcessor
+    lateinit var inputDataParser: InputDataParser
 
     @RelaxedMockK
     lateinit var model: GenerationModel
@@ -39,6 +39,6 @@ internal class RoboPOJOGeneratorTest {
         every { model.content }.returns(content)
         every { model.rootClassName }.returns(className)
         generator.generate(model)
-        verify { processor.proceed(any(), any()) }
+        verify { inputDataParser.parse(any(), any()) }
     }
 }

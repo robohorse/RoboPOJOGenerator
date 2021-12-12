@@ -9,7 +9,7 @@ import com.robohorse.robopojogenerator.postrocessing.common.AutoValueClassPostPr
 import com.robohorse.robopojogenerator.postrocessing.common.CommonJavaPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.processing.ClassCreator
-import com.robohorse.robopojogenerator.processing.ClassProcessor
+import com.robohorse.robopojogenerator.processing.InputDataParser
 import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.utils.ProcessingModelResolver
@@ -70,7 +70,7 @@ val generatorModule = module {
     }
 
     single {
-        ClassProcessor(get())
+        InputDataParser(get())
     }
 
     single { ClassGenerateHelper() }

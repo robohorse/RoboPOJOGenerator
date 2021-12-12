@@ -15,11 +15,11 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-internal class ClassProcessorTest {
+internal class InputDataParserTest {
     private val jsonReader: JsonReader = JsonReader()
 
     @InjectMockKs
-    lateinit var classProcessor: ClassProcessor
+    lateinit var inputDataParser: InputDataParser
 
     @RelaxedMockK
     lateinit var classGenerateHelper: ClassGenerateHelper
@@ -34,7 +34,7 @@ internal class ClassProcessorTest {
         every { classGenerateHelper.formatClassName(name) }.returns(name)
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
-        classProcessor.proceed(jsonItem, classItemMap)
+        inputDataParser.parse(jsonItem, classItemMap)
         assertTrue(classItemMap.size == 1)
         val iterator = classItemMap.values.iterator()
         val (className, _, _, _, fields) = iterator.next()
@@ -54,7 +54,7 @@ internal class ClassProcessorTest {
 
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
-        classProcessor.proceed(jsonItem, classItemMap)
+        inputDataParser.parse(jsonItem, classItemMap)
         assertTrue(classItemMap.size == 2)
         for ((className, _, _, _, fields) in classItemMap.values) {
             assertNotNull(fields)
@@ -77,7 +77,7 @@ internal class ClassProcessorTest {
         every { classGenerateHelper.formatClassName(name) }.returns(name)
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
-        classProcessor.proceed(jsonItem, classItemMap)
+        inputDataParser.parse(jsonItem, classItemMap)
         assertTrue(classItemMap.size == 1)
         val iterator: Iterator<*> = classItemMap.values.iterator()
         val (className, _, _, _, fields) = iterator.next() as ClassItem
@@ -98,7 +98,7 @@ internal class ClassProcessorTest {
         every { classGenerateHelper.formatClassName(name) }.returns(name)
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
-        classProcessor.proceed(jsonItem, classItemMap)
+        inputDataParser.parse(jsonItem, classItemMap)
         assertTrue(classItemMap.size == 1)
         val iterator: Iterator<*> = classItemMap.values.iterator()
         val (className, _, _, _, fields) = iterator.next() as ClassItem
@@ -122,7 +122,7 @@ internal class ClassProcessorTest {
         every { classGenerateHelper.getClassNameWithItemPostfix(any()) }.returns("DataItem")
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
-        classProcessor.proceed(jsonItem, classItemMap)
+        inputDataParser.parse(jsonItem, classItemMap)
         assertTrue(classItemMap.size == 2)
         for ((className, _, _, _, fields) in classItemMap.values) {
             assertNotNull(fields)
@@ -147,7 +147,7 @@ internal class ClassProcessorTest {
         val name = "Response"
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
-        classProcessor.proceed(jsonItem, classItemMap)
+        inputDataParser.parse(jsonItem, classItemMap)
         assertTrue(classItemMap.size == 1)
         val classFields = classItemMap.values.firstOrNull()?.classFields
         assertNotNull(classFields)
