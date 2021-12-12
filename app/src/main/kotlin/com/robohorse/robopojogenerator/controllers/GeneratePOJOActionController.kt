@@ -17,12 +17,10 @@ internal class GeneratePOJOActionController(
     private val generationDelegate: GenerationDelegate
 ) {
 
-    fun onActionHandled(event: AnActionEvent) {
-        try {
-            proceed(event)
-        } catch (exception: RoboPluginException) {
-            messageDelegate.onPluginExceptionHandled(exception)
-        }
+    fun onActionHandled(event: AnActionEvent) = try {
+        proceed(event)
+    } catch (exception: RoboPluginException) {
+        messageDelegate.onPluginExceptionHandled(exception)
     }
 
     private fun proceed(event: AnActionEvent) {

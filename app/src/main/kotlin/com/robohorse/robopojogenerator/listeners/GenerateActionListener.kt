@@ -16,15 +16,13 @@ internal class GenerateActionListener(
     private val viewModelMapper: ViewModelMapper
 ) : ActionListener {
 
-    override fun actionPerformed(actionEvent: ActionEvent) {
-        with(generatorVew) {
-            try {
-                classGenerateHelper.validateClassName(className.text)
-                classGenerateHelper.validateJsonContent(textArea.text ?: "")
-                eventListener.onJsonDataObtained(viewModelMapper.map(generatorVew))
-            } catch (exception: RoboPluginException) {
-                messageDelegate.onPluginExceptionHandled(exception)
-            }
+    override fun actionPerformed(actionEvent: ActionEvent) = with(generatorVew) {
+        try {
+            classGenerateHelper.validateClassName(className.text)
+            classGenerateHelper.validateJsonContent(textArea.text)
+            eventListener.onJsonDataObtained(viewModelMapper.map(generatorVew))
+        } catch (exception: RoboPluginException) {
+            messageDelegate.onPluginExceptionHandled(exception)
         }
     }
 }
