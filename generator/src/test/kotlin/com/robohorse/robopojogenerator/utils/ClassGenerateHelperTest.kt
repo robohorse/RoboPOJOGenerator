@@ -109,7 +109,8 @@ internal class ClassGenerateHelperTest {
         val classField = ClassField()
         classField.classField = ClassField()
         classField.classField?.classField = ClassField(ClassEnum.DOUBLE)
-        assertEquals("List<List<$type>>", classField.getJavaItem())
+        val javaItem = classField.getJavaItem()
+        assertEquals("List<List<$type>>", javaItem)
     }
 
     @Test
