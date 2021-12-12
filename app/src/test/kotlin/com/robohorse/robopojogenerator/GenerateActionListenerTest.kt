@@ -3,7 +3,7 @@ package com.robohorse.robopojogenerator
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.form.GeneratorVew
-import com.robohorse.robopojogenerator.generator.utils.ClassGenerateHelper
+import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.listeners.GenerateActionListener
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
 import com.robohorse.robopojogenerator.view.ViewModelMapper

@@ -3,7 +3,6 @@ package com.robohorse.robopojogenerator
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.robohorse.robopojogenerator.controllers.GeneratePOJOActionController
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
-import com.robohorse.robopojogenerator.delegates.GenerationDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.models.ProjectModel

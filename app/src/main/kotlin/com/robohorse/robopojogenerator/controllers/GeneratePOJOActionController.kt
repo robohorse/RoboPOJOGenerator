@@ -2,8 +2,9 @@ package com.robohorse.robopojogenerator.controllers
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.ui.DialogBuilder
+import com.robohorse.robopojogenerator.GenerationDelegate
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
-import com.robohorse.robopojogenerator.delegates.GenerationDelegate
+
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.listeners.GuiFormEventListener
