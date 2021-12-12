@@ -51,9 +51,10 @@ internal class JsonArrayParser(
                     val size = jsonItemArray.jsonObject.length()
                     val innerItemsMap = LinkedHashMap<String?, ClassItem>()
                     for (index in 0 until size) {
-                        val jsonObject = jsonItemArray.jsonObject[index] as JSONObject
-                        val jsonItem = JsonItem(itemName, jsonObject)
-                        jsonCallback.invoke(jsonItem, innerItemsMap)
+                        (jsonItemArray.jsonObject[index] as? JSONObject)?.let {
+                            val jsonItem = JsonItem(itemName, it)
+                            jsonCallback.invoke(jsonItem, innerItemsMap)
+                        }
                     }
                     classField.classField = ClassField(null, itemName)
                     innerItemsMap.forEach { (key: String?, value: ClassItem) ->
