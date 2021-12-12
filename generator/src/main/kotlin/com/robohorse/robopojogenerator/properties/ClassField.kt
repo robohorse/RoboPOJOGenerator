@@ -2,7 +2,7 @@ package com.robohorse.robopojogenerator.properties
 
 import com.robohorse.robopojogenerator.properties.templates.ArrayItemsTemplate
 
-internal data class ClassField @JvmOverloads constructor(
+internal class ClassField(
     var classEnum: ClassEnum? = null,
     var className: String? = null,
     var classField: ClassField? = null

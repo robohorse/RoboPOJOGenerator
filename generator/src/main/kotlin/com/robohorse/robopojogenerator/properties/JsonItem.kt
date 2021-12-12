@@ -4,16 +4,15 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 internal sealed class JsonModel(
-    open val key: String,
-    val keySet: Set<String>
+    open val key: String
 ) {
     data class JsonItem(
         override val key: String,
         val jsonObject: JSONObject
-    ) : JsonModel(key, jsonObject.keySet())
+    ) : JsonModel(key)
 
     data class JsonItemArray(
         override val key: String,
         val jsonObject: JSONArray
-    ) : JsonModel(key, emptySet())
+    ) : JsonModel(key)
 }

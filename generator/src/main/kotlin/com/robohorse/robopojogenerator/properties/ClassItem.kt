@@ -1,6 +1,6 @@
 package com.robohorse.robopojogenerator.properties
 
-internal data class ClassItem @JvmOverloads constructor(
+internal data class ClassItem(
     val className: String? = null,
     var annotation: String? = null,
     var classAnnotation: String? = null,

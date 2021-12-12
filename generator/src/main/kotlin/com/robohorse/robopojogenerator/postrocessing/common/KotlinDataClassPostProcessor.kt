@@ -39,7 +39,10 @@ internal class KotlinDataClassPostProcessor(
         return importsBuilder
     }
 
-    override fun proceedClassBody(classItem: ClassItem, generationModel: GenerationModel): String {
+    override fun proceedClassBody(
+        classItem: ClassItem,
+        generationModel: GenerationModel
+    ): String {
         val classBodyBuilder = StringBuilder()
         val classFields = classItem.classFields
         for (objectName in classFields.keys) {
@@ -59,63 +62,63 @@ internal class KotlinDataClassPostProcessor(
         return classBodyBuilder.toString()
     }
 
-    override fun createClassItemText(packagePath: String?, imports: String?, classTemplate: String?): String {
-        return classTemplateHelper
-            .createClassItemWithoutSemicolon(
-                packagePath,
-                imports,
-                classTemplate
-            )
-    }
+    override fun createClassItemText(
+        packagePath: String?,
+        imports: String?,
+        classTemplate: String?
+    ) = classTemplateHelper
+        .createClassItemWithoutSemicolon(
+            packagePath,
+            imports,
+            classTemplate
+        )
 
     override fun applyAnnotations(
         generationModel: GenerationModel,
         classItem: ClassItem
-    ) {
-        when (generationModel.annotationEnum) {
-            is Gson -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    KotlinAnnotations.GSON.classAnnotation,
-                    KotlinAnnotations.GSON.annotation,
-                    ImportsTemplate.GSON.imports
-                )
-            }
-            is LoganSquare -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    KotlinAnnotations.LOGAN_SQUARE.classAnnotation,
-                    KotlinAnnotations.LOGAN_SQUARE.annotation,
-                    ImportsTemplate.LOGAN_SQUARE.imports
-                )
-            }
-            is Jackson -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    KotlinAnnotations.JACKSON.classAnnotation,
-                    KotlinAnnotations.JACKSON.annotation,
-                    ImportsTemplate.JACKSON.imports
-                )
-            }
-            is FastJson -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    KotlinAnnotations.FAST_JSON.classAnnotation,
-                    KotlinAnnotations.FAST_JSON.annotation,
-                    ImportsTemplate.FAST_JSON.imports
-                )
-            }
-            is Moshi -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    KotlinAnnotations.MOSHI.classAnnotation,
-                    KotlinAnnotations.MOSHI.annotation,
-                    ImportsTemplate.MOSHI.imports
-                )
-            }
-            else -> {
-                // NO OP
-            }
+    ) = when (generationModel.annotationEnum) {
+        is Gson -> {
+            generateHelper.setAnnotations(
+                classItem,
+                KotlinAnnotations.GSON.classAnnotation,
+                KotlinAnnotations.GSON.annotation,
+                ImportsTemplate.GSON.imports
+            )
+        }
+        is LoganSquare -> {
+            generateHelper.setAnnotations(
+                classItem,
+                KotlinAnnotations.LOGAN_SQUARE.classAnnotation,
+                KotlinAnnotations.LOGAN_SQUARE.annotation,
+                ImportsTemplate.LOGAN_SQUARE.imports
+            )
+        }
+        is Jackson -> {
+            generateHelper.setAnnotations(
+                classItem,
+                KotlinAnnotations.JACKSON.classAnnotation,
+                KotlinAnnotations.JACKSON.annotation,
+                ImportsTemplate.JACKSON.imports
+            )
+        }
+        is FastJson -> {
+            generateHelper.setAnnotations(
+                classItem,
+                KotlinAnnotations.FAST_JSON.classAnnotation,
+                KotlinAnnotations.FAST_JSON.annotation,
+                ImportsTemplate.FAST_JSON.imports
+            )
+        }
+        is Moshi -> {
+            generateHelper.setAnnotations(
+                classItem,
+                KotlinAnnotations.MOSHI.classAnnotation,
+                KotlinAnnotations.MOSHI.annotation,
+                ImportsTemplate.MOSHI.imports
+            )
+        }
+        else -> {
+            // NO OP
         }
     }
 
@@ -123,11 +126,9 @@ internal class KotlinDataClassPostProcessor(
         classItem: ClassItem,
         classBody: String?,
         generationModel: GenerationModel
-    ): String {
-        return classTemplateHelper.createClassBodyKotlinDataClass(
-            classItem,
-            classBody,
-            generationModel.useKotlinParcelable
-        )
-    }
+    ) = classTemplateHelper.createClassBodyKotlinDataClass(
+        classItem,
+        classBody,
+        generationModel.useKotlinParcelable
+    )
 }

@@ -24,68 +24,66 @@ internal abstract class JavaPostProcessor(
     override fun applyAnnotations(
         generationModel: GenerationModel,
         classItem: ClassItem
-    ) {
-        when (generationModel.annotationEnum) {
-            is Gson -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    PojoAnnotations.GSON.classAnnotation,
-                    PojoAnnotations.GSON.annotation,
-                    ImportsTemplate.GSON.imports
-                )
-            }
-            is LoganSquare -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    PojoAnnotations.LOGAN_SQUARE.classAnnotation,
-                    PojoAnnotations.LOGAN_SQUARE.annotation,
-                    ImportsTemplate.LOGAN_SQUARE.imports
-                )
-            }
-            is Jackson -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    PojoAnnotations.JACKSON.classAnnotation,
-                    PojoAnnotations.JACKSON.annotation,
-                    ImportsTemplate.JACKSON.imports
-                )
-            }
-            is FastJson -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    PojoAnnotations.FAST_JSON.classAnnotation,
-                    PojoAnnotations.FAST_JSON.annotation,
-                    ImportsTemplate.FAST_JSON.imports
-                )
-            }
-            is AutoValue -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    PojoAnnotations.AUTO_VALUE_GSON.classAnnotation,
-                    PojoAnnotations.AUTO_VALUE_GSON.annotation,
-                    ImportsTemplate.AUTO_VALUE_GSON.imports
-                )
-            }
-            is Moshi -> {
-                generateHelper.setAnnotations(
-                    classItem,
-                    PojoAnnotations.MOSHI.classAnnotation,
-                    PojoAnnotations.MOSHI.annotation,
-                    ImportsTemplate.MOSHI.imports
-                )
-            }
-            is NoneLombok -> {
-                val annotations = PojoAnnotations.Lombok(generationModel.useLombokValue)
-                val importsTemplate = ImportsTemplate.Lombok(generationModel.useLombokValue)
-                generateHelper.setAnnotations(
-                    classItem,
-                    annotations.classAnnotation,
-                    annotations.annotation,
-                    importsTemplate.imports
-                )
-            }
-            is None -> { // NO OP
-            }
+    ) = when (generationModel.annotationEnum) {
+        is Gson -> {
+            generateHelper.setAnnotations(
+                classItem,
+                PojoAnnotations.GSON.classAnnotation,
+                PojoAnnotations.GSON.annotation,
+                ImportsTemplate.GSON.imports
+            )
+        }
+        is LoganSquare -> {
+            generateHelper.setAnnotations(
+                classItem,
+                PojoAnnotations.LOGAN_SQUARE.classAnnotation,
+                PojoAnnotations.LOGAN_SQUARE.annotation,
+                ImportsTemplate.LOGAN_SQUARE.imports
+            )
+        }
+        is Jackson -> {
+            generateHelper.setAnnotations(
+                classItem,
+                PojoAnnotations.JACKSON.classAnnotation,
+                PojoAnnotations.JACKSON.annotation,
+                ImportsTemplate.JACKSON.imports
+            )
+        }
+        is FastJson -> {
+            generateHelper.setAnnotations(
+                classItem,
+                PojoAnnotations.FAST_JSON.classAnnotation,
+                PojoAnnotations.FAST_JSON.annotation,
+                ImportsTemplate.FAST_JSON.imports
+            )
+        }
+        is AutoValue -> {
+            generateHelper.setAnnotations(
+                classItem,
+                PojoAnnotations.AUTO_VALUE_GSON.classAnnotation,
+                PojoAnnotations.AUTO_VALUE_GSON.annotation,
+                ImportsTemplate.AUTO_VALUE_GSON.imports
+            )
+        }
+        is Moshi -> {
+            generateHelper.setAnnotations(
+                classItem,
+                PojoAnnotations.MOSHI.classAnnotation,
+                PojoAnnotations.MOSHI.annotation,
+                ImportsTemplate.MOSHI.imports
+            )
+        }
+        is NoneLombok -> {
+            val annotations = PojoAnnotations.Lombok(generationModel.useLombokValue)
+            val importsTemplate = ImportsTemplate.Lombok(generationModel.useLombokValue)
+            generateHelper.setAnnotations(
+                classItem,
+                annotations.classAnnotation,
+                annotations.annotation,
+                importsTemplate.imports
+            )
+        }
+        is None -> { // NO OP
         }
     }
 }

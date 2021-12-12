@@ -60,13 +60,13 @@ internal class ClassTemplateHelper(
             model.classType,
             model.fieldNameFormatted
         ) else (
-            String.format(
-                ClassTemplate.FIELD_WITH_VISIBILITY,
-                model.visibility.value,
-                model.classType,
-                model.fieldNameFormatted
-            )
-            )
+                String.format(
+                    ClassTemplate.FIELD_WITH_VISIBILITY,
+                    model.visibility.value,
+                    model.classType,
+                    model.fieldNameFormatted
+                )
+                )
         return createAnnotatedField(model.fieldName, model.annotation, fieldDeclaration)
     }
 

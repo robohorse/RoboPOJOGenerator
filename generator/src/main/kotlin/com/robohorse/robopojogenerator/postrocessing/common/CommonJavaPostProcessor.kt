@@ -33,7 +33,11 @@ internal class CommonJavaPostProcessor(
                             fieldNameFormatted = itemNameFormatted,
                             fieldName = objectName,
                             annotation = classItem.annotation,
-                            visibility = if (generationModel.useLombokValue) Visibility.NONE else Visibility.PRIVATE
+                            visibility = if (generationModel.useLombokValue) {
+                                Visibility.NONE
+                            } else {
+                                Visibility.PRIVATE
+                            }
                         )
                     )
                 )

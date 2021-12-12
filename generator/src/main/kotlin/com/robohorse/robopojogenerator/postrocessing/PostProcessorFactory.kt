@@ -1,10 +1,10 @@
 package com.robohorse.robopojogenerator.postrocessing
 
+import com.robohorse.robopojogenerator.models.FrameworkVW.AutoValue
+import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.postrocessing.common.AutoValueClassPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.CommonJavaPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.KotlinDataClassPostProcessor
-import com.robohorse.robopojogenerator.models.FrameworkVW.AutoValue
-import com.robohorse.robopojogenerator.models.GenerationModel
 
 internal class PostProcessorFactory(
     private val kotlinDataClassPostProcessor: KotlinDataClassPostProcessor,
