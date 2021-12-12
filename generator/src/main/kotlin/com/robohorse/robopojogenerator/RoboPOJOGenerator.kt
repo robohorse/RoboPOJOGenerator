@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator
 
 import com.robohorse.robopojogenerator.properties.ClassItem
-import com.robohorse.robopojogenerator.processing.InputDataParser
+import com.robohorse.robopojogenerator.parser.InputDataParser
 import com.robohorse.robopojogenerator.utils.ProcessingModelResolver
 import com.robohorse.robopojogenerator.models.GenerationModel
 

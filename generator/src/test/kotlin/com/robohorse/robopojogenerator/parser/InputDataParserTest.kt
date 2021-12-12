@@ -1,37 +1,37 @@
-package com.robohorse.robopojogenerator.processing
+package com.robohorse.robopojogenerator.parser
 
 import com.robohorse.robopojogenerator.properties.ClassItem
 import com.robohorse.robopojogenerator.properties.JsonModel.JsonItem
 import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.JsonReader
-import io.mockk.MockKAnnotations
-import io.mockk.every
-import io.mockk.impl.annotations.InjectMockKs
-import io.mockk.impl.annotations.RelaxedMockK
 import org.json.JSONObject
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
+/**
+ * Integration test to verify that parsing logic is correct.
+ */
 internal class InputDataParserTest {
     private val jsonReader: JsonReader = JsonReader()
 
-    @InjectMockKs
-    lateinit var inputDataParser: InputDataParser
+    private val classGenerateHelper = ClassGenerateHelper()
 
-    @RelaxedMockK
-    lateinit var classGenerateHelper: ClassGenerateHelper
+    private val jsonObjectParser = JsonObjectParser(classGenerateHelper)
 
-    @BeforeTest
-    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
+    private val jsonArrayParser = JsonArrayParser(classGenerateHelper)
+
+    private val inputDataParser = InputDataParser(
+        classGenerateHelper,
+        jsonObjectParser,
+        jsonArrayParser
+    )
 
     @Test
     fun testSingleObjectGeneration_isCorrect() {
         val jsonObject = jsonReader.read("single_object.json") as JSONObject
         val name = "Response"
-        every { classGenerateHelper.formatClassName(name) }.returns(name)
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
         inputDataParser.parse(jsonItem, classItemMap)
@@ -50,8 +50,6 @@ internal class InputDataParserTest {
         val jsonObject = jsonReader.read("inner_json_object.json") as JSONObject
         val innerJsonObject = jsonObject.optJSONObject("data")
         val name = "Response"
-        every { classGenerateHelper.formatClassName(name) }.returns(name)
-
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
         inputDataParser.parse(jsonItem, classItemMap)
@@ -74,7 +72,6 @@ internal class InputDataParserTest {
     fun testEmptyArrayGeneration_isCorrect() {
         val jsonObject = jsonReader.read("empty_array.json") as JSONObject
         val name = "Response"
-        every { classGenerateHelper.formatClassName(name) }.returns(name)
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
         inputDataParser.parse(jsonItem, classItemMap)
@@ -95,7 +92,6 @@ internal class InputDataParserTest {
         val jsonObject = jsonReader.read("array_with_primitive.json") as JSONObject
         val name = "Response"
         val targetType = "List<Integer>"
-        every { classGenerateHelper.formatClassName(name) }.returns(name)
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
         inputDataParser.parse(jsonItem, classItemMap)
@@ -118,8 +114,6 @@ internal class InputDataParserTest {
         val innerJsonObject = innerJsonArray.getJSONObject(0)
         val name = "Response"
         val targetType = "List<DataItem>"
-        every { classGenerateHelper.formatClassName(name) }.returns(name)
-        every { classGenerateHelper.getClassNameWithItemPostfix(any()) }.returns("DataItem")
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
         inputDataParser.parse(jsonItem, classItemMap)
@@ -148,13 +142,17 @@ internal class InputDataParserTest {
         val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
         val jsonItem = JsonItem(name, jsonObject)
         inputDataParser.parse(jsonItem, classItemMap)
-        assertTrue(classItemMap.size == 1)
-        val classFields = classItemMap.values.firstOrNull()?.classFields
+        val classFields = hashSetOf<String>()
+        classItemMap.values.forEach { classFields.addAll(it.classFields.keys) }
         assertNotNull(classFields)
+
+        val targetResult = listOf("Outsides", "Outside", "Insides", "Inside", "A", "B", "C")
+        assertEquals(targetResult.size, classFields.size)
+
         // when using "itemMap.putAll(innerItemsMap);" element "C" will be missing as newer instances of objects in
         // innerItemsMap of the same name/type overwrite existing map (itemMap) entries
-        listOf("Outsides", "Outside", "Insides", "Inside", "A", "B", "C").listIterator().forEach {
-            assertTrue(classFields.containsKey(it), "Missing element: $it")
+        targetResult.listIterator().forEach {
+            assertTrue(classFields.contains(it), "Missing element: $it")
         }
     }
 }

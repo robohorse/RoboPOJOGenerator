@@ -1,5 +1,6 @@
-package com.robohorse.robopojogenerator.processing
+package com.robohorse.robopojogenerator.parser
 
+import com.robohorse.robopojogenerator.ClassCreator
 import com.robohorse.robopojogenerator.RoboPOJOGenerator
 import com.robohorse.robopojogenerator.filewriter.FileDelegateFactory
 import com.robohorse.robopojogenerator.models.GenerationModel

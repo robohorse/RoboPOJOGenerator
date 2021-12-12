@@ -6,7 +6,6 @@ import com.intellij.openapi.progress.Task.Backgroundable
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
-import com.robohorse.robopojogenerator.processing.ClassCreator
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
 

@@ -1,7 +1,7 @@
 package com.robohorse.robopojogenerator
 
 import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.processing.InputDataParser
+import com.robohorse.robopojogenerator.parser.InputDataParser
 import com.robohorse.robopojogenerator.properties.JsonModel.JsonItem
 import com.robohorse.robopojogenerator.utils.ProcessingModelResolver
 import io.mockk.MockKAnnotations

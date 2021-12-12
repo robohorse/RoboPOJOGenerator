@@ -1,4 +1,4 @@
-package com.robohorse.robopojogenerator.processing
+package com.robohorse.robopojogenerator.parser
 
 import com.robohorse.robopojogenerator.properties.ClassEnum
 import com.robohorse.robopojogenerator.properties.ClassEnum.BOOLEAN

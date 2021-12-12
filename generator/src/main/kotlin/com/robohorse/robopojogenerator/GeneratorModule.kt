@@ -4,12 +4,13 @@ import com.robohorse.robopojogenerator.filewriter.FileDelegateFactory
 import com.robohorse.robopojogenerator.filewriter.FileWriter
 import com.robohorse.robopojogenerator.filewriter.common.CommonFileWriterDelegate
 import com.robohorse.robopojogenerator.filewriter.common.KotlinSingleFileWriterDelegate
+import com.robohorse.robopojogenerator.parser.InputDataParser
+import com.robohorse.robopojogenerator.parser.JsonArrayParser
+import com.robohorse.robopojogenerator.parser.JsonObjectParser
 import com.robohorse.robopojogenerator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.postrocessing.common.AutoValueClassPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.CommonJavaPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.KotlinDataClassPostProcessor
-import com.robohorse.robopojogenerator.processing.ClassCreator
-import com.robohorse.robopojogenerator.processing.InputDataParser
 import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.utils.ProcessingModelResolver
@@ -70,7 +71,15 @@ val generatorModule = module {
     }
 
     single {
-        InputDataParser(get())
+        InputDataParser(get(), get(), get())
+    }
+
+    single {
+        JsonObjectParser(get())
+    }
+
+    single {
+        JsonArrayParser(get())
     }
 
     single { ClassGenerateHelper() }
