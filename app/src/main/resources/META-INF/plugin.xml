@@ -11,7 +11,7 @@
 
     <actions>
         <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.action.GeneratePOJOAction"
-                icon="/icons/pojo.png"
+                icon="/icons/pojo.svg"
                 text="Generate POJO from JSON"
                 description="GeneratePOJOAction">
             <add-to-group group-id="NewGroup" anchor="last"/>
