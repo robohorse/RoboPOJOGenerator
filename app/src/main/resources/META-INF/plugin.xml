@@ -4,6 +4,7 @@
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.robohorse.robopojogenerator.persistense.ViewStateService" />
         <notificationGroup id="RoboPOJO Generator" displayType="BALLOON" key="com.robohorse.robopojogenerator"/>
     </extensions>
 
@@ -11,7 +12,7 @@
 
     <actions>
         <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.action.GeneratePOJOAction"
-                icon="/icons/pojo.png"
+                icon="/icons/pojo.svg"
                 text="Generate POJO from JSON"
                 description="GeneratePOJOAction">
             <add-to-group group-id="NewGroup" anchor="last"/>

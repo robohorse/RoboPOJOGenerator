@@ -3,11 +3,10 @@ package com.robohorse.robopojogenerator.filewriter
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.delegates.PreWriterDelegate
 import com.robohorse.robopojogenerator.errors.FileWriteException
-import com.robohorse.robopojogenerator.properties.ClassItem
-import com.robohorse.robopojogenerator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.models.ProjectModel
-import java.io.File
+import com.robohorse.robopojogenerator.postrocessing.PostProcessorFactory
+import com.robohorse.robopojogenerator.properties.ClassItem
 import java.io.IOException
 
 internal abstract class BaseWriterDelegate(
@@ -35,13 +34,10 @@ internal abstract class BaseWriterDelegate(
         generationModel: GenerationModel,
         projectModel: ProjectModel
     ) {
-        val path = projectModel.directory.virtualFile.path
         val fileName = "$className${if (generationModel.useKotlin) FILE_KOTLIN else FILE_JAVA}"
-        val file = File(path + File.separator + fileName)
         try {
-            if (file.exists()) {
+            if (projectModel.directory.findFile(fileName) != null) {
                 if (generationModel.rewriteClasses) {
-                    file.delete()
                     messageDelegate.logEventMessage("updated $fileName")
                 } else {
                     messageDelegate.logEventMessage("skipped $fileName")
@@ -50,7 +46,9 @@ internal abstract class BaseWriterDelegate(
                 messageDelegate.logEventMessage("created $fileName")
             }
             fileWriterDelegate.writeToFile(
-                preWriterDelegate.updateFileBody(generationModel, classItemBody), file
+                preWriterDelegate.updateFileBody(generationModel, classItemBody), fileName,
+                projectModel,
+                generationModel
             )
         } catch (e: IOException) {
             throw FileWriteException(e.message)

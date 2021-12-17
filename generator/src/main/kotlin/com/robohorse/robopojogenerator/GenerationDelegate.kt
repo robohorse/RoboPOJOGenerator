@@ -1,8 +1,5 @@
 package com.robohorse.robopojogenerator
 
-import com.intellij.openapi.progress.ProgressIndicator
-import com.intellij.openapi.progress.ProgressManager
-import com.intellij.openapi.progress.Task.Backgroundable
 import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
@@ -26,23 +23,13 @@ internal class GenerationDelegateImpl(
         generationModel: GenerationModel,
         projectModel: ProjectModel
     ) {
-        ProgressManager.getInstance().run(object : Backgroundable(
-            projectModel.project,
-            TASK_TITLE, false
-        ) {
-            override fun run(indicator: ProgressIndicator) {
-                try {
-                    classCreator.generateFiles(generationModel, projectModel)
-                    messageDelegate.showSuccessMessage()
-                } catch (e: RoboPluginException) {
-                    messageDelegate.onPluginExceptionHandled(e)
-                } finally {
-                    indicator.stop()
-                    environmentDelegate.refreshProject(projectModel)
-                }
-            }
-        })
+        try {
+            classCreator.generateFiles(generationModel, projectModel)
+            messageDelegate.showSuccessMessage()
+        } catch (e: RoboPluginException) {
+            messageDelegate.onPluginExceptionHandled(e)
+        } finally {
+            environmentDelegate.refreshProject(projectModel)
+        }
     }
 }
-
-private const val TASK_TITLE = "RoboPOJO Generation"

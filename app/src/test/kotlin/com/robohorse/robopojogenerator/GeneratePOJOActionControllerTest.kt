@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.delegates.EnvironmentDelegate
 import com.robohorse.robopojogenerator.delegates.MessageDelegate
 import com.robohorse.robopojogenerator.errors.RoboPluginException
 import com.robohorse.robopojogenerator.models.ProjectModel
+import com.robohorse.robopojogenerator.persistense.ViewStateService
 import com.robohorse.robopojogenerator.view.GeneratorViewFactory
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -33,6 +34,9 @@ internal class GeneratePOJOActionControllerTest {
 
     @RelaxedMockK
     lateinit var event: AnActionEvent
+
+    @RelaxedMockK
+    lateinit var viewStateService: ViewStateService
 
     @InjectMockKs
     lateinit var generatePOJOActionController: GeneratePOJOActionController
