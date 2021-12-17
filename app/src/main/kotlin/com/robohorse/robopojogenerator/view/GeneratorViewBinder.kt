@@ -11,12 +11,15 @@ import javax.swing.BoxLayout
 import javax.swing.JCheckBox
 
 internal class GeneratorViewBinder(
-    private val propertiesFactory: PropertiesFactory
+    private val propertiesFactory: PropertiesFactory,
+    private val viewStateManager: ViewStateManager
 ) {
     var properties: ControlsModel? = null
 
     fun bindView(generatorVew: GeneratorVew) {
         properties = propertiesFactory.createControls()
+        viewStateManager.restoreState(properties)
+        viewStateManager.restoreCommonProperties(generatorVew)
         bindSource(generatorVew)
         bindLanguage(generatorVew)
         bindFrameworksAndProperties(generatorVew)
@@ -85,6 +88,7 @@ internal class GeneratorViewBinder(
                     bindFrameworksAndProperties(generatorVew)
                 }
             }
+            kotlinRadioButton.isSelected = properties?.selectedSource?.selectedLanguage is LanguageVM.Kotlin
         }
     }
 

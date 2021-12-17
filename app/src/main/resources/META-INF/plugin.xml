@@ -4,6 +4,7 @@
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.robohorse.robopojogenerator.persistense.ViewStateService" />
         <notificationGroup id="RoboPOJO Generator" displayType="BALLOON" key="com.robohorse.robopojogenerator"/>
     </extensions>
 
