@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.4
+
+- Class generation improvements.
+- Last plugin state saving/restoring.
+
 ## 2.3.3
 
 - Lombok @Value annotation support was added.
