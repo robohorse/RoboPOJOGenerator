@@ -11,11 +11,17 @@ import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseToString
 import com.robohorse.robopojogenerator.models.ControlsModel
 import com.robohorse.robopojogenerator.models.FrameworkVW.AutoValue
 import com.robohorse.robopojogenerator.models.FrameworkVW.FastJson
+import com.robohorse.robopojogenerator.models.FrameworkVW.FastJsonJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Gson
+import com.robohorse.robopojogenerator.models.FrameworkVW.GsonJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Jackson
+import com.robohorse.robopojogenerator.models.FrameworkVW.JacksonJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.LoganSquare
+import com.robohorse.robopojogenerator.models.FrameworkVW.LoganSquareJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Moshi
+import com.robohorse.robopojogenerator.models.FrameworkVW.MoshiJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.None
+import com.robohorse.robopojogenerator.models.FrameworkVW.NoneJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.NoneLombok
 import com.robohorse.robopojogenerator.models.LanguageVM.Java
 import com.robohorse.robopojogenerator.models.LanguageVM.Kotlin
@@ -52,6 +58,11 @@ internal class PropertiesFactory {
                         UseToString()
                     )
                 ),
+                NoneJavaRecords(
+                    properties = listOf(
+                        UseJavaPrimitives(selected = true)
+                    )
+                ),
                 NoneLombok(
                     properties = listOf(
                         UseJavaPrimitives(selected = true),
@@ -66,12 +77,22 @@ internal class PropertiesFactory {
                         UseToString()
                     )
                 ),
+                GsonJavaRecords(
+                    properties = listOf(
+                        UseJavaPrimitives(selected = true)
+                    )
+                ),
                 Jackson(
                     properties = listOf(
                         UseJavaPrimitives(selected = true),
                         UseSetters(),
                         UseGetters(selected = true),
                         UseToString()
+                    )
+                ),
+                JacksonJavaRecords(
+                    properties = listOf(
+                        UseJavaPrimitives(selected = true)
                     )
                 ),
                 LoganSquare(
@@ -82,6 +103,11 @@ internal class PropertiesFactory {
                         UseToString()
                     )
                 ),
+                LoganSquareJavaRecords(
+                    properties = listOf(
+                        UseJavaPrimitives(selected = true)
+                    )
+                ),
                 Moshi(
                     properties = listOf(
                         UseJavaPrimitives(selected = true),
@@ -90,12 +116,22 @@ internal class PropertiesFactory {
                         UseToString()
                     )
                 ),
+                MoshiJavaRecords(
+                    properties = listOf(
+                        UseJavaPrimitives(selected = true)
+                    )
+                ),
                 FastJson(
                     properties = listOf(
                         UseJavaPrimitives(selected = true),
                         UseSetters(),
                         UseGetters(selected = true),
                         UseToString()
+                    )
+                ),
+                FastJsonJavaRecords(
+                    properties = listOf(
+                        UseJavaPrimitives(selected = true)
                     )
                 ),
                 AutoValue()

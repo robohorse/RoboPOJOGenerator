@@ -5,10 +5,10 @@
 <!-- Plugin description -->
 Intellij Idea and Android Studio plugin for JSON to POJO transformation.
 
-Generates Java and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, empty annotations template.
+Generates Java, Java Records and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, empty annotations template.
 Supports: primitive types, multiple inner JSONArrays.
 
-Keywords: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok.
+Keywords: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok, Java records.
 <!-- Plugin description end -->
 
 <p><img src="images/tutorial_v201.gif" width="100%" height="50%"></p>
