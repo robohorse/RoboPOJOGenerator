@@ -101,6 +101,16 @@ internal class ClassTemplateHelper(
             )
         }
 
+    fun createJavaRecordClassField(model: FieldModel) =
+        createAnnotatedField(
+            model.fieldName, model.annotation,
+            String.format(
+                ClassTemplate.FIELD_JAVA_RECORD,
+                model.classType,
+                model.fieldNameFormatted
+            )
+        )
+
     fun createClassBody(classItem: ClassItem, classBody: String?) =
         createClassBodyAnnotated(
             classItem,
@@ -119,6 +129,16 @@ internal class ClassTemplateHelper(
             classItem,
             String.format(
                 ClassTemplate.CLASS_BODY_ABSTRACT,
+                classItem.className,
+                classBody
+            )
+        )
+
+    fun createClassBodyRecords(classItem: ClassItem, classBody: String?) =
+        createClassBodyAnnotated(
+            classItem,
+            String.format(
+                ClassTemplate.CLASS_BODY_RECORDS,
                 classItem.className,
                 classBody
             )

@@ -10,6 +10,7 @@ import com.robohorse.robopojogenerator.parser.JsonObjectParser
 import com.robohorse.robopojogenerator.postrocessing.PostProcessorFactory
 import com.robohorse.robopojogenerator.postrocessing.common.AutoValueClassPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.CommonJavaPostProcessor
+import com.robohorse.robopojogenerator.postrocessing.common.JavaRecordsPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.KotlinDataClassPostProcessor
 import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.ClassTemplateHelper
@@ -35,6 +36,10 @@ val generatorModule = module {
     }
 
     single {
+        JavaRecordsPostProcessor(get(), get())
+    }
+
+    single {
         FileWriter()
     }
 
@@ -43,7 +48,7 @@ val generatorModule = module {
     }
 
     single {
-        PostProcessorFactory(get(), get(), get())
+        PostProcessorFactory(get(), get(), get(), get())
     }
 
     single {

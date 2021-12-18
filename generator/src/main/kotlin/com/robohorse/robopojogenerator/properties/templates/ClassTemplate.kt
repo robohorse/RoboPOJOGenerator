@@ -11,6 +11,9 @@ internal object ClassTemplate {
         "{" + NEW_LINE +
         "%2\$s" + NEW_LINE +
         "}"
+
+    const val CLASS_BODY_RECORDS = "public record %1\$s(\n%2\$s\n)" + " {\n}"
+
     const val CLASS_BODY_KOTLIN_DTO = "data class %1\$s" +
         "(" + NEW_LINE +
         "%2\$s" + NEW_LINE +
@@ -41,6 +44,7 @@ internal object ClassTemplate {
     const val FIELD_AUTO_VALUE = TAB + "public abstract %1\$s %2\$s();" + NEW_LINE
     const val FIELD_KOTLIN_DTO = TAB + "val %1\$s: %2\$s? = null" + "," + NEW_LINE
     const val FIELD_KOTLIN_DTO_NON_NULL = TAB + "val %1\$s: %2\$s" + "," + NEW_LINE
+    const val FIELD_JAVA_RECORD = "$TAB%1\$s %2\$s,$NEW_LINE"
     const val FIELD_KOTLIN_DOT_DEFAULT = TAB + "val any: Any? = null"
     const val FIELD_ANNOTATED = "$NEW_LINE$TAB%1\$s$NEW_LINE%2\$s"
     const val TYPE_ADAPTER = (

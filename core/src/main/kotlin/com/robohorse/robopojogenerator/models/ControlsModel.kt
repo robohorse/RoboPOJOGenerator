@@ -55,6 +55,10 @@ sealed class FrameworkVW(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(NONE, properties)
 
+    class NoneJavaRecords(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(NONE_JAVA_RECORDS, properties), JavaRecords
+
     class NoneLombok(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(NONE_LOMBOK, properties)
@@ -63,17 +67,33 @@ sealed class FrameworkVW(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(GSON, properties)
 
+    class GsonJavaRecords(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(GSON_JAVA_RECORDS, properties), JavaRecords
+
     class Jackson(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(JACKSON, properties)
+
+    class JacksonJavaRecords(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(JACKSON_JAVA_RECORDS, properties), JavaRecords
 
     class LoganSquare(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(LOGAN_SQUARE, properties)
 
+    class LoganSquareJavaRecords(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(LOGAN_SQUARE_JAVA_RECORDS, properties), JavaRecords
+
     class Moshi(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(MOSHI, properties)
+
+    class MoshiJavaRecords(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(MOSHI_JAVA_RECORDS, properties), JavaRecords
 
     class AutoValue(
         properties: List<AdditionalPropertiesVM> = emptyList()
@@ -83,16 +103,28 @@ sealed class FrameworkVW(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(FAST_JSON, properties)
 
+    class FastJsonJavaRecords(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(FAST_JSON_JAVA_RECORDS, properties), JavaRecords
+
     companion object {
-        const val NONE = "none"
+        const val NONE = "None"
+        const val NONE_JAVA_RECORDS = "None (records)"
         const val NONE_LOMBOK = "Lombok"
         const val GSON = "GSON"
+        const val GSON_JAVA_RECORDS = "GSON (records)"
         const val JACKSON = "Jackson"
+        const val JACKSON_JAVA_RECORDS = "Jackson (records)"
         const val LOGAN_SQUARE = "Logan Square"
+        const val LOGAN_SQUARE_JAVA_RECORDS = "Logan Square (records)"
         const val MOSHI = "Moshi"
+        const val MOSHI_JAVA_RECORDS = "Moshi (records)"
         const val AUTO_VALUE = "AutoValue"
         const val FAST_JSON = "FastJson"
+        const val FAST_JSON_JAVA_RECORDS = "FastJson (records)"
     }
+
+    interface JavaRecords
 }
 
 sealed class AdditionalPropertiesVM(

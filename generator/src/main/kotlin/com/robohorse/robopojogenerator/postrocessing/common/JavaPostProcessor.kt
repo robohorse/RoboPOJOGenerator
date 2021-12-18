@@ -2,11 +2,17 @@ package com.robohorse.robopojogenerator.postrocessing.common
 
 import com.robohorse.robopojogenerator.models.FrameworkVW.AutoValue
 import com.robohorse.robopojogenerator.models.FrameworkVW.FastJson
+import com.robohorse.robopojogenerator.models.FrameworkVW.FastJsonJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Gson
+import com.robohorse.robopojogenerator.models.FrameworkVW.GsonJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Jackson
+import com.robohorse.robopojogenerator.models.FrameworkVW.JacksonJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.LoganSquare
+import com.robohorse.robopojogenerator.models.FrameworkVW.LoganSquareJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Moshi
+import com.robohorse.robopojogenerator.models.FrameworkVW.MoshiJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.None
+import com.robohorse.robopojogenerator.models.FrameworkVW.NoneJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.NoneLombok
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.postrocessing.BasePostProcessor
@@ -25,6 +31,7 @@ internal abstract class JavaPostProcessor(
         generationModel: GenerationModel,
         classItem: ClassItem
     ) = when (generationModel.annotationEnum) {
+        is GsonJavaRecords,
         is Gson -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -33,6 +40,7 @@ internal abstract class JavaPostProcessor(
                 ImportsTemplate.GSON.imports
             )
         }
+        is LoganSquareJavaRecords,
         is LoganSquare -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -41,6 +49,7 @@ internal abstract class JavaPostProcessor(
                 ImportsTemplate.LOGAN_SQUARE.imports
             )
         }
+        is JacksonJavaRecords,
         is Jackson -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -49,6 +58,7 @@ internal abstract class JavaPostProcessor(
                 ImportsTemplate.JACKSON.imports
             )
         }
+        is FastJsonJavaRecords,
         is FastJson -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -65,6 +75,7 @@ internal abstract class JavaPostProcessor(
                 ImportsTemplate.AUTO_VALUE_GSON.imports
             )
         }
+        is MoshiJavaRecords,
         is Moshi -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -83,7 +94,8 @@ internal abstract class JavaPostProcessor(
                 importsTemplate.imports
             )
         }
-        is None -> { // NO OP
+        is None,
+        is NoneJavaRecords -> { // NO OP
         }
     }
 }
