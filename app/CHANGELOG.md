@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.5
+
+- Java records experimental support.
+
 ## 2.3.4
 
 - Class generation improvements.
