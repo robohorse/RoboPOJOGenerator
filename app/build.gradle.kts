@@ -8,7 +8,7 @@ dependencies {
     implementation(project(":generator"))
     implementation(project(":core"))
 
-    implementation("com.fifesoft:rsyntaxtextarea:3.1.3")
+    implementation("com.fifesoft:rsyntaxtextarea:3.2.0")
 }
 
 tasks {
@@ -16,7 +16,6 @@ tasks {
     patchPluginXml {
         version.set(properties("pluginVersion"))
         sinceBuild.set(properties("pluginSinceBuild"))
-        untilBuild.set(properties("pluginUntilBuild"))
 
         pluginDescription.set(
             rootDir.resolve("README.md").readText().lines().run {
