@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.6
+
+- Dependencies update. Latest IDE build support.
+
 ## 2.3.5
 
 - Java records experimental support.
