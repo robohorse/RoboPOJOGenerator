@@ -39,15 +39,6 @@ see log of changes
 <img src="images/plugin_log_v201.png" height="200">
 </p>
 
-# People, who help
-<ul>
-<li>
-<a href="https://github.com/wafer-li">wafer-li</a> - Kotlin support (release 1.7)
-</li>
-<li>
-<a href="https://github.com/ccqy66">ccqy66</a> - toString support (release 1.8.1)
-</li>
-</ul>
 
 # Changelog
 Please find it [here](https://github.com/robohorse/RoboPOJOGenerator/blob/master/app/CHANGELOG.md).
