@@ -49,5 +49,8 @@ see log of changes
 </li>
 </ul>
 
+# Changelog
+Please find it [here](https://github.com/robohorse/RoboPOJOGenerator/blob/master/app/CHANGELOG.md).
+
 # About
 Copyright 2016 Vadim Shchenev, and licensed under the MIT license. No attribution is necessary but it's very much appreciated. Star this project if you like it.
