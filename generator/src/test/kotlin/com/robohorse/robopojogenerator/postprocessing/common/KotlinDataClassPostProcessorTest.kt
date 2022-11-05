@@ -2,6 +2,7 @@ package com.robohorse.robopojogenerator.postprocessing.common
 
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.postrocessing.common.KotlinDataClassPostProcessor
+import com.robohorse.robopojogenerator.postrocessing.utils.MoshiAnnotationsProcessor
 import com.robohorse.robopojogenerator.properties.ClassItem
 import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.ClassTemplateHelper
@@ -21,6 +22,9 @@ internal class KotlinDataClassPostProcessorTest {
     lateinit var generateHelper: ClassGenerateHelper
 
     @RelaxedMockK
+    lateinit var moshiAnnotationsProcessor: MoshiAnnotationsProcessor
+
+    @RelaxedMockK
     lateinit var classItem: ClassItem
 
     @RelaxedMockK
@@ -36,6 +40,6 @@ internal class KotlinDataClassPostProcessorTest {
     fun check_createClassTemplate() {
         val classBody = "Class"
         processor.createClassTemplate(classItem, classBody, generationModel)
-        verify { classTemplateHelper.createClassBodyKotlinDataClass(classItem, classBody) }
+        verify { classTemplateHelper.createClassBodyKotlinDataClass(classItem, classBody, generationModel) }
     }
 }
