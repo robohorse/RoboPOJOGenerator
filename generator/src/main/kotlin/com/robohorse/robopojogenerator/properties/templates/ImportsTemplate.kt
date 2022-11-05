@@ -45,4 +45,4 @@ internal const val TYPED_ADAPTER = "import com.google.gson.TypeAdapter;"
 internal const val GSON_IMPORT = "import com.google.gson.Gson;"
 
 internal const val PARCELABLE_ANDROID = "import android.os.Parcelable"
-internal const val PARCELIZE_KOTLINX = "import kotlinx.android.parcel.Parcelize"
+internal const val PARCELIZE_KOTLINX = "import kotlinx.parcelize.Parcelize"

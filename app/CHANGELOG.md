@@ -4,6 +4,7 @@
 - Moshi: generate adapter option support.
 - Kotlin: regular classes support.
 - One character field name issue fix.
+- kotlinx.parcelize.Parcelize import update.
 
 ## 2.3.7
 
