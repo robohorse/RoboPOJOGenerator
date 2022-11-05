@@ -28,7 +28,7 @@ internal class ClassTemplateHelperTest {
         val field = "item"
         val type = "String"
         val fieldUpper = "Item"
-        every { classGenerateHelper.upperCaseFirst(field) }.returns(fieldUpper)
+        every { classGenerateHelper.upperCaseName(field) }.returns(fieldUpper)
         every { classGenerateHelper.lowerCaseFirst(field) }.returns(field)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
         val target = (
@@ -47,7 +47,7 @@ internal class ClassTemplateHelperTest {
         val field = "item"
         val type = "String"
         val fieldUpper = "Item"
-        every { classGenerateHelper.upperCaseFirst(field) }.returns(fieldUpper)
+        every { classGenerateHelper.upperCaseName(field) }.returns(fieldUpper)
         every { classGenerateHelper.lowerCaseFirst(field) }.returns(field)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
         val target = (
@@ -66,7 +66,7 @@ internal class ClassTemplateHelperTest {
         val field = "item"
         val type = "boolean"
         val fieldUpper = "Item"
-        every { classGenerateHelper.upperCaseFirst(field) }.returns(fieldUpper)
+        every { classGenerateHelper.upperCaseName(field) }.returns(fieldUpper)
         every { classGenerateHelper.lowerCaseFirst(field) }.returns(field)
         every { classGenerateHelper.formatClassField(field) }.returns(field)
         val target = (

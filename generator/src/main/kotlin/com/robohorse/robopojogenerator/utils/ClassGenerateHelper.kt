@@ -50,21 +50,23 @@ class ClassGenerateHelper {
         return classBody
     }
 
-    fun formatClassName(name: String) = upperCaseFirst(proceedField(name))
+    fun formatClassName(name: String) = upperCaseName(proceedField(name))
 
     fun getClassNameWithItemPostfix(name: String) =
-        String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseFirst(proceedField(name)))
+        String.format(ArrayItemsTemplate.ITEM_NAME, upperCaseName(proceedField(name)))
 
-    fun upperCaseFirst(name: String) = if (name.length > 1) {
+    fun upperCaseName(name: String) = if (name.length > 1) {
         Character.toUpperCase(name.first()).toString() + name.substring(1)
     } else {
-        name
+        name.uppercase()
     }
 
-    fun formatClassField(name: String) = lowerCaseFirst(proceedField(name))
+    fun formatClassField(name: String) = lowerCaseFirst(proceedField(name), forceLowerCase = true)
 
-    fun lowerCaseFirst(name: String) = if (name.length > 1) {
+    fun lowerCaseFirst(name: String, forceLowerCase: Boolean = false) = if (name.length > 1) {
         Character.toLowerCase(name.first()).toString() + name.substring(1)
+    } else if (forceLowerCase) {
+        name.lowercase()
     } else {
         name
     }
@@ -94,10 +96,10 @@ class ClassGenerateHelper {
             .replace("[^A-Za-z0-9]".toRegex(), "_")
             .replace("_{2,}".toRegex(), "_")
         val isDigitFirst = (
-                objectName.isNotBlank() && Character.isDigit(objectName.first()) ||
-                        objectName.length > 1 && objectName.first() == '_' &&
-                        Character.isDigit(objectName[1])
-                )
+            objectName.isNotBlank() && Character.isDigit(objectName.first()) ||
+                objectName.length > 1 && objectName.first() == '_' &&
+                Character.isDigit(objectName[1])
+            )
         if (objectName.isBlank() || isDigitFirst || ReservedWords.WORDS_SET.contains(objectName)) {
             objectName = "json_member_$objectName"
         }

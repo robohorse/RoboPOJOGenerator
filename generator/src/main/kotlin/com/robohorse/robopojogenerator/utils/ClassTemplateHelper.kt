@@ -13,7 +13,7 @@ internal class ClassTemplateHelper(
 
     fun createSetter(field: String, type: String?) = String.format(
         ClassTemplate.SETTER,
-        classGenerateHelper.upperCaseFirst(field),
+        classGenerateHelper.upperCaseName(field),
         type,
         classGenerateHelper.lowerCaseFirst(field)
     )
@@ -22,7 +22,7 @@ internal class ClassTemplateHelper(
         String.format(
             if (ClassEnum.BOOLEAN.primitive.equals(type, ignoreCase = true))
                 ClassTemplate.GETTER_BOOLEAN else ClassTemplate.GETTER,
-            classGenerateHelper.upperCaseFirst(field),
+            classGenerateHelper.upperCaseName(field),
             classGenerateHelper.lowerCaseFirst(field),
             type
         )
