@@ -19,7 +19,8 @@ data class GenerationModel(
     val javaPrimitives: Boolean,
     val useTabsIndentation: Boolean,
     val useLombokValue: Boolean,
-    val useMoshiAdapter: Boolean
+    val useMoshiAdapter: Boolean,
+    val useKotlinDataClass: Boolean
 )
 
 data class ProjectModel(

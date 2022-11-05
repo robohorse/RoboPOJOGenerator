@@ -129,6 +129,6 @@ internal class KotlinDataClassPostProcessor(
     ) = classTemplateHelper.createClassBodyKotlinDataClass(
         classItem,
         classBody,
-        generationModel.useKotlinParcelable
+        generationModel
     )
 }

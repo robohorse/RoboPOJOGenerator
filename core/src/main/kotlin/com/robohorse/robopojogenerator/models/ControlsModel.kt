@@ -159,6 +159,10 @@ sealed class AdditionalPropertiesVM(
         selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, MOSHI_ADAPTER)
 
+    class UseKotlinDataClasses(
+        selected: Boolean = false
+    ) : AdditionalPropertiesVM(selected, KOTLIN_DATA_CLASSES)
+
     class UseKotlinNullableFields(
         selected: Boolean = false
     ) : AdditionalPropertiesVM(selected, KOTLIN_NULLABLE_FIELDS)
@@ -175,8 +179,9 @@ sealed class AdditionalPropertiesVM(
         const val LOMBOK_VALUE = "use @Value"
 
         const val KOTLIN_PARCELABLE = "parcelable (Android)"
-        const val KOTLIN_SINGLE_DATA_CLASS = "single data class"
+        const val KOTLIN_SINGLE_DATA_CLASS = "single file"
         const val MOSHI_ADAPTER = "generate adapter"
+        const val KOTLIN_DATA_CLASSES = "use data classes"
         const val KOTLIN_NULLABLE_FIELDS = "nullable fields"
     }
 }

@@ -67,6 +67,8 @@ internal class ViewStateManager(
                 model.useLombokValue
             filterIsInstance<AdditionalPropertiesVM.UseMoshiAdapterAnnotation>().firstOrNull()?.selected =
                 model.useMoshiAdapter
+            filterIsInstance<AdditionalPropertiesVM.UseKotlinDataClasses>().firstOrNull()?.selected =
+                model.useKotlinDataClass
         }
     }
 }

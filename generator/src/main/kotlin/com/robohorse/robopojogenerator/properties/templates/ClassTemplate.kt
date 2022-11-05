@@ -1,6 +1,7 @@
 package com.robohorse.robopojogenerator.properties.templates
 
 internal object ClassTemplate {
+    const val KOTLIN_DATA_CLASS = "data"
     const val NEW_LINE = "\n"
     const val TAB = "\t"
     const val CLASS_BODY = "public class %1\$s" +
@@ -14,11 +15,11 @@ internal object ClassTemplate {
 
     const val CLASS_BODY_RECORDS = "public record %1\$s(\n%2\$s\n)" + " {\n}"
 
-    const val CLASS_BODY_KOTLIN_DTO = "data class %1\$s" +
+    const val CLASS_BODY_KOTLIN_DTO = "$KOTLIN_DATA_CLASS class %1\$s" +
         "(" + NEW_LINE +
         "%2\$s" + NEW_LINE +
         ")"
-    const val CLASS_BODY_KOTLIN_DTO_PARCELABLE = "@Parcelize\ndata class %1\$s" +
+    const val CLASS_BODY_KOTLIN_DTO_PARCELABLE = "@Parcelize\n$KOTLIN_DATA_CLASS class %1\$s" +
         "(" + NEW_LINE +
         "%2\$s" + NEW_LINE +
         ") : Parcelable"
