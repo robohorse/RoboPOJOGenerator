@@ -21,7 +21,9 @@ internal sealed class KotlinAnnotations(
         annotation = "@JSONField(name=\"%1\$s\")"
     )
 
-    object MOSHI : KotlinAnnotations(
+    data class MOSHI(
+        val adapterClassAnnotation: String = "@JsonClass(generateAdapter = true)"
+    ) : KotlinAnnotations(
         annotation = "@Json(name=\"%1\$s\")"
     )
 }

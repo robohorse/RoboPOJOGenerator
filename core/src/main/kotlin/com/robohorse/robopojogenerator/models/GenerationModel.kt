@@ -18,7 +18,8 @@ data class GenerationModel(
     val kotlinNullableFields: Boolean,
     val javaPrimitives: Boolean,
     val useTabsIndentation: Boolean,
-    val useLombokValue: Boolean
+    val useLombokValue: Boolean,
+    val useMoshiAdapter: Boolean
 )
 
 data class ProjectModel(

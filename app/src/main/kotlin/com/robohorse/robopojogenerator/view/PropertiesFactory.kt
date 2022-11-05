@@ -6,6 +6,7 @@ import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseKotlinNu
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseKotlinParcelable
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseKotlinSingleDataClass
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseLombokValue
+import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseMoshiAdapterAnnotation
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseSetters
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseToString
 import com.robohorse.robopojogenerator.models.ControlsModel
@@ -171,6 +172,7 @@ internal class PropertiesFactory {
                     properties = listOf(
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
+                        UseMoshiAdapterAnnotation(),
                         UseKotlinParcelable()
                     )
                 ),

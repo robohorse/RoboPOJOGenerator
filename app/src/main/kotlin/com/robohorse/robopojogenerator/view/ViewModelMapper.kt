@@ -7,6 +7,7 @@ import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.K
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.KOTLIN_PARCELABLE
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.KOTLIN_SINGLE_DATA_CLASS
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.LOMBOK_VALUE
+import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.MOSHI_ADAPTER
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.SETTERS
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.TO_STRING
 import com.robohorse.robopojogenerator.models.GenerationModel
@@ -31,7 +32,8 @@ internal class ViewModelMapper(
             kotlinNullableFields = resolveCheckBox(KOTLIN_NULLABLE_FIELDS),
             javaPrimitives = resolveCheckBox(JAVA_PRIMITIVE_TYPES),
             useLombokValue = resolveCheckBox(LOMBOK_VALUE),
-            useTabsIndentation = useTabsIndentation.isSelected
+            useTabsIndentation = useTabsIndentation.isSelected,
+            useMoshiAdapter = resolveCheckBox(MOSHI_ADAPTER)
         )
     }
 

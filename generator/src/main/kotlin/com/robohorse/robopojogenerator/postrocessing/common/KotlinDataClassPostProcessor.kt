@@ -85,6 +85,7 @@ internal class KotlinDataClassPostProcessor(
                 ImportsTemplate.GSON.imports
             )
         }
+
         is LoganSquare -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -93,6 +94,7 @@ internal class KotlinDataClassPostProcessor(
                 ImportsTemplate.LOGAN_SQUARE.imports
             )
         }
+
         is Jackson -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -101,6 +103,7 @@ internal class KotlinDataClassPostProcessor(
                 ImportsTemplate.JACKSON.imports
             )
         }
+
         is FastJson -> {
             generateHelper.setAnnotations(
                 classItem,
@@ -109,14 +112,18 @@ internal class KotlinDataClassPostProcessor(
                 ImportsTemplate.FAST_JSON.imports
             )
         }
+
         is Moshi -> {
-            generateHelper.setAnnotations(
-                classItem,
-                KotlinAnnotations.MOSHI.classAnnotation,
-                KotlinAnnotations.MOSHI.annotation,
-                ImportsTemplate.MOSHI.imports
-            )
+            with(KotlinAnnotations.MOSHI()) {
+                generateHelper.setAnnotations(
+                    classItem,
+                    if (generationModel.useMoshiAdapter) adapterClassAnnotation else classAnnotation,
+                    annotation,
+                    ImportsTemplate.MOSHI.imports
+                )
+            }
         }
+
         else -> {
             // NO OP
         }
