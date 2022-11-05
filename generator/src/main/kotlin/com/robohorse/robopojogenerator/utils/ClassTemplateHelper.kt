@@ -13,7 +13,7 @@ internal class ClassTemplateHelper(
 
     fun createSetter(field: String, type: String?) = String.format(
         ClassTemplate.SETTER,
-        classGenerateHelper.upperCaseFirst(field),
+        classGenerateHelper.upperCaseName(field),
         type,
         classGenerateHelper.lowerCaseFirst(field)
     )
@@ -22,7 +22,7 @@ internal class ClassTemplateHelper(
         String.format(
             if (ClassEnum.BOOLEAN.primitive.equals(type, ignoreCase = true))
                 ClassTemplate.GETTER_BOOLEAN else ClassTemplate.GETTER,
-            classGenerateHelper.upperCaseFirst(field),
+            classGenerateHelper.upperCaseName(field),
             classGenerateHelper.lowerCaseFirst(field),
             type
         )
@@ -60,13 +60,13 @@ internal class ClassTemplateHelper(
             model.classType,
             model.fieldNameFormatted
         ) else (
-                String.format(
-                    ClassTemplate.FIELD_WITH_VISIBILITY,
-                    model.visibility.value,
-                    model.classType,
-                    model.fieldNameFormatted
-                )
-                )
+            String.format(
+                ClassTemplate.FIELD_WITH_VISIBILITY,
+                model.visibility.value,
+                model.classType,
+                model.fieldNameFormatted
+            )
+            )
         return createAnnotatedField(model.fieldName, model.annotation, fieldDeclaration)
     }
 
@@ -147,19 +147,28 @@ internal class ClassTemplateHelper(
     fun createClassBodyKotlinDataClass(
         classItem: ClassItem,
         classBody: String?,
-        parcelable: Boolean = false
+        generationModel: GenerationModel
     ) = createClassBodyAnnotated(
         classItem,
         String.format(
-            if (parcelable) {
-                ClassTemplate.CLASS_BODY_KOTLIN_DTO_PARCELABLE
-            } else {
-                ClassTemplate.CLASS_BODY_KOTLIN_DTO
-            },
+            generateKotlinClass(generationModel),
             classItem.className,
             classBody
         )
     )
+
+    private fun generateKotlinClass(generationModel: GenerationModel): String {
+        val body = if (generationModel.useKotlinParcelable) {
+            ClassTemplate.CLASS_BODY_KOTLIN_DTO_PARCELABLE
+        } else {
+            ClassTemplate.CLASS_BODY_KOTLIN_DTO
+        }
+        return if (generationModel.useKotlinDataClass) {
+            body
+        } else {
+            body.replace(ClassTemplate.KOTLIN_DATA_CLASS, "")
+        }
+    }
 
     fun createClassItem(
         packagePath: String?,

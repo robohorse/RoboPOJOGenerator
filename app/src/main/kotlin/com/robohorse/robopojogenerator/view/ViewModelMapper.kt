@@ -3,10 +3,12 @@ package com.robohorse.robopojogenerator.view
 import com.robohorse.robopojogenerator.form.GeneratorVew
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.GETTERS
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.JAVA_PRIMITIVE_TYPES
+import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.KOTLIN_DATA_CLASSES
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.KOTLIN_NULLABLE_FIELDS
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.KOTLIN_PARCELABLE
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.KOTLIN_SINGLE_DATA_CLASS
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.LOMBOK_VALUE
+import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.MOSHI_ADAPTER
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.SETTERS
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.Companion.TO_STRING
 import com.robohorse.robopojogenerator.models.GenerationModel
@@ -31,7 +33,9 @@ internal class ViewModelMapper(
             kotlinNullableFields = resolveCheckBox(KOTLIN_NULLABLE_FIELDS),
             javaPrimitives = resolveCheckBox(JAVA_PRIMITIVE_TYPES),
             useLombokValue = resolveCheckBox(LOMBOK_VALUE),
-            useTabsIndentation = useTabsIndentation.isSelected
+            useTabsIndentation = useTabsIndentation.isSelected,
+            useMoshiAdapter = resolveCheckBox(MOSHI_ADAPTER),
+            useKotlinDataClass = resolveCheckBox(KOTLIN_DATA_CLASSES)
         )
     }
 

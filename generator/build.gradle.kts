@@ -1,7 +1,7 @@
 dependencies {
     implementation(project(":core"))
 
-    implementation("org.json:json:20160212")
-    implementation("commons-io:commons-io:2.4")
-    implementation("com.google.guava:guava:19.0")
+    implementation("org.json:json:20220924")
+    implementation("commons-io:commons-io:2.11.0")
+    implementation("com.google.guava:guava:23.0")
 }

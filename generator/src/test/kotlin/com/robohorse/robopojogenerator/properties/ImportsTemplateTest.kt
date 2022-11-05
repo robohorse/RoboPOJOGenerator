@@ -50,6 +50,6 @@ internal class ImportsTemplateTest {
 
     @Test
     fun check_MOSHI() {
-        assertEquals(MOSHI.imports[0], MOSHI_PROPERTY)
+        assertEquals(MOSHI().imports[0], MOSHI_PROPERTY)
     }
 }

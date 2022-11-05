@@ -8,7 +8,7 @@ dependencies {
     implementation(project(":generator"))
     implementation(project(":core"))
 
-    implementation("com.fifesoft:rsyntaxtextarea:3.2.0")
+    implementation("com.fifesoft:rsyntaxtextarea:3.3.0")
 }
 
 tasks {

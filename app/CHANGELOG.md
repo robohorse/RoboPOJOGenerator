@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.8
+- Moshi: generate adapter option support.
+- Kotlin: regular classes support.
+- One character field name issue fix.
+
 ## 2.3.7
 
 - Latest IDE build support.

@@ -1,12 +1,7 @@
 package com.robohorse.robopojogenerator.view
 
 import com.robohorse.robopojogenerator.form.GeneratorVew
-import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM
-import com.robohorse.robopojogenerator.models.ControlsModel
-import com.robohorse.robopojogenerator.models.FrameworkVW
-import com.robohorse.robopojogenerator.models.GenerationModel
-import com.robohorse.robopojogenerator.models.LanguageVM
-import com.robohorse.robopojogenerator.models.SourceVM
+import com.robohorse.robopojogenerator.models.*
 import com.robohorse.robopojogenerator.persistense.ViewStateService
 
 internal class ViewStateManager(
@@ -70,6 +65,10 @@ internal class ViewStateManager(
                 model.kotlinNullableFields
             filterIsInstance<AdditionalPropertiesVM.UseLombokValue>().firstOrNull()?.selected =
                 model.useLombokValue
+            filterIsInstance<AdditionalPropertiesVM.UseMoshiAdapterAnnotation>().firstOrNull()?.selected =
+                model.useMoshiAdapter
+            filterIsInstance<AdditionalPropertiesVM.UseKotlinDataClasses>().firstOrNull()?.selected =
+                model.useKotlinDataClass
         }
     }
 }

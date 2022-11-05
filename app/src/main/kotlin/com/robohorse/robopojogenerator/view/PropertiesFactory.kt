@@ -2,10 +2,12 @@ package com.robohorse.robopojogenerator.view
 
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseGetters
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseJavaPrimitives
+import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseKotlinDataClasses
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseKotlinNullableFields
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseKotlinParcelable
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseKotlinSingleDataClass
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseLombokValue
+import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseMoshiAdapterAnnotation
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseSetters
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseToString
 import com.robohorse.robopojogenerator.models.ControlsModel
@@ -141,6 +143,7 @@ internal class PropertiesFactory {
             frameworks = listOf(
                 None(
                     properties = listOf(
+                        UseKotlinDataClasses(selected = true),
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
                         UseKotlinParcelable()
@@ -148,6 +151,7 @@ internal class PropertiesFactory {
                 ),
                 Gson(
                     properties = listOf(
+                        UseKotlinDataClasses(selected = true),
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
                         UseKotlinParcelable()
@@ -155,6 +159,7 @@ internal class PropertiesFactory {
                 ),
                 Jackson(
                     properties = listOf(
+                        UseKotlinDataClasses(selected = true),
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
                         UseKotlinParcelable()
@@ -162,6 +167,7 @@ internal class PropertiesFactory {
                 ),
                 LoganSquare(
                     properties = listOf(
+                        UseKotlinDataClasses(selected = true),
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
                         UseKotlinParcelable()
@@ -169,13 +175,16 @@ internal class PropertiesFactory {
                 ),
                 Moshi(
                     properties = listOf(
+                        UseKotlinDataClasses(selected = true),
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
+                        UseMoshiAdapterAnnotation(),
                         UseKotlinParcelable()
                     )
                 ),
                 FastJson(
                     properties = listOf(
+                        UseKotlinDataClasses(selected = true),
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
                         UseKotlinParcelable()
