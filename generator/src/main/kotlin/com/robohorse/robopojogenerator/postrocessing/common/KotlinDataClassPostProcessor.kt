@@ -8,6 +8,7 @@ import com.robohorse.robopojogenerator.models.FrameworkVW.LoganSquare
 import com.robohorse.robopojogenerator.models.FrameworkVW.Moshi
 import com.robohorse.robopojogenerator.models.GenerationModel
 import com.robohorse.robopojogenerator.postrocessing.BasePostProcessor
+import com.robohorse.robopojogenerator.postrocessing.utils.MoshiAnnotationsProcessor
 import com.robohorse.robopojogenerator.properties.ClassItem
 import com.robohorse.robopojogenerator.properties.annotations.KotlinAnnotations
 import com.robohorse.robopojogenerator.properties.templates.ClassTemplate
@@ -19,7 +20,8 @@ import com.robohorse.robopojogenerator.utils.ClassTemplateHelper
 
 internal class KotlinDataClassPostProcessor(
     generateHelper: ClassGenerateHelper,
-    classTemplateHelper: ClassTemplateHelper
+    classTemplateHelper: ClassTemplateHelper,
+    private val moshiAnnotationsProcessor: MoshiAnnotationsProcessor
 ) : BasePostProcessor(generateHelper, classTemplateHelper) {
 
     override fun proceedClassImports(
@@ -113,16 +115,7 @@ internal class KotlinDataClassPostProcessor(
             )
         }
 
-        is Moshi -> {
-            with(KotlinAnnotations.MOSHI()) {
-                generateHelper.setAnnotations(
-                    classItem,
-                    if (generationModel.useMoshiAdapter) adapterClassAnnotation else classAnnotation,
-                    annotation,
-                    ImportsTemplate.MOSHI.imports
-                )
-            }
-        }
+        is Moshi -> moshiAnnotationsProcessor.applyAnnotations(generationModel, classItem)
 
         else -> {
             // NO OP

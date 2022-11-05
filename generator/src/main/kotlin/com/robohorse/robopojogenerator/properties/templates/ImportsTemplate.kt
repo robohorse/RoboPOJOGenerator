@@ -15,7 +15,9 @@ internal sealed class ImportsTemplate(
 
     object FAST_JSON : ImportsTemplate(arrayOf(FAST_JSON_PROPERTY))
 
-    object MOSHI : ImportsTemplate(arrayOf(MOSHI_PROPERTY))
+    data class MOSHI(
+        val jsonClassAnnotation: String = "import com.squareup.moshi.JsonClass;"
+    ) : ImportsTemplate(arrayOf(MOSHI_PROPERTY))
 
     class Lombok(useValue: Boolean) : ImportsTemplate(
         imports = if (useValue) {

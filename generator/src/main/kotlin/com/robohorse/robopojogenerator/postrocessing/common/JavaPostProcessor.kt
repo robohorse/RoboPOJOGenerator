@@ -81,7 +81,7 @@ internal abstract class JavaPostProcessor(
                 classItem,
                 PojoAnnotations.MOSHI.classAnnotation,
                 PojoAnnotations.MOSHI.annotation,
-                ImportsTemplate.MOSHI.imports
+                ImportsTemplate.MOSHI().imports
             )
         }
         is NoneLombok -> {

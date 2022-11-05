@@ -12,6 +12,7 @@ import com.robohorse.robopojogenerator.postrocessing.common.AutoValueClassPostPr
 import com.robohorse.robopojogenerator.postrocessing.common.CommonJavaPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.JavaRecordsPostProcessor
 import com.robohorse.robopojogenerator.postrocessing.common.KotlinDataClassPostProcessor
+import com.robohorse.robopojogenerator.postrocessing.utils.MoshiAnnotationsProcessor
 import com.robohorse.robopojogenerator.utils.ClassGenerateHelper
 import com.robohorse.robopojogenerator.utils.ClassTemplateHelper
 import com.robohorse.robopojogenerator.utils.ProcessingModelResolver
@@ -52,7 +53,11 @@ val generatorModule = module {
     }
 
     single {
-        KotlinDataClassPostProcessor(get(), get())
+        KotlinDataClassPostProcessor(get(), get(), get())
+    }
+
+    single {
+        MoshiAnnotationsProcessor(get())
     }
 
     single {
