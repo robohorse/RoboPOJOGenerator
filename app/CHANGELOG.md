@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.3.9
+- 2022.3 platform version support
+
 ## 2.3.8
 - Moshi: generate adapter option support.
 - Kotlin: regular classes support.
