@@ -155,4 +155,44 @@ internal class InputDataParserTest {
             assertTrue(classFields.contains(it), "Missing element: $it")
         }
     }
+
+    @Test
+    fun testStringArrayInArrayGeneration_isCorrect() {
+        val jsonObject = jsonReader.read("array_inside_array.json") as JSONObject
+        val name = "Response"
+        val targetType = "List<List<String>>"
+        val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
+        val jsonItem = JsonItem(name, jsonObject)
+        inputDataParser.parse(jsonItem, classItemMap)
+        assertTrue(classItemMap.size == 1)
+        val iterator: Iterator<*> = classItemMap.values.iterator()
+        val (className, _, _, _, fields) = iterator.next() as ClassItem
+        assertEquals(className, name)
+        assertNotNull(fields)
+        for (key in jsonObject.keySet()) {
+            assertTrue(fields.containsKey(key))
+        }
+        val actualType = fields["data"]
+        assertEquals(targetType, actualType!!.getJavaItem())
+    }
+
+    @Test
+    fun testMultipleStringArrayInArrayGeneration_isCorrect() {
+        val jsonObject = jsonReader.read("multiple_arrays.json") as JSONObject
+        val name = "Response"
+        val targetType = "List<List<List<List<String>>>>"
+        val classItemMap: LinkedHashMap<String?, ClassItem> = LinkedHashMap()
+        val jsonItem = JsonItem(name, jsonObject)
+        inputDataParser.parse(jsonItem, classItemMap)
+        assertTrue(classItemMap.size == 1)
+        val iterator: Iterator<*> = classItemMap.values.iterator()
+        val (className, _, _, _, fields) = iterator.next() as ClassItem
+        assertEquals(className, name)
+        assertNotNull(fields)
+        for (key in jsonObject.keySet()) {
+            assertTrue(fields.containsKey(key))
+        }
+        val actualType = fields["data"]
+        assertEquals(targetType, actualType!!.getJavaItem())
+    }
 }
