@@ -74,7 +74,7 @@ internal class JsonArrayParser(
                     classField.classField = ClassField()
                     parseNonEmptyArray(
                         JsonItemArray(itemName, (itemObject as JSONArray)),
-                        classField,
+                        classField.classField!!,
                         classesMap,
                         jsonCallback
                     )

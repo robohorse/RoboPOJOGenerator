@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.0
+- Nested arrays issue fix
+
 ## 2.3.9
 - 2022.3 platform version support
 
