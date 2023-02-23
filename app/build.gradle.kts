@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":generator"))
-    implementation(project(":core"))
+    implementation(project(":generator", "default"))
+    implementation(project(":core", "default"))
 
     implementation("com.fifesoft:rsyntaxtextarea:3.3.1")
 }
