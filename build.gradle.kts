@@ -7,12 +7,14 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.6.0" apply false
     id("org.jetbrains.intellij") version "1.11.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("maven-publish")
 }
 
 subprojects {
     apply(plugin = "java")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.intellij")
+    apply(plugin = "maven-publish")
 
     repositories {
         mavenCentral()
