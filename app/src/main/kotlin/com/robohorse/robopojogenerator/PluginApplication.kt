@@ -7,7 +7,7 @@ import org.koin.core.component.inject
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.startKoin
 
-internal class PluginApplication : KoinComponent {
+object PluginApplication : KoinComponent {
     init {
         GlobalContext.getOrNull() ?: startKoin {
             modules(
