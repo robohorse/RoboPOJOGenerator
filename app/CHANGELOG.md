@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.1
+- App initialisation fix
+
 ## 2.4.0
 - Nested arrays issue fix
 
