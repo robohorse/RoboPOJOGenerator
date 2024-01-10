@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.2
+- 2023.3.2 build support
+
 ## 2.4.1
 - App initialisation fix
 
