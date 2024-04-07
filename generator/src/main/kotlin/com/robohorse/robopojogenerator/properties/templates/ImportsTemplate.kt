@@ -9,6 +9,8 @@ internal sealed class ImportsTemplate(
 
     object JACKSON : ImportsTemplate(arrayOf(JSON_PROPERTY))
 
+    object JAKATRA : ImportsTemplate(arrayOf(JAKATRA_PROPERTY))
+
     object AUTO_VALUE_GSON : ImportsTemplate(
         arrayOf(SERIALIZED_NAME, AUTO_VALUE, TYPED_ADAPTER, GSON_IMPORT)
     )
@@ -36,6 +38,7 @@ internal sealed class ImportsTemplate(
 internal const val JSON_OBJECT = "import com.bluelinelabs.logansquare.annotation.JsonObject;"
 internal const val JSON_FIELD = "import com.bluelinelabs.logansquare.annotation.JsonField;"
 internal const val JSON_PROPERTY = "import com.fasterxml.jackson.annotation.JsonProperty;"
+internal const val JAKATRA_PROPERTY = "import jakarta.json.bind.annotation.JsonbProperty;"
 internal const val FAST_JSON_PROPERTY = "import com.alibaba.fastjson.annotation.JSONField;"
 internal const val MOSHI_PROPERTY = "import com.squareup.moshi.Json;"
 internal const val LOMBOK_DATA = "import lombok.Data;"

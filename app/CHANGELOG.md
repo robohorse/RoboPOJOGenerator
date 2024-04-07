@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.3
+- 2023.3.6 build support; Jakarta JSON Binding
+
 ## 2.4.2
 - 2023.3.2 build support
 
