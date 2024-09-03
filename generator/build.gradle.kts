@@ -1,7 +1,12 @@
+plugins {
+    id("java")
+    id("maven-publish")
+    alias(libs.plugins.kotlin.jvm) apply true
+}
+
 dependencies {
     implementation(project(":core", "default"))
-
-    implementation("org.json:json:20231013")
-    implementation("commons-io:commons-io:2.11.0")
-    implementation("com.google.guava:guava:33.1.0-jre")
+    implementation(rootProject.libs.org.json)
+    implementation(rootProject.libs.commons.io)
+    implementation(rootProject.libs.google.guava)
 }

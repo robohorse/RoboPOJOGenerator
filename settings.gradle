@@ -1,5 +1,0 @@
-rootProject.name = 'RoboPOJOGenerator'
-include 'app'
-include 'generator'
-include 'core'
-
