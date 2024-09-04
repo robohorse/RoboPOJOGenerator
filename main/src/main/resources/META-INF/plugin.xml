@@ -7,6 +7,12 @@
 
     <depends>com.intellij.modules.lang</depends>
 
+    <description>
+        Intellij Idea and Android Studio plugin for JSON to POJO transformation.
+        Generates Java, Java Records and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, Jakarta JSON Binding, empty annotations' template. Supports: primitive types, multiple inner JSONArrays.
+        Keywords: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok, Jakarta JSON Binding, Java records.
+    </description>
+
     <actions>
         <action id="GeneratePOJOAction" class="com.robohorse.robopojogenerator.action.GeneratePOJOAction"
                 icon="/icons/pojo.svg"
