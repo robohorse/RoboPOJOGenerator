@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2024.2.1")
+        intellijIdeaCommunity("2024.1.2")
         bundledPlugin("com.intellij.java")
 
         pluginVerifier()
@@ -26,4 +26,17 @@ dependencies {
     implementation(project(":core", "default"))
 
     implementation(rootProject.libs.fifesoft.rsyntaxtextarea)
+}
+
+intellijPlatform {
+    pluginConfiguration {
+        id = "com.robohorse.robopojogenerator"
+        name = "RoboPOJOGenerator"
+        version = "2.5.0"
+        changeNotes = "Latest IDE support"
+        ideaVersion {
+            sinceBuild = "241"
+            untilBuild = "242.*"
+        }
+    }
 }

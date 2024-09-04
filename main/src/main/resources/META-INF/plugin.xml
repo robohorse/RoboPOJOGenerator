@@ -1,12 +1,7 @@
 <idea-plugin>
-    <id>com.robohorse.robopojogenerator</id>
-    <name>RoboPOJOGenerator</name>
-    <version>2.5.0</version>
-    <change-notes>Latest IDE support</change-notes>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
-
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.robohorse.robopojogenerator.persistense.ViewStateService" />
+        <applicationService serviceImplementation="com.robohorse.robopojogenerator.persistense.ViewStateService"/>
         <notificationGroup id="RoboPOJO Generator" displayType="BALLOON" key="com.robohorse.robopojogenerator"/>
     </extensions>
 

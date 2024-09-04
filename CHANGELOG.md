@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.5.0
+- Latest IDE support
+
 ## 2.4.3
 - 2023.3.6 build support; Jakarta JSON Binding
 
