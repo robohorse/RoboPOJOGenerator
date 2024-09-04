@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>2.6.0</version>
-    <idea-version since-build="241" until-build="243.*"/>
+    <version>2.6.1</version>
+    <idea-version since-build="241"/>
     <change-notes>Kotlin Serialisation</change-notes>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
     <extensions defaultExtensionNs="com.intellij">
