@@ -1,9 +1,9 @@
 <idea-plugin>
     <id>com.robohorse.robopojogenerator</id>
     <name>RoboPOJOGenerator</name>
-    <version>2.5.1</version>
-    <idea-version since-build="241" until-build="242.*"/>
-    <change-notes>Minor improvements with dependencies update</change-notes>
+    <version>2.6.0</version>
+    <idea-version since-build="241" until-build="243.*"/>
+    <change-notes>Kotlin Serialisation</change-notes>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.robohorse.robopojogenerator.persistense.ViewStateService"/>
@@ -14,8 +14,8 @@
 
     <description>
         Intellij Idea and Android Studio plugin for JSON to POJO transformation.
-        Generates Java, Java Records and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, Jakarta JSON Binding, empty annotations' template. Supports: primitive types, multiple inner JSONArrays.
-        Keywords: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok, Jakarta JSON Binding, Java records.
+        Generates Java, Java Records and Kotlin POJO files from JSON: GSON, FastJSON, AutoValue (GSON), Logan Square, Jackson, Lombok, Jakarta JSON Binding, KotlinX, empty annotations' template. Supports: primitive types, multiple inner JSONArrays.
+        Keywords: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok, Jakarta JSON Binding, Java records, KotlinX.
     </description>
 
     <actions>

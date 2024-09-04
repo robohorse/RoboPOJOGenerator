@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.6.0
+- Kotlin Serialisation.
+
 ## 2.5.1
 - Minor improvements with dependencies update.
 

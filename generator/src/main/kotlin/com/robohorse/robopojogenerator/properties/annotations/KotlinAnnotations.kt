@@ -8,6 +8,11 @@ internal sealed class KotlinAnnotations(
         annotation = "@field:SerializedName(\"%1\$s\")"
     )
 
+    object KOTLIN_X : KotlinAnnotations(
+        classAnnotation = "@Serializable",
+        annotation = "@SerialName(\"%1\$s\")"
+    )
+
     object LOGAN_SQUARE : KotlinAnnotations(
         classAnnotation = "@JsonObject",
         annotation = "@field:JsonField(name = [\"%1\$s\"])"
