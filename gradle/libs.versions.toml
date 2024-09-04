@@ -5,10 +5,10 @@ kotlin = "1.8.0"
 intellij = "2.0.1"
 ktlint = "10.2.0"
 rsyntaxtextarea = "3.4.0"
-changelog = "1.3.1"
 json = "20231013"
 commons = "2.11.0"
 guava = "33.1.0-jre"
+ide = "2024.1.2"
 
 [libraries]
 insert-koin = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
@@ -16,12 +16,13 @@ io-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 fifesoft-rsyntaxtextarea = { group = "com.fifesoft", name = "rsyntaxtextarea", version.ref = "rsyntaxtextarea" }
-org-json={ group = "org.json", name = "json", version.ref = "json" }
-commons-io={ group = "commons-io", name = "commons-io", version.ref = "commons" }
-google-guava ={ group = "com.google.guava", name = "guava", version.ref = "guava" }
+org-json = { group = "org.json", name = "json", version.ref = "json" }
+commons-io = { group = "commons-io", name = "commons-io", version.ref = "commons" }
+google-guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-jetbrains-intellij = { id = "org.jetbrains.intellij.platform", version.ref = "intellij" }
+jetbrains-intellij-platform = { id = "org.jetbrains.intellij.platform", version.ref = "intellij" }
+jetbrains-intellij-module = { id = "org.jetbrains.intellij.platform.module", version.ref = "intellij" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
-jetbrains-changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
+

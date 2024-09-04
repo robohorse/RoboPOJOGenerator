@@ -2,27 +2,26 @@ plugins {
     id("java")
     id("maven-publish")
     alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.jetbrains.intellij)
+    alias(libs.plugins.jetbrains.intellij.platform) apply true
+    alias(libs.plugins.jetbrains.intellij.module) apply false
     alias(libs.plugins.ktlint)
-    alias(libs.plugins.jetbrains.changelog) apply false
 }
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
-subprojects {
-    apply(plugin = "java")
+dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity(rootProject.libs.versions.ide)
+        pluginModule(implementation(project(":main")))
+        bundledPlugin("com.intellij.java")
 
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        implementation(rootProject.libs.kotlin.stdlib)
-        implementation(rootProject.libs.insert.koin)
-
-        testImplementation(rootProject.libs.kotlin.test)
-        testImplementation(rootProject.libs.io.mockk)
+        pluginVerifier()
+        zipSigner()
+        instrumentationTools()
     }
 }

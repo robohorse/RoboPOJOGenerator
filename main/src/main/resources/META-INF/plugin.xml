@@ -1,4 +1,9 @@
 <idea-plugin>
+    <id>com.robohorse.robopojogenerator</id>
+    <name>RoboPOJOGenerator</name>
+    <version>2.5.1</version>
+    <idea-version since-build="241" until-build="242.*"/>
+    <change-notes>Minor improvements with dependencies update</change-notes>
     <vendor email="robohorsed@gmail.com" url="https://github.com/robohorse/RoboPOJOGenerator">ROBOHORSE</vendor>
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.robohorse.robopojogenerator.persistense.ViewStateService"/>
