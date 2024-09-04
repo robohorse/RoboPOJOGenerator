@@ -1,6 +1,9 @@
 # Changelog
 
 ## 2.6.0
+- Kotlin Serialisation and max build fix.
+
+## 2.6.0
 - Kotlin Serialisation.
 
 ## 2.5.1
