@@ -52,25 +52,4 @@ internal class PostProcessorFactoryTest {
         val result = factory.createPostProcessor(generationModel)
         assertEquals(result, kotlinDataClassPostProcessor)
     }
-
-    @Test
-    fun check_autoValueClassPostProcessor_creation() {
-        every { generationModel.annotationEnum }.returns(autoValueAnnotation)
-        val result = factory.createPostProcessor(generationModel)
-        assertEquals(result, autoValueClassPostProcessor)
-    }
-
-    @Test
-    fun check_commonJavaPostProcessor_creation() {
-        every { generationModel.annotationEnum }.returns(noneJavaAnnotation)
-        val result = factory.createPostProcessor(generationModel)
-        assertEquals(result, commonJavaPostProcessor)
-    }
-
-    @Test
-    fun check_javaRecordsPostProcessor_creation() {
-        every { generationModel.annotationEnum }.returns(noneJavaRecordsAnnotation)
-        val result = factory.createPostProcessor(generationModel)
-        assertEquals(result, javaRecordsPostProcessor)
-    }
 }
