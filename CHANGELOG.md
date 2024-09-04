@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.5.1
+- Minor improvements with dependencies update.
+
 ## 2.5.0
 - Latest IDE support
 
