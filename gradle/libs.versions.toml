@@ -1,7 +1,7 @@
 [versions]
 koin = "3.1.4"
 mockk = "1.12.1"
-kotlin = "1.8.0"
+kotlin = "2.0.20"
 intellij = "2.0.1"
 ktlint = "10.2.0"
 rsyntaxtextarea = "3.4.0"
