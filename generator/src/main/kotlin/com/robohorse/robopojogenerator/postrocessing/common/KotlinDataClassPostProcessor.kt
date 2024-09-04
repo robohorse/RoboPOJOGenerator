@@ -84,6 +84,15 @@ internal class KotlinDataClassPostProcessor(
             )
         }
 
+        is KotlinX -> {
+            generateHelper.setAnnotations(
+                classItem,
+                KotlinAnnotations.KOTLIN_X.classAnnotation,
+                KotlinAnnotations.KOTLIN_X.annotation,
+                ImportsTemplate.KOTLIN_X.imports
+            )
+        }
+
         is LoganSquare -> {
             generateHelper.setAnnotations(
                 classItem,

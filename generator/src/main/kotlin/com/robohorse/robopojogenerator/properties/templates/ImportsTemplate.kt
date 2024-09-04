@@ -5,6 +5,8 @@ internal sealed class ImportsTemplate(
 ) {
     object GSON : ImportsTemplate(arrayOf(SERIALIZED_NAME))
 
+    object KOTLIN_X : ImportsTemplate(arrayOf(KOTLIN_X_SERIALIZABLE, KOTLIN_X_SERIAL_NAME))
+
     object LOGAN_SQUARE : ImportsTemplate(arrayOf(JSON_OBJECT, JSON_FIELD))
 
     object JACKSON : ImportsTemplate(arrayOf(JSON_PROPERTY))
@@ -49,3 +51,6 @@ internal const val GSON_IMPORT = "import com.google.gson.Gson;"
 
 internal const val PARCELABLE_ANDROID = "import android.os.Parcelable"
 internal const val PARCELIZE_KOTLINX = "import kotlinx.parcelize.Parcelize"
+
+internal const val KOTLIN_X_SERIALIZABLE = "import kotlinx.serialization.Serializable"
+internal const val KOTLIN_X_SERIAL_NAME = "import kotlinx.serialization.SerialName"

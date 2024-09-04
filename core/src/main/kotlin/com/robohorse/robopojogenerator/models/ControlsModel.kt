@@ -111,6 +111,10 @@ sealed class FrameworkVW(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(JAKATRA, properties)
 
+    class KotlinX(
+        properties: List<AdditionalPropertiesVM> = emptyList()
+    ) : FrameworkVW(KOTLIN_X, properties)
+
     class JakatraJavaRecords(
         properties: List<AdditionalPropertiesVM> = emptyList()
     ) : FrameworkVW(JAKATRA_JAVA_RECORDS, properties), JavaRecords
@@ -131,6 +135,7 @@ sealed class FrameworkVW(
         const val FAST_JSON = "FastJson"
         const val FAST_JSON_JAVA_RECORDS = "FastJson (records)"
         const val JAKATRA = "Jakarta JSON Binding"
+        const val KOTLIN_X = "KotlinX"
         const val JAKATRA_JAVA_RECORDS = "Jakarta JSON Binding (records)"
     }
 

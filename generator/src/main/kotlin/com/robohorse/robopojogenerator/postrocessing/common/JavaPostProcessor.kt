@@ -1,5 +1,6 @@
 package com.robohorse.robopojogenerator.postrocessing.common
 
+import com.robohorse.robopojogenerator.models.FrameworkVW.KotlinX
 import com.robohorse.robopojogenerator.models.FrameworkVW.AutoValue
 import com.robohorse.robopojogenerator.models.FrameworkVW.FastJson
 import com.robohorse.robopojogenerator.models.FrameworkVW.FastJsonJavaRecords
@@ -114,6 +115,7 @@ internal abstract class JavaPostProcessor(
         }
 
         is None,
+        is KotlinX,
         is NoneJavaRecords -> { // NO OP
         }
     }

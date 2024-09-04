@@ -11,7 +11,6 @@ import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseMoshiAda
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseSetters
 import com.robohorse.robopojogenerator.models.AdditionalPropertiesVM.UseToString
 import com.robohorse.robopojogenerator.models.ControlsModel
-import com.robohorse.robopojogenerator.models.FrameworkVW
 import com.robohorse.robopojogenerator.models.FrameworkVW.Jakatra
 import com.robohorse.robopojogenerator.models.FrameworkVW.JakatraJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.AutoValue
@@ -21,6 +20,7 @@ import com.robohorse.robopojogenerator.models.FrameworkVW.Gson
 import com.robohorse.robopojogenerator.models.FrameworkVW.GsonJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Jackson
 import com.robohorse.robopojogenerator.models.FrameworkVW.JacksonJavaRecords
+import com.robohorse.robopojogenerator.models.FrameworkVW.KotlinX
 import com.robohorse.robopojogenerator.models.FrameworkVW.LoganSquare
 import com.robohorse.robopojogenerator.models.FrameworkVW.LoganSquareJavaRecords
 import com.robohorse.robopojogenerator.models.FrameworkVW.Moshi
@@ -163,6 +163,13 @@ internal class PropertiesFactory {
                         UseKotlinSingleDataClass(selected = true),
                         UseKotlinNullableFields(selected = true),
                         UseKotlinParcelable()
+                    )
+                ),
+                KotlinX(
+                    properties = listOf(
+                        UseKotlinDataClasses(selected = true),
+                        UseKotlinSingleDataClass(selected = true),
+                        UseKotlinNullableFields(selected = true)
                     )
                 ),
                 Gson(
