@@ -61,8 +61,8 @@ internal class JsonArrayParser(
                         val existing = classesMap[key]
                         if (existing != null) {
                             value.classFields.forEach { (classKey: String, classValue: ClassField) ->
-                                    existing.classFields.putIfAbsent(classKey, classValue)
-                                }
+                                existing.classFields.putIfAbsent(classKey, classValue)
+                            }
                             existing.classImports.addAll(value.classImports)
                         } else {
                             classesMap[key] = value

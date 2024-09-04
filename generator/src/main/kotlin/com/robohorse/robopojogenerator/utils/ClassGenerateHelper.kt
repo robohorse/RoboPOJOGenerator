@@ -96,10 +96,10 @@ class ClassGenerateHelper {
             .replace("[^A-Za-z0-9]".toRegex(), "_")
             .replace("_{2,}".toRegex(), "_")
         val isDigitFirst = (
-            objectName.isNotBlank() && Character.isDigit(objectName.first()) ||
-                objectName.length > 1 && objectName.first() == '_' &&
-                Character.isDigit(objectName[1])
-            )
+                objectName.isNotBlank() && Character.isDigit(objectName.first()) ||
+                        objectName.length > 1 && objectName.first() == '_' &&
+                        Character.isDigit(objectName[1])
+                )
         if (objectName.isBlank() || isDigitFirst || ReservedWords.WORDS_SET.contains(objectName)) {
             objectName = "json_member_$objectName"
         }
