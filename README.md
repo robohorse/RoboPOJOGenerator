@@ -10,7 +10,7 @@
 <p><b>Keywords</b>: JsonToPojo, Json2Pojo, Kotlin, GSON, FastJSON, AutoValue, Jackson, LoganSquare, Moshi, Parcelable, Lombok, Jakarta JSON Binding, Java records, KotlinX.</p>
 <!-- Plugin description end -->
 
-<p><img src="images/tutorial_v202.gif" width="100%" height="50%" alt="tutorial image"></p>
+<p><img src="images/tutorial_v202.gif" width="640" height="480" alt="tutorial image"></p>
 
 
 # How to install
