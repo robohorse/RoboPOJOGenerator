@@ -13,7 +13,7 @@
 # How to install
 
 <p>Just get it and install from the official <a href="https://plugins.jetbrains.com/plugin/8634">plugin repository</a> or simply find it in <b>Preferences</b> -> <b>Plugins</b> -> <b>Marketplace</b> -> <b>RoboPOJOGenerator</b></p>
-<p><img src="images/install_v202.png" alt="installation image"></p>
+<p><img src="images/install_v204.png" alt="installation image"></p>
 
 # How to use
 
