@@ -1,6 +1,9 @@
 # Changelog
 
-## 2.6.0
+## 2.6.2
+- Latest IDE support
+
+## 2.6.1
 - Kotlin Serialisation and max build fix.
 
 ## 2.6.0

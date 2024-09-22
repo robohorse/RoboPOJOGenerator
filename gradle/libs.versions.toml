@@ -8,7 +8,7 @@ rsyntaxtextarea = "3.5.1"
 json = "20231013"
 commons = "2.16.1"
 guava = "33.1.0-jre"
-ide = "2024.1.2"
+ide = "2024.2"
 
 [libraries]
 insert-koin = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
