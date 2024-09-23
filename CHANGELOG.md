@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.6.3
+- IDE version fix
+
 ## 2.6.2
 - Latest IDE support
 
