@@ -38,6 +38,13 @@ class GeneratorFacade {
     )
 
     fun generate(model: GenerationModel, outputDir: File, packageName: String? = null) {
+        require(model.rootClassName.isNotBlank()) { "rootClassName must not be blank" }
+        require(!model.content.isNullOrBlank()) { "content must not be blank" }
+        if (!outputDir.exists()) {
+            require(outputDir.mkdirs()) { "Cannot create output directory: ${outputDir.absolutePath}" }
+        }
+        require(outputDir.isDirectory) { "Output path is not a directory: ${outputDir.absolutePath}" }
+
         val classItems = generator.generate(model)
         if (model.useKotlin && model.useKotlinSingleDataClass) {
             writeSingleKotlinFile(classItems, model, outputDir, packageName)
@@ -54,7 +61,11 @@ class GeneratorFacade {
     ) {
         val postProcessor = postProcessorFactory.createPostProcessor(model)
         for (classItem in classItems) {
-            val className = classItem.className ?: continue
+            val className = classItem.className
+            if (className == null) {
+                System.err.println("Warning: skipping class item with null className")
+                continue
+            }
             classItem.packagePath = packageName
             val body = applyIndentation(model,postProcessor.proceed(classItem, model))
             val ext = if (model.useKotlin) FILE_KOTLIN else FILE_JAVA
