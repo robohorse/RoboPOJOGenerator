@@ -18,27 +18,16 @@ import com.robohorse.robopojogenerator.models.JavaStyle
 import java.io.File
 
 val model = GenerationModel(
-    rewriteClasses = true,
-    useKotlin = false,
-    annotationEnum = FrameworkVW.fromString("jackson", JavaStyle.CLASS),
     rootClassName = "Account",
     content = """{"accountId": "abc", "active": true}""",
-    useSetters = false,
-    useGetters = false,
-    useStrings = false,
-    useKotlinSingleDataClass = false,
-    useKotlinParcelable = false,
-    kotlinNullableFields = true,
-    javaPrimitives = false,
-    useTabsIndentation = false,
-    useLombokValue = false,
-    useMoshiAdapter = false,
-    useKotlinDataClass = true
+    annotationEnum = FrameworkVW.fromString("jackson", JavaStyle.CLASS)
 )
 
 val outputDir = File("/tmp/generated")
 GeneratorFacade().generate(model, outputDir, packageName = "com.example.dto")
 ```
+
+Only `rootClassName` and `content` are required. All other fields have sensible defaults.
 
 Generated files are written directly to `outputDir`.
 
@@ -88,22 +77,9 @@ Factory for selecting a serialization framework and Java style.
 
 ```kotlin
 val model = GenerationModel(
-    rewriteClasses = true,
-    useKotlin = false,
-    annotationEnum = FrameworkVW.fromString("jackson", JavaStyle.RECORD),
     rootClassName = "UserResponse",
     content = """{"userId": 123, "name": "Alice"}""",
-    useSetters = false,
-    useGetters = false,
-    useStrings = false,
-    useKotlinSingleDataClass = false,
-    useKotlinParcelable = false,
-    kotlinNullableFields = true,
-    javaPrimitives = false,
-    useTabsIndentation = false,
-    useLombokValue = false,
-    useMoshiAdapter = false,
-    useKotlinDataClass = true
+    annotationEnum = FrameworkVW.fromString("jackson", JavaStyle.RECORD)
 )
 
 GeneratorFacade().generate(model, File("./out"), "com.example.api")
@@ -113,22 +89,10 @@ GeneratorFacade().generate(model, File("./out"), "com.example.api")
 
 ```kotlin
 val model = GenerationModel(
-    rewriteClasses = true,
-    useKotlin = true,
-    annotationEnum = FrameworkVW.fromString("kotlinx"),
     rootClassName = "Config",
     content = """{"host": "localhost", "port": 8080}""",
-    useSetters = false,
-    useGetters = false,
-    useStrings = false,
-    useKotlinSingleDataClass = false,
-    useKotlinParcelable = false,
-    kotlinNullableFields = true,
-    javaPrimitives = false,
-    useTabsIndentation = false,
-    useLombokValue = false,
-    useMoshiAdapter = false,
-    useKotlinDataClass = true
+    useKotlin = true,
+    annotationEnum = FrameworkVW.fromString("kotlinx")
 )
 
 GeneratorFacade().generate(model, File("./out"))
@@ -138,22 +102,10 @@ GeneratorFacade().generate(model, File("./out"))
 
 ```kotlin
 val model = GenerationModel(
-    rewriteClasses = true,
-    useKotlin = false,
-    annotationEnum = FrameworkVW.fromString("none", JavaStyle.LOMBOK),
     rootClassName = "Settings",
     content = """{"theme": "dark", "fontSize": 14}""",
-    useSetters = false,
-    useGetters = false,
-    useStrings = false,
-    useKotlinSingleDataClass = false,
-    useKotlinParcelable = false,
-    kotlinNullableFields = true,
-    javaPrimitives = false,
-    useTabsIndentation = false,
-    useLombokValue = true,
-    useMoshiAdapter = false,
-    useKotlinDataClass = true
+    annotationEnum = FrameworkVW.fromString("none", JavaStyle.LOMBOK),
+    useLombokValue = true
 )
 
 GeneratorFacade().generate(model, File("./out"), "com.myapp")
