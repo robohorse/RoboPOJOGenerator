@@ -88,11 +88,13 @@ java -jar cli/build/libs/cli-all.jar config.json
 
 | Value | Effect |
 |-------|--------|
-| `CLASS` | Standard Java classes with fields, getters/setters |
+| `CLASS` | Standard Java classes with fields |
 | `RECORD` | Java records (immutable, compact syntax) |
 | `LOMBOK` | Lombok-annotated classes |
 
 The `javaStyle` field combines with `framework` to select the output format. For example, `"framework": "jackson"` + `"javaStyle": "RECORD"` produces Jackson-annotated Java records.
+
+> **Note:** `LOMBOK` style only produces distinct output with `framework: "none"`. With other frameworks, it behaves identically to `CLASS`. The `auto-value` and `kotlinx` frameworks ignore `javaStyle` entirely.
 
 ## Examples
 

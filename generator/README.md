@@ -49,7 +49,7 @@ Generated files are written directly to `outputDir`.
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `model` | `GenerationModel` | All generation settings |
-| `outputDir` | `File` | Directory to write generated files (created if missing) |
+| `outputDir` | `File` | Directory to write generated files (created if it does not exist) |
 | `packageName` | `String?` | Package declaration (optional) |
 
 ### `FrameworkVW.fromString(name, style)`
