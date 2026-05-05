@@ -39,7 +39,7 @@ class GeneratorFacade {
 
     fun generate(model: GenerationModel, outputDir: File, packageName: String? = null) {
         require(model.rootClassName.isNotBlank()) { "rootClassName must not be blank" }
-        require(!model.content.isNullOrBlank()) { "content must not be blank" }
+        require(model.content.isNotBlank()) { "content must not be blank" }
         if (!outputDir.exists()) {
             require(outputDir.mkdirs()) { "Cannot create output directory: ${outputDir.absolutePath}" }
         }
