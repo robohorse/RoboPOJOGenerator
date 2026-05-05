@@ -8,6 +8,7 @@ rsyntaxtextarea = "3.5.1"
 json = "20231013"
 commons = "2.16.1"
 guava = "33.1.0-jre"
+jackson = "2.17.2"
 ide = "2024.1"
 
 [libraries]
@@ -19,6 +20,8 @@ fifesoft-rsyntaxtextarea = { group = "com.fifesoft", name = "rsyntaxtextarea", v
 org-json = { group = "org.json", name = "json", version.ref = "json" }
 commons-io = { group = "commons-io", name = "commons-io", version.ref = "commons" }
 google-guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
+jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
