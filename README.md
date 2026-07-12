@@ -27,6 +27,13 @@
 
 <p>3. See generated files inside the selected package!</p>
 
+# CLI & Library Usage
+
+Use RoboPOJOGenerator without IntelliJ — as a library dependency or standalone CLI.
+
+- **CLI** (raw JSON in, generated files out): [cli/README.md](cli/README.md)
+- **Java/Kotlin library** (call `GeneratorFacade` directly): [generator/README.md](generator/README.md)
+
 # Changelog
 
 You can find it [here](https://github.com/robohorse/RoboPOJOGenerator/blob/master/CHANGELOG.md).

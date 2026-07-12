@@ -47,6 +47,8 @@ sealed class LanguageVM(
     }
 }
 
+enum class JavaStyle { CLASS, RECORD, LOMBOK }
+
 sealed class FrameworkVW(
     val propertyName: String,
     val properties: List<AdditionalPropertiesVM>
@@ -137,6 +139,42 @@ sealed class FrameworkVW(
         const val JAKATRA = "Jakarta JSON Binding"
         const val KOTLIN_X = "KotlinX"
         const val JAKATRA_JAVA_RECORDS = "Jakarta JSON Binding (records)"
+
+        fun fromString(name: String, style: JavaStyle = JavaStyle.CLASS): FrameworkVW =
+            when (name.lowercase()) {
+                "none" -> when (style) {
+                    JavaStyle.CLASS -> None()
+                    JavaStyle.RECORD -> NoneJavaRecords()
+                    JavaStyle.LOMBOK -> NoneLombok()
+                }
+                "gson" -> when (style) {
+                    JavaStyle.CLASS, JavaStyle.LOMBOK -> Gson()
+                    JavaStyle.RECORD -> GsonJavaRecords()
+                }
+                "jackson" -> when (style) {
+                    JavaStyle.CLASS, JavaStyle.LOMBOK -> Jackson()
+                    JavaStyle.RECORD -> JacksonJavaRecords()
+                }
+                "moshi" -> when (style) {
+                    JavaStyle.CLASS, JavaStyle.LOMBOK -> Moshi()
+                    JavaStyle.RECORD -> MoshiJavaRecords()
+                }
+                "logan-square" -> when (style) {
+                    JavaStyle.CLASS, JavaStyle.LOMBOK -> LoganSquare()
+                    JavaStyle.RECORD -> LoganSquareJavaRecords()
+                }
+                "auto-value" -> AutoValue()
+                "fast-json" -> when (style) {
+                    JavaStyle.CLASS, JavaStyle.LOMBOK -> FastJson()
+                    JavaStyle.RECORD -> FastJsonJavaRecords()
+                }
+                "jakarta" -> when (style) {
+                    JavaStyle.CLASS, JavaStyle.LOMBOK -> Jakatra()
+                    JavaStyle.RECORD -> JakatraJavaRecords()
+                }
+                "kotlinx" -> KotlinX()
+                else -> throw IllegalArgumentException("Unknown framework: $name")
+            }
     }
 
     interface JavaRecords

@@ -5,3 +5,4 @@ rootProject.name = "RoboPOJOGenerator"
 include(":main")
 include(":generator")
 include(":core")
+include(":cli")

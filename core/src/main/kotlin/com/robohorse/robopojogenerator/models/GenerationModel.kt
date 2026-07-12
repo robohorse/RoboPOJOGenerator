@@ -5,23 +5,28 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiDirectory
 
 data class GenerationModel(
-    val rewriteClasses: Boolean,
-    val useKotlin: Boolean,
-    val annotationEnum: FrameworkVW,
     val rootClassName: String,
-    val content: String?,
-    val useSetters: Boolean,
-    val useGetters: Boolean,
-    val useStrings: Boolean,
-    val useKotlinSingleDataClass: Boolean,
-    val useKotlinParcelable: Boolean,
-    val kotlinNullableFields: Boolean,
-    val javaPrimitives: Boolean,
-    val useTabsIndentation: Boolean,
-    val useLombokValue: Boolean,
-    val useMoshiAdapter: Boolean,
-    val useKotlinDataClass: Boolean
-)
+    val content: String,
+    val rewriteClasses: Boolean = true,
+    val useKotlin: Boolean = false,
+    val annotationEnum: FrameworkVW = FrameworkVW.None(),
+    val useSetters: Boolean = false,
+    val useGetters: Boolean = false,
+    val useStrings: Boolean = false,
+    val useKotlinSingleDataClass: Boolean = false,
+    val useKotlinParcelable: Boolean = false,
+    val kotlinNullableFields: Boolean = true,
+    val javaPrimitives: Boolean = false,
+    val useTabsIndentation: Boolean = false,
+    val useLombokValue: Boolean = false,
+    val useMoshiAdapter: Boolean = false,
+    val useKotlinDataClass: Boolean = true
+) {
+    init {
+        require(rootClassName.isNotBlank()) { "rootClassName must not be blank" }
+        require(content.isNotBlank()) { "content must not be blank" }
+    }
+}
 
 data class ProjectModel(
     val directory: PsiDirectory,

@@ -8,6 +8,7 @@ rsyntaxtextarea = "3.5.1"
 json = "20231013"
 commons = "2.16.1"
 guava = "33.1.0-jre"
+clikt = "5.0.3"
 ide = "2024.1"
 
 [libraries]
@@ -19,6 +20,7 @@ fifesoft-rsyntaxtextarea = { group = "com.fifesoft", name = "rsyntaxtextarea", v
 org-json = { group = "org.json", name = "json", version.ref = "json" }
 commons-io = { group = "commons-io", name = "commons-io", version.ref = "commons" }
 google-guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
