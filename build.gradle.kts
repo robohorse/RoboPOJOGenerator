@@ -16,12 +16,18 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity(rootProject.libs.versions.ide)
+        create("IU", rootProject.libs.versions.ide)
         pluginModule(implementation(project(":main")))
         bundledPlugin("com.intellij.java")
 
         pluginVerifier()
         zipSigner()
         instrumentationTools()
+    }
+}
+
+tasks {
+    buildSearchableOptions {
+        enabled = false
     }
 }

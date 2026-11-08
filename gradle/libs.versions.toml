@@ -1,15 +1,15 @@
 [versions]
 koin = "3.5.6"
 mockk = "1.13.12"
-kotlin = "2.0.20"
+kotlin = "2.4.10"
 intellij = "2.0.1"
-ktlint = "10.2.0"
+ktlint = "14.2.0"
 rsyntaxtextarea = "3.5.1"
 json = "20231013"
 commons = "2.16.1"
 guava = "33.1.0-jre"
 clikt = "5.0.3"
-ide = "2024.1"
+ide = "2026.3"
 
 [libraries]
 insert-koin = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }

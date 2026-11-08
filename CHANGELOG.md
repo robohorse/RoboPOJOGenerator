@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.6.4
+- Latest IDE support (2026.3)
+
 ## 2.6.3
 - IDE version fix
 

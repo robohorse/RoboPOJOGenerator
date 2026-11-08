@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity(rootProject.libs.versions.ide)
+        create("IU", rootProject.libs.versions.ide)
         instrumentationTools()
     }
     implementation(rootProject.libs.kotlin.stdlib)
